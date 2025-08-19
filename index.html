@@ -3,89 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor de Script - OptiClean-Xtreme v7.0</title>
+    <title>OptiClean-Xtreme v7.2 - Script de Optimización</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        pre, code {
-            font-family: 'Fira Code', monospace;
-        }
         /* Estilo para la barra de desplazamiento */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
+        pre::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        ::-webkit-scrollbar-track {
-            background: #111827; /* bg-gray-900 */
+        pre::-webkit-scrollbar-track {
+            background: #1f2937; /* bg-gray-800 */
         }
-        ::-webkit-scrollbar-thumb {
-            background: #374151; /* bg-gray-700 */
-            border-radius: 5px;
-            border: 2px solid #111827;
+        pre::-webkit-scrollbar-thumb {
+            background-color: #4b5563; /* bg-gray-600 */
+            border-radius: 20px;
+            border: 2px solid #1f2937; /* bg-gray-800 */
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4b5563; /* bg-gray-600 */
-        }
-        
-        /* Resaltado de sintaxis simple */
-        .ps-comment { color: #6b7280; } /* gray-500 */
-        .ps-function { color: #818cf8; } /* indigo-400 */
-        .ps-command { color: #60a5fa; } /* blue-400 */
-        .ps-variable { color: #f87171; } /* red-400 */
-        .ps-string { color: #a3e635; } /* lime-400 */
-        .ps-keyword { color: #c084fc; } /* purple-400 */
-        .ps-section { color: #fbbf24; font-weight: 500; } /* amber-400 */
-
     </style>
 </head>
-<body class="bg-gray-900 text-gray-300 flex flex-col items-center justify-center min-h-screen p-4">
+<body class="bg-gray-900 text-gray-200 flex items-center justify-center min-h-screen p-4">
 
-    <div class="w-full max-w-5xl bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700 overflow-hidden">
-        <!-- Encabezado -->
-        <div class="p-5 bg-gray-900/70 border-b border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-                <h1 class="text-xl font-bold text-white">OptiClean-Xtreme v7.0</h1>
-                <p class="text-sm text-gray-400">Script de PowerShell Extremadamente Optimizado</p>
+    <div class="w-full max-w-4xl mx-auto">
+        <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+            <!-- Encabezado -->
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-2xl font-bold text-white">OptiClean-Xtreme v7.2</h1>
+                <p class="text-gray-400 mt-1">Script de Optimización y Reparación para Windows</p>
             </div>
-            <button id="copyButton" class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-300 transform hover:scale-105">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                </svg>
-                <span id="copyButtonText">Copiar Script</span>
-            </button>
-        </div>
 
-        <!-- Contenedor del Script -->
-        <div class="max-h-[70vh] overflow-y-auto">
-            <pre class="p-6 text-sm"><code id="scriptContent" class="language-powershell whitespace-pre-wrap break-words"><!-- El contenido del script se inserta aquí. Se usa innerHTML para renderizar los spans de color. --></code></pre>
+            <!-- Contenedor del Script -->
+            <div class="relative">
+                <pre id="scriptContainer" class="bg-gray-900 p-6 text-sm text-gray-300 overflow-x-auto max-h-[50vh]"><code class="language-powershell
+                "><!--
+                    El script de PowerShell se insertará aquí mediante JavaScript
+                    para evitar problemas de renderizado con caracteres especiales de HTML.
+                --></code></pre>
+                
+                <!-- Botón de Copiar -->
+                <button id="copyButton" class="absolute top-4 right-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                    Copiar Script
+                </button>
+            </div>
+
+            <!-- Pie de página con instrucciones -->
+            <div class="p-6 bg-gray-800 border-t border-gray-700">
+                <h3 class="font-semibold text-lg text-white">Instrucciones</h3>
+                <ol class="list-decimal list-inside mt-2 text-gray-400 space-y-1">
+                    <li>Haz clic en el botón <strong>"Copiar Script"</strong>.</li>
+                    <li>Abre una ventana de <strong>Windows PowerShell</strong> como <strong>Administrador</strong>.</li>
+                    <li>Pega el script en la terminal y presiona Enter para ejecutar.</li>
+                </ol>
+            </div>
         </div>
     </div>
 
     <script>
-        const scriptText = `
-<#
+        const scriptContent = `<#
 .SYNOPSIS
-  OptiClean-Xtreme v7.0: Script de Optimización y Reparación Extrema.
+    OptiClean-Xtreme v7.2: Script de Optimización y Reparación Extrema.
 .DESCRIPTION
-  Versión "pegar y ejecutar" inspirada en la minuciosidad de Tron Script.
-  Realiza una secuencia de preparación, limpieza profunda, eliminación de bloatware,
-  reparación del sistema, ajustes de privacidad y optimización final.
-  - MODO AUTOMÁTICO: No requiere intervención.
-  - LOG DETALLADO: Informa de cada paso ejecutado y recolecta errores.
-  - REPARACIÓN INTEGRAL: Ejecuta DISM, SFC, reseteo de red y más.
-  - PRIVACIDAD: Aplica ajustes para reducir la telemetría.
-  - OPTIMIZACIÓN AVANZADA: Incluye limpieza de cachés de apps modernas (Teams, Store).
+    Versión "pegar y ejecutar" inspirada en la minuciosidad de Tron Script.
+    Realiza una secuencia de preparación, limpieza profunda, eliminación de bloatware,
+    reparación del sistema, ajustes de privacidad y optimización final.
+    - MODO AUTOMÁTICO: No requiere intervención.
+    - LOG DETALLADO: Informa de cada paso ejecutado y recolecta errores.
+    - REPARACIÓN INTEGRAL: Ejecuta DISM (Cleanup y RestoreHealth), SFC, reseteo de red y más.
+    - PRIVACIDAD: Aplica ajustes para reducir la telemetría.
+    - OPTIMIZACIÓN AVANZADA: Incluye limpieza de cachés de apps modernas (Office, Zoom, Teams, Store).
 .NOTES
-  Ejecutar siempre en una terminal de PowerShell como Administrador.
-  Se recomienda cerrar todas las aplicaciones antes de ejecutar.
-  Versión: 7.0
+    Ejecutar siempre en una terminal de PowerShell como Administrador.
+    Se recomienda cerrar todas las aplicaciones antes de ejecutar.
+    Versión: 7.2 - Añadida limpieza de Prefetch, Font Cache, Componentes de Windows (WinSxS) y más cachés de apps.
 #>
 
 #region -------------------- [0] Configuración Inicial y Helpers --------------------
@@ -98,13 +92,16 @@ function Write-Log {
     param([string]$Message, [string]$Color = "White", [int]$Indent = 0)
     $indentation = " " * $Indent
     $timestamp = Get-Date -f 'HH:mm:ss'
-    Write-Host "$indentation[$timestamp] $Message" -ForegroundColor $Color
-    if ($Color -eq "Red") { $global:errorLog.Add("[$timestamp] $Message") }
+    $logMessage = "[$timestamp] $Message"
+    Write-Host "$indentation$logMessage" -ForegroundColor $Color
+    if ($Color -eq "Red" -or $Color -eq "Yellow" -or $Color -eq "DarkYellow") { 
+        $global:errorLog.Add($logMessage) 
+    }
 }
 
 function Write-Section {
     param([string]$Title)
-    Write-Host "\\n" + ("-"*80)
+    Write-Host "\`n" + ("-"*80)
     Write-Log $Title "Magenta"
     Write-Host ("-"*80)
 }
@@ -127,7 +124,7 @@ function Remove-Path-Safe {
 }
 
 function Stop-Conflicting-Processes {
-    $processes = @("chrome", "msedge", "firefox", "brave", "opera", "winword", "excel", "powerpnt", "outlook", "steam", "epicgameslauncher", "discord", "spotify", "teams")
+    $processes = @("chrome", "msedge", "firefox", "brave", "opera", "winword", "excel", "powerpnt", "outlook", "steam", "epicgameslauncher", "discord", "spotify", "teams", "zoom", "vlc")
     Write-Log "Cerrando procesos conflictivos para una limpieza efectiva..." "Yellow" 2
     foreach ($proc in $processes) {
         if (Get-Process $proc -ErrorAction SilentlyContinue) {
@@ -146,14 +143,14 @@ function Stop-Conflicting-Processes {
 #region -------------------- [1] Fase de Preparación --------------------
 function Stage-Preparation {
     Write-Section "[1] FASE DE PREPARACIÓN"
-    
+
     Write-Log "Verificando privilegios de administrador..." "Cyan" 2
     Require-Admin
     Write-Log "Verificación exitosa." "Green" 4
 
     Write-Log "Creando punto de restauración del sistema..." "Cyan" 2
     try {
-        Checkpoint-Computer -Description "OptiClean-Xtreme v7.0 (Pre-Ejecución)" -ErrorAction Stop
+        Checkpoint-Computer -Description "OptiClean-Xtreme v7.2 (Pre-Ejecución)" -ErrorAction Stop
         Write-Log "Punto de restauración creado con éxito." "Green" 4
     } catch {
         Write-Log "No se pudo crear el punto de restauración (puede estar deshabilitado o falló)." "Yellow" 4
@@ -190,11 +187,13 @@ function Stage-Clean {
         }
         $tempPaths | ForEach-Object { Remove-Path-Safe $_ }
     }
-    
-    Run-Cleaning-Task "Papelera de Reciclaje (Todas las unidades)" { 
-        (New-Object -ComObject Shell.Application).NameSpace(0x0a).Items() | ForEach-Object { Clear-RecycleBin -DriveLetter $_.Name.Substring(0,1) -Force -ErrorAction SilentlyContinue }
+
+    Run-Cleaning-Task "Papelera de Reciclaje (Todas las unidades)" {
+        Get-PSDrive -PSProvider FileSystem | ForEach-Object {
+            Clear-RecycleBin -DriveLetter $_.Name -Force -ErrorAction SilentlyContinue
+        }
     }
-    
+
     Run-Cleaning-Task "Cachés de Navegadores (Todos los perfiles)" {
         $browserCaches = @(
             'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\Cache', 'AppData\\Local\\Google\\Chrome\\User Data\\*\\Cache',
@@ -209,12 +208,14 @@ function Stage-Clean {
         }
     }
 
-    Run-Cleaning-Task "Cachés de Aplicaciones (Discord, Teams, Steam, etc.)" {
+    Run-Cleaning-Task "Cachés de Aplicaciones (Office, Discord, Teams, Steam, etc.)" {
         $appPaths = @(
             "$env:APPDATA\\discord\\Cache", "$env:APPDATA\\discord\\Code Cache", "$env:APPDATA\\discord\\GPUCache",
             "$env:APPDATA\\Microsoft\\Teams\\Cache", "$env:APPDATA\\Microsoft\\Teams\\Code Cache", "$env:APPDATA\\Microsoft\\Teams\\GPUCache",
             "$env:LOCALAPPDATA\\Spotify\\Browser", "$env:LOCALAPPDATA\\EpicGamesLauncher\\Saved\\webcache",
-            "$env:ProgramFiles (x86)\\Steam\\appcache", "$env:ProgramFiles (x86)\\Steam\\config\\htmlcache"
+            "$env:ProgramFiles (x86)\\Steam\\appcache", "$env:ProgramFiles (x86)\\Steam\\config\\htmlcache",
+            "$env:APPDATA\\Zoom\\data\\Cache", "$env:APPDATA\\vlc\\art\\cache",
+            "$env:LOCALAPPDATA\\Microsoft\\Office\\16.0\\OfficeFileCache", "$env:LOCALAPPDATA\\Microsoft\\MSOIdentityCRL"
         )
         $appPaths | ForEach-Object { Remove-Path-Safe $_ }
     }
@@ -228,6 +229,18 @@ function Stage-Clean {
         $shaderPaths | ForEach-Object { Remove-Path-Safe $_ }
     }
     
+    Run-Cleaning-Task "Archivos Prefetch" {
+        Stop-Service -Name "SysMain" -Force -ErrorAction SilentlyContinue
+        Remove-Path-Safe "$env:windir\\Prefetch\\*"
+        Start-Service -Name "SysMain" -ErrorAction SilentlyContinue
+    }
+    
+    Run-Cleaning-Task "Caché de Fuentes del Sistema" {
+        Stop-Service -Name "FontCache" -Force -ErrorAction SilentlyContinue
+        Remove-Item "$env:windir\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat" -Force -ErrorAction SilentlyContinue
+        Start-Service -Name "FontCache" -ErrorAction SilentlyContinue
+    }
+
     Run-Cleaning-Task "Restos de Windows Update y Delivery Optimization" {
         Stop-Service -Name "wuauserv", "bits", "dosvc" -Force -ErrorAction SilentlyContinue
         Remove-Path-Safe "$env:windir\\SoftwareDistribution\\Download\\*"
@@ -240,13 +253,17 @@ function Stage-Clean {
         Remove-Path-Safe "$env:ProgramData\\Microsoft\\Windows\\WER\\*"
         Remove-Item "$env:SystemDrive\\MEMORY.DMP" -Force -ErrorAction SilentlyContinue
         Remove-Item "$env:windir\\Logs\\CBS\\*.log", "$env:windir\\Logs\\CBS\\*.cab" -Force -ErrorAction SilentlyContinue
-        wevtutil cl "Windows PowerShell" | Out-Null
         wevtutil cl "Application" | Out-Null
+        wevtutil cl "Security" | Out-Null
+        wevtutil cl "Setup" | Out-Null
         wevtutil cl "System" | Out-Null
+        wevtutil cl "ForwardedEvents" | Out-Null
+        wevtutil cl "Windows PowerShell" | Out-Null
     }
-    
+
     Run-Cleaning-Task "Caché de Miniaturas, Iconos y Sistema de Archivos" {
         Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 2
         Remove-Item "$env:LOCALAPPDATA\\Microsoft\\Windows\\Explorer\\thumbcache_*.db" -Force -ErrorAction SilentlyContinue
         Remove-Item "$env:LOCALAPPDATA\\IconCache.db" -Force -ErrorAction SilentlyContinue
         fsutil usn deletejournal /D /N C: | Out-Null
@@ -258,25 +275,35 @@ function Stage-Clean {
 #region -------------------- [3] Fase de Eliminación de Bloatware --------------------
 function Stage-Debloat {
     Write-Section "[3] FASE DE ELIMINACIÓN DE BLOATWARE"
-    
+
     $bloatwarePatterns = @(
         "*3DViewer*", "*MixedReality*", "*Print3D*", "*SkypeApp*", "*YourPhone*", "*Solitaire*", "*Zune*",
         "*BingNews*", "*BingWeather*", "*GetHelp*", "*Getstarted*", "*FeedbackHub*", "*OfficeHub*", "*OneNote*",
         "*People*", "*Wallet*", "*WindowsAlarms*", "*WindowsMaps*", "*Messaging*", "*SoundRecorder*", "*WindowsCamera*", "*549981C3F5F10*"
     )
-    
+
     Write-Log "Buscando y eliminando Bloatware (puede tardar)..." "Yellow" 2
     $allPackages = Get-AppxPackage -AllUsers
     $provisionedPackages = Get-AppxProvisionedPackage -Online
 
     foreach ($pattern in $bloatwarePatterns) {
+        # Quitar paquetes de usuario actual
         $allPackages | Where-Object { $_.Name -like $pattern } | ForEach-Object {
-            Write-Log "Quitando: $($_.Name)" "DarkGray" 4
-            $_ | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+            Write-Log "Intentando quitar: $($_.Name)" "DarkGray" 4
+            try {
+                $_ | Remove-AppxPackage -AllUsers -ErrorAction Stop
+            } catch {
+                Write-Log "No se pudo quitar (protegido por el sistema): $($_.Name)" "DarkYellow" 6
+            }
         }
+        # Quitar paquetes pre-instalados para nuevos usuarios
         $provisionedPackages | Where-Object { $_.DisplayName -like $pattern } | ForEach-Object {
             Write-Log "Quitando provisión: $($_.DisplayName)" "DarkGray" 4
-            $_ | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+            try {
+                $_ | Remove-AppxProvisionedPackage -Online -ErrorAction Stop
+            } catch {
+                Write-Log "No se pudo quitar provisión: $($_.DisplayName)" "DarkYellow" 6
+            }
         }
     }
     Write-Log "Desinstalación de bloatware completada." "Green" 2
@@ -287,14 +314,18 @@ function Stage-Debloat {
 function Stage-Repair {
     Write-Section "[4] FASE DE REPARACIONES Y MANTENIMIENTO"
 
-    Write-Log "Reparando imagen del sistema (DISM)... Esto puede tardar." "Cyan" 2
-    try { Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null } catch { Write-Log "Fallo en DISM." "Red" 4 }
-    Write-Log "DISM completado." "Green" 4
+    Write-Log "Limpiando componentes de Windows (DISM Cleanup)... Esto puede tardar." "Cyan" 2
+    try { Dism.exe /Online /Cleanup-Image /StartComponentCleanup | Out-Null } catch { Write-Log "Fallo en DISM Cleanup." "Red" 4 }
+    Write-Log "Limpieza de componentes completada." "Green" 4
+
+    Write-Log "Reparando imagen del sistema (DISM RestoreHealth)... Esto puede tardar." "Cyan" 2
+    try { Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null } catch { Write-Log "Fallo en DISM RestoreHealth." "Red" 4 }
+    Write-Log "DISM RestoreHealth completado." "Green" 4
 
     Write-Log "Reparando integridad de archivos del sistema (SFC)..." "Cyan" 2
     try { sfc.exe /scannow | Out-Null } catch { Write-Log "Fallo en SFC." "Red" 4 }
     Write-Log "SFC completado." "Green" 4
-    
+
     Write-Log "Reparando la Pila de Red (TCP/IP, Winsock, DNS)..." "Cyan" 2
     netsh winsock reset | Out-Null
     netsh int ip reset | Out-Null
@@ -306,7 +337,7 @@ function Stage-Repair {
     Write-Log "Re-registrando aplicaciones de la Tienda de Windows..." "Cyan" 2
     Get-AppxPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\\AppXManifest.xml" -ErrorAction SilentlyContinue}
     Write-Log "Re-registro completado." "Green" 4
-    
+
     Write-Log "Restaurando archivo HOSTS a su estado por defecto..." "Cyan" 2
     $hostsContent = @"
 # Copyright (c) 1993-2009 Microsoft Corp.
@@ -362,29 +393,38 @@ function Stage-Optimize {
     Write-Section "[6] FASE DE OPTIMIZACIÓN"
 
     Write-Log "Aplicando plan de energía de 'Máximo Rendimiento'..." "Cyan" 2
-    $ultimatePlan = powercfg -l | Select-String "Máximo rendimiento"
-    if ($ultimatePlan) {
-        $guid = $ultimatePlan.ToString().Split(' ')[3]
-        powercfg -setactive $guid
+    $ultimatePlanGuid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
+    if (-not (powercfg -l | Select-String $ultimatePlanGuid -Quiet)) {
+        Write-Log "Importando plan de energía 'Máximo Rendimiento'..." "DarkGray" 4
+        powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+    }
+    powercfg -setactive $ultimatePlanGuid
+    if ($?) {
         Write-Log "Plan de energía 'Máximo Rendimiento' activado." "Green" 4
     } else {
-        Write-Log "No se encontró el plan de energía 'Máximo Rendimiento'." "Yellow" 4
+        Write-Log "No se pudo activar el plan de energía 'Máximo Rendimiento'." "Yellow" 4
     }
-    
+
     Write-Log "Deshabilitando hibernación para liberar espacio..." "Cyan" 2
     powercfg -h off
-    
+
     Write-Log "Ajustando efectos visuales para máximo rendimiento..." "Cyan" 2
     Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects" -Name "VisualFXSetting" -Value 2 -Type DWord -Force
-    
+
     Write-Log "Deshabilitando SysMain (Superfetch) y optimizando memoria..." "Cyan" 2
     if (Get-Service -Name "SysMain" -ErrorAction SilentlyContinue) { Set-Service -Name "SysMain" -StartupType Disabled; Stop-Service -Name "SysMain" -Force }
     Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management" -Name "ClearPageFileAtShutdown" -Value 0 -Type DWord -Force
-    
+
     Write-Log "Optimizando unidades (TRIM/Defrag)..." "Cyan" 2
-    Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.HealthStatus -eq 'Healthy' } | ForEach-Object {
+    # CORRECCIÓN: Filtrar solo volúmenes con letra de unidad para evitar errores
+    Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.HealthStatus -eq 'Healthy' -and $null -ne $_.DriveLetter } | ForEach-Object {
         Write-Log "Optimizando unidad $($_.DriveLetter):..." "DarkGray" 4
-        Optimize-Volume -DriveLetter $_.DriveLetter -Defrag -Verbose -ErrorAction SilentlyContinue
+        try {
+            # El parámetro -Defrag ejecuta TRIM en SSDs y Defrag en HDDs automáticamente.
+            Optimize-Volume -DriveLetter $_.DriveLetter -Defrag -Verbose -ErrorAction Stop
+        } catch {
+            Write-Log "Fallo al optimizar la unidad $($_.DriveLetter): $_" "Red" 6
+        }
     }
     Write-Log "Optimización de unidades completada." "Green" 2
 }
@@ -392,11 +432,11 @@ function Stage-Optimize {
 
 #region -------------------- [7] Lógica Principal de Ejecución --------------------
 function Main {
-    Write-Host "\\n"
+    Write-Host "\`n"
     Write-Host "================================================================================" -ForegroundColor "White"
-    Write-Host "                INICIANDO OPTICLEAN-XTREME v7.0 (MODO AUTOMÁTICO)               " -ForegroundColor "White"
+    Write-Host "           INICIANDO OPTICLEAN-XTREME v7.2 (MODO AUTOMÁTICO)            " -ForegroundColor "White"
     Write-Host "================================================================================" -ForegroundColor "White"
-    
+
     $phases = @(
         { Stage-Preparation }, { Stage-Clean }, { Stage-Debloat },
         { Stage-Repair }, { Stage-Privacy }, { Stage-Optimize }
@@ -409,76 +449,64 @@ function Main {
     $elapsed = [math]::Round((New-TimeSpan -Start $startTime).TotalMinutes, 1)
     Write-Log "Espacio total liberado en esta sesión: $totalGB GB (aprox.)" "Green" 2
     Write-Log "Tiempo total de ejecución: $elapsed minutos." "Green" 2
-    
+
     if ($global:errorLog.Count -gt 0) {
-        Write-Log "Se encontraron $($global:errorLog.Count) errores durante la ejecución:" "Yellow" 2
+        Write-Log "Se registraron $($global:errorLog.Count) advertencias o errores durante la ejecución:" "Yellow" 2
         $global:errorLog | ForEach-Object { Write-Log $_ "Yellow" 4 }
     } else {
         Write-Log "El script se completó sin errores registrados." "Green" 2
     }
 
     Write-Host "--------------------------------------------------------------------------------" -ForegroundColor "White"
-    Write-Log "OptiClean-Xtreme v7.0 ha finalizado. Se RECOMIENDA REINICIAR el sistema." "Green"
+    Write-Log "OptiClean-Xtreme v7.2 ha finalizado. Se RECOMIENDA REINICIAR el sistema." "Green"
     Write-Host "================================================================================" -ForegroundColor "White"
 }
 
 # Iniciar la ejecución
 Main
-#endregion
-`;
+#endregion`;
 
-        function applySyntaxHighlighting(script) {
-            return script
-                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') // HTML escape
-                .replace(/(<#[\s\S]*?#>)/g, '<span class="ps-comment">$1</span>') // Comments
-                .replace(/(#region[\s\S]*?#endregion)/g, '<span class="ps-section">$1</span>') // Regions
-                .replace(/^(function\s+[\w-]+)/gm, '<span class="ps-function">$1</span>') // Function names
-                .replace(/(\$[a-zA-Z0-9_:]+)/g, '<span class="ps-variable">$1</span>') // Variables
-                .replace(/(Write-Host|Set-ItemProperty|Get-ChildItem|Remove-Item|Stop-Process|Start-Process|Get-Service|Set-Service|Stop-Service|Start-Service|Checkpoint-Computer|Get-AppxPackage|Remove-AppxPackage|Get-AppxProvisionedPackage|Remove-AppxProvisionedPackage|Optimize-Volume|Write-Log|Write-Section|Require-Admin|Remove-Path-Safe|Stop-Conflicting-Processes|Run-Cleaning-Task|Main)/g, '<span class="ps-command">$1</span>')
-                .replace(/(\s-[\w]+)/g, '<span class="ps-keyword">$1</span>') // Parameters
-                .replace(/("(.*?)")/g, '<span class="ps-string">$1</span>'); // Strings
-        }
+        // Insertar el contenido del script en el elemento <code>
+        const codeBlock = document.querySelector('#scriptContainer code');
+        codeBlock.textContent = scriptContent;
 
-        const scriptContainer = document.getElementById('scriptContent');
         const copyButton = document.getElementById('copyButton');
-        const copyButtonText = document.getElementById('copyButtonText');
-        
-        // Cargar y colorear el script
-        scriptContainer.innerHTML = applySyntaxHighlighting(scriptText);
-        
         copyButton.addEventListener('click', () => {
+            // Crear un área de texto temporal para copiar el contenido
             const textArea = document.createElement('textarea');
-            // Usar el texto original sin HTML para la copia
-            textArea.value = scriptText.trim();
+            textArea.value = scriptContent;
             
+            // Evitar que se vea en pantalla
             textArea.style.position = 'fixed';
-            textArea.style.left = '-9999px';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            textArea.style.opacity = 0;
+
             document.body.appendChild(textArea);
-            
+            textArea.focus();
             textArea.select();
+
             try {
-                document.execCommand('copy');
-                copyButtonText.textContent = '¡Copiado!';
-                copyButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                copyButton.classList.add('bg-green-600');
-
-                setTimeout(() => {
-                    copyButtonText.textContent = 'Copiar Script';
-                    copyButton.classList.remove('bg-green-600');
-                    copyButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
-                }, 2000);
-
+                // Usar document.execCommand para compatibilidad
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const originalText = copyButton.textContent;
+                    copyButton.textContent = '¡Copiado!';
+                    copyButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+                    copyButton.classList.add('bg-green-600');
+                    
+                    setTimeout(() => {
+                        copyButton.textContent = originalText;
+                        copyButton.classList.remove('bg-green-600');
+                        copyButton.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+                    }, 2000);
+                }
             } catch (err) {
                 console.error('Error al intentar copiar el script: ', err);
-                copyButtonText.textContent = 'Error al copiar';
-                 setTimeout(() => {
-                    copyButtonText.textContent = 'Copiar Script';
-                }, 2000);
             }
-            
+
             document.body.removeChild(textArea);
         });
     </script>
-
 </body>
 </html>
