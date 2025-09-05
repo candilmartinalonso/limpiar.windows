@@ -14,39 +14,6 @@
     pre::-webkit-scrollbar-track{background:#111827}
     pre::-webkit-scrollbar-thumb{background-color:#4b5563;border-radius:20px;border:2px solid #111827}
     code{white-space:pre}
-    .tooltip { position: relative; display: inline-block; }
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 240px;
-      background-color: #1f2937;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 8px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      margin-left: -120px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-    .tooltip .tooltiptext::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: #1f2937 transparent transparent transparent;
-    }
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-    }
   </style>
 </head>
 <body class="bg-gray-900 text-gray-200 min-h-screen p-4 sm:p-6">
@@ -59,10 +26,11 @@
           <li><span class="font-semibold text-green-400">¡NUEVO!</span> Actualización integral de software con <b class="text-green-300">Winget</b> (Windows, Office, drivers y apps de la Store/terceros).</li>
           <li><span class="font-semibold text-green-400">¡NUEVO!</span> Limpieza de caché de <b class="text-green-300">instaladores de Windows (WinSxS)</b> para ahorrar espacio en disco SSD.</li>
           <li><span class="font-semibold text-green-400">¡NUEVO!</span> Optimización de red avanzada (DNS, TCP, QoS) para mejorar latencia y velocidad.</li>
-          <li>Limpieza extendida (CCleaner/BleachBit) y Debloat seguro ampliado.</li>
-          <li>Reparación completa (DISM, SFC, cachés de GPU/Store/Office, Red).</li>
-          <li>Privacidad reforzada y arranque más rápido con plan de <b class="text-green-300">Máximo Rendimiento</b>.</li>
-          <li><b class="text-yellow-400">Modo reversible:</b> crea Punto de Restauración y conserva un log detallado.</li>
+          <li>Limpieza extendida de archivos basura y cachés de sistema/aplicaciones.</li>
+          <li>Eliminación segura y ampliada de Bloatware (no afecta funciones esenciales).</li>
+          <li>Reparación completa del sistema (DISM, SFC) y reseteo de cachés (GPU, Store, Office, Red).</li>
+          <li>Privacidad reforzada, arranque más rápido y plan de energía de <b class="text-green-300">Máximo Rendimiento</b>.</li>
+          <li><b class="text-yellow-400">Modo reversible:</b> crea un Punto de Restauración y conserva un log detallado de cada acción.</li>
         </ul>
       </header>
 
@@ -77,14 +45,14 @@
       <footer class="p-6 border-t border-gray-700 grid gap-4">
         <h3 class="font-semibold text-lg text-white">Instrucciones de Uso</h3>
         <ol class="list-decimal list-inside text-gray-400 space-y-1">
-          <li>Hacé clic en <strong>Copiar Script</strong> o <strong>Descargar .ps1</strong>.</li>
-          <li>Abrí <strong>PowerShell</strong> o <strong>Terminal</strong> (buscalo en Inicio, clic derecho &rarr; <strong>Ejecutar como Administrador</strong>).</li>
-          <li>Ejecutá el script. Si lo copiaste, pegalo y presioná Enter. Si lo descargaste, navegá a la carpeta y ejecutá `.\OptiClean_Xtreme_v11.ps1`.</li>
+          <li>Haz clic en <strong>Copiar Script</strong> o <strong>Descargar .ps1</strong>.</li>
+          <li>Abre <strong>PowerShell</strong> o <strong>Terminal</strong> (búscalo en Inicio, clic derecho &rarr; <strong>Ejecutar como Administrador</strong>).</li>
+          <li>Ejecuta el script. Si lo copiaste, pégalo y presiona Enter. Si lo descargaste, navega a la carpeta y ejecuta `.\OptiClean_Xtreme_v11.ps1`.</li>
           <li>El proceso puede tardar, especialmente la actualización con Winget. Sé paciente.</li>
-          <li>Al finalizar, <strong>reiniciá</strong> el equipo para aplicar todos los cambios.</li>
+          <li>Al finalizar, <strong>reinicia</strong> el equipo para aplicar todos los cambios.</li>
         </ol>
         <p class="text-xs text-gray-500">
-            <span class="font-semibold">Nota de seguridad:</span> Este perfil es seguro y no realiza cambios destructivos. No desactiva Windows Update, Defender, ni la Búsqueda. Si querés un perfil aún más agresivo (no recomendado para uso diario), avisanos.
+            <span class="font-semibold">Nota de seguridad:</span> Este script está diseñado para ser seguro y no eliminará archivos personales. No desactiva Windows Update, Defender ni la Búsqueda. Los cambios son reversibles a través del Punto de Restauración creado.
         </p>
       </footer>
     </div>
@@ -93,278 +61,315 @@
   <script>
 const scriptContent = `#requires -version 5.1
 <#
+  .SYNOPSIS
   OptiClean‑Xtreme v11.0 — Perfil "Turbo Seguro Plus"
-  Objetivo: acelerar, limpiar y actualizar al máximo sin romper funciones clave.
-  Cambios clave sobre v10:
-   - Integración de Winget para actualizar TODO: Windows, Office, drivers y apps de terceros.
-   - Limpieza del almacén de componentes de WinSxS (instaladores viejos de Windows Update).
-   - Optimización de red avanzada: Flush DNS, TCP Optimizer, deshabilitar QoS.
-   - Limpieza mejorada para cachés de desarrollo (Node.js/npm, Python/pip, VSCode).
-   - Chequeo de salud del SSD/HDD con el comando integrado de Windows.
-   - Lógica de registro y medición de espacio liberado mejorada.
-   - Pequeños ajustes de robustez y compatibilidad.
 
-  Seguro: crea Punto de Restauración y no toca Defender/Update/Búsqueda/BitLocker.
+  .DESCRIPTION
+  Un script integral para optimizar, limpiar, reparar y actualizar sistemas Windows 10/11.
+  Diseñado para obtener el máximo rendimiento sin comprometer la estabilidad ni los archivos personales.
+  
+  .NOTES
+  Autor: Gemini
+  Versión: 11.0
+  Principales mejoras sobre v10:
+   - Integración completa de Winget para actualizar TODO: Windows, Office, drivers y apps de terceros.
+   - Limpieza profunda del almacén de componentes de WinSxS (instaladores viejos de Windows Update).
+   - Optimización de red avanzada: Flush DNS, reseteo de TCP/IP y Winsock.
+   - Limpieza mejorada para cachés de desarrollo (Node.js/npm, Python/pip, VSCode).
+   - Chequeo de salud del SSD/HDD con el comando integrado de Windows (SMART).
+   - Lógica de registro y medición de espacio liberado mejorada.
+   
+  .SAFETY
+  - Crea un Punto de Restauración antes de realizar cambios.
+  - No elimina archivos personales (Documentos, Fotos, etc).
+  - No deshabilita funciones críticas como Windows Defender, Windows Update o la Búsqueda.
 #>
 
+#region Preparación y Configuración
+# --- Forzar la ejecución y configurar manejo de errores ---
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 $ErrorActionPreference = 'SilentlyContinue'
 
-#region Config
-$StartTime = Get-Date
-$Global:Freed = 0
-$Global:Warns = [System.Collections.Generic.List[string]]::new()
+# --- Variables Globales y Funciones de Ayuda ---
+$Global:StartTime = Get-Date
+$Global:FreedSpace = 0
+$Global:Warnings = [System.Collections.Generic.List[string]]::new()
 $LogPath = Join-Path $env:TEMP ("OptiClean_v11_" + (Get-Date -f 'yyyyMMdd_HHmmss') + ".log")
 
-function Log([string]$msg, [string]$color = 'Gray', [switch]$warn){
-  $ts = Get-Date -f 'HH:mm:ss'; $line = "[$ts] $msg"
+function Log([string]$message, [string]$color = 'Gray', [switch]$isWarning){
+  $timestamp = Get-Date -f 'HH:mm:ss'
+  $line = "[$timestamp] $message"
   Write-Host $line -ForegroundColor $color
   Add-Content -Path $LogPath -Value $line
-  if($warn){ $Global:Warns.Add($line) }
+  if($isWarning){ $Global:Warnings.Add($line) }
 }
 
-function Section($title){
-  Write-Host "\n"; Write-Host ('-'*90) -ForegroundColor DarkGray
+function Write-Section($title){
+  Write-Host ""
+  Write-Host ('-'*90) -ForegroundColor DarkGray
   Log $title 'Magenta'
   Write-Host ('-'*90) -ForegroundColor DarkGray
 }
 
-function Require-Admin(){
-  $id=[Security.Principal.WindowsIdentity]::GetCurrent();
-  $p = New-Object Security.Principal.WindowsPrincipal($id)
-  if(-not $p.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)){
-    throw 'Ejecutá este script como Administrador para que funcione correctamente.'
+function Assert-Admin(){
+  $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+  if (-not $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {
+    Log "Error: Este script requiere privilegios de Administrador." 'Red'
+    Log "Por favor, haz clic derecho en PowerShell/Terminal y selecciona 'Ejecutar como Administrador'." 'Red'
+    throw "Permisos insuficientes."
   }
 }
 
-function SizeDeltaTask([scriptblock]$Action){
-  $drv = Get-PSDrive $env:SystemDrive.Substring(0,1)
-  $before = $drv.Free
-  try { & $Action } catch { Log "Error en la tarea: $($_.Exception.Message)" 'DarkYellow' -warn }
-  $after = (Get-PSDrive $drv.Name).Free
+function Measure-Task([scriptblock]$Action){
+  $drive = Get-PSDrive $env:SystemDrive.Substring(0,1)
+  $before = $drive.Free
+  try { & $Action } catch { Log "Error durante la tarea: \$($_.Exception.Message)" 'DarkYellow' -isWarning }
+  $after = (Get-PSDrive $drive.Name).Free
   $delta = $after - $before
-  if($delta -gt 1MB){ $Global:Freed += $delta; Log ("-> Liberado: {0:N2} MB" -f ($delta/1MB)) 'Green' }
-}
-
-function RemoveSafe([string]$path){ if(Test-Path -LiteralPath $path){ try{ Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction Stop } catch{ Log "No se pudo eliminar: $path" 'DarkYellow' -warn } } }
-
-#endregion
-
-#region Preparación
-Section '[1] Preparación y Punto de Restauración'
-Require-Admin
-Log ("El registro detallado de esta sesión se guardará en: $LogPath") 'DarkGray'
-try{ 
-    Checkpoint-Computer -Description 'OptiClean v11 PRE' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
-    Log 'Punto de restauración creado con éxito.' 'Green' 
-} catch { 
-    Log 'No se pudo crear el punto de restauración (puede estar deshabilitado en el sistema).' 'DarkYellow' -warn 
-}
-
-# Cerrar procesos comunes para evitar archivos bloqueados
-Log "Cerrando procesos comunes para liberar archivos..." 'Cyan'
-$procs = 'chrome','msedge','firefox','brave','opera','winword','excel','powerpnt','outlook','steam','epicgameslauncher','discord','spotify','teams','zoom','vlc','onedrive','photos','notepad','code','mspaint'
-foreach($p in $procs){ Get-Process $p -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue }
-Start-Sleep -Seconds 1
-#endregion
-
-#region Limpieza Extrema (Archivos temporales y cachés)
-Section '[2] Limpieza Extrema (Cachés y Residuos)'
-
-SizeDeltaTask { RemoveSafe "$env:SystemDrive\Windows.old" }
-
-Log "Limpiando archivos temporales del sistema y usuarios..." 'Cyan'
-SizeDeltaTask {
-  $paths = @("$env:windir\Temp\*","$env:TEMP\*")
-  Get-ChildItem "$env:SystemDrive\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-    $userProfile = $_.FullName
-    $paths += Join-Path $userProfile 'AppData\\Local\\Temp\\*'
-    $paths += Join-Path $userProfile 'AppData\\Local\\CrashDumps\\*'
-    $paths += Join-Path $userProfile 'AppData\\Local\\Microsoft\\Windows\\INetCache\\*'
+  if($delta -gt 1MB){ 
+    $Global:FreedSpace += $delta
+    Log ("-> Espacio liberado: {0:N2} MB" -f ($delta/1MB)) 'Green' 
   }
-  $paths | ForEach-Object { RemoveSafe $_ }
+}
+
+function Safe-Remove([string]$path){ 
+    if(Test-Path -LiteralPath $path){ 
+        try{ Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction Stop } 
+        catch{ Log "No se pudo eliminar: $path (probablemente en uso)" 'DarkYellow' -isWarning } 
+    } 
+}
+
+#endregion
+
+#region Fase 1: Seguridad y Preparación
+Write-Section '[1/8] Preparación y Punto de Restauración'
+Assert-Admin
+Log ("El registro detallado de esta sesión se guardará en: $LogPath") 'DarkGray'
+try { 
+    Checkpoint-Computer -Description 'OptiClean v11 PRE-OPTIMIZATION' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
+    Log 'Punto de restauración creado con éxito. Tu sistema está seguro.' 'Green' 
+} catch { 
+    Log 'No se pudo crear el punto de restauración (puede estar deshabilitado en el sistema).' 'DarkYellow' -isWarning 
+}
+#endregion
+
+#region Fase 2: Limpieza Extrema de Archivos
+Write-Section '[2/8] Limpieza Extrema (Cachés del Sistema, Apps y Residuos)'
+
+Log "Limpiando archivos temporales del sistema y de todos los perfiles de usuario..." 'Cyan'
+Measure-Task {
+  $tempPaths = @(
+    "$env:windir\\Temp\\*",
+    "$env:TEMP\\*",
+    "$env:SystemDrive\\Windows.old"
+  )
+  Get-ChildItem "$env:SystemDrive\\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+    $userProfile = $_.FullName
+    $tempPaths += @(
+      Join-Path $userProfile 'AppData\\Local\\Temp\\*',
+      Join-Path $userProfile 'AppData\\Local\\CrashDumps\\*',
+      Join-Path $userProfile 'AppData\\Local\\Microsoft\\Windows\\INetCache\\*'
+    )
+  }
+  $tempPaths | ForEach-Object { Safe-Remove $_ }
 }
 
 Log "Vaciando Papelera de Reciclaje de todas las unidades..." 'Cyan'
-SizeDeltaTask { Get-PSDrive -PSProvider FileSystem | ForEach-Object { try{ Clear-RecycleBin -DriveLetter $_.Name -Force -ErrorAction Stop } catch{} } }
-
-Log "Limpiando cachés de navegadores (Chrome, Edge, Firefox, Brave)..." 'Cyan'
-SizeDeltaTask {
-  $patterns = @(
-   'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\Cache', 'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\Code Cache', 'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\GPUCache',
-   'AppData\\Local\\Google\\Chrome\\User Data\\*\\Cache', 'AppData\\Local\\Google\\Chrome\\User Data\\*\\Code Cache', 'AppData\\Local\\Google\\Chrome\\User Data\\*\\GPUCache',
-   'AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\*\\Cache', 'AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\*\\Code Cache', 'AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\*\\GPUCache',
-   'AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\*\\cache2'
-  )
-  Get-ChildItem "$env:SystemDrive\Users" -Directory | ForEach-Object { $u=$_.FullName; foreach($pt in $patterns){ Get-ChildItem (Join-Path $u $pt) -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue } }
+Measure-Task { 
+    Get-PSDrive -PSProvider FileSystem | ForEach-Object { 
+        try { Clear-RecycleBin -DriveLetter $_.Name -Force -ErrorAction Stop } catch{} 
+    } 
 }
 
-Log "Limpiando cachés de apps comunes (Office, Discord, Steam, VSCode, Adobe, NVIDIA/AMD)..." 'Cyan'
-SizeDeltaTask {
-  $appCaches = @(
+Log "Limpiando cachés de navegadores (Chrome, Edge, Firefox, Brave)..." 'Cyan'
+Measure-Task {
+  $browserPatterns = @(
+   'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\Cache', 'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\Code Cache', 'AppData\\Local\\Microsoft\\Edge\\User Data\\*\\GPUCache',
+   'AppData\\Local\\Google\\Chrome\\User Data\\*\\Cache', 'AppData\\Local\\Google\\Chrome\\User Data\\*\\Code Cache', 'AppData\\Local\\Google\\Chrome\\User Data\\*\\GPUCache',
+   'AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\*\\Cache',
+   'AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\*\\cache2'
+  )
+  Get-ChildItem "$env:SystemDrive\\Users" -Directory | ForEach-Object { 
+      $u = $_.FullName
+      foreach($pattern in $browserPatterns){ 
+          Get-ChildItem (Join-Path $u $pattern) -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue 
+      } 
+  }
+}
+
+Log "Limpiando cachés de apps comunes (Office, Discord, Steam, VSCode, NVIDIA/AMD)..." 'Cyan'
+Measure-Task {
+  $appCachePaths = @(
     "$env:APPDATA\\discord\\Cache", "$env:APPDATA\\discord\\Code Cache", "$env:APPDATA\\discord\\GPUCache",
-    "$env:APPDATA\\Microsoft\\Teams\\Cache", "$env:APPDATA\\Microsoft\\Teams\\Code Cache", "$env:APPDATA\\Microsoft\\Teams\\GPUCache",
-    "$env:LOCALAPPDATA\\Microsoft\\Office\\16.0\\OfficeFileCache", "$env:LOCALAPPDATA\\Microsoft\\MSOIdentityCRL",
+    "$env:APPDATA\\Microsoft\\Teams\\Cache", "$env:APPDATA\\Microsoft\\Teams\\GPUCache",
+    "$env:LOCALAPPDATA\\Microsoft\\Office\\16.0\\OfficeFileCache",
     "$env:LOCALAPPDATA\\NVIDIA\\DXCache", "$env:LOCALAPPDATA\\NVIDIA\\GLCache", "$env:ProgramData\\NVIDIA Corporation\\NV_Cache",
     "$env:LOCALAPPDATA\\AMD\\DxCache", "$env:LOCALAPPDATA\\D3DShaderCache",
     "$env:ProgramFiles (x86)\\Steam\\appcache", "$env:ProgramFiles (x86)\\Steam\\config\\htmlcache",
     "$env:LOCALAPPDATA\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\LocalCache",
-    "$env:APPDATA\\Code\\Cache", "$env:APPDATA\\Code\\CachedData", "$env:APPDATA\\Code\\GPUCache",
+    "$env:APPDATA\\Code\\Cache*", "$env:APPDATA\\Code\\GPUCache",
     "$env:LOCALAPPDATA\\npm-cache", "$env:APPDATA\\npm-cache", 
     (Join-Path $env:USERPROFILE ".node_repl_history"),
     (Join-Path $env:USERPROFILE "AppData\\Local\\pip\\cache")
   )
-  $appCaches | ForEach-Object { RemoveSafe $_ }
+  $appCachePaths | ForEach-Object { Safe-Remove $_ }
 }
 
-Log "Limpiando cachés de Windows (Prefetch, Fuentes, Iconos)..." 'Cyan'
-SizeDeltaTask {
-  Stop-Service SysMain -Force -ErrorAction SilentlyContinue; RemoveSafe "$env:windir\\Prefetch\\*"; Start-Service SysMain -ErrorAction SilentlyContinue
-  Stop-Service FontCache -Force -ErrorAction SilentlyContinue
-  Remove-Item "$env:windir\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat" -Force -ErrorAction SilentlyContinue
-  Start-Service FontCache -ErrorAction SilentlyContinue
+Log "Limpiando cachés de Windows (Iconos, Fuentes, Prefetch) y reiniciando Explorer..." 'Cyan'
+Measure-Task {
+  Stop-Service SysMain -Force -ErrorAction SilentlyContinue; Safe-Remove "$env:windir\\Prefetch\\*"; Start-Service SysMain -ErrorAction SilentlyContinue
+  Stop-Service FontCache -Force -ErrorAction SilentlyContinue; Safe-Remove "$env:windir\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat"; Start-Service FontCache -ErrorAction SilentlyContinue
   Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue; Start-Sleep 1
-  Remove-Item "$env:LOCALAPPDATA\\Microsoft\\Windows\\Explorer\\thumbcache_*.db" -Force -ErrorAction SilentlyContinue
-  Remove-Item "$env:LOCALAPPDATA\\IconCache.db" -Force -ErrorAction SilentlyContinue
+  Safe-Remove "$env:LOCALAPPDATA\\Microsoft\\Windows\\Explorer\\thumbcache_*.db"
+  Safe-Remove "$env:LOCALAPPDATA\\IconCache.db"
   Start-Process explorer | Out-Null
 }
 
 Log "Limpiando residuos de Windows Update y optimización de entrega..." 'Cyan'
-SizeDeltaTask {
+Measure-Task {
   Stop-Service wuauserv,bits,dosvc -Force -ErrorAction SilentlyContinue
-  RemoveSafe "$env:windir\\SoftwareDistribution\\Download\\*"
-  RemoveSafe "$env:windir\\DeliveryOptimization\\Cache\\*"
+  Safe-Remove "$env:windir\\SoftwareDistribution\\Download\\*"
+  Safe-Remove "$env:windir\\DeliveryOptimization\\Cache\\*"
   Start-Service wuauserv,bits,dosvc -ErrorAction SilentlyContinue
 }
 
 Log "Limpiando volcados de memoria, informes de errores y logs antiguos..." 'Cyan'
-SizeDeltaTask {
-  RemoveSafe "$env:windir\\Minidump\\*"
-  RemoveSafe "$env:ProgramData\\Microsoft\\Windows\\WER\\*"
-  Remove-Item "$env:SystemDrive\\MEMORY.DMP" -Force -ErrorAction SilentlyContinue
+Measure-Task {
+  Safe-Remove "$env:windir\\Minidump\\*"
+  Safe-Remove "$env:ProgramData\\Microsoft\\Windows\\WER\\*"
+  Safe-Remove "$env:SystemDrive\\MEMORY.DMP"
   Remove-Item "$env:windir\\Logs\\CBS\\*.log", "$env:windir\\Logs\\CBS\\*.cab" -Force -ErrorAction SilentlyContinue
 }
 #endregion
 
-#region Actualización integral con Winget
-Section '[3] Actualización Integral del Sistema con Winget'
+#region Fase 3: Actualización Integral con Winget
+Write-Section '[3/8] Actualización Integral del Sistema con Winget'
 Log 'Buscando e instalando actualizaciones para TODO (Windows, Office, Drivers, Apps)...' 'Cyan'
-Log 'Este proceso puede tardar varios minutos. Por favor, sea paciente.' 'Yellow'
+Log 'Este proceso es el más largo. Por favor, sé paciente mientras Winget trabaja.' 'Yellow'
 try {
     winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
     Log 'Actualización con Winget completada.' 'Green'
 } catch {
-    Log 'Winget no está disponible o falló. Omitiendo actualización automática.' 'DarkYellow' -warn
+    Log 'Winget no está disponible o falló. Omitiendo actualización automática.' 'DarkYellow' -isWarning
 }
 #endregion
 
-#region Debloat Seguro (Eliminación de bloatware)
-Section '[4] Eliminación de Bloatware (Seguro)'
-$bloat = @(
+#region Fase 4: Eliminación Segura de Bloatware
+Write-Section '[4/8] Eliminación de Bloatware (Seguro)'
+$bloatwarePatterns = @(
  '*3DViewer*','*MixedReality*','*Print3D*','*SkypeApp*','*YourPhone*','*Solitaire*','*Zune*',
  '*BingNews*','*BingWeather*','*GetHelp*','*Getstarted*','*FeedbackHub*','*OfficeHub*','*OneNote*',
  '*People*','*Wallet*','*WindowsAlarms*','*WindowsMaps*','*Messaging*','*SoundRecorder*','*WindowsCamera*',
  '*Clipchamp*','*Cortana*','*MicrosoftTeams*','*PowerAutomate*','*Todos*','*549981C3F5F10*', # Publisher ID for some OEM apps
- '*Xbox*','*GamingApp*','*Microsoft.GamingApp*','*XboxGameOverlay*','*XboxIdentityProvider*','*XboxSpeechToTextOverlay*',
+ '*Xbox*','*GamingApp*','*Microsoft.GamingApp*','*XboxGameOverlay*','*XboxIdentityProvider*','*XboxSpeechTo-TextOverlay*',
  '*WebExperience*','*WindowsWidgets*'
 )
 
 Log "Eliminando bloatware preinstalado y aprovisionado..." 'Cyan'
-$all = Get-AppxPackage -AllUsers
-$prov = Get-AppxProvisionedPackage -Online
-foreach($pat in $bloat){
-  $all | Where-Object { $_.Name -like $pat } | ForEach-Object { try{ $_ | Remove-AppxPackage -AllUsers -ErrorAction Stop; Log "Quitado: $($_.Name)" 'DarkGray' } catch{ Log "No se pudo quitar: $($_.Name)" 'DarkYellow' -warn } }
-  $prov | Where-Object { $_.DisplayName -like $pat } | ForEach-Object { try{ $_ | Remove-AppxProvisionedPackage -Online -ErrorAction Stop; Log "Quitada provisión: $($_.DisplayName)" 'DarkGray' } catch{ Log "No se pudo quitar provisión: $($_.DisplayName)" 'DarkYellow' -warn } }
+$allPackages = Get-AppxPackage -AllUsers
+$provisionedPackages = Get-AppxProvisionedPackage -Online
+
+foreach($pattern in $bloatwarePatterns){
+  $allPackages | Where-Object { $_.Name -like $pattern } | ForEach-Object { 
+      try { $_ | Remove-AppxPackage -AllUsers -ErrorAction Stop; Log "  [Quitado] \$($_.Name)" 'DarkGray' } 
+      catch { Log "  [Fallo al quitar] \$($_.Name)" 'DarkYellow' -isWarning } 
+  }
+  $provisionedPackages | Where-Object { $_.DisplayName -like $pattern } | ForEach-Object { 
+      try { $_ | Remove-AppxProvisionedPackage -Online -ErrorAction Stop; Log "  [Quitada provisión] \$($_.DisplayName)" 'DarkGray' } 
+      catch { Log "  [Fallo al quitar provisión] \$($_.DisplayName)" 'DarkYellow' -isWarning } 
+  }
 }
 Log 'Debloat completado.' 'Green'
 #endregion
 
-#region Reparación y Salud del Sistema
-Section '[5] Reparaciones (DISM/SFC/Red/Store/WinSxS)'
+#region Fase 5: Reparación y Salud del Sistema
+Write-Section '[5/8] Reparaciones (DISM/SFC/Red/Store/WinSxS)'
 
-Log 'Limpiando almacén de componentes (WinSxS)...' 'Cyan'
-SizeDeltaTask {
+Log 'Limpiando almacén de componentes (WinSxS) para recuperar espacio de antiguas actualizaciones...' 'Cyan'
+Measure-Task {
     try { 
         Dism.exe /Online /Cleanup-Image /StartComponentCleanup | Out-Null
         Log 'Limpieza de WinSxS completada.' 'Green'
     } catch { 
-        Log 'Fallo en la limpieza de WinSxS.' 'DarkYellow' -warn 
+        Log 'Fallo en la limpieza de WinSxS.' 'DarkYellow' -isWarning 
     }
 }
 
-Log 'DISM RestoreHealth (reparando imagen del sistema)...' 'Cyan'
-try{ Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null; Log 'RestoreHealth completado.' 'Green' } catch{ Log 'Fallo en RestoreHealth' 'DarkYellow' -warn }
+Log 'DISM RestoreHealth (reparando imagen del sistema desde Windows Update)...' 'Cyan'
+try{ Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null; Log 'RestoreHealth completado.' 'Green' } catch{ Log 'Fallo en RestoreHealth' 'DarkYellow' -isWarning }
 
-Log 'SFC /scannow (verificando archivos de sistema)...' 'Cyan'
-try{ sfc.exe /scannow | Out-Null; Log 'SFC completado.' 'Green' } catch{ Log 'Fallo en SFC' 'DarkYellow' -warn }
+Log 'SFC /scannow (verificando y reparando archivos de sistema)...' 'Cyan'
+try{ sfc.exe /scannow | Out-Null; Log 'SFC completado.' 'Green' } catch{ Log 'Fallo en SFC' 'DarkYellow' -isWarning }
 
-Log 'Reiniciando y optimizando pila de red...' 'Cyan'
+Log 'Reiniciando y optimizando pila de red para mejorar la conexión...' 'Cyan'
 try{
     ipconfig /flushdns | Out-Null
     netsh winsock reset | Out-Null
     netsh int ip reset | Out-Null
     netsh int tcp set global autotuninglevel=normal
     netsh int tcp set global ecncapability=enabled
-    Log 'Red optimizada.' 'Green'
+    Log 'Pila de red reseteada y optimizada.' 'Green'
 } catch {
-    Log 'Fallo en la optimización de red.' 'DarkYellow' -warn
+    Log 'Fallo en la optimización de red.' 'DarkYellow' -isWarning
 }
 
 Log 'WSReset (reseteando caché de la Tienda Windows)...' 'Cyan'
-try{ Start-Process wsreset -Wait -WindowStyle Hidden; Log 'WSReset ejecutado.' 'Green' } catch{ Log 'WSReset no disponible o falló.' 'DarkYellow' -warn }
+try{ Start-Process wsreset -Wait -WindowStyle Hidden; Log 'WSReset ejecutado.' 'Green' } catch{ Log 'WSReset no disponible o falló.' 'DarkYellow' -isWarning }
 
-Log 'Re-registrando aplicaciones de la Tienda...' 'Cyan'
-Get-AppxPackage -AllUsers | ForEach-Object { try{ Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\\AppXManifest.xml" -ErrorAction Stop } catch{} } | Out-Null
-Log 'Re-registro completado.' 'Green'
+Log 'Re-registrando aplicaciones de la Tienda para corregir posibles errores...' 'Cyan'
+Get-AppxPackage -AllUsers | ForEach-Object { try{ Add-AppxPackage -DisableDevelopmentMode -Register "\$($_.InstallLocation)\\AppXManifest.xml" -ErrorAction Stop } catch{} } | Out-Null
+Log 'Re-registro de apps completado.' 'Green'
 #endregion
 
-#region Privacidad Reforzada
-Section '[6] Privacidad (Telemetría Mínima)'
+#region Fase 6: Privacidad y Telemetría
+Write-Section '[6/8] Privacidad (Telemetría Mínima)'
 Log "Deshabilitando servicios y tareas de recolección de datos..." 'Cyan'
-$services = 'DiagTrack','dmwappushservice','diagsvc','PcaSvc','RemoteRegistry'
-foreach($s in $services){ if(Get-Service $s -ErrorAction SilentlyContinue){ try{ Set-Service $s -StartupType Disabled; Stop-Service $s -Force } catch{} } }
+$telemetryServices = 'DiagTrack','dmwappushservice','diagsvc','PcaSvc','RemoteRegistry'
+foreach($s in $telemetryServices){ if(Get-Service $s -ErrorAction SilentlyContinue){ try{ Set-Service $s -StartupType Disabled; Stop-Service $s -Force } catch{} } }
 
-$tasks = @(
+$telemetryTasks = @(
   '\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser',
-  '\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator',
-  '\\Microsoft\\Windows\\Autochk\\Proxy',
-  '\\Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticDataCollector'
+  '\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator'
 )
-foreach($t in $tasks){ try{ $path=$t.Substring(0,$t.LastIndexOf('\\')); $name=$t.Split('\\')[-1]; Get-ScheduledTask -TaskPath $path -TaskName $name | Disable-ScheduledTask } catch{} }
+foreach($t in $telemetryTasks){ try{ Get-ScheduledTask -TaskPath ($t.Substring(0,$t.LastIndexOf('\\'))) -TaskName ($t.Split('\\')[-1]) | Disable-ScheduledTask } catch{} }
 
 Log "Aplicando configuración de privacidad en el registro..." 'Cyan'
-$reg = @{
+$regKeys = @{
   'HKLM:SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection' = @{AllowTelemetry=0};
   'HKLM:SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection' = @{AllowTelemetry=0};
   'HKLM:SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\AutoLogger-Diagtrack-Listener' = @{Start=0};
   'HKCU:Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo' = @{Enabled=0};
   'HKLM:SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' = @{DisableWindowsConsumerFeatures=1};
-  'HKLM:SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting' = @{Disabled=1};
 }
-foreach($k in $reg.Keys){ if(-not (Test-Path $k)){ New-Item $k -Force | Out-Null }; foreach($n in $reg[$k].Keys){ try{ New-ItemProperty -Path $k -Name $n -Value $reg[$k][$n] -PropertyType DWord -Force | Out-Null } catch{} } }
-Log 'Privacidad aplicada.' 'Green'
+foreach($key in $regKeys.Keys){ 
+    if(-not (Test-Path $key)){ New-Item $key -Force | Out-Null }
+    foreach($name in $regKeys[$key].Keys){ 
+        try{ New-ItemProperty -Path $key -Name $name -Value $regKeys[$key][$name] -PropertyType DWord -Force | Out-Null } catch{} 
+    } 
+}
+Log 'Configuración de privacidad aplicada.' 'Green'
 #endregion
 
-#region Optimización Final y Arranque
-Section '[7] Optimización Final (Energía/Arranque/Discos/UI)'
+#region Fase 7: Optimización Final del Sistema
+Write-Section '[7/8] Optimización Final (Energía, Arranque, Discos, UI)'
 
-Log "Activando plan de energía 'Máximo Rendimiento'..." 'Cyan'
-$guid = 'e9a42b02-d5df-448d-aa00-03f14749eb61'
+Log "Activando plan de energía 'Máximo Rendimiento' para exprimir cada gota de potencia..." 'Cyan'
+$maxPerfGuid = 'e9a42b02-d5df-448d-aa00-03f14749eb61'
 try{
-    if(-not (powercfg -l | Select-String $guid -Quiet)){ powercfg -duplicatescheme $guid | Out-Null }
-    powercfg -setactive $guid
+    if(-not (powercfg -l | Select-String $maxPerfGuid -Quiet)){ powercfg -duplicatescheme $maxPerfGuid | Out-Null }
+    powercfg -setactive $maxPerfGuid
     Log 'Plan de energía Máximo Rendimiento activado.' 'Green'
 } catch {
-    Log 'No se pudo activar el plan de energía.' 'DarkYellow' -warn
+    Log 'No se pudo activar el plan de energía.' 'DarkYellow' -isWarning
 }
 
-Log "Desactivando hibernación para liberar espacio (seguro en SSD)..." 'Cyan'
-SizeDeltaTask { try{ powercfg -h off } catch{} }
+Log "Desactivando hibernación para liberar espacio en disco (seguro en SSD)..." 'Cyan'
+Measure-Task { try{ powercfg -h off } catch{} }
 
-Log "Configurando efectos visuales para mejor rendimiento..." 'Cyan'
+Log "Configurando efectos visuales para 'Mejor Rendimiento'..." 'Cyan'
 try{ Set-ItemProperty 'HKCU:Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects' -Name VisualFXSetting -Value 2 -Type DWord -Force } catch{}
 
-Log "Deshabilitando SysMain (Superfetch), a menudo redundante en SSDs..." 'Cyan'
+Log "Deshabilitando SysMain (Superfetch), a menudo redundante en SSDs modernos..." 'Cyan'
 try{ if(Get-Service SysMain -ErrorAction SilentlyContinue){ Set-Service SysMain -StartupType Disabled; Stop-Service SysMain -Force } } catch{}
 
 Log "Optimizando discos (TRIM para SSDs, Defrag para HDDs)..." 'Cyan'
@@ -372,38 +377,38 @@ try{
     Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.HealthStatus -eq 'Healthy' -and $_.DriveLetter } | ForEach-Object { Optimize-Volume -DriveLetter $_.DriveLetter -Defrag -ErrorAction SilentlyContinue }
     Log 'Discos optimizados.' 'Green' 
 } catch { 
-    Log 'Fallo al optimizar discos.' 'DarkYellow' -warn 
+    Log 'Fallo al optimizar discos.' 'DarkYellow' -isWarning 
 }
 
 Log "Verificando estado de salud de las unidades (SMART)..." 'Cyan'
 try {
-    $status = Get-CimInstance -Namespace root\\wmi -ClassName MSStorageDriver_FailurePredictStatus
-    if ($status.PredictFailure) {
-        Log "¡Alerta! Una unidad de almacenamiento reporta problemas de salud (SMART)." 'Red' -warn
+    $driveStatus = Get-CimInstance -Namespace root\\wmi -ClassName MSStorageDriver_FailurePredictStatus
+    if ($driveStatus.PredictFailure) {
+        Log "¡ALERTA! Una unidad de almacenamiento reporta problemas de salud (SMART)." 'Red' -isWarning
     } else {
         Log "Estado de salud de las unidades (SMART): OK." 'Green'
     }
 } catch {
-    Log "No se pudo verificar el estado de salud de las unidades (SMART)." 'DarkYellow' -warn
+    Log "No se pudo verificar el estado de salud de las unidades (SMART)." 'DarkYellow' -isWarning
 }
 #endregion
 
-#region Resumen Final
-Section '[8] Resumen Final'
-$gb = [math]::Round($Global:Freed/1GB,3)
-$mins = [math]::Round((New-TimeSpan -Start $StartTime).TotalMinutes,1)
+#region Fase 8: Resumen Final
+Write-Section '[8/8] Resumen Final'
+$totalGB = [math]::Round($Global:FreedSpace/1GB, 3)
+$totalMinutes = [math]::Round((New-TimeSpan -Start $Global:StartTime).TotalMinutes, 1)
 Write-Host ""
 Log ("------------------ TAREA COMPLETADA ------------------") 'White'
-Log ("Espacio total liberado: {0} GB (aproximadamente)" -f $gb) 'Green'
-Log ("Tiempo total de ejecución: {0} minutos" -f $mins) 'Green'
-if($Global:Warns.Count -gt 0){ 
-    Log ("Se registraron $($Global:Warns.Count) advertencias. Revisá el log para más detalles:") 'Yellow' 
+Log ("Espacio total liberado: ~{0} GB" -f $totalGB) 'Green'
+Log ("Tiempo total de ejecución: {0} minutos" -f $totalMinutes) 'Green'
+if($Global:Warnings.Count -gt 0){ 
+    Log ("Se registraron $($Global:Warnings.Count) advertencias. Revisa el log para más detalles:") 'Yellow' 
     Log ($LogPath) 'Yellow'
 } else { 
     Log 'El proceso finalizó sin advertencias.' 'Green' 
 }
 Write-Host ""
-Log '¡Listo! Se recomienda encarecidamente reiniciar el equipo ahora para aplicar todos los cambios.' 'Cyan'
+Log '¡Listo! Se recomienda encarecidamente REINICIAR el equipo ahora para aplicar todos los cambios.' 'Cyan'
 Log '----------------------------------------------------' 'White'
 #endregion
 `;
@@ -452,3 +457,4 @@ downloadButton.addEventListener('click',()=>{
   </script>
 </body>
 </html>
+
