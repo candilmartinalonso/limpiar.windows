@@ -1,937 +1,276 @@
-<!--
-  Optimización Segura de Windows (HTML → PowerShell)
-  --------------------------------------------------
-  Uso:
-    1) Abre este archivo localmente (doble clic). No ejecuta nada por sí mismo.
-    2) Marca las casillas de los módulos y opciones que desees.
-    3) Elige "Simulación (dry-run)" si quieres revisar sin tocar nada. 
-       - Donde PowerShell soporte -WhatIf se usará.
-       - Donde no exista -WhatIf (por ej., DISM, Remove-AppxPackage), se listarán acciones/órdenes sin ejecutarlas.
-    4) Pulsa “Generar script”. Copia/pega el contenido en PowerShell como Administrador.
-    5) Revisa los comentarios dentro del script. Tú decides qué ejecutar.
-  
-  Limitaciones y seguridad:
-    - No descarga binarios, no modifica Set-ExecutionPolicy, no desactiva Microsoft Defender, ni toca servicios críticos.
-    - No se eleva desde el HTML. Debes abrir PowerShell como Administrador manualmente.
-    - Compatible con Windows 10/11. Si es Windows Server, el script se abortará con aviso.
-    - Esta herramienta solo genera scripts (bloques <pre><code>) para copiar y pegar.
-    - Úsalo bajo tu responsabilidad. Revisa cada línea.
-
-  Novedades de esta versión:
-    - Corrección: reemplazo de literales por variables ($Scope, $KeepProvisioned) en UWP y uso correcto de $false/$true.
-    - Botón adicional “Copiar TODO” que concatena Script principal + Script de reversión.
--->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Optimización Segura de Windows (HTML → PowerShell)</title>
-<style>
-  :root{
-    --bg:#0f1115; --panel:#171923; --muted:#232636; --text:#e8eaf0; --sub:#b8bfd1;
-    --accent:#5cc8ff; --accent-2:#8ef7a8; --warn:#ffd166; --danger:#ff6b6b; --ok:#8ef7a8;
-    --border:#2a2f45; --focus:#9be7ff;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;
-    line-height:1.45;
-  }
-  header{
-    background:linear-gradient(180deg,var(--panel),var(--muted));
-    border-bottom:1px solid var(--border);
-    padding:16px 20px;
-    position:sticky; top:0; z-index:10;
-  }
-  header h1{margin:0 0 6px 0; font-size:20px; letter-spacing:.2px}
-  header p{margin:0; color:var(--sub); font-size:14px}
-  .wrap{display:grid; grid-template-columns:280px 1fr; min-height:calc(100vh - 76px)}
-  nav{
-    border-right:1px solid var(--border); background:var(--panel); padding:14px; position:sticky; top:76px; align-self:start; height:calc(100vh - 76px); overflow:auto;
-  }
-  nav .group{margin-bottom:16px}
-  nav h3{margin:12px 8px 8px; font-size:13px; color:var(--sub); font-weight:600}
-  nav a{
-    display:block; padding:8px 10px; border-radius:8px; color:var(--text); text-decoration:none; font-size:14px;
-    border:1px solid transparent;
-  }
-  nav a:focus{outline:2px solid var(--focus); outline-offset:2px}
-  nav a[aria-current="true"], nav a:hover{background:var(--muted); border-color:var(--border)}
-  main{padding:20px; background:#0e1017}
-  section{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:18px; margin-bottom:18px}
-  section h2{margin-top:0; font-size:18px}
-  .callout{
-    background:#141827; border:1px solid var(--border); border-left:4px solid var(--warn);
-    padding:12px 14px; border-radius:8px; margin:12px 0; color:#fff3d1;
-  }
-  .danger{border-left-color:var(--danger); color:#ffdede}
-  .ok{border-left-color:var(--ok); color:#dcffe5}
-  .grid{display:grid; gap:12px}
-  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-  @media (max-width:1100px){.grid.cols-3{grid-template-columns:1fr 1fr}}
-  @media (max-width:900px){.wrap{grid-template-columns:1fr} nav{position:static; height:auto} .grid.cols-2{grid-template-columns:1fr}}
-  label{display:flex; gap:10px; align-items:flex-start; cursor:pointer; user-select:none}
-  label .lbl{flex:1}
-  input[type="checkbox"], input[type="radio"]{transform:translateY(2px)}
-  details{background:#121525; border:1px dashed var(--border); padding:10px 12px; border-radius:8px}
-  details summary{cursor:pointer; color:var(--accent)}
-  .field{display:flex; gap:10px; align-items:center; margin:6px 0}
-  .field input[type="text"]{flex:1; background:#0e1120; border:1px solid var(--border); border-radius:8px; color:var(--text); padding:8px}
-  .tip{color:var(--sub); font-size:12px}
-  .btn{
-    display:inline-flex; gap:8px; align-items:center; padding:10px 14px; border-radius:10px;
-    background:linear-gradient(180deg,#1b2240,#131a35); color:#e9f3ff; border:1px solid #2b355e;
-    cursor:pointer; font-weight:600; letter-spacing:.2px;
-  }
-  .btn:hover{filter:brightness(1.1)}
-  .btn.secondary{background:#16202b; border-color:#263749}
-  .btn.ghost{background:transparent; border-color:var(--border)}
-  .btn[disabled]{opacity:.6; cursor:not-allowed}
-  .out{background:#0b0e18; border:1px solid var(--border); border-radius:10px; padding:0; overflow:hidden}
-  .out header{display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center; padding:10px 12px; background:#0f1426; border-bottom:1px solid var(--border); position:static}
-  .out header h3{margin:0; font-size:14px; color:#cfe7ff}
-  .out pre{margin:0; padding:14px; overflow:auto; max-height:50vh}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,Monaco,monospace; font-size:12.5px; color:#bfe1ff}
-  .kbd{display:inline-block; border:1px solid var(--border); background:#0b0e18; padding:0 6px; border-radius:6px; font-family:inherit}
-  .badge{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid var(--border); background:#121831; color:#d1e6ff}
-  .warning-banner{
-    background:#1e1414; border:1px solid #3a1e1e; padding:10px 12px; border-radius:8px; color:#ffdede; font-size:14px;
-  }
-  .tooltip{border-bottom:1px dashed var(--sub); position:relative}
-  .tooltip:hover::after{
-    content:attr(data-tip); position:absolute; left:0; top:120%; background:#0b0e18; border:1px solid var(--border); color:#e8eaf0; padding:8px 10px; border-radius:8px; width:300px; z-index:5;
-  }
-  .footer-note{color:var(--sub); font-size:12px; margin-top:10px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Titán para Windows: El Script Definitivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* slate-950 */
+        }
+        .code-block {
+            background-color: #0f172a; /* slate-900 */
+            color: #e2e8f0; /* slate-200 */
+            border: 1px solid #334155; /* slate-700 */
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            position: relative;
+            font-family: 'Fira Code', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: #1e293b; /* slate-800 */
+            color: #94a3b8; /* slate-400 */
+            border: 1px solid #334155; /* slate-700 */
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-weight: 600;
+        }
+        .copy-button:hover {
+            background-color: #334155;
+            color: #e2e8f0;
+        }
+        .feature-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.1);
+        }
+        .glow-text {
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        }
+    </style>
 </head>
-<body>
-  <header role="banner" aria-label="Cabecera">
-    <h1>Optimización Segura de Windows (HTML → PowerShell)</h1>
-    <p>Genera scripts de PowerShell en español para limpiar temporales, analizar DISM, desinstalar bloatware de forma conservadora, gestionar inicio y optimizar SSD (TRIM/ReTrim). Nada se ejecuta desde aquí.</p>
-  </header>
+<body class="text-slate-300">
 
-  <div class="wrap" role="application">
-    <nav aria-label="Módulos">
-      <div class="group">
-        <h3>Módulos</h3>
-        <a href="#pref" aria-current="true">Pre-vuelo y avisos</a>
-        <a href="#restore">Punto de restauración y backups</a>
-        <a href="#clean">Limpieza segura</a>
-        <a href="#dism">DISM (análisis / limpieza)</a>
-        <a href="#uwp">Desinstalar bloatware (UWP)</a>
-        <a href="#startup">Inicio (HKCU/HKLM Run)</a>
-        <a href="#ssd">SSD (TRIM / ReTrim)</a>
-        <a href="#gen">Generar script</a>
-      </div>
-      <div class="group">
-        <h3>Accesos rápidos</h3>
-        <a href="#salida">Salida de scripts</a>
-      </div>
-    </nav>
+    <div class="container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 glow-text">Optimizador Titán para Windows</h1>
+            <p class="text-xl text-sky-300">El script definitivo para limpieza, actualización y rendimiento sin precedentes.</p>
+        </header>
 
-    <main>
-      <section id="pref" tabindex="-1">
-        <h2>Resumen de riesgos y pre-vuelo</h2>
-        <div class="warning-banner" role="note" aria-live="polite">
-          Este generador <strong>no</strong> desactiva Defender ni toca servicios críticos. Tampoco aplica “tweaks” agresivos. 
-          Aun así, <strong>revisa cada línea</strong> y ejecútalo <strong>bajo tu responsabilidad</strong> como Administrador.
-        </div>
-        <div class="grid cols-2" style="margin-top:10px">
-          <div>
-            <label title="Comprueba que tienes permisos y que el equipo es Windows 10/11 (no Server).">
-              <input type="checkbox" id="chkPreReq" checked />
-              <span class="lbl"><strong>Pre-requisitos</strong> <span class="tip">Abrir PowerShell como Administrador; espacio libre adecuado.</span></span>
-            </label>
-            <label title="Cierra navegadores si limpiarás cachés para evitar bloqueos.">
-              <input type="checkbox" id="chkCloseApps" />
-              <span class="lbl"><strong>Cerrar apps</strong> (navegadores, instaladores, tiendas)</span>
-            </label>
-          </div>
-          <div>
-            <div class="callout">
-              <span class="badge">Compatibilidad</span> Diseñado para <strong>Windows 10/11</strong>. En equipos tipo <em>Windows Server</em> el script abortará con un aviso seguro.
+        <main>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="feature-card">
+                    <h3 class="text-xl font-bold text-sky-400 mb-2">Limpieza de Nivel Profundo</h3>
+                    <p class="text-slate-400">Elimina cachés ocultas, informes de error y archivos temporales para recuperar el máximo espacio.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-bold text-sky-400 mb-2">Actualizador Universal</h3>
+                    <p class="text-slate-400">Actualiza Windows y todos tus programas de terceros (Chrome, VLC, etc.) de una sola vez con Winget.</p>
+                </div>
+                 <div class="feature-card">
+                    <h3 class="text-xl font-bold text-sky-400 mb-2">Rendimiento Extremo</h3>
+                    <p class="text-slate-400">Optimiza la red, los efectos visuales y la energía para una fluidez y velocidad de respuesta máximas.</p>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section id="restore" tabindex="-1" aria-label="Punto de restauración y backups">
-        <h2>Punto de restauración y backups</h2>
-        <label class="tooltip" data-tip="Usa Checkpoint-Computer si existe y Protección del Sistema está activa. Si no, dará instrucciones manuales.">
-          <input type="checkbox" id="chkRestorePoint" checked />
-          <span class="lbl"><strong>Crear punto de restauración</strong> con <code>Checkpoint-Computer</code></span>
-        </label>
-        <div class="grid cols-2" style="margin-top:8px">
-          <label class="tooltip" data-tip="Exporta listado CSV de Appx instaladas (Nombre y PackageFullName) antes de desinstalar.">
-            <input type="checkbox" id="chkExportAppx" checked />
-            <span class="lbl"><strong>Exportar lista de Appx instaladas</strong> (<code>Export-Csv</code>)</span>
-          </label>
-          <label class="tooltip" data-tip="Copia a .reg las claves Run de HKCU y HKLM antes de mover/deshabilitar entradas.">
-            <input type="checkbox" id="chkBackupRun" checked />
-            <span class="lbl"><strong>Backup de claves Run</strong> (HKCU/HKLM → <code>.reg</code>)</span>
-          </label>
-        </div>
-      </section>
-
-      <section id="clean" tabindex="-1" aria-label="Limpieza segura">
-        <h2>Limpieza segura de temporales y cachés</h2>
-        <div class="grid cols-2">
-          <label class="tooltip" data-tip="Elimina archivos sin bloqueo en %TEMP% y Windows\Temp con try/catch y -WhatIf si simulas.">
-            <input type="checkbox" id="chkTempUser" checked />
-            <span class="lbl"><strong>%TEMP% del usuario</strong> y <strong>C:\Windows\Temp</strong></span>
-          </label>
-          <label class="tooltip" data-tip="Sólo si los navegadores están cerrados; si no, el script listará rutas sin borrar.">
-            <input type="checkbox" id="chkBrowserCaches" />
-            <span class="lbl"><strong>Cachés de navegadores</strong> (Edge/Chrome/Firefox)</span>
-          </label>
-        </div>
-        <p class="tip">Nunca borra <em>Prefetch</em> ni toca <em>WinSxS</em> manualmente.</p>
-      </section>
-
-      <section id="dism" tabindex="-1" aria-label="DISM">
-        <h2>DISM – Tienda de componentes</h2>
-        <div class="grid cols-2">
-          <label class="tooltip" data-tip="Analiza el estado de la Tienda de Componentes sin modificar nada.">
-            <input type="checkbox" id="chkDismAnalyze" />
-            <span class="lbl"><strong>DISM /AnalyzeComponentStore</strong></span>
-          </label>
-          <label class="tooltip" data-tip="Limpia componentes reemplazados de forma segura. No usa /ResetBase.">
-            <input type="checkbox" id="chkDismCleanup" />
-            <span class="lbl"><strong>DISM StartComponentCleanup</strong> (sin /ResetBase)</span>
-          </label>
-        </div>
-      </section>
-
-      <section id="uwp" tabindex="-1" aria-label="Desinstalar bloatware">
-        <h2>Desinstalar bloatware (lista conservadora y avanzada)</h2>
-        <div class="callout">
-          Se exportará un CSV con las Appx instaladas <em>antes</em> de desinstalar. La lista conservadora viene marcada; la avanzada queda desmarcada y con aviso. 
-          No se toca Microsoft Store, Fotos, Calculadora, .NET, Edge WebView2 ni componentes del sistema.
-        </div>
-        <div class="grid cols-3" aria-label="Listas de aplicaciones">
-          <div>
-            <h3>Conservadora (segura)</h3>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.Microsoft3DViewer" checked/> 3D Viewer</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.Print3D" checked/> Print 3D</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.MixedReality.Portal" checked/> Mixed Reality Portal</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.GetHelp" checked/> Get Help / Obtener ayuda</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.BingNews" checked/> News</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.BingSports|Microsoft.BingSports*" checked/> Sports</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.BingWeather" checked/> Weather</label>
-            <label><input type="checkbox" class="uwp-safe" data-pattern="Microsoft.XboxGamingOverlay|Microsoft.XboxGameBar" checked/> Xbox Game Bar</label>
-          </div>
-          <div>
-            <h3>Avanzada (bajo tu criterio)</h3>
-            <details>
-              <summary>Mostrar opciones avanzadas (no marcadas)</summary>
-              <div class="tip" style="margin:6px 0 8px">Riesgo: podrían revertirse pero algunas apps se reinstalan tras updates.</div>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.SkypeApp"/> Skype</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.MicrosoftOfficeHub"/> Office Hub</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.ZuneMusic|Microsoft.GrooveMusic"/> Groove Music</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.ZuneVideo|Microsoft.MicrosoftZuneVideo"/> Movies &amp; TV</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.People"/> People</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.OneConnect"/> Phone Companion</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Clipchamp.Clipchamp"/> Clipchamp</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.XboxApp|Microsoft.GamingApp"/> Xbox App</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.Xbox.TCUI|Microsoft.XboxSpeechToTextOverlay|Microsoft.XboxIdentityProvider"/> Xbox componentes</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.MicrosoftStickyNotes"/> Sticky Notes</label>
-              <label><input type="checkbox" class="uwp-adv" data-pattern="Microsoft.YourPhone|Microsoft.PhoneLink"/> Phone Link</label>
-            </details>
-          </div>
-          <div>
-            <h3>Ámbito y modo</h3>
-            <div class="field">
-              <label><input type="radio" name="uwpScope" value="current" checked/> Usuario actual</label>
+            <!-- INSTRUCCIONES DE USO -->
+            <div class="bg-slate-900 border border-slate-700 p-6 rounded-lg mb-8">
+                <h2 class="text-2xl font-semibold text-white mb-4">Instrucciones para Desatar el Poder</h2>
+                <ol class="list-decimal list-inside space-y-3 text-slate-300">
+                    <li>Haz clic en el botón <strong>"Copiar Script Titán"</strong>.</li>
+                    <li>Abre el menú Inicio, escribe <strong>"PowerShell"</strong>, haz clic derecho y selecciona <strong>"Ejecutar como administrador"</strong>.</li>
+                    <li>En la ventana azul de PowerShell, haz clic derecho para pegar el script.</li>
+                    <li>Presiona <strong>Enter</strong> y observa cómo se ejecuta la optimización más completa.</li>
+                    <li>Presta atención a las instrucciones en pantalla, especialmente durante la actualización de programas.</li>
+                </ol>
             </div>
-            <div class="field">
-              <label class="tooltip" data-tip="Requiere admin. Evita en equipos compartidos si no estás seguro.">
-                <input type="radio" name="uwpScope" value="all"/> Todos los usuarios (+ provisionadas)
-              </label>
-            </div>
-            <div class="field">
-              <label class="tooltip" data-tip="En simulación se listarán apps a quitar.">
-                <input type="checkbox" id="chkUwpKeepProvisioned" /> Mantener provisionadas (solo quitar del usuario)
-              </label>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section id="startup" tabindex="-1" aria-label="Inicio Run">
-        <h2>Inicio (Run) – Deshabilitar de forma reversible</h2>
-        <p class="tip">No se borran entradas: se <strong>mueven</strong> a una ubicación de backup y se genera un script de restauración.</p>
-        <div class="grid cols-2">
-          <label class="tooltip" data-tip="Deshabilita entradas de HKCU\...\Run (usuario actual).">
-            <input type="checkbox" id="chkRunHKCU" /> HKCU\Software\Microsoft\Windows\CurrentVersion\Run
-          </label>
-          <label class="tooltip" data-tip="Deshabilita entradas de HKLM\...\Run (todos los usuarios). Requiere admin.">
-            <input type="checkbox" id="chkRunHKLM" /> HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
-          </label>
-        </div>
-      </section>
-
-      <section id="ssd" tabindex="-1" aria-label="SSD">
-        <h2>SSD – TRIM / ReTrim (sin desfragmentar)</h2>
-        <div class="grid cols-2">
-          <label class="tooltip" data-tip="Consulta el estado TRIM (DisableDeleteNotify). Si está deshabilitado, se habilita.">
-            <input type="checkbox" id="chkTrim" checked /> Verificar/habilitar TRIM
-          </label>
-          <div class="field tooltip" data-tip="Letra(s) de unidad a optimizar con ReTrim. Ej: C o C,D">
-            <span style="min-width:160px">Unidades SSD:</span>
-            <input id="txtDrives" type="text" placeholder="C" aria-label="Letras de unidad SSD separadas por coma" />
-          </div>
-          <label class="tooltip" data-tip="Ejecuta Optimize-Volume -ReTrim para las unidades indicadas (no desfragmenta).">
-            <input type="checkbox" id="chkReTrim" /> Ejecutar ReTrim
-          </label>
-        </div>
-      </section>
-
-      <section id="gen" tabindex="-1" aria-label="Generar script">
-        <h2>Generar scripts</h2>
-        <div class="grid cols-2">
-          <label class="tooltip" data-tip="-WhatIf donde aplique, o listado de acciones para revisión.">
-            <input type="radio" name="mode" value="dry" checked/> Simulación (dry-run)
-          </label>
-          <label class="tooltip" data-tip="Ejecuta las acciones seleccionadas. Lee primero el código.">
-            <input type="radio" name="mode" value="real"/> Ejecutable
-          </label>
-        </div>
-        <div class="grid" style="margin-top:10px">
-          <button class="btn" id="btnGen" aria-controls="salida" aria-label="Generar scripts">
-            🛠️ Generar script
-          </button>
-          <button class="btn secondary" id="btnReset">Reiniciar opciones</button>
-        </div>
-        <p class="footer-note">Consejo: si PowerShell bloquea la ejecución por políticas, puedes ejecutar <span class="kbd">powershell -ExecutionPolicy Bypass -NoProfile</span> para la sesión actual (decisión tuya). Este HTML no cambia la política.</p>
-      </section>
-
-      <section id="salida" tabindex="-1" aria-label="Salida de scripts">
-        <h2>Salida</h2>
-        <div class="out" style="margin-bottom:14px">
-          <header>
-            <h3>Script principal (PowerShell)</h3>
+            <!-- BLOQUE DEL SCRIPT -->
             <div>
-              <button class="btn ghost" id="copyMain" data-target="codeMain">Copiar</button>
-              <button class="btn ghost" id="copyAll" title="Copia Script principal + Script de reversión concatenados">Copiar TODO</button>
-            </div>
-          </header>
-          <pre><code id="codeMain" aria-live="polite" aria-label="Script principal generado"></code></pre>
-        </div>
+                <h2 class="text-3xl font-bold text-white mb-4 text-center">Script de Optimización Titán</h2>
+                <div class="code-block">
+                    <button id="copyButton" class="copy-button">Copiar Script Titán</button>
+                    <pre><code id="powerShellScript">
+# =================================================================================
+# ||                   SCRIPT DE OPTIMIZACIÓN TITÁN PARA WINDOWS                   ||
+# ||          Limpieza Profunda | Actualización Universal | Rendimiento Máximo     ||
+# =================================================================================
 
-        <div class="out">
-          <header>
-            <h3>Script de reversión</h3>
-            <div>
-              <button class="btn ghost" id="copyRev" data-target="codeRev">Copiar</button>
-            </div>
-          </header>
-          <pre><code id="codeRev" aria-live="polite" aria-label="Script de reversión generado"></code></pre>
-        </div>
-      </section>
-
-      <section>
-        <h2>Notas post-ejecución</h2>
-        <ul>
-          <li>Reinicia el equipo si DISM o cambios de inicio lo sugieren.</li>
-          <li>Revisa el espacio liberado y el <em>log</em> en: <code>%USERPROFILE%\Desktop\Windows-Optimiza-LOG.txt</code>.</li>
-          <li>Para restaurar:
-            <ul>
-              <li>Usa el <strong>punto de restauración</strong> creado (Panel de control → Recuperación → Abrir Restaurar sistema).</li>
-              <li>Ejecuta el <strong>Script de reversión</strong> generado para Appx y claves Run.</li>
-              <li>Importa las copias <code>.reg</code> de HKCU/HKLM Run si lo prefieres.</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-    </main>
-  </div>
-
-<script>
-/* ===========================================================
-   Generador de scripts – modular y comentado
-   Nada se ejecuta aquí. Solo compone cadenas de PowerShell.
-   =========================================================== */
-
-const $ = (sel)=>document.querySelector(sel);
-const $$ = (sel)=>Array.from(document.querySelectorAll(sel));
-
-function getMode(){
-  return (document.querySelector('input[name="mode"]:checked')?.value||'dry') === 'dry';
+Function Show-Intro {
+    Clear-Host
+    Write-Host "=====================================================" -ForegroundColor Cyan
+    Write-Host "     INICIANDO SCRIPT DE OPTIMIZACIÓN TITÁN" -ForegroundColor Cyan
+    Write-Host "=====================================================" -ForegroundColor Gray
+    Write-Host "Este script es el más completo y seguro para maximizar el rendimiento."
+    Write-Host "Por favor, guarda tu trabajo. El proceso puede ser largo, especialmente"
+    Write-Host "durante la actualización de programas." -ForegroundColor Yellow
+    Write-Host "====================================================="
+    Start-Sleep -Seconds 6
 }
 
-function copyText(txt){
-  return navigator.clipboard.writeText(txt).then(()=>true).catch(()=>{
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = txt; document.body.appendChild(ta); ta.select();
-    let ok = false;
-    try{ ok = document.execCommand('copy'); }catch(e){}
-    ta.remove();
-    return ok;
-  });
-}
-
-function copyCode(targetId){
-  const el = document.getElementById(targetId);
-  if(!el) return;
-  const txt = el.textContent;
-  copyText(txt).then(ok=>alert(ok?'Copiado al portapapeles.':'No se pudo copiar.'));
-}
-
-function copyAll(){
-  const main = $('#codeMain').textContent || '';
-  const rev  = $('#codeRev').textContent  || '';
-  const sep  = '\n\n### --- FIN DEL SCRIPT PRINCIPAL --- ###\n\n';
-  const all  = (main.trim() + sep + rev.trim()).trim() + '\n';
-  copyText(all).then(ok=>alert(ok?'Todo copiado (principal + reversión).':'No se pudo copiar todo.'));
-}
-
-function resetOptions(){
-  // Valores por defecto razonables
-  $('#chkPreReq').checked = true;
-  $('#chkCloseApps').checked = false;
-  $('#chkRestorePoint').checked = true;
-  $('#chkExportAppx').checked = true;
-  $('#chkBackupRun').checked = true;
-  $('#chkTempUser').checked = true;
-  $('#chkBrowserCaches').checked = false;
-  $('#chkDismAnalyze').checked = false;
-  $('#chkDismCleanup').checked = false;
-  $('#chkRunHKCU').checked = false;
-  $('#chkRunHKLM').checked = false;
-  $('#chkTrim').checked = true;
-  $('#chkReTrim').checked = false;
-  $('#txtDrives').value = '';
-  document.querySelector('input[name="uwpScope"][value="current"]').checked = true;
-  $('#chkUwpKeepProvisioned').checked = false;
-  $$('input.uwp-safe').forEach(cb=>cb.checked = true);
-  $$('input.uwp-adv').forEach(cb=>cb.checked = false);
-  document.querySelector('input[name="mode"][value="dry"]').checked = true;
-  $('#codeMain').textContent = '';
-  $('#codeRev').textContent  = '';
-}
-
-function buildHeader(){
-  return `# ============================================
-# Optimización Segura de Windows – Script principal
-# Generado con HTML (no ejecutado automáticamente)
-# Compatibilidad: Windows 10/11 (no Windows Server)
-# ============================================
-
-# Recomendación: Ejecutar PowerShell como Administrador
-# Este script registra acciones en el Escritorio del usuario.
-`;
-}
-
-function buildAdminAndEnv(){
-  return `# --- Comprobaciones iniciales y entorno ---
-$ErrorActionPreference = 'Stop'
-$IsDryRun = ${getMode() ? '$true' : '$false'}
-
-# Detectar si es Windows Server y abortar con aviso seguro
-try {
-  $installationType = (Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion' -ErrorAction Stop).InstallationType
-} catch {
-  $installationType = ''
-}
-if ($installationType -match 'Server') {
-  Write-Warning 'Este script está diseñado para Windows 10/11. Se detectó Windows Server. Abortando sin cambios.'
-  return
-}
-
-# Comprobar privilegios de administrador
-$principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-$IsAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-if (-not $IsAdmin) { 
-  Write-Warning 'Ejecuta PowerShell como Administrador y vuelve a intentarlo.'
-  return
-}
-
-# Carpeta de trabajo en Escritorio y log
-$Desktop = [Environment]::GetFolderPath('Desktop')
-$WorkDir = Join-Path $Desktop 'Windows-Optimiza'
-if (-not (Test-Path $WorkDir)) { New-Item -ItemType Directory -Path $WorkDir | Out-Null }
-
-$LogFile = Join-Path $Desktop 'Windows-Optimiza-LOG.txt'
-try {
-  Start-Transcript -Path $LogFile -Append -ErrorAction Stop
-} catch {
-  Write-Warning 'No se pudo iniciar el transcript de PowerShell. Continuando sin transcript.'
-}
-`;
-}
-
-function buildPreFlight(){
-  const closeApps = $('#chkCloseApps').checked;
-  return `# --- Pre-vuelo ---
-Write-Host 'Pre-requisitos: PowerShell como Administrador, espacio libre suficiente.' -ForegroundColor Cyan
-${closeApps ? "Write-Host 'Cierra navegadores y apps antes de continuar.' -ForegroundColor Yellow" : ""}
-`;
-}
-
-function buildRestorePoint(){
-  if (!$('#chkRestorePoint').checked) return '';
-  return `# --- Punto de restauración ---
-try {
-  if (Get-Command Checkpoint-Computer -ErrorAction SilentlyContinue) {
-    if ($IsDryRun) {
-      Write-Host '[Simulación] Se crearía un punto de restauración: Pre-Optimización-Segura'
-    } else {
-      Checkpoint-Computer -Description 'Pre-Optimización-Segura' -RestorePointType 'MODIFY_SETTINGS'
-      Write-Host 'Punto de restauración creado (si la Protección del Sistema está habilitada).'
+# --- PASO 1: LIMPIEZA DE NIVEL PROFUNDO ---
+Function Step1-Deep-Cleanup {
+    Write-Host "`n[PASO 1 de 7] - Iniciando Limpieza de Nivel Profundo..." -ForegroundColor Green
+    $Locations = @(
+        "$env:windir\Temp\*",
+        "$env:TEMP\*",
+        "$env:windir\SoftwareDistribution\Download\*",
+        "$env:windir\Prefetch\*",
+        "$env:windir\Logs\CBS\*.log",
+        "$env:ProgramData\Microsoft\Windows\WER\ReportQueue\*",
+        "$env:windir\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization\Cache\*"
+    )
+    foreach ($loc in $Locations) {
+        Write-Host " - Vaciando: $($loc.Split('\')[-2])" -ForegroundColor Gray
+        Remove-Item -Path $loc -Recurse -Force -ErrorAction SilentlyContinue
     }
-  } else {
-    Write-Warning 'Checkpoint-Computer no está disponible. Alternativa manual: Panel de control → Recuperación → Configurar Restaurar sistema.'
-  }
-} catch {
-  Write-Warning 'No se pudo crear el punto de restauración. Verifica que la Protección del Sistema esté habilitada.'
-}
-`;
-}
-
-function buildBackups(){
-  const exportAppx = $('#chkExportAppx').checked;
-  const backupRun = $('#chkBackupRun').checked;
-  let s = `# --- Backups previos ---
-`;
-  if (exportAppx){
-    s += `
-# Exportar lista de Appx instaladas
-try {
-  $AppxCsv = Join-Path $WorkDir 'Appx-Instaladas.csv'
-  Get-AppxPackage | Select-Object Name, PackageFullName | Export-Csv -Path $AppxCsv -NoTypeInformation -Encoding UTF8
-  Write-Host "Listado Appx exportado a: $AppxCsv"
-} catch { Write-Warning 'Fallo exportando lista Appx.' }
-`;
-  }
-  if (backupRun){
-    s += `
-# Copia de seguridad de claves Run (HKCU y HKLM) a .reg
-try {
-  $RegHKCU = Join-Path $WorkDir 'Backup-HKCU-Run.reg'
-  reg.exe export "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" "$RegHKCU" /y | Out-Null
-  Write-Host "HKCU Run exportado a: $RegHKCU"
-} catch { Write-Warning 'No se pudo exportar HKCU Run (posible clave vacía).' }
-
-try {
-  $RegHKLM = Join-Path $WorkDir 'Backup-HKLM-Run.reg'
-  reg.exe export "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" "$RegHKLM" /y | Out-Null
-  Write-Host "HKLM Run exportado a: $RegHKLM"
-} catch { Write-Warning 'No se pudo exportar HKLM Run (requiere admin o clave vacía).' }
-`;
-  }
-  return s;
+    Write-Host " - Limpiando caché de la Tienda de Windows..."
+    $wsresetPath = "$env:SystemRoot\System32\WSReset.exe"; if (Test-Path $wsresetPath) { Start-Process $wsresetPath -Wait -WindowStyle Hidden }
+    Write-Host " - Vaciando la Papelera de Reciclaje..."
+    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+    Write-Host " - Limpiando caché de DNS..."
+    ipconfig /flushdns
+    Write-Host " - Reconstruyendo caché de iconos (se reiniciará el explorador al final)..."
+    if (Test-Path "$env:LOCALAPPDATA\IconCache.db") { Remove-Item "$env:LOCALAPPDATA\IconCache.db" -Force -ErrorAction SilentlyContinue }
 }
 
-function buildCleanTemps(){
-  if (!$('#chkTempUser').checked && !$('#chkBrowserCaches').checked) return '';
-  const isDry = getMode();
-  const whatIf = isDry ? ' -WhatIf' : '';
-  const browser = $('#chkBrowserCaches').checked;
-  return `# --- Limpieza segura de temporales ---
-try {
-  $tempUser = $env:TEMP
-  $tempWin  = 'C:\\Windows\\Temp'
-  Write-Host "Limpieza de $tempUser y $tempWin" -ForegroundColor Cyan
-
-  # Eliminar archivos no bloqueados (con -WhatIf en simulación)
-  foreach($p in @($tempUser, $tempWin)) {
-    if (Test-Path $p) {
-      Get-ChildItem -LiteralPath $p -Force -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
-        try {
-          if (-not $_.PSIsContainer) {
-            Remove-Item -LiteralPath $_.FullName -Force -ErrorAction Stop${whatIf}
-          }
-        } catch {
-          # Ignorar archivos en uso o sin permisos
-        }
-      }
-      # Intentar eliminar directorios vacíos
-      Get-ChildItem -LiteralPath $p -Force -Recurse -Directory -ErrorAction SilentlyContinue | Sort-Object -Property FullName -Descending | ForEach-Object {
-        try {
-          Remove-Item -LiteralPath $_.FullName -Force -Recurse -ErrorAction Stop${whatIf}
-        } catch {}
-      }
-    }
-  }
-} catch { Write-Warning 'Error durante la limpieza de temporales.' }
-
-${browser ? `# --- Cachés de navegadores (opcional) ---
-# Recomendación: cerrar Edge/Chrome/Firefox. Si están abiertos, solo se listarán rutas.
-$Browsers = @(
-  @{ Name='Edge';    Cache="$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache" },
-  @{ Name='Chrome';  Cache="$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Cache" },
-  @{ Name='Firefox'; Cache="$env:APPDATA\\Mozilla\\Firefox\\Profiles" } # múltiples perfiles
-)
-
-foreach($b in $Browsers){
-  $path = $b.Cache
-  if ($b.Name -eq 'Firefox') {
-    if (Test-Path $path) {
-      Get-ChildItem $path -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-        $fp = Join-Path $_.FullName 'cache2'
-        if (Test-Path $fp) {
-          if ($IsDryRun) {
-            Write-Host "[Simulación] Limpiaría caché de Firefox en: $fp"
-          } else {
-            try { Remove-Item -Path $fp -Recurse -Force -ErrorAction Stop } catch { Write-Warning "No se pudo limpiar $fp (¿Firefox abierto?)." }
-          }
-        }
-      }
-    }
-  } else {
-    if (Test-Path $path) {
-      if ($IsDryRun) {
-        Write-Host "[Simulación] Limpiaría caché de $($b.Name) en: $path"
-      } else {
-        try { Remove-Item -Path $path -Recurse -Force -ErrorAction Stop } catch { Write-Warning "No se pudo limpiar $path (¿navegador abierto?)." }
-      }
-    }
-  }
-}
-` : ``}
-`;
+# --- PASO 2: MANTENIMIENTO Y REPARACIÓN INTEGRAL ---
+Function Step2-System-Repair {
+    Write-Host "`n[PASO 2 de 7] - Verificando y reparando la integridad del sistema..." -ForegroundColor Green
+    Write-Host " - Ejecutando System File Checker (SFC)..." -ForegroundColor Yellow
+    sfc /scannow
+    Write-Host " - Ejecutando DISM para reparar la imagen de Windows..." -ForegroundColor Yellow
+    DISM /Online /Cleanup-Image /RestoreHealth
 }
 
-function buildDISM(){
-  const analyze = $('#chkDismAnalyze').checked;
-  const cleanup = $('#chkDismCleanup').checked;
-  if (!analyze && !cleanup) return '';
-  let s = `# --- DISM / Tienda de Componentes ---
-`;
-  if (analyze){
-    s += `
-# Analizar estado de la Tienda de Componentes (no cambia nada)
-if ($IsDryRun) {
-  Write-Host '[Simulación] Ejecutaría: DISM /Online /Cleanup-Image /AnalyzeComponentStore'
-} else {
-  Start-Process -FilePath dism.exe -ArgumentList '/Online','/Cleanup-Image','/AnalyzeComponentStore' -Wait
-}
-`;
-  }
-  if (cleanup){
-    s += `
-# Limpieza segura de componentes reemplazados (sin /ResetBase)
-if ($IsDryRun) {
-  Write-Host '[Simulación] Ejecutaría: DISM /Online /Cleanup-Image /StartComponentCleanup'
-} else {
-  Start-Process -FilePath dism.exe -ArgumentList '/Online','/Cleanup-Image','/StartComponentCleanup' -Wait
-}
-`;
-  }
-  return s;
-}
-
-function collectUwpPatterns(){
-  const sel = [];
-  $$('input.uwp-safe:checked').forEach(cb=>sel.push(cb.dataset.pattern));
-  $$('input.uwp-adv:checked').forEach(cb=>sel.push(cb.dataset.pattern));
-  return sel.filter(Boolean);
-}
-
-function buildUWP(){
-  const patterns = collectUwpPatterns();
-  if (patterns.length === 0) return '';
-  const scope = document.querySelector('input[name="uwpScope"]:checked')?.value || 'current';
-  const keepProv = $('#chkUwpKeepProvisioned').checked;
-  const patternArray = patterns.map(p=>`'${p}'`).join(', ');
-  return `# --- Desinstalación conservadora de aplicaciones UWP ---
-# Se respeta una lista segura y otra avanzada opcional. No se toca Microsoft Store, Fotos, Calculadora, .NET, Edge WebView2 ni componentes del sistema.
-# Config del bloque UWP (inyectada por la UI del HTML)
-$Scope = '${scope}'            # 'current' o 'all'
-$KeepProvisioned = ${keepProv ? '$true' : '$false'} # $true para mantener provisionadas, $false para quitarlas
-
-$Patterns = @(${patternArray})
-$ToRemove = @()
-
-# Filtrar paquetes instalados que coincidan con patrones
-$all = Get-AppxPackage -AllUsers
-foreach($pat in $Patterns){
-  $ToRemove += $all | Where-Object { $_.Name -match $pat }
-}
-$ToRemove = $ToRemove | Sort-Object -Property Name -Unique
-
-if ($ToRemove.Count -eq 0) {
-  Write-Host 'No se encontraron paquetes coincidentes para desinstalar.'
-} else {
-  Write-Host ('Se encontraron {0} paquetes candidatos.' -f $ToRemove.Count)
-}
-
-foreach($pkg in $ToRemove){
-  Write-Host ("{0}  →  {1}" -f $pkg.Name, $pkg.PackageFullName)
-}
-
-if ($IsDryRun) {
-  Write-Host '[Simulación] Se listarían y removerían los paquetes anteriores en el ámbito seleccionado.'
-} else {
-  foreach($pkg in $ToRemove){
+# --- PASO 3: ACTUALIZADOR UNIVERSAL (WINDOWS Y APPS) ---
+Function Step3-Update-Everything {
+    Write-Host "`n[PASO 3 de 7] - Iniciando Actualizador Universal..." -ForegroundColor Green
+    Write-Host " - Buscando e instalando actualizaciones de Windows..." -ForegroundColor White
     try {
-      if ($Scope -eq 'current') {
-        # Usuario actual
-        Get-AppxPackage -Name $pkg.Name | ForEach-Object {
-          Write-Host ("Quitando (usuario actual): {0}" -f $_.PackageFullName)
-          Remove-AppxPackage -Package $_.PackageFullName -ErrorAction Stop
-        }
-        if (-not $KeepProvisioned) {
-          # Opcionalmente quitar también del aprovisionamiento para NUEVOS usuarios
-          $prov = Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $pkg.Name }
-          foreach($p in $prov){
-            Write-Host ("Quitando provisionado: {0}" -f $p.DisplayName)
-            Remove-AppxProvisionedPackage -Online -PackageName $p.PackageName | Out-Null
-          }
-        }
-      } else {
-        # Todos los usuarios + provisionadas
-        Write-Host ("Quitando (todos los usuarios): {0}" -f $pkg.Name)
-        Get-AppxPackage -AllUsers -Name $pkg.Name | ForEach-Object {
-          Remove-AppxPackage -Package $_.PackageFullName -AllUsers -ErrorAction Stop
-        }
-        if (-not $KeepProvisioned) {
-          $prov = Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $pkg.Name }
-          foreach($p in $prov){
-            Write-Host ("Quitando provisionado: {0}" -f $p.DisplayName)
-            Remove-AppxProvisionedPackage -Online -PackageName $p.PackageName | Out-Null
-          }
-        }
-      }
+        UsoClient.exe StartInteractiveScan
+        Write-Host "   Se ha iniciado el proceso de Windows Update. Revisa la configuración si requiere tu atención." -ForegroundColor Gray
+    } catch { Write-Host "   No se pudo iniciar UsoClient.exe. Por favor, busca actualizaciones manualmente." -ForegroundColor Yellow }
+    
+    Write-Host "`n - Buscando actualizaciones para programas de terceros con Winget..." -ForegroundColor White
+    Write-Host "   Esto puede tardar MUCHO TIEMPO. Winget buscará y actualizará todo lo posible." -ForegroundColor Yellow
+    Read-Host "Presiona ENTER para comenzar la actualización de programas..."
+    try {
+        winget upgrade --all --accept-source-agreements --accept-package-agreements --silent --disable-interactivity
     } catch {
-      Write-Warning ("Fallo quitando {0}: {1}" -f $pkg.Name, $_.Exception.Message)
+        Write-Host "   Winget no está disponible o falló. Omite este paso o instálalo desde la Microsoft Store." -ForegroundColor Red
     }
-  }
-}
-`;
 }
 
-function buildStartup(){
-  const doHKCU = $('#chkRunHKCU').checked;
-  const doHKLM = $('#chkRunHKLM').checked;
-  if (!doHKCU && !doHKLM) return '';
-
-  function blockFor(hive){
-    const key = hive === 'HKCU'
-      ? 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
-      : 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run';
-    const backupKey = hive === 'HKCU'
-      ? 'HKCU:\\Software\\Windows-Optimiza\\Backup\\Run'
-      : 'HKLM:\\SOFTWARE\\Windows-Optimiza\\Backup\\Run';
-    return `
-# --- Deshabilitar entradas de inicio en ${hive} (reversible, sin borrar) ---
-$RunKey = '${key}'
-$BackupKey = '${backupKey}'
-if (-not (Test-Path $BackupKey)) {
-  if ($IsDryRun) { Write-Host "[Simulación] Crearía clave de backup: $BackupKey" }
-  else { New-Item -Path $BackupKey -Force | Out-Null }
-}
-
-if (Test-Path $RunKey) {
-  $values = (Get-Item -Path $RunKey).GetValueNames()
-  foreach($v in $values){
-    $data = (Get-ItemProperty -Path $RunKey -Name $v -ErrorAction SilentlyContinue).$v
-    if ($null -ne $data) {
-      if ($IsDryRun) {
-        Write-Host "[Simulación] Movería '$v' → backup y eliminaría del Run activo."
-      } else {
-        # Copiar valor a backup
-        New-ItemProperty -Path $BackupKey -Name $v -Value $data -PropertyType String -Force | Out-Null
-        # Quitar del Run activo (sin borrar permanente, ya está en backup)
-        Remove-ItemProperty -Path $RunKey -Name $v -Force -ErrorAction SilentlyContinue
-      }
-    }
-  }
-} else {
-  Write-Host "Clave Run no encontrada: $RunKey"
-}
-`;
-  }
-
-  return `${doHKCU ? blockFor('HKCU') : ''}${doHKLM ? blockFor('HKLM') : ''}`;
-}
-
-function buildSSD(){
-  const doTrim = $('#chkTrim').checked;
-  const doReTrim = $('#chkReTrim').checked;
-  const drives = ($('#txtDrives').value || '').trim();
-  if (!doTrim && (!doReTrim || drives === '')) return '';
-  let s = `# --- SSD / TRIM / ReTrim ---
-`;
-  if (doTrim){
-    s += `
-# Verificar/habilitar TRIM
-try {
-  $trim = (fsutil behavior query DisableDeleteNotify) 2>&1
-  Write-Host ($trim | Out-String)
-  if (-not $IsDryRun) {
-    if ($trim -match 'DisableDeleteNotify\\s*:\\s*1') {
-      Write-Host 'TRIM deshabilitado. Habilitando…'
-      fsutil behavior set DisableDeleteNotify 0 | Out-Null
+# --- PASO 4: OPTIMIZACIÓN DE DISCO INTELIGENTE ---
+Function Step4-Disk-Optimization {
+    Write-Host "`n[PASO 4 de 7] - Optimizando el disco del sistema..." -ForegroundColor Green
+    $SystemDrive = Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object { $_.DeviceID -eq $env:SystemDrive }
+    if ($SystemDrive.MediaType -eq 4) {
+        Write-Host " - Optimizando SSD (TRIM)..." -ForegroundColor White
+        Optimize-Volume -DriveLetter $env:SystemDrive.Substring(0,1) -ReTrim -Verbose
     } else {
-      Write-Host 'TRIM ya está habilitado.'
+        Write-Host " - Desfragmentando HDD..." -ForegroundColor White
+        Optimize-Volume -DriveLetter $env:SystemDrive.Substring(0,1) -Defrag -Verbose
     }
-  } else {
-    Write-Host '[Simulación] Revisaría y habilitaría TRIM si procede.'
-  }
-} catch { Write-Warning 'No se pudo consultar/establecer TRIM.' }
-`;
-  }
-  if (doReTrim && drives !== ''){
-    const letters = drives.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean);
-    s += `
-# ReTrim de unidades indicadas (no desfragmenta SSD)
-$Drives = @(${letters.map(l=>`'${l}'`).join(', ')})
-foreach($d in $Drives){
-  try {
-    if ($IsDryRun) {
-      Write-Host "[Simulación] Ejecutaría: Optimize-Volume -DriveLetter $d -ReTrim -Verbose"
-    } else {
-      Optimize-Volume -DriveLetter $d -ReTrim -Verbose
-    }
-  } catch {
-    Write-Warning "No se pudo optimizar $d: $($_.Exception.Message)"
-  }
-}
-`;
-  }
-  return s;
 }
 
-function buildFooter(){
-  return `
-# --- Cierre y transcript ---
-try { Stop-Transcript | Out-Null } catch {}
-Write-Host "Registro en: $LogFile" -ForegroundColor Green
-Write-Host "Finalizado. Revisa los mensajes anteriores." -ForegroundColor Green
-`;
+# --- PASO 5: AJUSTES AVANZADOS DE RENDIMIENTO Y RED ---
+Function Step5-Performance-Tweaks {
+    Write-Host "`n[PASO 5 de 7] - Aplicando ajustes avanzados de rendimiento..." -ForegroundColor Green
+    Write-Host " - Activando plan de energía 'Máximo Rendimiento'..."
+    powercfg /s e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+    Write-Host " - Optimizando efectos visuales para máxima fluidez..."
+    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFxSetting' -Value 2
+    Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop' -Name 'FontSmoothing' -Value '2'
+    Write-Host " - Aplicando optimizaciones de red..."
+    netsh int tcp set global autotuninglevel=normal
+    netsh int tcp set global congestionprovider=ctcp
+    netsh int tcp set global ecncapability=enabled
 }
 
-function buildMainScript(){
-  let ps = '';
-  ps += buildHeader();
-  ps += buildAdminAndEnv();
-  if ($('#chkPreReq').checked) ps += buildPreFlight();
-  ps += buildRestorePoint();
-  ps += buildBackups();
-  ps += buildCleanTemps();
-  ps += buildDISM();
-  ps += buildUWP();
-  ps += buildStartup();
-  ps += buildSSD();
-  ps += buildFooter();
-  return ps.trim() + '\n';
+# --- PASO 6: DEBLOAT Y CONTROL DE INICIO ---
+Function Step6-Debloat-Startup {
+    Write-Host "`n[PASO 6 de 7] - Asistente de Debloat y control de inicio..." -ForegroundColor Green
+    Write-Host " - A continuación se abrirá el Administrador de Tareas en 'Aplicaciones de arranque'." -ForegroundColor Yellow
+    Write-Host " - Por favor, DESHABILITA cualquier programa que no necesites que se inicie con Windows." -ForegroundColor Yellow
+    Read-Host "Presiona ENTER para abrir el Administrador de Tareas..."
+    Start-Process -FilePath "ms-settings:startupapps"
+    
+    Write-Host "`n - Ahora se abrirá el panel para desinstalar programas." -ForegroundColor Yellow
+    Write-Host " - Desinstala todo el software que ya no utilices." -ForegroundColor Yellow
+    Read-Host "Presiona ENTER para abrir 'Programas y características'..."
+    control.exe appwiz.cpl
 }
 
-function buildRevertScript(){
-  // Script de reversión: restaurar claves Run + guía para reinstalar Appx (mejor esfuerzo).
-  return `# ============================================
-# Optimización Segura de Windows – Script de reversión
-# Uso: Ejecutar como Administrador. Reinstala/recupera en lo posible.
-# ============================================
-$ErrorActionPreference = 'Stop'
-$Desktop = [Environment]::GetFolderPath('Desktop')
-$WorkDir = Join-Path $Desktop 'Windows-Optimiza'
-$LogFile = Join-Path $Desktop 'Windows-Optimiza-LOG.txt'
-try { Start-Transcript -Path $LogFile -Append } catch {}
-
-# 1) Restaurar entradas de inicio (Run) desde backup
-function Restore-RunKey {
-  param([string]$ActiveKey, [string]$BackupKey)
-  if (Test-Path $BackupKey) {
-    $values = (Get-Item -Path $BackupKey).GetValueNames()
-    foreach($v in $values){
-      $data = (Get-ItemProperty -Path $BackupKey -Name $v -ErrorAction SilentlyContinue).$v
-      if ($null -ne $data) {
-        New-ItemProperty -Path $ActiveKey -Name $v -Value $data -PropertyType String -Force | Out-Null
-        # mantener en backup por si se desea conservar copia
-      }
-    }
-    Write-Host "Restauradas entradas desde $BackupKey → $ActiveKey"
-  } else {
-    Write-Host "No hay backup en: $BackupKey"
-  }
+# --- PASO 7: FINALIZACIÓN Y REINICIO DE INTERFAZ ---
+Function Step7-Finalize {
+    Write-Host "`n[PASO 7 de 7] - Finalizando y aplicando cambios..." -ForegroundColor Green
+    Write-Host " - Reiniciando el Explorador de Windows para aplicar la nueva caché de iconos..."
+    Stop-Process -Name explorer -Force
+    Write-Host "`n`n=====================================================" -ForegroundColor Cyan
+    Write-Host "¡OPTIMIZACIÓN TITÁN COMPLETADA!" -ForegroundColor Cyan
+    Write-Host "Se ha limpiado, reparado, actualizado y optimizado tu sistema." -ForegroundColor White
+    Write-Host "Para una máxima efectividad, REINICIA TU EQUIPO ahora." -ForegroundColor Yellow
+    Write-Host "====================================================="
 }
 
-try {
-  Restore-RunKey -ActiveKey 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -BackupKey 'HKCU:\\Software\\Windows-Optimiza\\Backup\\Run'
-} catch { Write-Warning 'No se pudo restaurar HKCU Run.' }
+# --- EJECUCIÓN DEL SCRIPT ---
+Show-Intro
+Step1-Deep-Cleanup
+Step2-System-Repair
+Step3-Update-Everything
+Step4-Disk-Optimization
+Step5-Performance-Tweaks
+Step6-Debloat-Startup
+Step7-Finalize
 
-try {
-  Restore-RunKey -ActiveKey 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -BackupKey 'HKLM:\\SOFTWARE\\Windows-Optimiza\\Backup\\Run'
-} catch { Write-Warning 'No se pudo restaurar HKLM Run (requiere admin).' }
+                    </code></pre>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-center text-slate-500 mt-12">
+            <p>&copy; 2024. Siente el poder de un sistema completamente optimizado.</p>
+        </footer>
+    </div>
 
-# 2) Reinstalar aplicaciones UWP desde CSV (mejor esfuerzo)
-# Nota: No todas las Appx tienen reinstalación directa. Muchas se restauran desde Microsoft Store automáticamente.
-$AppxCsv = Join-Path $WorkDir 'Appx-Instaladas.csv'
-if (Test-Path $AppxCsv) {
-  try {
-    $apps = Import-Csv -Path $AppxCsv
-    foreach($a in $apps){
-      $name = $a.Name
-      Write-Host "Para reinstalar $name: abre Microsoft Store, busca la app y reinstálala. (Algunas requieren reinicio/cuenta Microsoft)."
-    }
-  } catch { Write-Warning 'No se pudo leer el CSV de Appx.' }
-} else {
-  Write-Host 'No se encontró Appx-Instaladas.csv. Si desinstalaste apps, reinstala desde Microsoft Store.'
-}
-
-# 3) Punto de restauración del sistema
-Write-Host 'Si algo quedó mal, usa el Punto de Restauración creado previamente:'
-Write-Host 'Panel de control → Recuperación → Abrir Restaurar sistema.'
-
-try { Stop-Transcript | Out-Null } catch {}
-Write-Host "Registro en: $LogFile"
-`;
-}
-
-function generate(){
-  const main = buildMainScript();
-  const rev  = buildRevertScript();
-  $('#codeMain').textContent = main;
-  $('#codeRev').textContent  = rev;
-  document.getElementById('salida').scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-function setActiveNav(){
-  const links = $$('nav a[href^="#"]');
-  const sections = links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  const y = window.scrollY + 120;
-  let active = null;
-  for(const s of sections){
-    const rect = s.getBoundingClientRect();
-    const top = rect.top + window.scrollY;
-    if (top <= y) active = s;
-  }
-  links.forEach(a=>a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + (active?.id||'pref'))));
-}
-
-document.addEventListener('click', (e)=>{
-  if (e.target.id === 'btnGen'){ generate(); }
-  if (e.target.id === 'btnReset'){ resetOptions(); }
-  if (e.target.matches('nav a[href^="#"]')){
-    e.preventDefault();
-    const id = e.target.getAttribute('href');
-    document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-  if (e.target.id === 'copyMain' || e.target.id === 'copyRev'){
-    copyCode(e.target.dataset.target);
-  }
-  if (e.target.id === 'copyAll'){
-    copyAll();
-  }
-});
-
-document.addEventListener('keydown', (e)=>{
-  // Accesibilidad: Ctrl+Shift+G = Generar
-  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'g'){
-    e.preventDefault(); generate();
-  }
-});
-
-window.addEventListener('scroll', setActiveNav);
-window.addEventListener('load', ()=>{
-  resetOptions(); setActiveNav();
-});
-</script>
+    <script>
+        document.getElementById('copyButton').addEventListener('click', function() {
+            const scriptText = document.getElementById('powerShellScript').textContent;
+            const textArea = document.createElement('textarea');
+            textArea.value = scriptText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                this.textContent = '¡Copiado!';
+                this.style.backgroundColor = '#10B981'; // emerald-500
+                this.style.color = '#fff';
+            } catch (err) {
+                this.textContent = 'Error';
+                this.style.backgroundColor = '#EF4444'; // red-500
+                console.error('No se pudo copiar el texto: ', err);
+            }
+            document.body.removeChild(textArea);
+            
+            setTimeout(() => {
+                this.textContent = 'Copiar Script Titán';
+                this.style.backgroundColor = '#1e293b';
+                this.style.color = '#94a3b8';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
