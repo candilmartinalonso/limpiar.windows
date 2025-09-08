@@ -17,8 +17,9 @@
     - Esta herramienta solo genera scripts (bloques <pre><code>) para copiar y pegar.
     - Úsalo bajo tu responsabilidad. Revisa cada línea.
 
-  Autor: “Ingeniero de sistemas Windows + dev front-end / UX de seguridad”
-  Licencia mínima: Usar, leer, adaptar con crédito.
+  Novedades de esta versión:
+    - Corrección: reemplazo de literales por variables ($Scope, $KeepProvisioned) en UWP y uso correcto de $false/$true.
+    - Botón adicional “Copiar TODO” que concatena Script principal + Script de reversión.
 -->
 <!doctype html>
 <html lang="es">
@@ -90,7 +91,7 @@
   .btn.ghost{background:transparent; border-color:var(--border)}
   .btn[disabled]{opacity:.6; cursor:not-allowed}
   .out{background:#0b0e18; border:1px solid var(--border); border-radius:10px; padding:0; overflow:hidden}
-  .out header{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:#0f1426; border-bottom:1px solid var(--border); position:static}
+  .out header{display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center; padding:10px 12px; background:#0f1426; border-bottom:1px solid var(--border); position:static}
   .out header h3{margin:0; font-size:14px; color:#cfe7ff}
   .out pre{margin:0; padding:14px; overflow:auto; max-height:50vh}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,Monaco,monospace; font-size:12.5px; color:#bfe1ff}
@@ -314,6 +315,7 @@
             <h3>Script principal (PowerShell)</h3>
             <div>
               <button class="btn ghost" id="copyMain" data-target="codeMain">Copiar</button>
+              <button class="btn ghost" id="copyAll" title="Copia Script principal + Script de reversión concatenados">Copiar TODO</button>
             </div>
           </header>
           <pre><code id="codeMain" aria-live="polite" aria-label="Script principal generado"></code></pre>
@@ -360,19 +362,31 @@ function getMode(){
   return (document.querySelector('input[name="mode"]:checked')?.value||'dry') === 'dry';
 }
 
+function copyText(txt){
+  return navigator.clipboard.writeText(txt).then(()=>true).catch(()=>{
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){}
+    ta.remove();
+    return ok;
+  });
+}
+
 function copyCode(targetId){
   const el = document.getElementById(targetId);
   if(!el) return;
   const txt = el.textContent;
-  navigator.clipboard.writeText(txt).then(()=>{
-    alert('Copiado al portapapeles.');
-  },()=>{
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = txt; document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); alert('Copiado.'); } catch(e){ alert('No se pudo copiar.'); }
-    ta.remove();
-  });
+  copyText(txt).then(ok=>alert(ok?'Copiado al portapapeles.':'No se pudo copiar.'));
+}
+
+function copyAll(){
+  const main = $('#codeMain').textContent || '';
+  const rev  = $('#codeRev').textContent  || '';
+  const sep  = '\n\n### --- FIN DEL SCRIPT PRINCIPAL --- ###\n\n';
+  const all  = (main.trim() + sep + rev.trim()).trim() + '\n';
+  copyText(all).then(ok=>alert(ok?'Todo copiado (principal + reversión).':'No se pudo copiar todo.'));
 }
 
 function resetOptions(){
@@ -586,7 +600,6 @@ function buildDISM(){
   const analyze = $('#chkDismAnalyze').checked;
   const cleanup = $('#chkDismCleanup').checked;
   if (!analyze && !cleanup) return '';
-  const isDry = getMode();
   let s = `# --- DISM / Tienda de Componentes ---
 `;
   if (analyze){
@@ -624,10 +637,13 @@ function buildUWP(){
   if (patterns.length === 0) return '';
   const scope = document.querySelector('input[name="uwpScope"]:checked')?.value || 'current';
   const keepProv = $('#chkUwpKeepProvisioned').checked;
-  const isDry = getMode();
   const patternArray = patterns.map(p=>`'${p}'`).join(', ');
   return `# --- Desinstalación conservadora de aplicaciones UWP ---
 # Se respeta una lista segura y otra avanzada opcional. No se toca Microsoft Store, Fotos, Calculadora, .NET, Edge WebView2 ni componentes del sistema.
+# Config del bloque UWP (inyectada por la UI del HTML)
+$Scope = '${scope}'            # 'current' o 'all'
+$KeepProvisioned = ${keepProv ? '$true' : '$false'} # $true para mantener provisionadas, $false para quitarlas
+
 $Patterns = @(${patternArray})
 $ToRemove = @()
 
@@ -653,13 +669,13 @@ if ($IsDryRun) {
 } else {
   foreach($pkg in $ToRemove){
     try {
-      if ('${scope}' -eq 'current') {
+      if ($Scope -eq 'current') {
         # Usuario actual
         Get-AppxPackage -Name $pkg.Name | ForEach-Object {
           Write-Host ("Quitando (usuario actual): {0}" -f $_.PackageFullName)
           Remove-AppxPackage -Package $_.PackageFullName -ErrorAction Stop
         }
-        if (-not ${keepProv}) {
+        if (-not $KeepProvisioned) {
           # Opcionalmente quitar también del aprovisionamiento para NUEVOS usuarios
           $prov = Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $pkg.Name }
           foreach($p in $prov){
@@ -673,7 +689,7 @@ if ($IsDryRun) {
         Get-AppxPackage -AllUsers -Name $pkg.Name | ForEach-Object {
           Remove-AppxPackage -Package $_.PackageFullName -AllUsers -ErrorAction Stop
         }
-        if (-not ${keepProv}) {
+        if (-not $KeepProvisioned) {
           $prov = Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $pkg.Name }
           foreach($p in $prov){
             Write-Host ("Quitando provisionado: {0}" -f $p.DisplayName)
@@ -693,7 +709,6 @@ function buildStartup(){
   const doHKCU = $('#chkRunHKCU').checked;
   const doHKLM = $('#chkRunHKLM').checked;
   if (!doHKCU && !doHKLM) return '';
-  const isDry = getMode();
 
   function blockFor(hive){
     const key = hive === 'HKCU'
@@ -808,7 +823,7 @@ function buildMainScript(){
 }
 
 function buildRevertScript(){
-  // Script de reversión: reinstalar Appx desde CSV donde posible + restaurar Run desde claves backup
+  // Script de reversión: restaurar claves Run + guía para reinstalar Appx (mejor esfuerzo).
   return `# ============================================
 # Optimización Segura de Windows – Script de reversión
 # Uso: Ejecutar como Administrador. Reinstala/recupera en lo posible.
@@ -853,10 +868,7 @@ if (Test-Path $AppxCsv) {
     $apps = Import-Csv -Path $AppxCsv
     foreach($a in $apps){
       $name = $a.Name
-      try {
-        # Intento simple: si existe en Store, winget/add-appxpackage podrían reinstalar; aquí sólo informamos.
-        Write-Host "Para reinstalar $name: abre Microsoft Store, busca la app y reinstálala. (Automático varía por versión)."
-      } catch { Write-Warning "No se pudo procesar reinstalación de $name." }
+      Write-Host "Para reinstalar $name: abre Microsoft Store, busca la app y reinstálala. (Algunas requieren reinicio/cuenta Microsoft)."
     }
   } catch { Write-Warning 'No se pudo leer el CSV de Appx.' }
 } else {
@@ -877,7 +889,6 @@ function generate(){
   const rev  = buildRevertScript();
   $('#codeMain').textContent = main;
   $('#codeRev').textContent  = rev;
-  // Mover foco a salida
   document.getElementById('salida').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
@@ -904,6 +915,9 @@ document.addEventListener('click', (e)=>{
   }
   if (e.target.id === 'copyMain' || e.target.id === 'copyRev'){
     copyCode(e.target.dataset.target);
+  }
+  if (e.target.id === 'copyAll'){
+    copyAll();
   }
 });
 
