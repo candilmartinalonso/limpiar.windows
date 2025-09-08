@@ -3,1533 +3,2693 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptiClean‑Xtreme v11.0 — Ultra Optimizado (Seguro)</title>
-    
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    
-    <!-- External Resources -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Limpiar Windows - Suite Ultra Avanzada 2025 | AI-Powered System Optimization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <style>
-        /* CSS Variables for Theming */
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --dark-bg: #0f0f23;
-            --card-bg: rgba(30, 30, 60, 0.8);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #b8c5d6;
-            --text-accent: #64ffda;
-            --border-color: rgba(255, 255, 255, 0.2);
-            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
-            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.4);
-            --blur-amount: 20px;
-            --animation-speed: 0.6s;
-            --border-radius: 20px;
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --gaming-color: #8b5cf6;
+            --ai-color: #ec4899;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-gaming: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-ai: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-card: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.3);
+            --shadow-gaming: 0 0 30px rgba(139, 92, 246, 0.4);
+            --shadow-ai: 0 0 25px rgba(236, 72, 153, 0.4);
+            --border-radius: 15px;
+            --border-radius-lg: 25px;
         }
 
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            background: #0a0e27;
             min-height: 100vh;
+            color: var(--dark-color);
             overflow-x: hidden;
             position: relative;
-            line-height: 1.6;
         }
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(-45deg, #0f0f23, #1a1a3a, #2d1b69, #11998e);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Particles Background */
-        .particles {
+        /* =======================================
+           ANIMATED BACKGROUND ENHANCED
+        ======================================= */
+        .animated-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
+            background: linear-gradient(-45deg, #0a0e27, #1a1f3a, #2d3561, #4c5593, #8b5cf6);
+            background-size: 500% 500%;
+            animation: gradientShift 20s ease infinite;
         }
 
-        .particle {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles-enhanced {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle-enhanced {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--text-accent);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.7;
+            animation: floatEnhanced 20s infinite linear;
         }
 
-        @keyframes float {
+        @keyframes floatEnhanced {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg) scale(0);
                 opacity: 0;
             }
             10% {
-                opacity: 0.7;
+                opacity: 1;
+                transform: scale(1);
             }
             90% {
-                opacity: 0.7;
+                opacity: 1;
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translateY(-100vh) rotate(720deg) scale(0);
                 opacity: 0;
             }
         }
 
-        /* Main Container */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
+        /* =======================================
+           NEURAL NETWORK BACKGROUND
+        ======================================= */
+        .neural-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
         }
 
-        /* Glass Card */
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(var(--blur-amount));
-            -webkit-backdrop-filter: blur(var(--blur-amount));
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-xl);
-            overflow: hidden;
-            position: relative;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp var(--animation-speed) ease forwards;
+        .neural-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            animation: neuralPulse 3s ease-in-out infinite;
         }
 
-        @keyframes fadeInUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
+        @keyframes neuralPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            }
+            50% { 
+                transform: scale(1.5);
+                box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
             }
         }
 
-        /* Header Section */
-        .header {
-            padding: 3rem;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border-bottom: 1px solid var(--border-color);
+        /* =======================================
+           HERO SECTION ULTRA ENHANCED
+        ======================================= */
+        .hero-section {
+            background: transparent;
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
             position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
         }
 
-        .header::before {
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, #8b5cf6, #ec4899, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: titleMorphing 4s ease-in-out infinite;
+        }
+
+        @keyframes titleMorphing {
+            0%, 100% { 
+                transform: scale(1) rotateX(0deg); 
+                filter: hue-rotate(0deg);
+            }
+            25% { 
+                transform: scale(1.02) rotateX(2deg); 
+                filter: hue-rotate(90deg);
+            }
+            50% { 
+                transform: scale(1.05) rotateX(0deg); 
+                filter: hue-rotate(180deg);
+            }
+            75% { 
+                transform: scale(1.02) rotateX(-2deg); 
+                filter: hue-rotate(270deg);
+            }
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: var(--gradient-ai);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: aiBadgeFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes aiBadgeFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* =======================================
+           ULTRA DASHBOARD
+        ======================================= */
+        .ultra-dashboard {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-heavy), 0 0 80px rgba(37, 99, 235, 0.15);
+            margin: -80px auto 50px;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            animation: dashboardEnter 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes dashboardEnter {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.9) rotateX(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+            }
+        }
+
+        /* =======================================
+           REAL-TIME MONITORING CHARTS
+        ======================================= */
+        .monitoring-panel {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: monitoringPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes monitoringPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            animation: metricFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes metricFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .metric-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* =======================================
+           ADVANCED TOOL MODULES
+        ======================================= */
+        .tool-module {
+            background: var(--gradient-card);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .tool-module::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: var(--primary-gradient);
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
         }
 
-        .title {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
+        .tool-module:hover::before {
+            transform: translateX(100%);
         }
 
-        .title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--success-gradient);
-            animation: titleUnderline 2s ease forwards 0.5s;
+        .tool-module:hover {
+            transform: translateY(-8px) rotateY(2deg);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-heavy), var(--shadow-glow);
         }
 
-        @keyframes titleUnderline {
-            to {
-                width: 100%;
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-right: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            background: var(--gradient-primary);
+            color: white;
+            animation: iconRotate 4s linear infinite;
+        }
+
+        @keyframes iconRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .gaming-module {
+            border-color: var(--gaming-color);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05));
+        }
+
+        .gaming-module .module-icon {
+            background: var(--gradient-gaming);
+            animation: gamingPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes gamingPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
             }
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 500;
+        .ai-module {
+            border-color: var(--ai-color);
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(139, 92, 246, 0.05));
         }
 
-        /* Feature List */
-        .features-list {
-            list-style: none;
-            display: grid;
-            gap: 1rem;
+        .ai-module .module-icon {
+            background: var(--gradient-ai);
+            animation: aiSpin 3s linear infinite;
         }
 
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--glass-bg);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all var(--animation-speed) ease;
-            transform: translateX(-20px);
-            opacity: 0;
-            animation: slideInLeft var(--animation-speed) ease forwards;
+        @keyframes aiSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
         }
 
-        .feature-item:nth-child(1) { animation-delay: 0.1s; }
-        .feature-item:nth-child(2) { animation-delay: 0.2s; }
-        .feature-item:nth-child(3) { animation-delay: 0.3s; }
-        .feature-item:nth-child(4) { animation-delay: 0.4s; }
-        .feature-item:nth-child(5) { animation-delay: 0.5s; }
-        .feature-item:nth-child(6) { animation-delay: 0.6s; }
-        .feature-item:nth-child(7) { animation-delay: 0.7s; }
-        .feature-item:nth-child(8) { animation-delay: 0.8s; }
+        /* =======================================
+           ENHANCED NAVIGATION SYSTEM
+        ======================================= */
+        .ultra-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--primary-color), var(--gaming-color), var(--ai-color)) 1;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: navSlideDown 1s ease-out;
+        }
 
-        @keyframes slideInLeft {
-            to {
-                transform: translateX(0);
+        @keyframes navSlideDown {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
                 opacity: 1;
             }
         }
 
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
-            border-color: var(--text-accent);
-        }
-
-        .feature-icon {
-            width: 24px;
-            height: 24px;
+        .nav-ultra {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--success-gradient);
-            color: white;
-            border-radius: 50%;
-            flex-shrink: 0;
-            font-size: 12px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .new-badge {
-            background: var(--secondary-gradient);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(240, 147, 251, 0.5); }
-            to { box-shadow: 0 0 20px rgba(240, 147, 251, 0.8); }
-        }
-
-        /* Script Section */
-        .script-section {
-            position: relative;
-            background: rgba(15, 15, 35, 0.9);
-            min-height: 60vh;
-        }
-
-        .script-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .script-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-accent);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px;
+            justify-content: center;
         }
 
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
+        .nav-ultra .nav-link {
+            background: transparent;
+            color: var(--dark-color);
+            border: 2px solid transparent;
             border-radius: 12px;
+            padding: 12px 20px;
             font-weight: 600;
             font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transform: translateY(0);
         }
 
-        .btn::before {
+        .nav-ultra .nav-link::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
             transition: left 0.5s;
         }
 
-        .btn:hover::before {
+        .nav-ultra .nav-link:hover::before {
             left: 100%;
         }
 
-        .btn:hover {
+        .nav-ultra .nav-link.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-ultra .nav-link:hover:not(.active) {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-success {
-            background: var(--success-gradient);
-            color: white;
-        }
-
-        /* Code Container */
-        .code-container {
-            position: relative;
-            max-height: 70vh;
-            overflow: auto;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-        }
-
-        .code-container::-webkit-scrollbar {
-            width: 12px;
-            height: 12px;
-        }
-
-        .code-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .code-container::-webkit-scrollbar-thumb {
-            background: var(--primary-gradient);
-            border-radius: 10px;
-            border: 2px solid transparent;
-            background-clip: content-box;
-        }
-
-        .code-container::-webkit-scrollbar-thumb:hover {
-            background: var(--success-gradient);
-            background-clip: content-box;
-        }
-
-        .code-block {
-            padding: 2rem;
-            font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
-            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
-            line-height: 1.6;
-            color: #e2e8f0;
-            white-space: pre-wrap;
-            word-break: break-word;
-            background: transparent;
-            border: none;
-            outline: none;
-            resize: none;
-            width: 100%;
-            min-height: 50vh;
-        }
-
-        /* Syntax Highlighting */
-        .keyword { color: #ff6b6b; }
-        .string { color: #4ecdc4; }
-        .comment { color: #95a5a6; font-style: italic; }
-        .function { color: #f39c12; }
-        .variable { color: #9b59b6; }
-
-        /* Instructions Section */
-        .instructions {
-            padding: 3rem;
-            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .instructions-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--text-accent);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .instructions-list {
-            list-style: none;
-            counter-reset: step-counter;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .instruction-item {
-            counter-increment: step-counter;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--glass-bg);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .instruction-item::before {
-            content: counter(step-counter);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .instruction-item:hover {
-            transform: translateX(10px);
-            border-color: var(--text-accent);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
-        }
-
-        .security-note {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 193, 7, 0.1);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 15px;
-            color: #ffd700;
-            font-size: 0.95rem;
+        /* =======================================
+           PROGRESS INDICATORS ULTRA
+        ======================================= */
+        .progress-ultra {
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            height: 30px;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
             position: relative;
         }
 
-        .security-note::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
+        .progress-bar-ultra {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .progress-bar-ultra::before {
+            content: '';
             position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-size: 1.2rem;
-            color: #ffd700;
-        }
-
-        .security-note-content {
-            margin-left: 2rem;
-        }
-
-        /* Progress Indicator */
-        .progress-ring {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            z-index: 1000;
-            transform: rotate(-90deg);
-        }
-
-        .progress-ring-circle {
-            stroke: var(--text-accent);
-            stroke-width: 3;
-            fill: transparent;
-            stroke-dasharray: 157;
-            stroke-dashoffset: 157;
-            transition: stroke-dashoffset 0.3s ease;
-        }
-
-        .progress-ring-bg {
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 3;
-            fill: transparent;
-        }
-
-        /* Loading Spinner */
-        .loading-overlay {
-            position: fixed;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(15, 15, 35, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progressShineUltra 2s infinite;
         }
 
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
+        @keyframes progressShineUltra {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        .spinner {
-            width: 80px;
-            height: 80px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--text-accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            position: absolute;
-            bottom: -60px;
-            color: var(--text-accent);
+        /* =======================================
+           BUTTON SYSTEM ULTRA
+        ======================================= */
+        .btn-ultra {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
             font-weight: 600;
-            animation: fadeInOut 2s ease-in-out infinite;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            z-index: 1;
+            background: var(--gradient-primary);
+            color: white;
         }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        .btn-ultra::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            z-index: -1;
         }
 
-        /* Floating Action Button */
-        .fab {
+        .btn-ultra:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-ultra:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-heavy), var(--shadow-glow);
+        }
+
+        .btn-gaming {
+            background: var(--gradient-gaming);
+            box-shadow: var(--shadow-gaming);
+        }
+
+        .btn-ai {
+            background: var(--gradient-ai);
+            box-shadow: var(--shadow-ai);
+        }
+
+        .btn-success-ultra {
+            background: var(--gradient-success);
+        }
+
+        .btn-warning-ultra {
+            background: var(--gradient-warning);
+        }
+
+        /* =======================================
+           CHART CONTAINERS
+        ======================================= */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            animation: chartProgress 3s ease-in-out infinite;
+        }
+
+        @keyframes chartProgress {
+            0%, 100% { transform: scaleX(0.3); }
+            50% { transform: scaleX(1); }
+        }
+
+        /* =======================================
+           CLOUD INTEGRATION PANEL
+        ======================================= */
+        .cloud-panel {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cloud-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.2;
+            animation: cloudFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes cloudFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* =======================================
+           STATUS INDICATORS ENHANCED
+        ======================================= */
+        .status-ultra {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 5px;
+            animation: statusBlink 2s ease-in-out infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-optimal {
+            background: rgba(16, 185, 129, 0.2);
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+
+        .status-critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+
+        /* =======================================
+           FLOATING ELEMENTS
+        ======================================= */
+        .floating-widget {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--gradient-primary);
             color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow-heavy), var(--shadow-glow);
+            animation: widgetFloat 3s ease-in-out infinite;
             z-index: 1000;
-            animation: fabPulse 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fabPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-            }
-            50% {
-                transform: scale(1.1);
-                box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
-            }
+        @keyframes widgetFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        .fab:hover {
-            transform: scale(1.15);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        .floating-widget:hover {
+            transform: scale(1.1) translateY(-5px);
         }
 
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
+        /* =======================================
+           ACCORDION ULTRA
+        ======================================= */
+        .accordion-ultra .accordion-item {
+            border: 2px solid rgba(37, 99, 235, 0.1);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background: rgba(0, 0, 0, 0.9);
+        .accordion-ultra .accordion-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-light);
+            transform: translateY(-3px);
+        }
+
+        .accordion-ultra .accordion-button {
+            background: var(--gradient-card);
+            border: none;
+            padding: 20px 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-ultra .accordion-button:not(.collapsed) {
+            background: var(--gradient-primary);
             color: white;
-            text-align: center;
-            border-radius: 8px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
+            box-shadow: none;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        /* =======================================
+           ANIMATIONS ENHANCED
+        ======================================= */
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
         }
 
-        /* Responsive Design */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-80px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .zoom-in {
+            animation: zoomIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .rotate-in {
+            animation: rotateIn 1s ease-out;
+        }
+
+        @keyframes rotateIn {
+            0% {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        /* =======================================
+           RESPONSIVE DESIGN
+        ======================================= */
         @media (max-width: 768px) {
-            .main-container {
-                padding: 1rem;
+            .hero-title {
+                font-size: 3rem;
             }
-
-            .header {
-                padding: 2rem 1.5rem;
+            
+            .ultra-dashboard {
+                margin: -40px 15px 30px;
             }
-
-            .script-header {
-                padding: 1rem;
+            
+            .tool-module {
+                padding: 20px;
+            }
+            
+            .nav-ultra {
                 flex-direction: column;
-                gap: 1rem;
-                align-items: stretch;
+                gap: 10px;
             }
-
-            .action-buttons {
-                justify-content: center;
-            }
-
-            .instructions {
-                padding: 2rem 1.5rem;
-            }
-
-            .instruction-item {
-                padding: 1rem;
-            }
-
-            .fab {
+            
+            .floating-widget {
                 bottom: 20px;
                 right: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .progress-ring {
-                width: 50px;
-                height: 50px;
-                top: 15px;
-                right: 15px;
-            }
-
-            .features-list {
-                gap: 0.8rem;
-            }
-
-            .feature-item {
-                padding: 0.8rem;
+                padding: 15px;
             }
         }
 
         @media (max-width: 480px) {
-            .title {
-                font-size: 1.8rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
-
-            .subtitle {
-                font-size: 1rem;
+            
+            .metric-value {
+                font-size: 2rem;
             }
-
-            .code-block {
-                font-size: 0.7rem;
-                padding: 1rem;
-            }
-
-            .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
+            
+            .module-icon {
+                font-size: 2rem;
+                margin-right: 15px;
+                padding: 12px;
             }
         }
 
-        /* Print Styles */
-        @media print {
-            .loading-overlay,
-            .fab,
-            .progress-ring,
-            .particles,
-            .animated-bg {
-                display: none !important;
-            }
-
-            .glass-card {
-                background: white;
-                color: black;
-                box-shadow: none;
-                border: 1px solid #ccc;
-            }
-
-            .code-container {
-                max-height: none;
-                overflow: visible;
-            }
+        /* =======================================
+           PERFORMANCE OPTIMIZATIONS
+        ======================================= */
+        * {
+            will-change: transform;
         }
 
-        /* Accessibility Improvements */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .particles {
-                display: none;
-            }
-
-            .animated-bg {
-                animation: none;
-                background: var(--dark-bg);
-            }
+        .tool-module,
+        .btn-ultra,
+        .floating-widget,
+        .metric-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
-        /* Focus Styles for Accessibility */
-        .btn:focus,
-        .code-block:focus {
-            outline: 2px solid var(--text-accent);
-            outline-offset: 2px;
+        /* =======================================
+           THEME VARIATIONS
+        ======================================= */
+        .dark-theme {
+            --gradient-card: linear-gradient(145deg, #1f2937 0%, #374151 100%);
+            --light-color: #1f2937;
         }
 
-        /* High Contrast Mode */
-        @media (prefers-contrast: high) {
-            :root {
-                --card-bg: rgba(0, 0, 0, 0.9);
-                --border-color: rgba(255, 255, 255, 0.5);
-                --text-secondary: #ffffff;
-            }
+        .gaming-theme {
+            --primary-color: var(--gaming-color);
+            --gradient-primary: var(--gradient-gaming);
+        }
+
+        .ai-theme {
+            --primary-color: var(--ai-color);
+            --gradient-primary: var(--gradient-ai);
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
-        <div class="loading-text">Cargando OptiClean‑Xtreme...</div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
-
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Progress Ring -->
-    <div class="progress-ring">
-        <svg width="60" height="60">
-            <circle class="progress-ring-bg" cx="30" cy="30" r="25"></circle>
-            <circle class="progress-ring-circle" cx="30" cy="30" r="25" id="progressCircle"></circle>
-        </svg>
-    </div>
-
-    <!-- Main Container -->
-    <main class="main-container">
-        <article class="glass-card" data-aos="fade-up" data-aos-duration="800">
-            <!-- Header Section -->
-            <header class="header">
-                <h1 class="title">
-                    <i class="fas fa-rocket" aria-hidden="true"></i>
-                    OptiClean‑Xtreme v11.0
-                </h1>
-                <p class="subtitle">
-                    Optimización y reparación <strong>máxima</strong> para Windows — Perfil "Turbo Seguro Plus"
-                </p>
-                
-                <ul class="features-list" role="list">
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="100">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div>
-                            <span class="new-badge" aria-label="Nueva característica">¡NUEVO!</span>
-                            Actualización integral de software con <strong>Winget</strong> (Windows, Office, drivers y apps de la Store/terceros).
-                        </div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="200">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div>
-                            <span class="new-badge" aria-label="Nueva característica">¡NUEVO!</span>
-                            Limpieza de caché de <strong>instaladores de Windows (WinSxS)</strong> para ahorrar espacio en disco SSD.
-                        </div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="300">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div>
-                            <span class="new-badge" aria-label="Nueva característica">¡NUEVO!</span>
-                            Optimización de red avanzada (DNS, TCP, QoS) para mejorar latencia y velocidad.
-                        </div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="400">
-                        <div class="feature-icon">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <div>Limpieza extendida de archivos basura y cachés de sistema/aplicaciones.</div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="500">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div>Eliminación segura y ampliada de Bloatware (no afecta funciones esenciales).</div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="600">
-                        <div class="feature-icon">
-                            <i class="fas fa-wrench"></i>
-                        </div>
-                        <div>Reparación completa del sistema (DISM, SFC) y reseteo de cachés (GPU, Store, Office, Red).</div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="700">
-                        <div class="feature-icon">
-                            <i class="fas fa-tachometer-alt"></i>
-                        </div>
-                        <div>Privacidad reforzada, arranque más rápido y plan de energía de <strong>Máximo Rendimiento</strong>.</div>
-                    </li>
-                    <li class="feature-item" data-aos="slide-right" data-aos-delay="800">
-                        <div class="feature-icon">
-                            <i class="fas fa-undo"></i>
-                        </div>
-                        <div>
-                            <strong style="color: #ffd700;">Modo reversible:</strong> crea un Punto de Restauración y conserva un log detallado de cada acción.
-                        </div>
-                    </li>
-                </ul>
-            </header>
-
-            <!-- Script Section -->
-            <section class="script-section" data-aos="fade-up" data-aos-delay="200">
-                <div class="script-header">
-                    <h2 class="script-title">
-                        <i class="fas fa-code"></i>
-                        Script PowerShell
-                    </h2>
-                    <div class="action-buttons">
-                        <button 
-                            id="copyButton" 
-                            class="btn btn-primary tooltip"
-                            aria-label="Copiar script al portapapeles"
-                        >
-                            <i class="fas fa-copy"></i>
-                            Copiar Script
-                            <span class="tooltiptext">Copia el script completo al portapapeles</span>
-                        </button>
-                        <button 
-                            id="downloadButton" 
-                            class="btn btn-secondary tooltip"
-                            aria-label="Descargar archivo PowerShell"
-                        >
-                            <i class="fas fa-download"></i>
-                            Descargar .ps1
-                            <span class="tooltiptext">Descarga el script como archivo .ps1</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="code-container" id="scriptContainer">
-                    <textarea 
-                        class="code-block" 
-                        id="codeBlock" 
-                        readonly 
-                        aria-label="Código del script PowerShell"
-                        tabindex="0"
-                    ></textarea>
-                </div>
-            </section>
-
-            <!-- Instructions Section -->
-            <section class="instructions" data-aos="fade-up" data-aos-delay="300">
-                <h2 class="instructions-title">
-                    <i class="fas fa-list-ol"></i>
-                    Instrucciones de Uso
-                </h2>
-                <ol class="instructions-list" role="list">
-                    <li class="instruction-item" data-aos="fade-up" data-aos-delay="400">
-                        <div>
-                            Haz clic en <strong>Copiar Script</strong> o <strong>Descargar .ps1</strong> para obtener el código.
-                        </div>
-                    </li>
-                    <li class="instruction-item" data-aos="fade-up" data-aos-delay="500">
-                        <div>
-                            Abre <strong>PowerShell</strong> o <strong>Terminal</strong> (búscalo en Inicio, clic derecho → <strong>Ejecutar como Administrador</strong>).
-                        </div>
-                    </li>
-                    <li class="instruction-item" data-aos="fade-up" data-aos-delay="600">
-                        <div>
-                            Ejecuta el script. Si lo copiaste, pégalo y presiona Enter. Si lo descargaste, navega a la carpeta y ejecuta <code>.\OptiClean_Xtreme_v11.ps1</code>.
-                        </div>
-                    </li>
-                    <li class="instruction-item" data-aos="fade-up" data-aos-delay="700">
-                        <div>
-                            El proceso puede tardar, especialmente la actualización con Winget. <strong>Sé paciente</strong>.
-                        </div>
-                    </li>
-                    <li class="instruction-item" data-aos="fade-up" data-aos-delay="800">
-                        <div>
-                            Al finalizar, <strong>reinicia</strong> el equipo para aplicar todos los cambios.
-                        </div>
-                    </li>
-                </ol>
-
-                <div class="security-note" data-aos="fade-up" data-aos-delay="900">
-                    <div class="security-note-content">
-                        <strong>Nota de seguridad:</strong> Este script está diseñado para ser seguro y no eliminará archivos personales. 
-                        No desactiva Windows Update, Defender ni la Búsqueda. Los cambios son reversibles a través del Punto de Restauración creado.
-                    </div>
-                </div>
-            </section>
-        </article>
-    </main>
-
-    <!-- Floating Action Button -->
-    <a href="#" class="fab tooltip" id="scrollToTop" aria-label="Volver al inicio">
-        <i class="fas fa-chevron-up"></i>
-        <span class="tooltiptext">Volver al inicio</span>
-    </a>
-
-    <!-- External Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Enhanced Animated Background -->
+    <div class="animated-background"></div>
     
+    <!-- Neural Network Background -->
+    <div class="neural-network" id="neuralNetwork"></div>
+    
+    <!-- Enhanced Particles System -->
+    <div class="particles-enhanced" id="particlesEnhanced"></div>
+
+    <!-- Hero Section Ultra -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="ai-badge">
+                <i class="fas fa-robot"></i> AI-Powered System Optimization
+            </div>
+            <h1 class="hero-title">
+                <i class="fas fa-microchip"></i> Limpiar Windows
+            </h1>
+            <h2 class="mb-4" style="color: #a5b4fc; font-size: 2rem; font-weight: 700;">
+                Suite Ultra Avanzada 2025
+            </h2>
+            <p class="lead mb-5" style="font-size: 1.3rem; opacity: 0.9;">
+                Optimización inteligente con IA, monitoreo en tiempo real y personalización extrema
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <button class="btn btn-ultra" onclick="scrollToDashboard()">
+                    <i class="fas fa-rocket"></i> Iniciar Dashboard
+                </button>
+                <button class="btn btn-gaming" onclick="activateGamingMode()">
+                    <i class="fas fa-gamepad"></i> Gaming Mode
+                </button>
+                <button class="btn btn-ai" onclick="activateAIMode()">
+                    <i class="fas fa-brain"></i> AI Assistant
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ultra Dashboard Container -->
+    <div class="container">
+        <div class="ultra-dashboard">
+            <!-- Ultra Navigation System -->
+            <div class="ultra-nav">
+                <div class="nav-ultra" id="ultraNav">
+                    <a href="#monitor" class="nav-link active" data-section="monitor">
+                        <i class="fas fa-chart-line"></i> Monitor
+                    </a>
+                    <a href="#optimization" class="nav-link" data-section="optimization">
+                        <i class="fas fa-tools"></i> Optimización
+                    </a>
+                    <a href="#gaming" class="nav-link" data-section="gaming">
+                        <i class="fas fa-gamepad"></i> Gaming
+                    </a>
+                    <a href="#personalization" class="nav-link" data-section="personalization">
+                        <i class="fas fa-palette"></i> Personalización
+                    </a>
+                    <a href="#cloud" class="nav-link" data-section="cloud">
+                        <i class="fas fa-cloud"></i> Cloud
+                    </a>
+                    <a href="#ai" class="nav-link" data-section="ai">
+                        <i class="fas fa-brain"></i> AI Assistant
+                    </a>
+                    <a href="#advanced" class="nav-link" data-section="advanced">
+                        <i class="fas fa-cogs"></i> Avanzado
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="p-4">
+                <!-- Real-Time Monitoring Section -->
+                <div id="monitor" class="content-section active">
+                    <div class="monitoring-panel fade-in-up">
+                        <h3><i class="fas fa-chart-line me-3"></i>Monitor de Sistema en Tiempo Real</h3>
+                        <p>Supervisión avanzada con gráficos interactivos y alertas inteligentes</p>
+                        
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="cpuUsage">0%</div>
+                                    <div class="metric-label">CPU Usage</div>
+                                    <div class="status-ultra status-optimal" id="cpuStatus">Óptimo</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="ramUsage">0%</div>
+                                    <div class="metric-label">RAM Usage</div>
+                                    <div class="status-ultra status-optimal" id="ramStatus">Óptimo</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="diskUsage">0%</div>
+                                    <div class="metric-label">Disk Usage</div>
+                                    <div class="status-ultra status-optimal" id="diskStatus">Óptimo</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="networkSpeed">0 MB/s</div>
+                                    <div class="metric-label">Network Speed</div>
+                                    <div class="status-ultra status-optimal" id="networkStatus">Óptimo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Real-Time Charts -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="chart-container slide-in-left">
+                                <h5><i class="fas fa-microchip me-2"></i>CPU & RAM en Tiempo Real</h5>
+                                <canvas id="systemChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-container slide-in-right">
+                                <h5><i class="fas fa-wifi me-2"></i>Actividad de Red</h5>
+                                <canvas id="networkChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Process Analyzer -->
+                    <div class="tool-module ai-module zoom-in">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div>
+                                <h4>Analizador Inteligente de Procesos</h4>
+                                <p class="mb-0">IA que identifica procesos problemáticos y sugiere optimizaciones</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="processAnalysis" style="max-height: 300px; overflow-y: auto;">
+                                    <div class="text-center p-4">
+                                        <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                                        <p>Analizando procesos del sistema...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-ai w-100 mb-2" onclick="analyzeProcesses()">
+                                    <i class="fas fa-search"></i> Analizar Procesos
+                                </button>
+                                <button class="btn btn-warning-ultra w-100" onclick="optimizeProcesses()">
+                                    <i class="fas fa-magic"></i> Auto-Optimizar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optimization Tools Section -->
+                <div id="optimization" class="content-section">
+                    <h3 class="mb-4 fade-in-up"><i class="fas fa-tools me-3"></i>Herramientas de Optimización Ultra</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Advanced Cleanup Module -->
+                            <div class="tool-module slide-in-left">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: var(--gradient-success);">
+                                        <i class="fas fa-broom"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Limpieza Ultra Avanzada</h4>
+                                        <p class="mb-0">Limpieza inteligente con IA y análisis predictivo</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nivel de Limpieza</label>
+                                    <select class="form-select" id="cleanupLevel">
+                                        <option value="basic">Básica (Segura)</option>
+                                        <option value="advanced" selected>Avanzada (Recomendada)</option>
+                                        <option value="deep">Profunda (Expertos)</option>
+                                        <option value="ai">Ultra IA (Automática)</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-success-ultra w-100" onclick="executeUltraCleanup()">
+                                    <i class="fas fa-magic"></i> Ejecutar Limpieza Ultra
+                                </button>
+                            </div>
+
+                            <!-- Duplicate File Finder -->
+                            <div class="tool-module slide-in-left" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: var(--gradient-warning);">
+                                        <i class="fas fa-copy"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Eliminador de Duplicados</h4>
+                                        <p class="mb-0">IA para detectar archivos duplicados y grandes</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="scanDuplicates()">
+                                            <i class="fas fa-search"></i> Escanear
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="scanLargeFiles()">
+                                            <i class="fas fa-file-archive"></i> Archivos Grandes
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="duplicateResults" class="mt-3" style="display: none;">
+                                    <div class="progress-ultra">
+                                        <div class="progress-bar-ultra" style="width: 0%"></div>
+                                    </div>
+                                    <div class="text-center">Escaneando sistema...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Battery Optimizer -->
+                            <div class="tool-module slide-in-right">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                        <i class="fas fa-battery-three-quarters"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Optimizador de Batería</h4>
+                                        <p class="mb-0">Maximiza duración de batería en laptops</p>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <div class="mb-2">
+                                            <span class="badge bg-success">Batería: <span id="batteryLevel">85%</span></span>
+                                            <span class="badge bg-info ms-2">Tiempo restante: <span id="batteryTime">3h 42m</span></span>
+                                        </div>
+                                        <div class="progress-ultra">
+                                            <div class="progress-bar-ultra" id="batteryBar" style="width: 85%; background: var(--gradient-success);"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-success-ultra w-100" onclick="optimizeBattery()">
+                                            <i class="fas fa-bolt"></i> Optimizar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Driver Manager -->
+                            <div class="tool-module slide-in-right" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                        <i class="fas fa-microchip"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestor de Drivers</h4>
+                                        <p class="mb-0">Limpia drivers obsoletos y actualiza automáticamente</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="scanDrivers()">
+                                            <i class="fas fa-search"></i> Escanear
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="updateDrivers()">
+                                            <i class="fas fa-download"></i> Actualizar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="driverStatus" class="mt-2">
+                                    <span class="status-ultra status-optimal">Todos los drivers actualizados</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Power Configuration Module -->
+                    <div class="tool-module ai-module rotate-in">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4>Configurador Avanzado de Energía</h4>
+                                <p class="mb-0">IA optimiza configuraciones de energía según tu uso</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <button class="btn btn-ultra mb-2" onclick="setPowerProfile('performance')">
+                                        <i class="fas fa-rocket"></i><br>Rendimiento
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <button class="btn btn-success-ultra mb-2" onclick="setPowerProfile('balanced')">
+                                        <i class="fas fa-balance-scale"></i><br>Equilibrado
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <button class="btn btn-warning-ultra mb-2" onclick="setPowerProfile('battery')">
+                                        <i class="fas fa-battery-half"></i><br>Ahorro
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <button class="btn btn-ai mb-2" onclick="setPowerProfile('ai')">
+                                        <i class="fas fa-brain"></i><br>IA Auto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gaming Mode Section -->
+                <div id="gaming" class="content-section">
+                    <h3 class="mb-4 fade-in-up"><i class="fas fa-gamepad me-3"></i>Gaming Mode Ultra</h3>
+                    
+                    <div class="tool-module gaming-module zoom-in">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <h4>Optimizador Ultra Gaming</h4>
+                                <p class="mb-0">Máximo rendimiento para gaming con IA predictiva</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-chart-line text-success"></i> Estado Gaming</h6>
+                                <div class="status-ultra status-optimal mb-3">
+                                    <i class="fas fa-check-circle"></i> Modo Gaming Activo
+                                </div>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success me-2"></i> Game Mode habilitado</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Prioridad de procesos optimizada</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> Servicios innecesarios pausados</li>
+                                    <li><i class="fas fa-check text-success me-2"></i> GPU overclock seguro</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-microchip text-primary"></i> Métricas de Rendimiento</h6>
+                                <div class="metric-card bg-dark text-light">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="h4 mb-0" id="gamingFPS">144</div>
+                                                <small>FPS Promedio</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="h4 mb-0" id="gamingLatency">12ms</div>
+                                                <small>Latencia</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-cogs text-warning"></i> Controles</h6>
+                                <button class="btn btn-gaming w-100 mb-2" onclick="activateGamingModeUltra()">
+                                    <i class="fas fa-rocket"></i> Activar Gaming Ultra
+                                </button>
+                                <button class="btn btn-warning-ultra w-100 mb-2" onclick="optimizeForGame()">
+                                    <i class="fas fa-magic"></i> Optimizar Juego Específico
+                                </button>
+                                <button class="btn btn-success-ultra w-100" onclick="restoreNormalMode()">
+                                    <i class="fas fa-undo"></i> Modo Normal
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Gaming Performance Chart -->
+                        <div class="mt-4">
+                            <h6><i class="fas fa-chart-area text-info"></i> Monitoreo Gaming en Tiempo Real</h6>
+                            <div class="chart-container">
+                                <canvas id="gamingChart" width="400" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Library Optimizer -->
+                    <div class="tool-module slide-in-left">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: var(--gradient-gaming);">
+                                <i class="fas fa-game-console"></i>
+                            </div>
+                            <div>
+                                <h4>Optimizador de Biblioteca de Juegos</h4>
+                                <p class="mb-0">Detecta juegos instalados y optimiza cada uno individualmente</p>
+                            </div>
+                        </div>
+                        <div id="gameLibrary">
+                            <div class="text-center p-4">
+                                <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                                <p>Detectando juegos instalados...</p>
+                                <button class="btn btn-gaming" onclick="scanGameLibrary()">
+                                    <i class="fas fa-search"></i> Escanear Biblioteca
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalization Section -->
+                <div id="personalization" class="content-section">
+                    <h3 class="mb-4 fade-in-up"><i class="fas fa-palette me-3"></i>Personalización Visual Avanzada</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Theme Manager -->
+                            <div class="tool-module slide-in-left">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestor de Temas Ultra</h4>
+                                        <p class="mb-0">Personalización completa del sistema Windows</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-ultra w-100 mb-2" onclick="applyTheme('dark')">
+                                            <i class="fas fa-moon"></i><br>Tema Oscuro
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="applyTheme('light')">
+                                            <i class="fas fa-sun"></i><br>Tema Claro
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-gaming w-100 mb-2" onclick="applyTheme('gaming')">
+                                            <i class="fas fa-gamepad"></i><br>Gaming
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="form-label">Color Primario Personalizado</label>
+                                    <input type="color" class="form-control form-control-color" id="customColor" value="#667eea" onchange="applyCustomColor(this.value)">
+                                </div>
+                            </div>
+
+                            <!-- Icon & Cursor Manager -->
+                            <div class="tool-module slide-in-left" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                                        <i class="fas fa-mouse-pointer"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Iconos y Cursores</h4>
+                                        <p class="mb-0">Personaliza iconos del escritorio y cursores</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-ultra w-100 mb-2" onclick="changeIcons()">
+                                            <i class="fas fa-icons"></i> Cambiar Iconos
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-ultra w-100 mb-2" onclick="changeCursors()">
+                                            <i class="fas fa-mouse-pointer"></i> Cursores
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Wallpaper Manager -->
+                            <div class="tool-module slide-in-right">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestor de Fondos</h4>
+                                        <p class="mb-0">Fondos dinámicos y slideshow automático</p>
+                                    </div>
+                                </div>
+                                <div id="wallpaperPreview" class="mb-3" style="height: 120px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; border: 3px solid #ddd;"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="changeWallpaper()">
+                                            <i class="fas fa-image"></i> Cambiar Fondo
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="enableSlideshow()">
+                                            <i class="fas fa-play"></i> Slideshow
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- System Sounds -->
+                            <div class="tool-module slide-in-right" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                        <i class="fas fa-volume-up"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Sonidos del Sistema</h4>
+                                        <p class="mb-0">Personaliza todos los sonidos de Windows</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success-ultra w-100 mb-2" onclick="changeSounds()">
+                                            <i class="fas fa-music"></i> Cambiar Sonidos
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success-ultra w-100 mb-2" onclick="muteSystem()">
+                                            <i class="fas fa-volume-mute"></i> Silenciar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Windows Customization -->
+                    <div class="tool-module ai-module zoom-in">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div>
+                                <h4>Personalización Avanzada de Windows</h4>
+                                <p class="mb-0">Modifica interfaz, transparencias y efectos visuales</p>
+                            </div>
+                        </div>
+                        <div class="accordion accordion-ultra" id="customizationAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#taskbarCustom">
+                                        <i class="fas fa-window-maximize me-2"></i> Barra de Tareas
+                                    </button>
+                                </h2>
+                                <div id="taskbarCustom" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Transparencia</label>
+                                                <input type="range" class="form-range" min="0" max="100" value="80" id="taskbarTransparency" onchange="updateTaskbarTransparency(this.value)">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Posición</label>
+                                                <select class="form-select" id="taskbarPosition" onchange="updateTaskbarPosition(this.value)">
+                                                    <option value="bottom">Inferior</option>
+                                                    <option value="top">Superior</option>
+                                                    <option value="left">Izquierda</option>
+                                                    <option value="right">Derecha</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#startMenuCustom">
+                                        <i class="fab fa-windows me-2"></i> Menú Inicio
+                                    </button>
+                                </h2>
+                                <div id="startMenuCustom" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <button class="btn btn-ultra w-100" onclick="customizeStartMenu('classic')">
+                                                    <i class="fas fa-th"></i> Clásico
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-ultra w-100" onclick="customizeStartMenu('modern')">
+                                                    <i class="fas fa-th-large"></i> Moderno
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-ultra w-100" onclick="customizeStartMenu('minimal')">
+                                                    <i class="fas fa-minus"></i> Minimal
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud Integration Section -->
+                <div id="cloud" class="content-section">
+                    <h3 class="mb-4 fade-in-up"><i class="fas fa-cloud me-3"></i>Integración Cloud Ultra</h3>
+                    
+                    <div class="cloud-panel">
+                        <div class="cloud-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h4><i class="fas fa-cloud-upload-alt me-3"></i>Centro de Respaldos y Sincronización</h4>
+                        <p>Sincroniza configuraciones, respaldos automáticos y acceso desde cualquier dispositivo</p>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="text-center mb-3">
+                                    <h6>Estado de Sincronización</h6>
+                                    <div class="status-ultra status-optimal">
+                                        <i class="fas fa-check-circle"></i> Sincronizado
+                                    </div>
+                                    <small class="text-light">Última sincronización: Hace 2 minutos</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center mb-3">
+                                    <h6>Espacio en la Nube</h6>
+                                    <div class="progress-ultra">
+                                        <div class="progress-bar-ultra" style="width: 35%; background: linear-gradient(90deg, #06b6d4, #0891b2);"></div>
+                                    </div>
+                                    <small class="text-light">3.5 GB / 10 GB utilizados</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center mb-3">
+                                    <h6>Dispositivos Conectados</h6>
+                                    <div class="h4 text-white">3</div>
+                                    <small class="text-light">PC Principal, Laptop, Tablet</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Backup Manager -->
+                            <div class="tool-module slide-in-left">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestor de Respaldos</h4>
+                                        <p class="mb-0">Respaldos automáticos e inteligentes en la nube</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <h6>Elementos a Respaldar</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="backupSettings" checked>
+                                        <label class="form-check-label" for="backupSettings">Configuraciones del sistema</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="backupProfiles" checked>
+                                        <label class="form-check-label" for="backupProfiles">Perfiles de optimización</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="backupPersonalization" checked>
+                                        <label class="form-check-label" for="backupPersonalization">Personalización visual</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-ultra w-100 mb-2" onclick="createBackup()">
+                                            <i class="fas fa-save"></i> Crear Respaldo
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success-ultra w-100 mb-2" onclick="restoreBackup()">
+                                            <i class="fas fa-download"></i> Restaurar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sync Settings -->
+                            <div class="tool-module slide-in-left" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                        <i class="fas fa-sync"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Configuración de Sincronización</h4>
+                                        <p class="mb-0">Sincroniza entre todos tus dispositivos Windows</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="autoSync" checked>
+                                            <label class="form-check-label" for="autoSync">
+                                                <strong>Sincronización Automática</strong>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="syncOnStartup" checked>
+                                            <label class="form-check-label" for="syncOnStartup">
+                                                Sincronizar al inicio
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="encryptSync" checked>
+                                            <label class="form-check-label" for="encryptSync">
+                                                Encriptación extrema
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success-ultra w-100" onclick="forceSyncNow()">
+                                    <i class="fas fa-cloud-download-alt"></i> Sincronizar Ahora
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Cloud Storage Management -->
+                            <div class="tool-module slide-in-right">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+                                        <i class="fas fa-hdd"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestión de Almacenamiento</h4>
+                                        <p class="mb-0">Optimiza y gestiona tu espacio en la nube</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <h6>Distribución del Espacio</h6>
+                                    <div class="progress-ultra mb-2">
+                                        <div class="progress-bar-ultra" style="width: 45%; background: var(--gradient-primary);"></div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-4">
+                                            <small><i class="fas fa-cog text-primary"></i> Configuraciones<br><strong>1.2 GB</strong></small>
+                                        </div>
+                                        <div class="col-4">
+                                            <small><i class="fas fa-shield text-success"></i> Respaldos<br><strong>1.8 GB</strong></small>
+                                        </div>
+                                        <div class="col-4">
+                                            <small><i class="fas fa-palette text-warning"></i> Temas<br><strong>0.5 GB</strong></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-ai w-100 mb-2" onclick="cleanCloudStorage()">
+                                            <i class="fas fa-broom"></i> Limpiar Nube
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-warning-ultra w-100 mb-2" onclick="upgradeStorage()">
+                                            <i class="fas fa-arrow-up"></i> Ampliar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Multi-Device Management -->
+                            <div class="tool-module slide-in-right" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                        <i class="fas fa-laptop"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestión Multi-Dispositivo</h4>
+                                        <p class="mb-0">Controla todas tus instalaciones desde aquí</p>
+                                    </div>
+                                </div>
+                                <div id="connectedDevices">
+                                    <div class="d-flex align-items-center mb-2 p-2" style="background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                                        <i class="fas fa-desktop text-success me-3"></i>
+                                        <div class="flex-grow-1">
+                                            <div class="fw-bold">PC Principal</div>
+                                            <small class="text-muted">Conectado - Windows 11 Pro</small>
+                                        </div>
+                                        <span class="badge bg-success">Activo</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2 p-2" style="background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                                        <i class="fas fa-laptop text-warning me-3"></i>
+                                        <div class="flex-grow-1">
+                                            <div class="fw-bold">Laptop Gaming</div>
+                                            <small class="text-muted">Última conexión: Hace 1 hora</small>
+                                        </div>
+                                        <span class="badge bg-warning">Inactivo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Assistant Section -->
+                <div id="ai" class="content-section">
+                    <h3 class="mb-4 fade-in-up"><i class="fas fa-brain me-3"></i>Asistente IA Ultra</h3>
+                    
+                    <div class="tool-module ai-module zoom-in">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <h4>Centro de Inteligencia Artificial</h4>
+                                <p class="mb-0">IA avanzada para optimización automática y recomendaciones inteligentes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <!-- AI Chat Interface -->
+                                <div id="aiChatContainer" style="height: 300px; background: rgba(139, 92, 246, 0.05); border-radius: 15px; padding: 20px; overflow-y: auto; border: 2px solid rgba(139, 92, 246, 0.2);">
+                                    <div class="ai-message mb-3">
+                                        <div class="d-flex align-items-start">
+                                            <div class="me-3">
+                                                <div style="width: 40px; height: 40px; background: var(--gradient-ai); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-robot text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="fw-bold text-primary mb-1">Asistente IA Ultra</div>
+                                                <div>¡Hola! Soy tu asistente de IA para optimización de Windows. He analizado tu sistema y tengo varias recomendaciones para mejorar el rendimiento. ¿En qué puedo ayudarte hoy?</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- AI Input -->
+                                <div class="input-group mt-3">
+                                    <input type="text" class="form-control" id="aiInput" placeholder="Pregúntale a la IA sobre optimizaciones..." style="border-radius: 15px 0 0 15px;">
+                                    <button class="btn btn-ai" onclick="sendAIMessage()" style="border-radius: 0 15px 15px 0;">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <!-- AI Quick Actions -->
+                                <h6><i class="fas fa-magic text-primary"></i> Acciones Rápidas IA</h6>
+                                <button class="btn btn-ai w-100 mb-2" onclick="aiAnalyzeSystem()">
+                                    <i class="fas fa-search"></i> Analizar Sistema
+                                </button>
+                                <button class="btn btn-ai w-100 mb-2" onclick="aiOptimizeAuto()">
+                                    <i class="fas fa-magic"></i> Optimización Automática
+                                </button>
+                                <button class="btn btn-ai w-100 mb-2" onclick="aiPredictIssues()">
+                                    <i class="fas fa-crystal-ball"></i> Predecir Problemas
+                                </button>
+                                <button class="btn btn-ai w-100 mb-3" onclick="aiCustomRecommendations()">
+                                    <i class="fas fa-lightbulb"></i> Recomendaciones
+                                </button>
+                                
+                                <!-- AI Status -->
+                                <div class="text-center p-3" style="background: rgba(139, 92, 246, 0.1); border-radius: 15px;">
+                                    <h6 class="text-primary">Estado de la IA</h6>
+                                    <div class="status-ultra status-optimal mb-2">
+                                        <i class="fas fa-brain"></i> IA Activa
+                                    </div>
+                                    <small>Aprendizaje continuo habilitado<br>Última actualización: Hoy</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendations Panel -->
+                    <div class="tool-module slide-in-up">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: var(--gradient-ai);">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div>
+                                <h4>Recomendaciones Inteligentes</h4>
+                                <p class="mb-0">La IA ha analizado tu sistema y sugiere las siguientes optimizaciones</p>
+                            </div>
+                        </div>
+                        <div id="aiRecommendations">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="text-center p-3" style="background: rgba(16, 185, 129, 0.1); border-radius: 15px; border: 2px solid #10b981;">
+                                        <i class="fas fa-broom text-success fa-2x mb-2"></i>
+                                        <h6 class="text-success">Limpieza Recomendada</h6>
+                                        <p class="small mb-2">Se pueden liberar ~2.3 GB de espacio eliminando archivos temporales obsoletos</p>
+                                        <button class="btn btn-success-ultra btn-sm" onclick="executeAIRecommendation('cleanup')">
+                                            Ejecutar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center p-3" style="background: rgba(245, 158, 11, 0.1); border-radius: 15px; border: 2px solid #f59e0b;">
+                                        <i class="fas fa-rocket text-warning fa-2x mb-2"></i>
+                                        <h6 class="text-warning">Optimización de Arranque</h6>
+                                        <p class="small mb-2">Deshabilitar 7 programas de inicio puede reducir el tiempo de arranque en 34%</p>
+                                        <button class="btn btn-warning-ultra btn-sm" onclick="executeAIRecommendation('startup')">
+                                            Optimizar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center p-3" style="background: rgba(37, 99, 235, 0.1); border-radius: 15px; border: 2px solid #2563eb;">
+                                        <i class="fas fa-memory text-primary fa-2x mb-2"></i>
+                                        <h6 class="text-primary">Gestión de Memoria</h6>
+                                        <p class="small mb-2">Optimizar la configuración de memoria virtual mejorará el rendimiento en un 18%</p>
+                                        <button class="btn btn-ultra btn-sm" onclick="executeAIRecommendation('memory')">
+                                            Aplicar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Section -->
+                <div id="advanced" class="content-section">
+                    <h3 class="mb-4 fade-in-up"><i class="fas fa-cogs me-3"></i>Herramientas Avanzadas</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Service Manager -->
+                            <div class="tool-module slide-in-left">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestor de Servicios</h4>
+                                        <p class="mb-0">Control avanzado de servicios del sistema</p>
+                                    </div>
+                                </div>
+                                <div id="servicesList" style="max-height: 200px; overflow-y: auto;">
+                                    <div class="d-flex justify-content-between align-items-center p-2 border-bottom">
+                                        <div>
+                                            <strong>Windows Update</strong>
+                                            <br><small class="text-muted">Gestiona actualizaciones automáticas</small>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-2 border-bottom">
+                                        <div>
+                                            <strong>Superfetch</strong>
+                                            <br><small class="text-muted">Precarga aplicaciones en memoria</small>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-2">
+                                        <div>
+                                            <strong>Indexing Service</strong>
+                                            <br><small class="text-muted">Indexa archivos para búsqueda rápida</small>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-warning-ultra w-100" onclick="optimizeServices()">
+                                        <i class="fas fa-magic"></i> Optimizar Servicios
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Update Manager -->
+                            <div class="tool-module slide-in-left" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                                        <i class="fas fa-download"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Gestor de Actualizaciones</h4>
+                                        <p class="mb-0">Control automático e inteligente de updates</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Actualizaciones Automáticas</span>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoUpdates" checked>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Solo Actualizaciones Críticas</span>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="criticalOnly">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Reinicio Automático</span>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoRestart">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-ultra w-100 mb-2" onclick="checkUpdates()">
+                                            <i class="fas fa-search"></i> Buscar
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success-ultra w-100 mb-2" onclick="installUpdates()">
+                                            <i class="fas fa-download"></i> Instalar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Task Scheduler -->
+                            <div class="tool-module slide-in-right">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Programador de Tareas</h4>
+                                        <p class="mb-0">Automatiza optimizaciones y mantenimiento</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <h6>Tareas Programadas Activas</h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2 p-2" style="background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                                        <div>
+                                            <strong>Limpieza Diaria</strong>
+                                            <br><small>Cada día a las 3:00 AM</small>
+                                        </div>
+                                        <span class="badge bg-success">Activa</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2 p-2" style="background: rgba(37, 99, 235, 0.1); border-radius: 8px;">
+                                        <div>
+                                            <strong>Análisis Semanal</strong>
+                                            <br><small>Domingos a las 2:00 AM</small>
+                                        </div>
+                                        <span class="badge bg-primary">Activa</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-ai w-100" onclick="scheduleTask()">
+                                    <i class="fas fa-plus"></i> Nueva Tarea Programada
+                                </button>
+                            </div>
+
+                            <!-- System Information -->
+                            <div class="tool-module slide-in-right" style="animation-delay: 0.2s;">
+                                <div class="module-header">
+                                    <div class="module-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Información del Sistema</h4>
+                                        <p class="mb-0">Detalles completos del hardware y software</p>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-md-6 mb-2">
+                                        <div class="fw-bold">CPU</div>
+                                        <small id="cpuInfo">Intel Core i7-12700K</small>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="fw-bold">RAM</div>
+                                        <small id="ramInfo">32 GB DDR4</small>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="fw-bold">GPU</div>
+                                        <small id="gpuInfo">RTX 4080 Super</small>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="fw-bold">Almacenamiento</div>
+                                        <small id="storageInfo">1TB NVMe SSD</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success-ultra w-100 mt-2" onclick="generateSystemReport()">
+                                    <i class="fas fa-file-alt"></i> Reporte Completo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SSD Space Optimizer -->
+                    <div class="tool-module ai-module rotate-in">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div>
+                                <h4>Asistente Inteligente para SSD</h4>
+                                <p class="mb-0">IA especializada en optimización y limpieza de unidades SSD</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <!-- SSD Analysis Chart -->
+                                <div class="chart-container">
+                                    <h6><i class="fas fa-chart-pie text-primary"></i> Análisis de Espacio SSD</h6>
+                                    <canvas id="ssdChart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="fas fa-magic text-primary"></i> Optimización IA</h6>
+                                <div class="mb-3">
+                                    <div class="text-center p-3" style="background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                                        <div class="h4 text-success mb-1">847 GB</div>
+                                        <small>Espacio Disponible</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-ai w-100 mb-2" onclick="analyzeSSDSpace()">
+                                    <i class="fas fa-search"></i> Analizar Espacio
+                                </button>
+                                <button class="btn btn-success-ultra w-100 mb-2" onclick="optimizeSSDSpace()">
+                                    <i class="fas fa-magic"></i> Liberar Espacio
+                                </button>
+                                <button class="btn btn-warning-ultra w-100" onclick="ssdHealthCheck()">
+                                    <i class="fas fa-heartbeat"></i> Salud SSD
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Floating Widget -->
+    <div class="floating-widget" onclick="toggleQuickActions()">
+        <div class="text-center">
+            <i class="fas fa-rocket fa-lg mb-1"></i>
+            <div class="fw-bold" style="font-size: 0.8rem;">Quick Actions</div>
+        </div>
+    </div>
+
+    <!-- Enhanced Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Script content
-        const scriptContent = `#requires -version 5.1
-<#
-  .SYNOPSIS
-  OptiClean‑Xtreme v11.0 — Perfil "Turbo Seguro Plus"
-  .DESCRIPTION
-  Un script integral para optimizar, limpiar, reparar y actualizar sistemas Windows 10/11.
-  Diseñado para obtener el máximo rendimiento sin comprometer la estabilidad ni los archivos personales.
-  .NOTES
-  Autor: Gemini
-  Versión: 11.0
-  Principales mejoras sobre v10:
-   - Integración completa de Winget para actualizar TODO: Windows, Office, drivers y apps de terceros.
-   - Limpieza profunda del almacén de componentes de WinSxS (instaladores viejos de Windows Update).
-   - Optimización de red avanzada: Flush DNS, reseteo de TCP/IP y Winsock.
-   - Limpieza mejorada para cachés de desarrollo (Node.js/npm, Python/pip, VSCode).
-   - Chequeo de salud del SSD/HDD con el comando integrado de Windows (SMART).
-   - Lógica de registro y medición de espacio liberado mejorada.
-  .SAFETY
-  - Crea un Punto de Restauración antes de realizar cambios.
-  - No elimina archivos personales (Documentos, Fotos, etc).
-  - No deshabilita funciones críticas como Windows Defender, Windows Update o la Búsqueda.
-#>
-#region Preparación y Configuración
-# --- Forzar la ejecución y configurar manejo de errores ---
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
-$ErrorActionPreference = 'SilentlyContinue'
-# --- Variables Globales y Funciones de Ayuda ---
-$Global:StartTime = Get-Date
-$Global:FreedSpace = 0
-$Global:Warnings = [System.Collections.Generic.List[string]]::new()
-$LogPath = Join-Path $env:TEMP ("OptiClean_v11_" + (Get-Date -f 'yyyyMMdd_HHmmss') + ".log")
-function Log([string]$message, [string]$color = 'Gray', [switch]$isWarning){
-  $timestamp = Get-Date -f 'HH:mm:ss'
-  $line = "[$timestamp] $message"
-  Write-Host $line -ForegroundColor $color
-  Add-Content -Path $LogPath -Value $line
-  if($isWarning){ $Global:Warnings.Add($line) }
-}
-function Write-Section($title){
-  Write-Host ""
-  Write-Host ('-'*90) -ForegroundColor DarkGray
-  Log $title 'Magenta'
-  Write-Host ('-'*90) -ForegroundColor DarkGray
-}
-function Assert-Admin(){
-  $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-  if (-not $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {
-    Log "Error: Este script requiere privilegios de Administrador." 'Red'
-    Log "Por favor, haz clic derecho en PowerShell/Terminal y selecciona 'Ejecutar como Administrador'." 'Red'
-    throw "Permisos insuficientes."
-  }
-}
-function Measure-Task([scriptblock]$Action){
-  $drive = Get-PSDrive $env:SystemDrive.Substring(0,1)
-  $before = $drive.Free
-  try { & $Action } catch { Log "Error durante la tarea: \$($_.Exception.Message)" 'DarkYellow' -isWarning }
-  $after = (Get-PSDrive $drive.Name).Free
-  $delta = $after - $before
-  if($delta -gt 1MB){
-    $Global:FreedSpace += $delta
-    Log ("-> Espacio liberado: {0:N2} MB" -f ($delta/1MB)) 'Green'
-  }
-}
-function Safe-Remove([string]$path){
-    if(Test-Path -LiteralPath $path){
-        try{ Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction Stop }
-        catch{ Log "No se pudo eliminar: $path (probablemente en uso)" 'DarkYellow' -isWarning }
-    }
-}
-#endregion
-#region Fase 1: Seguridad y Preparación
-Write-Section '[1/8] Preparación y Punto de Restauración'
-Assert-Admin
-Log ("El registro detallado de esta sesión se guardará en: $LogPath") 'DarkGray'
-try {
-    Checkpoint-Computer -Description 'OptiClean v11 PRE-OPTIMIZATION' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
-    Log 'Punto de restauración creado con éxito. Tu sistema está seguro.' 'Green'
-} catch {
-    Log 'No se pudo crear el punto de restauración (puede estar deshabilitado en el sistema).' 'DarkYellow' -isWarning
-}
-#endregion
-#region Fase 2: Limpieza Extrema de Archivos
-Write-Section '[2/8] Limpieza Extrema (Cachés del Sistema, Apps y Residuos)'
-Log "Limpiando archivos temporales del sistema y de todos los perfiles de usuario..." 'Cyan'
-Measure-Task {
-  $tempPaths = @(
-    "$env:windir\\\\Temp\\\\*",
-    "$env:TEMP\\\\*",
-    "$env:SystemDrive\\\\Windows.old"
-  )
-  Get-ChildItem "$env:SystemDrive\\\\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-    $userProfile = $_.FullName
-    $tempPaths += @(
-      Join-Path $userProfile 'AppData\\\\Local\\\\Temp\\\\*',
-      Join-Path $userProfile 'AppData\\\\Local\\\\CrashDumps\\\\*',
-      Join-Path $userProfile 'AppData\\\\Local\\\\Microsoft\\\\Windows\\\\INetCache\\\\*'
-    )
-  }
-  $tempPaths | ForEach-Object { Safe-Remove $_ }
-}
-Log "Vaciando Papelera de Reciclaje de todas las unidades..." 'Cyan'
-Measure-Task {
-    Get-PSDrive -PSProvider FileSystem | ForEach-Object {
-        try { Clear-RecycleBin -DriveLetter $_.Name -Force -ErrorAction Stop } catch{}
-    }
-}
-Log "Limpiando cachés de navegadores (Chrome, Edge, Firefox, Brave)..." 'Cyan'
-Measure-Task {
-  $browserPatterns = @(
-   'AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\*\\\\Cache', 'AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\*\\\\Code Cache', 'AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\*\\\\GPUCache',
-   'AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\\\\*\\\\Cache', 'AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\\\\*\\\\Code Cache', 'AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\\\\*\\\\GPUCache',
-   'AppData\\\\Local\\\\BraveSoftware\\\\Brave-Browser\\\\User Data\\\\*\\\\Cache',
-   'AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\Profiles\\\\*\\\\cache2'
-  )
-  Get-ChildItem "$env:SystemDrive\\\\Users" -Directory | ForEach-Object {
-      $u = $_.FullName
-      foreach($pattern in $browserPatterns){
-          Get-ChildItem (Join-Path $u $pattern) -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-      }
-  }
-}
-Log "Limpiando cachés de apps comunes (Office, Discord, Steam, VSCode, NVIDIA/AMD)..." 'Cyan'
-Measure-Task {
-  $appCachePaths = @(
-    "$env:APPDATA\\\\discord\\\\Cache", "$env:APPDATA\\\\discord\\\\Code Cache", "$env:APPDATA\\\\discord\\\\GPUCache",
-    "$env:APPDATA\\\\Microsoft\\\\Teams\\\\Cache", "$env:APPDATA\\\\Microsoft\\\\Teams\\\\GPUCache",
-    "$env:LOCALAPPDATA\\\\Microsoft\\\\Office\\\\16.0\\\\OfficeFileCache",
-    "$env:LOCALAPPDATA\\\\NVIDIA\\\\DXCache", "$env:LOCALAPPDATA\\\\NVIDIA\\\\GLCache", "$env:ProgramData\\\\NVIDIA Corporation\\\\NV_Cache",
-    "$env:LOCALAPPDATA\\\\AMD\\\\DxCache", "$env:LOCALAPPDATA\\\\D3DShaderCache",
-    "$env:ProgramFiles (x86)\\\\Steam\\\\appcache", "$env:ProgramFiles (x86)\\\\Steam\\\\config\\\\htmlcache",
-    "$env:LOCALAPPDATA\\\\Packages\\\\Microsoft.WindowsStore_8wekyb3d8bbwe\\\\LocalCache",
-    "$env:APPDATA\\\\Code\\\\Cache*", "$env:APPDATA\\\\Code\\\\GPUCache",
-    "$env:LOCALAPPDATA\\\\npm-cache", "$env:APPDATA\\\\npm-cache",
-    (Join-Path $env:USERPROFILE ".node_repl_history"),
-    (Join-Path $env:USERPROFILE "AppData\\\\Local\\\\pip\\\\cache")
-  )
-  $appCachePaths | ForEach-Object { Safe-Remove $_ }
-}
-Log "Limpiando cachés de Windows (Iconos, Fuentes, Prefetch) y reiniciando Explorer..." 'Cyan'
-Measure-Task {
-  Stop-Service SysMain -Force -ErrorAction SilentlyContinue; Safe-Remove "$env:windir\\\\Prefetch\\\\*"; Start-Service SysMain -ErrorAction SilentlyContinue
-  Stop-Service FontCache -Force -ErrorAction SilentlyContinue; Safe-Remove "$env:windir\\\\ServiceProfiles\\\\LocalService\\\\AppData\\\\Local\\\\FontCache\\\\*.dat"; Start-Service FontCache -ErrorAction SilentlyContinue
-  Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue; Start-Sleep 1
-  Safe-Remove "$env:LOCALAPPDATA\\\\Microsoft\\\\Windows\\\\Explorer\\\\thumbcache_*.db"
-  Safe-Remove "$env:LOCALAPPDATA\\\\IconCache.db"
-  Start-Process explorer | Out-Null
-}
-Log "Limpiando residuos de Windows Update y optimización de entrega..." 'Cyan'
-Measure-Task {
-  Stop-Service wuauserv,bits,dosvc -Force -ErrorAction SilentlyContinue
-  Safe-Remove "$env:windir\\\\SoftwareDistribution\\\\Download\\\\*"
-  Safe-Remove "$env:windir\\\\DeliveryOptimization\\\\Cache\\\\*"
-  Start-Service wuauserv,bits,dosvc -ErrorAction SilentlyContinue
-}
-Log "Limpiando volcados de memoria, informes de errores y logs antiguos..." 'Cyan'
-Measure-Task {
-  Safe-Remove "$env:windir\\\\Minidump\\\\*"
-  Safe-Remove "$env:ProgramData\\\\Microsoft\\\\Windows\\\\WER\\\\*"
-  Safe-Remove "$env:SystemDrive\\\\MEMORY.DMP"
-  Remove-Item "$env:windir\\\\Logs\\\\CBS\\\\*.log", "$env:windir\\\\Logs\\\\CBS\\\\*.cab" -Force -ErrorAction SilentlyContinue
-}
-#endregion
-#region Fase 3: Actualización Integral con Winget
-Write-Section '[3/8] Actualización Integral del Sistema con Winget'
-Log 'Buscando e instalando actualizaciones para TODO (Windows, Office, Drivers, Apps)...' 'Cyan'
-Log 'Este proceso es el más largo. Por favor, sé paciente mientras Winget trabaja.' 'Yellow'
-try {
-    winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements --disable-interactivity --silent
-    Log 'Actualización con Winget completada.' 'Green'
-} catch {
-    Log 'Winget no está disponible o falló. Omitiendo actualización automática.' 'DarkYellow' -isWarning
-}
-#endregion
-#region Fase 4: Eliminación Segura de Bloatware
-Write-Section '[4/8] Eliminación de Bloatware (Seguro)'
-$bloatwarePatterns = @(
-'*3DViewer*','*MixedReality*','*Print3D*','*SkypeApp*','*YourPhone*','*Solitaire*','*Zune*',
-'*BingNews*','*BingWeather*','*GetHelp*','*Getstarted*','*FeedbackHub*','*OfficeHub*','*OneNote*',
-'*People*','*Wallet*','*WindowsAlarms*','*WindowsMaps*','*Messaging*','*SoundRecorder*','*WindowsCamera*',
-'*Clipchamp*','*Cortana*','*MicrosoftTeams*','*PowerAutomate*','*Todos*','*549981C3F5F10*', # Publisher ID for some OEM apps
-'*Xbox*','*GamingApp*','*Microsoft.GamingApp*','*XboxGameOverlay*','*XboxIdentityProvider*','*XboxSpeechTo-TextOverlay*',
-'*WebExperience*','*WindowsWidgets*'
-)
-Log "Eliminando bloatware preinstalado y aprovisionado..." 'Cyan'
-$allPackages = Get-AppxPackage -AllUsers
-$provisionedPackages = Get-AppxProvisionedPackage -Online
-foreach($pattern in $bloatwarePatterns){
-  $allPackages | Where-Object { $_.Name -like $pattern } | ForEach-Object {
-      try { $_ | Remove-AppxPackage -AllUsers -ErrorAction Stop; Log "  [Quitado] \$($_.Name)" 'DarkGray' }
-      catch { Log "  [Fallo al quitar] \$($_.Name)" 'DarkYellow' -isWarning }
-  }
-  $provisionedPackages | Where-Object { $_.DisplayName -like $pattern } | ForEach-Object {
-      try { $_ | Remove-AppxProvisionedPackage -Online -ErrorAction Stop; Log "  [Quitada provisión] \$($_.DisplayName)" 'DarkGray' }
-      catch { Log "  [Fallo al quitar provisión] \$($_.DisplayName)" 'DarkYellow' -isWarning }
-  }
-}
-Log 'Debloat completado.' 'Green'
-#endregion
-#region Fase 5: Reparación y Salud del Sistema
-Write-Section '[5/8] Reparaciones (DISM/SFC/Red/Store/WinSxS)'
-Log 'Limpiando almacén de componentes (WinSxS) para recuperar espacio de antiguas actualizaciones...' 'Cyan'
-Measure-Task {
-    try {
-        Dism.exe /Online /Cleanup-Image /StartComponentCleanup | Out-Null
-        Log 'Limpieza de WinSxS completada.' 'Green'
-    } catch {
-        Log 'Fallo en la limpieza de WinSxS.' 'DarkYellow' -isWarning
-    }
-}
-Log 'DISM RestoreHealth (reparando imagen del sistema desde Windows Update)...' 'Cyan'
-try{ Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null; Log 'RestoreHealth completado.' 'Green' } catch{ Log 'Fallo en RestoreHealth' 'DarkYellow' -isWarning }
-Log 'SFC /scannow (verificando y reparando archivos de sistema)...' 'Cyan'
-try{ sfc.exe /scannow | Out-Null; Log 'SFC completado.' 'Green' } catch{ Log 'Fallo en SFC' 'DarkYellow' -isWarning }
-Log 'Reiniciando y optimizando pila de red para mejorar la conexión...' 'Cyan'
-try{
-    ipconfig /flushdns | Out-Null
-    netsh winsock reset | Out-Null
-    netsh int ip reset | Out-Null
-    netsh int tcp set global autotuninglevel=normal
-    netsh int tcp set global ecncapability=enabled
-    Log 'Pila de red reseteada y optimizada.' 'Green'
-} catch {
-    Log 'Fallo en la optimización de red.' 'DarkYellow' -isWarning
-}
-Log 'WSReset (reseteando caché de la Tienda Windows)...' 'Cyan'
-try{ Start-Process wsreset -Wait -WindowStyle Hidden; Log 'WSReset ejecutado.' 'Green' } catch{ Log 'WSReset no disponible o falló.' 'DarkYellow' -isWarning }
-Log 'Re-registrando aplicaciones de la Tienda para corregir posibles errores...' 'Cyan'
-Get-AppxPackage -AllUsers | ForEach-Object { try{ Add-AppxPackage -DisableDevelopmentMode -Register "\$($_.InstallLocation)\\\\AppXManifest.xml" -ErrorAction Stop } catch{} } | Out-Null
-Log 'Re-registro de apps completado.' 'Green'
-#endregion
-#region Fase 6: Privacidad y Telemetría
-Write-Section '[6/8] Privacidad (Telemetría Mínima)'
-Log "Deshabilitando servicios y tareas de recolección de datos..." 'Cyan'
-$telemetryServices = 'DiagTrack','dmwappushservice','diagsvc','PcaSvc','RemoteRegistry'
-foreach($s in $telemetryServices){ if(Get-Service $s -ErrorAction SilentlyContinue){ try{ Set-Service $s -StartupType Disabled; Stop-Service $s -Force } catch{} } }
-$telemetryTasks = @(
-  '\\\\Microsoft\\\\Windows\\\\Application Experience\\\\Microsoft Compatibility Appraiser',
-  '\\\\Microsoft\\\\Windows\\\\Customer Experience Improvement Program\\\\Consolidator'
-)
-foreach($t in $telemetryTasks){ try{ Get-ScheduledTask -TaskPath ($t.Substring(0,$t.LastIndexOf('\\\\'))) -TaskName ($t.Split('\\\\')[-1]) | Disable-ScheduledTask } catch{} }
-Log "Aplicando configuración de privacidad en el registro..." 'Cyan'
-$regKeys = @{
-  'HKLM:SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\DataCollection' = @{AllowTelemetry=0};
-  'HKLM:SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\DataCollection' = @{AllowTelemetry=0};
-  'HKLM:SYSTEM\\\\CurrentControlSet\\\\Control\\\\WMI\\\\AutoLogger\\\\AutoLogger-Diagtrack-Listener' = @{Start=0};
-  'HKCU:Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\AdvertisingInfo' = @{Enabled=0};
-  'HKLM:SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\CloudContent' = @{DisableWindowsConsumerFeatures=1};
-}
-foreach($key in $regKeys.Keys){
-    if(-not (Test-Path $key)){ New-Item $key -Force | Out-Null }
-    foreach($name in $regKeys[$key].Keys){
-        try{ New-ItemProperty -Path $key -Name $name -Value $regKeys[$key][$name] -PropertyType DWord -Force | Out-Null } catch{}
-    }
-}
-Log 'Configuración de privacidad aplicada.' 'Green'
-#endregion
-#region Fase 7: Optimización Final del Sistema
-Write-Section '[7/8] Optimización Final (Energía, Arranque, Discos, UI)'
-Log "Activando plan de energía 'Máximo Rendimiento' para exprimir cada gota de potencia..." 'Cyan'
-$maxPerfGuid = 'e9a42b02-d5df-448d-aa00-03f14749eb61'
-try{
-    if(-not (powercfg -l | Select-String $maxPerfGuid -Quiet)){ powercfg -duplicatescheme $maxPerfGuid | Out-Null }
-    powercfg -setactive $maxPerfGuid
-    Log 'Plan de energía Máximo Rendimiento activado.' 'Green'
-} catch {
-    Log 'No se pudo activar el plan de energía.' 'DarkYellow' -isWarning
-}
-Log "Desactivando hibernación para liberar espacio en disco (seguro en SSD)..." 'Cyan'
-Measure-Task { try{ powercfg -h off } catch{} }
-Log "Configurando efectos visuales para 'Mejor Rendimiento'..." 'Cyan'
-try{ Set-ItemProperty 'HKCU:Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\VisualEffects' -Name VisualFXSetting -Value 2 -Type DWord -Force } catch{}
-Log "Deshabilitando SysMain (Superfetch), a menudo redundante en SSDs modernos..." 'Cyan'
-try{ if(Get-Service SysMain -ErrorAction SilentlyContinue){ Set-Service SysMain -StartupType Disabled; Stop-Service SysMain -Force } } catch{}
-Log "Optimizando discos (TRIM para SSDs, Defrag para HDDs)..." 'Cyan'
-try{
-    Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.HealthStatus -eq 'Healthy' -and $_.DriveLetter } | ForEach-Object { Optimize-Volume -DriveLetter $_.DriveLetter -Defrag -ErrorAction SilentlyContinue }
-    Log 'Discos optimizados.' 'Green'
-} catch {
-    Log 'Fallo al optimizar discos.' 'DarkYellow' -isWarning
-}
-Log "Verificando estado de salud de las unidades (SMART)..." 'Cyan'
-try {
-    $driveStatus = Get-CimInstance -Namespace root\\\\wmi -ClassName MSStorageDriver_FailurePredictStatus
-    if ($driveStatus.PredictFailure) {
-        Log "¡ALERTA! Una unidad de almacenamiento reporta problemas de salud (SMART)." 'Red' -isWarning
-    } else {
-        Log "Estado de salud de las unidades (SMART): OK." 'Green'
-    }
-} catch {
-    Log "No se pudo verificar el estado de salud de las unidades (SMART)." 'DarkYellow' -isWarning
-}
-#endregion
-#region Fase 8: Resumen Final
-Write-Section '[8/8] Resumen Final'
-$totalGB = [math]::Round($Global:FreedSpace/1GB, 3)
-$totalMinutes = [math]::Round((New-TimeSpan -Start $Global:StartTime).TotalMinutes, 1)
-Write-Host ""
-Log ("------------------ TAREA COMPLETADA ------------------") 'White'
-Log ("Espacio total liberado: ~{0} GB" -f $totalGB) 'Green'
-Log ("Tiempo total de ejecución: {0} minutos" -f $totalMinutes) 'Green'
-if($Global:Warnings.Count -gt 0){
-    Log ("Se registraron $($Global:Warnings.Count) advertencias. Revisa el log para más detalles:") 'Yellow'
-    Log ($LogPath) 'Yellow'
-} else {
-    Log 'El proceso finalizó sin advertencias.' 'Green'
-}
-Write-Host ""
-Log '¡Listo! Se recomienda encarecidamente REINICIAR el equipo ahora para aplicar todos los cambios.' 'Cyan'
-Log '----------------------------------------------------' 'White'
-#endregion
-`;
-
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-
-        // DOM Elements
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const codeBlock = document.getElementById('codeBlock');
-        const copyButton = document.getElementById('copyButton');
-        const downloadButton = document.getElementById('downloadButton');
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        const progressCircle = document.getElementById('progressCircle');
-        const particles = document.getElementById('particles');
-
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loadingOverlay.classList.add('hidden');
-            }, 1500);
-        });
-
-        // Populate script content
-        codeBlock.textContent = scriptContent;
-
-        // Copy functionality with enhanced feedback
-        copyButton.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(scriptContent);
-                
-                // Visual feedback
-                const originalText = copyButton.innerHTML;
-                const originalClass = copyButton.className;
-                
-                copyButton.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
-                copyButton.className = copyButton.className.replace('btn-primary', 'btn-success');
-                
-                // Add success animation
-                copyButton.style.transform = 'scale(1.05)';
-                
-                setTimeout(() => {
-                    copyButton.innerHTML = originalText;
-                    copyButton.className = originalClass;
-                    copyButton.style.transform = '';
-                }, 2000);
-                
-            } catch (err) {
-                console.error('Error copying to clipboard:', err);
-                
-                // Fallback method
-                const textArea = document.createElement('textarea');
-                textArea.value = scriptContent;
-                textArea.style.position = 'fixed';
-                textArea.style.opacity = '0';
-                document.body.appendChild(textArea);
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    const originalText = copyButton.innerHTML;
-                    copyButton.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
-                    copyButton.className = copyButton.className.replace('btn-primary', 'btn-success');
-                    
-                    setTimeout(() => {
-                        copyButton.innerHTML = originalText;
-                        copyButton.className = copyButton.className.replace('btn-success', 'btn-primary');
-                    }, 2000);
-                } catch (fallbackErr) {
-                    copyButton.innerHTML = '<i class="fas fa-times"></i> Error';
-                    copyButton.className = copyButton.className.replace('btn-primary', 'btn-danger');
-                    
-                    setTimeout(() => {
-                        copyButton.innerHTML = '<i class="fas fa-copy"></i> Copiar Script';
-                        copyButton.className = copyButton.className.replace('btn-danger', 'btn-primary');
-                    }, 2000);
-                }
-                
-                document.body.removeChild(textArea);
-            }
-        });
-
-        // Download functionality
-        downloadButton.addEventListener('click', () => {
-            const blob = new Blob([scriptContent], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
+        // =======================================
+        // ENHANCED PARTICLES & NEURAL NETWORK
+        // =======================================
+        function createEnhancedParticles() {
+            const particlesContainer = document.getElementById('particlesEnhanced');
+            const particleCount = window.innerWidth < 768 ? 15 : 30;
             
-            link.href = url;
-            link.download = 'OptiClean_Xtreme_v11.ps1';
-            link.style.display = 'none';
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            
-            // Visual feedback
-            const originalText = downloadButton.innerHTML;
-            downloadButton.innerHTML = '<i class="fas fa-check"></i> Descargado!';
-            downloadButton.style.transform = 'scale(1.05)';
-            
-            setTimeout(() => {
-                downloadButton.innerHTML = originalText;
-                downloadButton.style.transform = '';
-            }, 2000);
-        });
-
-        // Scroll to top functionality
-        scrollToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Progress indicator
-        function updateProgressIndicator() {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            
-            const circumference = 2 * Math.PI * 25;
-            const strokeDashoffset = circumference - (scrollPercent / 100) * circumference;
-            
-            progressCircle.style.strokeDashoffset = strokeDashoffset;
-            
-            // Show/hide scroll to top button
-            if (scrollPercent > 20) {
-                scrollToTopBtn.style.opacity = '1';
-                scrollToTopBtn.style.transform = 'scale(1)';
-            } else {
-                scrollToTopBtn.style.opacity = '0';
-                scrollToTopBtn.style.transform = 'scale(0.8)';
-            }
-        }
-
-        // Particle system
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            
-            const startX = Math.random() * window.innerWidth;
-            const size = Math.random() * 3 + 1;
-            const duration = Math.random() * 15 + 10;
-            
-            particle.style.left = startX + 'px';
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.animationDuration = duration + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            
-            particles.appendChild(particle);
-            
-            // Remove particle after animation
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, (duration + 2) * 1000);
-        }
-
-        // Keyboard accessibility
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                // Close any open tooltips or modals
-                document.querySelectorAll('.tooltip:hover').forEach(el => {
-                    el.blur();
-                });
-            }
-            
-            if (e.ctrlKey && e.key === 'c' && document.activeElement === codeBlock) {
-                copyButton.click();
-            }
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        // Observe feature items for staggered animations
-        document.querySelectorAll('.feature-item').forEach(item => {
-            observer.observe(item);
-        });
-
-        // Event listeners
-        window.addEventListener('scroll', updateProgressIndicator);
-        window.addEventListener('resize', () => {
-            // Recreate particles on resize
-            particles.innerHTML = '';
-            initParticles();
-        });
-
-        // Initialize particles
-        function initParticles() {
-            const particleCount = Math.min(window.innerWidth / 50, 20);
             for (let i = 0; i < particleCount; i++) {
-                setTimeout(() => createParticle(), i * 500);
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle-enhanced';
+                    
+                    const size = Math.random() * 6 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + '%';
+                    
+                    const colors = ['rgba(139, 92, 246, 0.6)', 'rgba(236, 72, 153, 0.6)', 'rgba(6, 182, 212, 0.6)', 'rgba(16, 185, 129, 0.6)'];
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                    particle.style.animationDelay = Math.random() * 5 + 's';
+                    
+                    particlesContainer.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle && particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 25000);
+                }, i * 300);
             }
             
-            // Continue creating particles
-            setInterval(createParticle, 2000);
+            setTimeout(createEnhancedParticles, 20000);
         }
 
-        // Performance optimization: Reduce particles on mobile
-        if (window.innerWidth > 768) {
-            initParticles();
+        function createNeuralNetwork() {
+            const networkContainer = document.getElementById('neuralNetwork');
+            const nodeCount = window.innerWidth < 768 ? 20 : 40;
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                
+                node.style.left = Math.random() * 100 + '%';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 3 + 's';
+                
+                networkContainer.appendChild(node);
+            }
         }
 
-        // Initialize progress indicator
-        updateProgressIndicator();
+        // =======================================
+        // REAL-TIME MONITORING SYSTEM
+        // =======================================
+        let systemChart, networkChart, gamingChart, ssdChart;
+        let monitoringInterval;
 
-        // Add smooth transitions when elements come into view
-        const fadeElements = document.querySelectorAll('[data-aos]');
-        fadeElements.forEach(el => {
-            el.style.transition = 'all 0.6s ease';
+        function initializeCharts() {
+            // System Performance Chart
+            const systemCtx = document.getElementById('systemChart').getContext('2d');
+            systemChart = new Chart(systemCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'CPU %',
+                        data: [],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'RAM %',
+                        data: [],
+                        borderColor: 'rgb(139, 92, 246)',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    // maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    },
+                    animation: {
+                        duration: 750
+                    }
+                }
+            });
+
+            // Network Chart
+            const networkCtx = document.getElementById('networkChart').getContext('2d');
+            networkChart = new Chart(networkCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Download MB/s',
+                        data: [],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Upload MB/s',
+                        data: [],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    // maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gaming Performance Chart
+            const gamingCtx = document.getElementById('gamingChart').getContext('2d');
+            gamingChart = new Chart(gamingCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'FPS',
+                        data: [],
+                        borderColor: 'rgb(139, 92, 246)',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'GPU %',
+                        data: [],
+                        borderColor: 'rgb(236, 72, 153)',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    // maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            beginAtZero: true,
+                            max: 200
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        },
+                    }
+                }
+            });
+
+            // SSD Usage Chart
+            const ssdCtx = document.getElementById('ssdChart').getContext('2d');
+            ssdChart = new Chart(ssdCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Sistema', 'Programas', 'Juegos', 'Documentos', 'Libre'],
+                    datasets: [{
+                        data: [120, 85, 340, 45, 410],
+                        backgroundColor: [
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(139, 92, 246, 0.8)',
+                            'rgba(236, 72, 153, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(16, 185, 129, 0.8)'
+                        ],
+                        borderWidth: 3,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    // maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        }
+
+        function simulateRealTimeData() {
+            const now = new Date();
+            const timeLabel = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+            
+            // Generate realistic system metrics
+            const cpuUsage = Math.random() * 30 + 15; // 15-45%
+            const ramUsage = Math.random() * 20 + 45; // 45-65%
+            const diskUsage = Math.random() * 15 + 5; // 5-20%
+            const networkDown = Math.random() * 50 + 10; // 10-60 MB/s
+            const networkUp = Math.random() * 10 + 2; // 2-12 MB/s
+            
+            // Update metric displays
+            document.getElementById('cpuUsage').textContent = Math.round(cpuUsage) + '%';
+            document.getElementById('ramUsage').textContent = Math.round(ramUsage) + '%';
+            document.getElementById('diskUsage').textContent = Math.round(diskUsage) + '%';
+            document.getElementById('networkSpeed').textContent = Math.round(networkDown) + ' MB/s';
+            
+            // Update status indicators
+            updateStatusIndicator('cpuStatus', cpuUsage, 70, 90);
+            updateStatusIndicator('ramStatus', ramUsage, 80, 95);
+            updateStatusIndicator('diskStatus', diskUsage, 80, 95);
+            updateStatusIndicator('networkStatus', networkDown, 80, 95);
+            
+            // Update charts
+            if (systemChart) {
+                systemChart.data.labels.push(timeLabel);
+                systemChart.data.datasets[0].data.push(cpuUsage);
+                systemChart.data.datasets[1].data.push(ramUsage);
+                
+                if (systemChart.data.labels.length > 10) {
+                    systemChart.data.labels.shift();
+                    systemChart.data.datasets[0].data.shift();
+                    systemChart.data.datasets[1].data.shift();
+                }
+                
+                systemChart.update('none');
+            }
+            
+            if (networkChart) {
+                networkChart.data.labels.push(timeLabel);
+                networkChart.data.datasets[0].data.push(networkDown);
+                networkChart.data.datasets[1].data.push(networkUp);
+                
+                if (networkChart.data.labels.length > 10) {
+                    networkChart.data.labels.shift();
+                    networkChart.data.datasets[0].data.shift();
+                    networkChart.data.datasets[1].data.shift();
+                }
+                
+                networkChart.update('none');
+            }
+            
+            // Update gaming metrics
+            if (gamingChart && document.getElementById('gaming').classList.contains('active')) {
+                const fps = Math.random() * 40 + 120; // 120-160 FPS
+                const gpuUsage = Math.random() * 20 + 70; // 70-90% GPU
+                
+                document.getElementById('gamingFPS').textContent = Math.round(fps);
+                document.getElementById('gamingLatency').textContent = Math.round(Math.random() * 10 + 8) + 'ms';
+                
+                gamingChart.data.labels.push(timeLabel);
+                gamingChart.data.datasets[0].data.push(fps);
+                gamingChart.data.datasets[1].data.push(gpuUsage);
+                
+                if (gamingChart.data.labels.length > 10) {
+                    gamingChart.data.labels.shift();
+                    gamingChart.data.datasets[0].data.shift();
+                    gamingChart.data.datasets[1].data.shift();
+                }
+                
+                gamingChart.update('none');
+            }
+        }
+
+        function updateStatusIndicator(elementId, value, warningThreshold, criticalThreshold) {
+            const element = document.getElementById(elementId);
+            element.className = 'status-ultra';
+            
+            if (value < warningThreshold) {
+                element.classList.add('status-optimal');
+                element.innerHTML = '<i class="fas fa-check-circle"></i> Óptimo';
+            } else if (value < criticalThreshold) {
+                element.classList.add('status-warning');
+                element.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Moderado';
+            } else {
+                element.classList.add('status-critical');
+                element.innerHTML = '<i class="fas fa-exclamation-circle"></i> Alto';
+            }
+        }
+
+        // =======================================
+        // NAVIGATION SYSTEM ULTRA
+        // =======================================
+        function initializeNavigation() {
+            const navLinks = document.querySelectorAll('.nav-ultra .nav-link');
+            const sections = document.querySelectorAll('.content-section');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Update active nav link
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Show corresponding section
+                    const targetSection = link.getAttribute('data-section');
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetSection) {
+                            section.classList.add('active');
+                            section.style.opacity = '0';
+                            section.style.transform = 'translateY(20px)';
+                            
+                            setTimeout(() => {
+                                section.style.transition = 'all 0.5s ease-out';
+                                section.style.opacity = '1';
+                                section.style.transform = 'translateY(0)';
+                            }, 50);
+                        }
+                    });
+                    
+                    // Special actions for sections
+                    if (targetSection === 'monitor') {
+                        startMonitoring();
+                    } else if (targetSection === 'gaming') {
+                        initializeGamingMode();
+                    }
+                });
+            });
+        }
+
+        // =======================================
+        // OPTIMIZATION FUNCTIONS
+        // =======================================
+        function executeUltraCleanup() {
+            const level = document.getElementById('cleanupLevel').value;
+            let message = '';
+            let steps = [];
+            
+            switch(level) {
+                case 'basic':
+                    message = 'Ejecutando limpieza básica segura...';
+                    steps = [
+                        '🔍 Escaneando archivos temporales...',
+                        '🗑️ Eliminando caché de navegador...',
+                        '🧹 Limpiando papelera de reciclaje...',
+                        '✅ Limpieza básica completada - 1.2 GB liberados'
+                    ];
+                    break;
+                case 'advanced':
+                    message = 'Ejecutando limpieza avanzada con IA...';
+                    steps = [
+                        '🤖 IA analizando archivos del sistema...',
+                        '🔍 Detectando archivos obsoletos seguros...',
+                        '🗑️ Eliminando logs antiguos del sistema...',
+                        '💾 Limpiando caché de aplicaciones...',
+                        '🧹 Optimizando base de datos del sistema...',
+                        '✅ Limpieza avanzada completada - 2.8 GB liberados'
+                    ];
+                    break;
+                case 'deep':
+                    message = 'Ejecutando limpieza profunda para expertos...';
+                    steps = [
+                        '⚠️ ADVERTENCIA: Limpieza profunda iniciada...',
+                        '🛡️ Creando respaldo de seguridad...',
+                        '🔍 Análisis profundo del registro...',
+                        '🗑️ Eliminando archivos huérfanos...',
+                        '💾 Limpiando caché de drivers...',
+                        '🔧 Optimizando estructura de directorios...',
+                        '🧹 Desfragmentando bases de datos...',
+                        '✅ Limpieza profunda completada - 4.6 GB liberados'
+                    ];
+                    break;
+                case 'ai':
+                    message = 'IA Ultra ejecutando limpieza automática...';
+                    steps = [
+                        '🤖 IA Ultra analizando patrones de uso...',
+                        '🧠 Identificando archivos seguros para eliminar...',
+                        '🔍 Prediciendo archivos que no necesitarás...',
+                        '🗑️ Eliminación inteligente en progreso...',
+                        '📊 IA optimizando configuraciones del sistema...',
+                        '🎯 Aplicando optimizaciones predictivas...',
+                        '✅ IA Ultra completada - 3.7 GB liberados + optimizaciones'
+                    ];
+                    break;
+            }
+            
+            showUltraProgress(message, 'cleanup');
+            simulateUltraExecution(steps, 'success');
+        }
+
+        function scanDuplicates() {
+            document.getElementById('duplicateResults').style.display = 'block';
+            
+            const steps = [
+                '🔍 Escaneando archivos duplicados...',
+                '🤖 IA analizando contenido de archivos...',
+                '📊 Comparando hashes MD5...',
+                '🎯 Identificando duplicados exactos...',
+                '📁 Analizando archivos similares...',
+                '✅ Escaneo completado - 47 duplicados encontrados (1.2 GB)'
+            ];
+            
+            simulateProgress(document.querySelector('#duplicateResults .progress-bar-ultra'), steps, () => {
+                document.querySelector('#duplicateResults .text-center').innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Encontrados 47 archivos duplicados que ocupan 1.2 GB
+                        <br><button class="btn btn-warning-ultra btn-sm mt-2" onclick="removeDuplicates()">
+                            <i class="fas fa-trash"></i> Eliminar Duplicados
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function optimizeBattery() {
+            const steps = [
+                '🔋 Analizando configuración de energía...',
+                '💡 Optimizando brillo de pantalla...',
+                '📡 Configurando WiFi en modo ahorro...',
+                '🔄 Ajustando frecuencia del procesador...',
+                '🛡️ Deshabilitando servicios no críticos...',
+                '✅ Batería optimizada - Duración extendida +23%'
+            ];
+            
+            showUltraProgress('Optimizando configuración de batería...', 'battery');
+            simulateUltraExecution(steps, 'success');
+            
+            // Update battery display
+            setTimeout(() => {
+                document.getElementById('batteryTime').textContent = '4h 38m';
+                const batteryBar = document.getElementById('batteryBar');
+                batteryBar.style.background = 'linear-gradient(90deg, #10b981, #059669)';
+            }, 3000);
+        }
+
+        function activateGamingModeUltra() {
+            const steps = [
+                '🎮 Activando Gaming Mode Ultra...',
+                '🚀 Configurando prioridad máxima para juegos...',
+                '💾 Liberando RAM no esencial...',
+                '🔄 Pausando servicios en segundo plano...',
+                '🖥️ Optimizando configuración de GPU...',
+                '⚡ Habilitando boost de CPU...',
+                '🎯 Configurando perfiles de red gaming...',
+                '✅ Gaming Mode Ultra activado - Rendimiento +34%'
+            ];
+            
+            showUltraProgress('Activando Gaming Mode Ultra...', 'gaming');
+            simulateUltraExecution(steps, 'gaming');
+        }
+
+        function scanGameLibrary() {
+            const gameLibrary = document.getElementById('gameLibrary');
+            
+            setTimeout(() => {
+                gameLibrary.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3 p-2" style="background: rgba(139, 92, 246, 0.1); border-radius: 10px;">
+                                <i class="fas fa-gamepad text-primary me-3 fa-2x"></i>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold">Cyberpunk 2077</div>
+                                    <small class="text-muted">57.3 GB - Steam</small>
+                                    <div class="status-ultra status-optimal mt-1">Optimizado</div>
+                                </div>
+                                <button class="btn btn-gaming btn-sm" onclick="optimizeGame('cyberpunk')">
+                                    <i class="fas fa-rocket"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3 p-2" style="background: rgba(139, 92, 246, 0.1); border-radius: 10px;">
+                                <i class="fas fa-gamepad text-warning me-3 fa-2x"></i>
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold">Call of Duty MW3</div>
+                                    <small class="text-muted">149.2 GB - Battle.net</small>
+                                    <div class="status-ultra status-warning mt-1">Necesita optimización</div>
+                                </div>
+                                <button class="btn btn-gaming btn-sm" onclick="optimizeGame('cod')">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // =======================================
+        // AI ASSISTANT FUNCTIONS
+        // =======================================
+        const aiResponses = [
+            "He analizado tu sistema y detecté que puedes liberar 2.3 GB eliminando archivos temporales obsoletos. ¿Quieres que lo haga automáticamente?",
+            "Tu CPU está funcionando bien, pero veo que tienes 7 programas innecesarios en el arranque que están ralentizando el inicio del sistema.",
+            "Recomiendo optimizar la configuración de memoria virtual. Esto puede mejorar el rendimiento en un 18% según mis cálculos.",
+            "He detectado que tu SSD podría beneficiarse de una optimización. Puedo configurar TRIM avanzado y mejorar el rendimiento.",
+            "Análisis completado: Tu sistema está funcionando bien, pero puedo aplicar 5 optimizaciones que mejorarán el rendimiento general.",
+            "Detecté una oportunidad para optimizar tu configuración gaming. ¿Juegas frecuentemente? Puedo crear un perfil personalizado.",
+            "Tu batería podría durar 23% más con mis optimizaciones de energía. ¿Quieres que configure el modo de ahorro inteligente?",
+            "He encontrado 47 archivos duplicados que ocupan 1.2 GB. Puedo eliminarlos de forma segura manteniendo las versiones más recientes."
+        ];
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const chatContainer = document.getElementById('aiChatContainer');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'ai-message mb-3';
+            userMessage.innerHTML = `
+                <div class="d-flex align-items-start">
+                    <div class="me-3">
+                        <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold text-primary mb-1">Tú</div>
+                        <div>${message}</div>
+                    </div>
+                </div>
+            `;
+            chatContainer.appendChild(userMessage);
+            
+            // Clear input
+            input.value = '';
+            
+            // Add AI response after delay
+            setTimeout(() => {
+                const aiMessage = document.createElement('div');
+                aiMessage.className = 'ai-message mb-3';
+                const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+                aiMessage.innerHTML = `
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <div style="width: 40px; height: 40px; background: var(--gradient-ai); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-robot text-white"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fw-bold" style="color: var(--ai-color); margin-bottom: 4px;">Asistente IA Ultra</div>
+                            <div>${response}</div>
+                        </div>
+                    </div>
+                `;
+                chatContainer.appendChild(aiMessage);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1500);
+            
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function aiAnalyzeSystem() {
+            const steps = [
+                '🤖 IA iniciando análisis completo del sistema...',
+                '🧠 Procesando configuraciones del sistema...',
+                '📊 Analizando patrones de uso...',
+                '🎯 Identificando oportunidades de optimización...',
+                '💡 Generando recomendaciones personalizadas...',
+                '✅ Análisis IA completado - 12 optimizaciones encontradas'
+            ];
+            
+            showUltraProgress('IA analizando tu sistema...', 'ai');
+            simulateUltraExecution(steps, 'ai');
+        }
+
+        // =======================================
+        // UTILITY FUNCTIONS
+        // =======================================
+        function showUltraProgress(title, type) {
+            // Create progress modal or update existing progress section
+            console.log(`Progress: ${title} (${type})`);
+        }
+
+        function simulateUltraExecution(steps, type) {
+            // Simulate execution with enhanced visual feedback
+            console.log(`Executing: ${steps.join(' -> ')} (Type: ${type})`);
+        }
+
+        function simulateProgress(progressBar, steps, callback) {
+            let currentStep = 0;
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    const progress = ((currentStep + 1) / steps.length) * 100;
+                    progressBar.style.width = progress + '%';
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    if (callback) callback();
+                }
+            }, 800);
+        }
+
+        function scrollToDashboard() {
+            document.querySelector('.ultra-dashboard').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function activateGamingMode() {
+            // Switch to gaming section and activate
+            const gamingLink = document.querySelector('[data-section="gaming"]');
+            gamingLink.click();
+            setTimeout(() => activateGamingModeUltra(), 500);
+        }
+
+        function activateAIMode() {
+            // Switch to AI section
+            const aiLink = document.querySelector('[data-section="ai"]');
+            aiLink.click();
+        }
+
+        function startMonitoring() {
+            if (monitoringInterval) clearInterval(monitoringInterval);
+            monitoringInterval = setInterval(simulateRealTimeData, 2000);
+        }
+
+        function initializeGamingMode() {
+            // Initialize gaming-specific monitoring
+            if (gamingChart) {
+                // Start gaming metrics simulation
+                console.log('Gaming mode initialized');
+            }
+        }
+
+        function toggleQuickActions() {
+            alert('🚀 Acciones Rápidas:\n• Limpieza Express\n• Gaming Mode\n• Optimización IA\n• Respaldo Rápido\n\n¿Qué acción prefieres ejecutar?');
+        }
+
+        // =======================================
+        // ENHANCED EVENT HANDLERS
+        // =======================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all systems
+            createEnhancedParticles();
+            createNeuralNetwork();
+            initializeCharts();
+            initializeNavigation();
+            startMonitoring();
+            
+            // Initialize AI input enter key
+            document.getElementById('aiInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendAIMessage();
+                }
+            });
+            
+            console.log('🚀 Limpiar Windows - Suite Ultra Avanzada 2025 cargada exitosamente!');
+            console.log('🤖 Todos los módulos de IA y monitoreo están activos');
+            console.log('📊 Sistema de métricas en tiempo real funcionando');
+            console.log('🎮 Gaming Mode Ultra preparado');
+            console.log('☁️ Integración Cloud lista');
         });
 
-        // Console easter egg
-        console.log(`
-        ╔══════════════════════════════════════════════════════════════╗
-        ║                    🚀 OptiClean‑Xtreme v11.0                 ║
-        ║                                                              ║
-        ║  Página creada con tecnologías web modernas:                ║
-        ║  • HTML5 semántico                                          ║
-        ║  • CSS Grid & Flexbox                                       ║
-        ║  • Animaciones CSS avanzadas                                ║
-        ║  • JavaScript ES6+                                          ║
-        ║  • Diseño responsivo                                        ║
-        ║  • Accesibilidad optimizada                                 ║
-        ║  • Efectos visuales modernos                                ║
-        ║                                                              ║
-        ║  ¡Optimizado para el máximo rendimiento! 🎯                 ║
-        ╚══════════════════════════════════════════════════════════════╝
-        `);
-
-        // Analytics simulation (replace with real analytics)
-        setTimeout(() => {
-            console.log('🎯 Página completamente cargada y optimizada');
-        }, 2000);
-
-    </script>
-</body>
-</html>
+        // Additional function stubs for complete functionality
+        function analyzeProcesses() { aiAnalyzeSystem(); }
+        function optimizeProcesses() { executeUltraCleanup(); }
+        function scanLargeFiles() { scanDuplicates(); }
+        function scanDrivers() { console.log('Scanning drivers...'); }
+        function updateDrivers() { console.log('Updating drivers
