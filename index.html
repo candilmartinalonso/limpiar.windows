@@ -13,8 +13,7 @@
             font-family: 'Inter', sans-serif;
             background: #0c0a09 url('https://www.transparenttextures.com/patterns/subtle-prism.png');
         }
-        .code-block {
-            background-color: rgba(23, 21, 53, 0.8); 
+Ctrl+A            background-color: rgba(23, 21, 53, 0.8); 
             backdrop-filter: blur(10px);
             color: #e0e7ff; /* indigo-100 */
             border: 1px solid #4c1d95; /* violet-800 */
@@ -27,122 +26,7 @@
             font-size: 0.9rem;
             line-height: 1.6;
         }
-        .copy-button {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background-color: #3730a3; /* indigo-800 */
-            color: #e0e7ff; /* indigo-200 */
-            border: 1px solid #4338ca; /* indigo-700 */
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            font-weight: 600;
-        }
-        .copy-button:hover {
-            background-color: #4f46e5;
-            color: #ffffff;
-        }
-        .feature-card {
-            background: linear-gradient(145deg, rgba(30, 27, 75, 0.5), rgba(12, 10, 9, 0.5));
-            backdrop-filter: blur(10px);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            border: 1px solid #4c1d95;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2);
-        }
-        .glow-text {
-            text-shadow: 0 0 15px rgba(196, 181, 253, 0.8);
-        }
-    </style>
-</head>
-<body class="text-slate-300">
-
-    <div class="container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 glow-text">Optimizador Singularidad</h1>
-            <p class="text-xl text-violet-300">El Final del Juego: El rendimiento ha alcanzado su forma final.</p>
-        </header>
-
-        <main>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                <div class="feature-card">
-                    <h3 class="text-xl font-bold text-violet-400 mb-2">Aniquilación del Throttling</h3>
-                    <p class="text-slate-400">Desactiva el Power Throttling de la CPU para que todas las tareas, en primer y segundo plano, se ejecuten a máxima potencia.</p>
-                </div>
-                <div class="feature-card">
-                    <h3 class="text-xl font-bold text-violet-400 mb-2">Tuning Definitivo</h3>
-                    <p class="text-slate-400">Decide si quieres desactivar Windows Search, el mayor consumidor de recursos en segundo plano, para una ganancia masiva.</p>
-                </div>
-                 <div class="feature-card">
-                    <h3 class="text-xl font-bold text-violet-400 mb-2">Arranque Taquiónico</h3>
-                    <p class="text-slate-400">Fuerza a Windows a usar todos los núcleos de tu procesador durante el arranque para un inicio del sistema más rápido.</p>
-                </div>
-            </div>
-
-            <!-- INSTRUCCIONES DE USO -->
-            <div class="bg-gray-900/50 backdrop-blur-sm border border-violet-800 p-6 rounded-lg mb-8">
-                <h2 class="text-2xl font-semibold text-white mb-4">Instrucciones para la Singularidad</h2>
-                <ol class="list-decimal list-inside space-y-3 text-slate-300">
-                    <li>Haz clic en el botón <strong>"Copiar Script Singularidad"</strong>.</li>
-                    <li>Abre el menú Inicio, escribe <strong>"PowerShell"</strong>, haz clic derecho y selecciona <strong>"Ejecutar como administrador"</strong>.</li>
-                    <li>En la ventana azul, haz clic derecho para pegar el script y presiona <strong>Enter</strong>.</li>
-                    <li class="text-yellow-400"><strong class="text-yellow-200">¡Atención!</strong> Responde a las preguntas (S/N) que el script te hará. Tus respuestas determinarán el nivel final de la optimización.</li>
-                    <li>Reinicia tu PC y experimenta la forma final de Windows.</li>
-                </ol>
-            </div>
-
-            <!-- BLOQUE DEL SCRIPT -->
-            <div>
-                <h2 class="text-3xl font-bold text-white mb-4 text-center">Script de Optimización Singularidad</h2>
-                <div class="code-block">
-                    <button id="copyButton" class="copy-button">Copiar Script Singularidad</button>
-                    <pre><code id="powerShellScript">
-# =================================================================================
-# ||               SCRIPT DE OPTIMIZACIÓN SINGULARIDAD PARA WINDOWS                ||
-# ||          Aniquilación de Throttling | Tuning Definitivo | Arranque Taquiónico  ||
-# ||                            VERSIÓN EL FINAL DEL JUEGO                         ||
-# =================================================================================
-
-Function Show-Intro {
-    Clear-Host
-    Write-Host "=======================================================" -ForegroundColor 'DarkMagenta'
-    Write-Host "     INICIANDO SCRIPT DE OPTIMIZACIÓN SINGULARIDAD" -ForegroundColor 'DarkMagenta'
-    Write-Host "                   (El Final del Juego)" -ForegroundColor 'Yellow'
-    Write-Host "=======================================================" -ForegroundColor Gray
-    Write-Host "ADVERTENCIA: Has llegado al final. Este es el script más potente." -ForegroundColor Red
-    Write-Host "Se te harán preguntas cruciales para adaptar la optimización." -ForegroundColor Yellow
-    Write-Host "Lee cada pregunta con atención. Los cambios son el cénit del rendimiento." -ForegroundColor Red
-    Write-Host "======================================================="
-    Start-Sleep -Seconds 10
-}
-
-# --- PASO 1: LA GRAN PURGA (LIMPIEZA FINAL) ---
-Function Step1-The-Great-Purge {
-    Write-Host "`n[PASO 1 de 11] - Iniciando La Gran Purga..." -ForegroundColor Green
-    $Locations = @(
-        "$env:windir\Temp\*", "$env:TEMP\*", "$env:windir\SoftwareDistribution\Download\*", "$env:windir\Prefetch\*",
-        "$env:ProgramData\Microsoft\Windows\WER\ReportQueue\*", "$env:LOCALAPPDATA\NVIDIA\GLCache\*",
-        "$env:LOCALAPPDATA\AMD\DxCache\*", "$env:LOCALAPPDATA\Intel\ShaderCache\*", "$env:LOCALAPPDATA\Microsoft\Office\16.0\WebServiceCache\*",
-        "$env:SystemRoot\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\*", "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\*",
-        "$env:LOCALAPPDATA\Microsoft\Windows\GameExplorer\*"
-    )
-    foreach ($loc in $Locations) { Remove-Item -Path $loc -Recurse -Force -ErrorAction SilentlyContinue }
-    
-    Write-Host " - Purgando Registros de Eventos y Caché de Mapas..." -ForegroundColor Gray
-    Get-EventLog -List | ForEach-Object { Clear-EventLog -LogName $_.Log }
-    Get-AppxPackage *windowsmaps* | Remove-AppxPackage -ErrorAction SilentlyContinue
-    
-    Write-Host " - Limpiando Almacén de Componentes (WinSxS)..." -ForegroundColor Yellow
-    DISM.exe /Online /Cleanup-Image /StartComponentCleanup /Quiet
-    
-    if ((Read-Host "`n`n¿Deseas eliminar TODOS los Puntos de Restauración? (IRREVERSIBLE) [s/n]") -eq 's') {
+  Ctrl+A     if ((Read-Host "`n`n¿Deseas eliminar TODOS los Puntos de Restauración? (IRREVERSIBLE) [s/n]") -eq 's') {
         Write-Host " - Eliminando puntos de restauración..." -ForegroundColor Red
         try { vssadmin delete shadows /all /quiet } catch { Write-Host "   No se pudieron eliminar." -ForegroundColor Yellow }
     }
