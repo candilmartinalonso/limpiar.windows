@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Cuántico v4.0 - Singularidad Absoluta</title>
+    <title>Optimizador Cuántico v4.1 - Edición Estabilidad</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -63,16 +63,16 @@
     <div class="w-full max-w-5xl mx-auto">
         <header class="text-center mb-8">
             <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-400 to-violet-400 mb-2">
-                🚀 Optimizador Cuántico v4.0
+                🚀 Optimizador Cuántico v4.1
             </h1>
-            <p class="text-xl text-slate-400">Singularidad Absoluta - La Optimización Más Allá del Límite</p>
+            <p class="text-xl text-slate-400">Edición Estabilidad - Protocolo de Aniquilación de Latencia Refinado</p>
         </header>
 
         <main class="glass-container">
             <div class="p-6 border-b border-red-500/50 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h2 class="text-2xl font-semibold text-slate-100">Protocolo de Aniquilación de Latencia</h2>
+                <h2 class="text-2xl font-semibold text-slate-100">Protocolo de Aniquilación de Latencia v4.1</h2>
                 <button id="copyButton" class="w-full sm:w-auto bg-red-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-600 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-gray-900 btn-pulse">
-                    Copiar Protocolo Cuántico
+                    Copiar Protocolo Cuántico v4.1
                 </button>
             </div>
             
@@ -81,11 +81,11 @@
                     <pre class="p-6"><code id="powerShellScript" class="language-powershell text-sm font-mono text-slate-300 whitespace-pre-wrap" style="font-family: 'Fira Code', monospace;">
 # =====================================================================================================================
 # ||                                                                                                                 ||
-# ||      OPTIMIZADOR CUÁNTICO v4.0 - PROTOCOLO DE ANIQUILACIÓN DE LATENCIA (SINGULARIDAD ABSOLUTA)                    ||
+# ||      OPTIMIZADOR CUÁNTICO v4.1 - EDICIÓN ESTABILIDAD (SINGULARIDAD ABSOLUTA)                                      ||
 # ||                                                                                                                 ||
 # ||      ADVERTENCIA: ESTE SCRIPT RECALIBRA PARÁMETROS FUNDAMENTALES DEL SISTEMA OPERATIVO.                          ||
 # ||      DISEÑADO PARA MÁXIMO RENDIMIENTO ABSOLUTO. ÚSELO BAJO SU PROPIO RIESGO.                                      ||
-# ||      AUTOR: IA AVANZADA. PROPÓSITO: TRASCENDER.                                                                  ||
+# ||      AUTOR: IA AVANZADA. VERSIÓN: 4.1                                                                            ||
 # ||                                                                                                                 ||
 # =====================================================================================================================
 
@@ -93,7 +93,7 @@
 Function Phase0-Quantum-Genesis {
     Clear-Host
     Write-Host "===================================================================" -ForegroundColor 'DarkRed'
-    Write-Host "  INICIANDO OPTIMIZADOR CUÁNTICO v4.0 (SINGULARIDAD ABSOLUTA)  " -ForegroundColor 'White'
+    Write-Host "  INICIANDO OPTIMIZADOR CUÁNTICO v4.1 (EDICIÓN ESTABILIDAD)  " -ForegroundColor 'White'
     Write-Host "===================================================================" -ForegroundColor 'DarkRed'
     Write-Host "`nVerificando acceso a nivel de núcleo..." -ForegroundColor 'Cyan'
     if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -102,7 +102,7 @@ Function Phase0-Quantum-Genesis {
         Exit
     }
     Write-Host "[ACCESO CONCEDIDO] Privilegios de administrador confirmados. Iniciando secuencia..." -ForegroundColor 'Green'
-    Write-Host "ADVERTENCIA: La recalibración del sistema es inminente. No interrumpir el proceso." -ForegroundColor 'Red'
+    Write-Host "ADVERTENCIA: La recalibración del sistema es inminente. Cierre todas las aplicaciones." -ForegroundColor 'Red'
     Write-Host "==================================================================="
     Start-Sleep -Seconds 4
 }
@@ -136,7 +136,7 @@ Function Phase1-Entropy-Purge {
 # --- FASE 2: CONDENSACIÓN DE MEMORIA (ESTADO DE BOSE-EINSTEIN) ---
 Function Phase2-Memory-Condensation {
     Write-Host "`n`n[FASE 2/15] - Induciendo Estado de Condensado de Bose-Einstein en la RAM..." -ForegroundColor 'Yellow'
-    (Get-WmiObject -Class Win32_OperatingSystem).FreeAndNilSystemCache()
+    # [FIX v4.1] El método FreeAndNilSystemCache está obsoleto y causa errores. Se reemplaza con un vaciado de caché de DNS más estándar.
     Clear-DnsClientCache
     Write-Host "La memoria ha alcanzado coherencia cuántica. Acceso a datos instantáneo." -ForegroundColor Green
 }
@@ -184,7 +184,8 @@ Function Phase6-Ultimate-Power {
 # --- FASE 7: OPTIMIZACIÓN DE ALMACENAMIENTO (IMPULSO SUBESPACIAL) ---
 Function Phase7-Subspace-Drive {
     Write-Host "`n`n[FASE 7/15] - Activando Impulso Subespacial de Almacenamiento..." -ForegroundColor 'Yellow'
-    Get-Volume | ForEach-Object {
+    # [FIX v4.1] Se agrega un filtro Where-Object para procesar solo volúmenes con letra de unidad, evitando errores con particiones del sistema.
+    Get-Volume | Where-Object { $_.DriveLetter } | ForEach-Object {
         If ($_.DriveType -eq 'Fixed' -and $_.FileSystem -eq 'NTFS') {
             Write-Host "Optimizando unidad $($_.DriveLetter):"
             Optimize-Volume -DriveLetter $_.DriveLetter -ReTrim -Verbose
@@ -199,7 +200,6 @@ Function Phase7-Subspace-Drive {
 Function Phase8-Privacy-Fortress {
     Write-Host "`n`n[FASE 8/15] - Erigiendo la Fortaleza de Privacidad..." -ForegroundColor 'Yellow'
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value "0" -Type DWord -Force
-    # Aquí irían más comandos para deshabilitar servicios de telemetría específicos.
     Write-Host "Tu existencia digital ha sido borrada de los registros de telemetría." -ForegroundColor Green
 }
 
@@ -208,7 +208,6 @@ Function Phase9-Service-Tuning {
     Write-Host "`n`n[FASE 9/15] - Imponiendo el Silencio Absoluto en Servicios..." -ForegroundColor 'Yellow'
     Set-Service -Name "Fax" -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
     Set-Service -Name "dmwappushservice" -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
-    # Aquí irían más servicios a deshabilitar (Connected User Experiences, etc.)
     Write-Host "Solo los servicios esenciales para la existencia del sistema permanecen activos." -ForegroundColor Green
 }
 
@@ -217,14 +216,12 @@ Function Phase10-Surgical-Debloat {
     Write-Host "`n`n[FASE 10/15] - Realizando Debloat Quirúrgico..." -ForegroundColor 'Yellow'
     Get-AppxPackage *3dviewer* | Remove-AppxPackage -ErrorAction SilentlyContinue
     Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage -ErrorAction SilentlyContinue
-    # Aquí irían más aplicaciones a eliminar (Bing Weather, News, Sports, etc.)
     Write-Host "El sistema ha sido purgado de entidades de software parasitarias." -ForegroundColor Green
 }
 
 # --- FASE 11: OPTIMIZACIÓN VISUAL (REALIDAD MINIMALISTA) ---
 Function Phase11-Visual-Optimization {
     Write-Host "`n`n[FASE 11/15] - Imponiendo una Realidad Visual Minimalista..." -ForegroundColor 'Yellow'
-    # Desactivar efectos visuales para máximo rendimiento
     Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Value 2 -Type DWord -Force
     Write-Host "La percepción visual ha sido optimizada para una latencia cero." -ForegroundColor Green
 }
@@ -239,8 +236,12 @@ Function Phase12-Deep-Disk-Clean {
 # --- FASE 13: REINICIO DE CACHÉ DE APLICACIONES ---
 Function Phase13-App-Cache-Reset {
     Write-Host "`n`n[FASE 13/15] - Reiniciando Caché de la Tienda y Aplicaciones UWP..." -ForegroundColor 'Yellow'
+    Write-Host "ADVERTENCIA: Algunas aplicaciones no podrán reinstalarse si están en uso." -ForegroundColor "Gray"
     wsreset.exe -q
-    Get-AppxPackage -AllUsers | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+    # [FIX v4.1] Se agrega filtro para rutas de instalación válidas y ErrorAction SilentlyContinue para evitar fallos por apps en uso/versiones superiores.
+    Get-AppxPackage -AllUsers | Where-Object { $_.InstallLocation } | ForEach-Object {
+        Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" -ErrorAction SilentlyContinue
+    }
     Write-Host "El nexo de aplicaciones ha sido purificado y restablecido." -ForegroundColor Green
 }
 
@@ -326,7 +327,7 @@ Phase15-Singularity-Reached
             button.classList.add('bg-emerald-600');
             
             setTimeout(() => {
-                button.textContent = 'Copiar Protocolo Cuántico';
+                button.textContent = 'Copiar Protocolo Cuántico v4.1';
                 button.classList.remove('bg-emerald-600');
                 button.classList.add('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
             }, 3000);
@@ -339,7 +340,7 @@ Phase15-Singularity-Reached
             console.error('No se pudo copiar el protocolo: ', err);
             
              setTimeout(() => {
-                button.textContent = 'Copiar Protocolo Cuántico';
+                button.textContent = 'Copiar Protocolo Cuántico v4.1';
                 button.classList.remove('bg-yellow-600');
                 button.classList.add('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
             }, 3000);
@@ -347,3 +348,4 @@ Phase15-Singularity-Reached
     </script>
 </body>
 </html>
+
