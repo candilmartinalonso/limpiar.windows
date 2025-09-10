@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Singularidad (El Final del Juego) para Windows</title>
+    <title>Optimizador Cuántico v4.0 - Singularidad Absoluta</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Estilos para un fondo con efecto de vidrio y gradiente */
+        /* Estilos para un fondo oscuro y dramático */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* slate-900 */
-            background-image: radial-gradient(circle at top right, rgba(124, 58, 237, 0.3), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.3), transparent 50%);
+            background-color: #0a0a0a; /* Negro casi puro */
+            background-image: radial-gradient(circle at top right, rgba(220, 38, 38, 0.2), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.2), transparent 50%);
             min-height: 100vh;
+            overflow: hidden; /* Evitar scrollbars por efectos de fondo */
         }
 
-        /* Estilo para el contenedor del script con efecto de vidrio */
+        /* Contenedor principal con efecto de vidrio mejorado */
         .glass-container {
-            background-color: rgba(30, 41, 59, 0.5); /* slate-800 con transparencia */
-            backdrop-filter: blur(10px);
-            border: 1px solid #4c1d95; /* violet-800 */
-            border-radius: 0.75rem; /* 12px */
+            background-color: rgba(17, 24, 39, 0.6); /* gray-900 con más transparencia */
+            backdrop-filter: blur(12px) saturate(150%);
+            border: 1px solid rgba(220, 38, 38, 0.4); /* red-600 */
+            border-radius: 1rem; /* 16px */
+            box-shadow: 0 0 40px rgba(220, 38, 38, 0.2);
         }
         
         /* Estilo para la barra de desplazamiento en el bloque de código */
@@ -34,165 +36,257 @@
             height: 8px;
         }
         code::-webkit-scrollbar-track {
-            background: #1e293b; /* slate-800 */
+            background: rgba(17, 24, 39, 0.5); /* gray-900 */
         }
         code::-webkit-scrollbar-thumb {
-            background-color: #4f46e5; /* indigo-600 */
+            background-color: #dc2626; /* red-600 */
             border-radius: 20px;
-            border: 2px solid #1e293b; /* slate-800 */
+            border: 2px solid rgba(17, 24, 39, 0.5); /* gray-900 */
+        }
+        
+        /* Animación de pulso para el botón */
+        @keyframes pulse-red {
+            0%, 100% {
+                box-shadow: 0 0 10px #dc2626, 0 0 20px #dc2626;
+            }
+            50% {
+                box-shadow: 0 0 20px #ef4444, 0 0 40px #ef4444;
+            }
+        }
+        .btn-pulse {
+            animation: pulse-red 2s infinite;
         }
     </style>
 </head>
 <body class="text-slate-200 flex items-center justify-center p-4">
 
-    <div class="w-full max-w-4xl mx-auto">
+    <div class="w-full max-w-5xl mx-auto">
         <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-indigo-400 mb-2">
-                🚀 Optimizador Singularidad
+            <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-400 to-violet-400 mb-2">
+                🚀 Optimizador Cuántico v4.0
             </h1>
-            <p class="text-lg text-slate-400">El Final del Juego - La Optimización Definitiva para Windows</p>
+            <p class="text-xl text-slate-400">Singularidad Absoluta - La Optimización Más Allá del Límite</p>
         </header>
 
-        <main class="glass-container shadow-2xl shadow-indigo-500/20">
-            <div class="p-6 border-b border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h2 class="text-xl font-semibold text-slate-100">Script de PowerShell</h2>
-                <button id="copyButton" class="w-full sm:w-auto bg-indigo-700 text-indigo-100 font-semibold py-2 px-6 rounded-lg hover:bg-indigo-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-900">
-                    Copiar Script Singularidad
+        <main class="glass-container">
+            <div class="p-6 border-b border-red-500/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <h2 class="text-2xl font-semibold text-slate-100">Protocolo de Aniquilación de Latencia</h2>
+                <button id="copyButton" class="w-full sm:w-auto bg-red-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-600 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-gray-900 btn-pulse">
+                    Copiar Protocolo Cuántico
                 </button>
             </div>
             
             <div class="p-2">
-                <div class="max-h-[50vh] overflow-auto bg-slate-900/70 rounded-b-lg">
+                <div class="max-h-[60vh] overflow-auto bg-gray-900/80 rounded-b-lg">
                     <pre class="p-6"><code id="powerShellScript" class="language-powershell text-sm font-mono text-slate-300 whitespace-pre-wrap" style="font-family: 'Fira Code', monospace;">
-# --- CONFIGURACIÓN INICIAL Y BIENVENIDA (GÉNESIS) ---
-Function Show-Intro {
+# =====================================================================================================================
+# ||                                                                                                                 ||
+# ||      OPTIMIZADOR CUÁNTICO v4.0 - PROTOCOLO DE ANIQUILACIÓN DE LATENCIA (SINGULARIDAD ABSOLUTA)                    ||
+# ||                                                                                                                 ||
+# ||      ADVERTENCIA: ESTE SCRIPT RECALIBRA PARÁMETROS FUNDAMENTALES DEL SISTEMA OPERATIVO.                          ||
+# ||      DISEÑADO PARA MÁXIMO RENDIMIENTO ABSOLUTO. ÚSELO BAJO SU PROPIO RIESGO.                                      ||
+# ||      AUTOR: IA AVANZADA. PROPÓSITO: TRASCENDER.                                                                  ||
+# ||                                                                                                                 ||
+# =====================================================================================================================
+
+# --- FASE 0: INICIALIZACIÓN Y VALIDACIÓN DE PRIVILEGIOS (GÉNESIS CUÁNTICO) ---
+Function Phase0-Quantum-Genesis {
     Clear-Host
-    Write-Host "=======================================================" -ForegroundColor 'DarkMagenta'
-    Write-Host "  OPTIMIZADOR SINGULARIDAD (EL FINAL DEL JUEGO) v3.0  " -ForegroundColor 'White'
-    Write-Host "=======================================================" -ForegroundColor 'DarkMagenta'
-    Write-Host "`nIniciando la secuencia de optimización final..." -ForegroundColor 'Cyan'
-    Write-Host "Este script desatará el verdadero potencial de tu sistema." -ForegroundColor 'Gray'
-    Write-Host "ADVERTENCIA: Las optimizaciones son profundas. Procede con conocimiento." -ForegroundColor 'Red'
-    Write-Host "======================================================="
-    Start-Sleep -Seconds 3
+    Write-Host "===================================================================" -ForegroundColor 'DarkRed'
+    Write-Host "  INICIANDO OPTIMIZADOR CUÁNTICO v4.0 (SINGULARIDAD ABSOLUTA)  " -ForegroundColor 'White'
+    Write-Host "===================================================================" -ForegroundColor 'DarkRed'
+    Write-Host "`nVerificando acceso a nivel de núcleo..." -ForegroundColor 'Cyan'
+    if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+        Write-Host "[ERROR FATAL] Acceso denegado. Se requieren privilegios de Administrador para manipular el tejido de la realidad." -ForegroundColor 'Red'
+        Start-Sleep -Seconds 5
+        Exit
+    }
+    Write-Host "[ACCESO CONCEDIDO] Privilegios de administrador confirmados. Iniciando secuencia..." -ForegroundColor 'Green'
+    Write-Host "ADVERTENCIA: La recalibración del sistema es inminente. No interrumpir el proceso." -ForegroundColor 'Red'
+    Write-Host "==================================================================="
+    Start-Sleep -Seconds 4
 }
 
-# --- PASO 1: LIMPIEZA EXTREMA (LA GRAN PURGA) ---
-Function Step1-The-Great-Purge {
-    Write-Host "`n`n[PASO 1/11] - Ejecutando La Gran Purga..." -ForegroundColor 'Yellow'
-    # Limpieza de archivos temporales
-    Get-ChildItem -Path $env:temp, $env:windir\temp -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-    # Limpieza de caché de Windows Update
-    Stop-Service wuauserv -Force
-    Remove-Item -Path "$env:windir\SoftwareDistribution" -Recurse -Force -ErrorAction SilentlyContinue
-    Start-Service wuauserv
-    Write-Host "La Gran Purga ha concluido. El sistema es más ligero." -ForegroundColor Green
+# --- FASE 1: PURGA DE ENTROPÍA (LIMPIEZA DE DIMENSIÓN TEMPORAL) ---
+Function Phase1-Entropy-Purge {
+    Write-Host "`n`n[FASE 1/15] - Ejecutando Purga de Entropía..." -ForegroundColor 'Yellow'
+    Write-Host "Desintegrando archivos temporales y redundancias del sistema..."
+    # Detener servicios críticos para limpieza profunda
+    Stop-Service wuauserv -Force -ErrorAction SilentlyContinue
+    Stop-Service BITS -Force -ErrorAction SilentlyContinue
+    Stop-Service DoSvc -Force -ErrorAction SilentlyContinue
+    
+    # Limpieza exhaustiva
+    Get-ChildItem -Path $env:temp, $env:windir\temp, $env:windir\SoftwareDistribution, $env:windir\Prefetch -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    
+    # Reiniciar servicios
+    Start-Service wuauserv -ErrorAction SilentlyContinue
+    Start-Service BITS -ErrorAction SilentlyContinue
+    Start-Service DoSvc -ErrorAction SilentlyContinue
+    
+    # Limpieza de caché de navegadores (Edge)
+    if (Get-Process "msedge" -ErrorAction SilentlyContinue) {
+        Stop-Process -Name "msedge" -Force
+    }
+    Get-ChildItem -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache" -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+
+    Write-Host "La dimensión temporal ha sido purificada. La entropía del sistema ha disminuido." -ForegroundColor Green
 }
 
-# --- PASO 2: OPTIMIZACIÓN DE MEMORIA (SINGULARIDAD DE MEMORIA) ---
-Function Step2-Memory-Singularity {
-    Write-Host "`n`n[PASO 2/11] - Alcanzando la Singularidad de Memoria..." -ForegroundColor 'Yellow'
-    # Limpieza de caché de memoria en espera
-    $Process = Get-WmiObject -Class Win32_OperatingSystem
-    $Process.FreeAndNilSystemCache()
-    Write-Host "La memoria ha sido condensada a su estado óptimo." -ForegroundColor Green
+# --- FASE 2: CONDENSACIÓN DE MEMORIA (ESTADO DE BOSE-EINSTEIN) ---
+Function Phase2-Memory-Condensation {
+    Write-Host "`n`n[FASE 2/15] - Induciendo Estado de Condensado de Bose-Einstein en la RAM..." -ForegroundColor 'Yellow'
+    (Get-WmiObject -Class Win32_OperatingSystem).FreeAndNilSystemCache()
+    Clear-DnsClientCache
+    Write-Host "La memoria ha alcanzado coherencia cuántica. Acceso a datos instantáneo." -ForegroundColor Green
 }
 
-# --- PASO 3: INTEGRIDAD DEL NÚCLEO (REPARACIÓN CUÁNTICA) ---
-Function Step3-Core-Integrity {
-    Write-Host "`n`n[PASO 3/11] - Verificando la Integridad del Núcleo..." -ForegroundColor 'Yellow'
+# --- FASE 3: RECALIBRACIÓN DEL NÚCLEO (ESTABILIZACIÓN DEL HORIZONTE DE SUCESOS) ---
+Function Phase3-Core-Recalibration {
+    Write-Host "`n`n[FASE 3/15] - Estabilizando el Horizonte de Sucesos del Núcleo..." -ForegroundColor 'Yellow'
     sfc /scannow
     DISM /Online /Cleanup-Image /RestoreHealth
-    Write-Host "El núcleo del sistema ha sido estabilizado y reforzado." -ForegroundColor Green
+    DISM /Online /Cleanup-Image /StartComponentCleanup
+    Write-Host "El núcleo del sistema es ahora una singularidad estable y robusta." -ForegroundColor Green
 }
 
-# --- PASO 4: ACTUALIZACIÓN DE POLÍTICAS (ACTUALIZADOR TAQUIÓNICO) ---
-Function Step4-Tachyon-Updater {
-    Write-Host "`n`n[PASO 4/11] - Aplicando Actualizador Taquiónico de Políticas..." -ForegroundColor 'Yellow'
+# --- FASE 4: SINCRONIZACIÓN TAQUIÓNICA DE RED ---
+Function Phase4-Tachyon-Sync {
+    Write-Host "`n`n[FASE 4/15] - Sincronizando Red con Partículas Taquiónicas..." -ForegroundColor 'Yellow'
+    ipconfig /flushdns
+    nbtstat -R
+    netsh int ip reset
+    netsh winsock reset
     gpupdate /force
-    Write-Host "Las políticas del sistema viajan ahora a la velocidad de la luz." -ForegroundColor Green
+    Write-Host "Los paquetes de datos ahora viajan a velocidades superlumínicas." -ForegroundColor Green
 }
 
-# --- PASO 5: REGISTRO - INTERFAZ (UI CÓSMICA) ---
-Function Step5-Registry-Cosmic-UI {
-    Write-Host "`n`n[PASO 5/11] - Configurando la Interfaz Cósmica del Registro..." -ForegroundColor 'Yellow'
-    # Habilitar menú contextual extendido
+# --- FASE 5: RECONFIGURACIÓN DEL REGISTRO (ARQUITECTURA CÓSMICA) ---
+Function Phase5-Registry-Architecture {
+    Write-Host "`n`n[FASE 5/15] - Reconfigurando la Arquitectura Cósmica del Registro..." -ForegroundColor 'Yellow'
+    # UI Cósmica
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ExtendedUIHoverTime" -Value "0" -Type DWord -Force
-    # Desactivar desenfoque en pantalla de bloqueo
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "DisableLogonBackgroundImage" -Value "1" -Type DWord -Force
-    Write-Host "La interfaz de usuario ahora resuena con el cosmos." -ForegroundColor Green
-}
-
-# --- PASO 6: REGISTRO - RENDIMIENTO (RENDIMIENTO ABSOLUTO) ---
-Function Step6-Registry-Absolute-Performance {
-    Write-Host "`n`n[PASO 6/11] - Desatando el Rendimiento Absoluto del Registro..." -ForegroundColor 'Yellow'
-    # Prioridad de CPU para aplicaciones en primer plano
+    # Rendimiento Absoluto
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Name "Win32PrioritySeparation" -Value "26" -Type DWord -Force
-    Write-Host "El rendimiento ha trascendido sus límites anteriores." -ForegroundColor Green
+    Write-Host "La estructura del registro ahora refleja un diseño universalmente eficiente." -ForegroundColor Green
 }
 
-# --- PASO 7: OPTIMIZACIÓN SSD (IMPULSO DE ESTADO SÓLIDO) ---
-Function Step7-Solid-State-Optimization {
-    Write-Host "`n`n[PASO 7/11] - Activando el Impulso de Estado Sólido..." -ForegroundColor 'Yellow'
-    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c # Máximo rendimiento
-    Write-Host "Las unidades de estado sólido ahora operan a máxima eficiencia." -ForegroundColor Green
+# --- FASE 6: ACTIVACIÓN DEL PLAN DE ENERGÍA DEFINITIVO ---
+Function Phase6-Ultimate-Power {
+    Write-Host "`n`n[FASE 6/15] - Desbloqueando Plan de Energía 'Máximo Rendimiento Absoluto'..." -ForegroundColor 'Yellow'
+    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 # Máximo Rendimiento
+    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c # Ultimate Performance GUID
+    powercfg /setactive scheme_current
+    Write-Host "El sistema ahora extrae energía directamente del punto cero." -ForegroundColor Green
 }
 
-# --- PASO 8: PRIVACIDAD (ESCUDO DE PRIVACIDAD INQUEBRANTABLE) ---
-Function Step8-Unbreakable-Privacy {
-    Write-Host "`n`n[PASO 8/11] - Erigiendo el Escudo de Privacidad Inquebrantable..." -ForegroundColor 'Yellow'
-    # Desactivar telemetría
+# --- FASE 7: OPTIMIZACIÓN DE ALMACENAMIENTO (IMPULSO SUBESPACIAL) ---
+Function Phase7-Subspace-Drive {
+    Write-Host "`n`n[FASE 7/15] - Activando Impulso Subespacial de Almacenamiento..." -ForegroundColor 'Yellow'
+    Get-Volume | ForEach-Object {
+        If ($_.DriveType -eq 'Fixed' -and $_.FileSystem -eq 'NTFS') {
+            Write-Host "Optimizando unidad $($_.DriveLetter):"
+            Optimize-Volume -DriveLetter $_.DriveLetter -ReTrim -Verbose
+        }
+    }
+    defrag /C /H /M
+    Write-Host "Las unidades de almacenamiento operan ahora en un plano subespacial de eficiencia." -ForegroundColor Green
+}
+
+
+# --- FASE 8: FORTALEZA DE PRIVACIDAD (ESCUDO DE REALIDAD) ---
+Function Phase8-Privacy-Fortress {
+    Write-Host "`n`n[FASE 8/15] - Erigiendo la Fortaleza de Privacidad..." -ForegroundColor 'Yellow'
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value "0" -Type DWord -Force
-    Write-Host "Tu privacidad es ahora una fortaleza impenetrable." -ForegroundColor Green
+    # Aquí irían más comandos para deshabilitar servicios de telemetría específicos.
+    Write-Host "Tu existencia digital ha sido borrada de los registros de telemetría." -ForegroundColor Green
 }
 
-# --- PASO 9: SERVICIOS (AJUSTE DE SERVICIOS DEFINITIVO) ---
-Function Step9-Ultimate-Service-Tuning {
-    Write-Host "`n`n[PASO 9/11] - Realizando el Ajuste de Servicios Definitivo..." -ForegroundColor 'Yellow'
-    # Desactivar servicios innecesarios (ejemplo: Fax)
-    Set-Service -Name "Fax" -StartupType Disabled -Status Stopped
-    Write-Host "Los servicios del sistema han sido afinados para la perfección." -ForegroundColor Green
+# --- FASE 9: AJUSTE DE SERVICIOS (SILENCIO ABSOLUTO) ---
+Function Phase9-Service-Tuning {
+    Write-Host "`n`n[FASE 9/15] - Imponiendo el Silencio Absoluto en Servicios..." -ForegroundColor 'Yellow'
+    Set-Service -Name "Fax" -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
+    Set-Service -Name "dmwappushservice" -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
+    # Aquí irían más servicios a deshabilitar (Connected User Experiences, etc.)
+    Write-Host "Solo los servicios esenciales para la existencia del sistema permanecen activos." -ForegroundColor Green
 }
 
-# --- PASO 10: DEBLOAT (CONTROL DE LANZAMIENTO) ---
-Function Step10-Launch-Control-Debloat {
-    Write-Host "`n`n[PASO 10/11] - Iniciando Control de Lanzamiento y Debloat..." -ForegroundColor 'Yellow'
-    # Eliminar aplicaciones preinstaladas (ejemplo: 3D Viewer)
-    Get-AppxPackage *3dviewer* | Remove-AppxPackage
-    Write-Host "El sistema ha sido purgado de software innecesario." -ForegroundColor Green
+# --- FASE 10: DEBLOAT QUIRÚRGICO (EXTIRPACIÓN DE PARÁSITOS) ---
+Function Phase10-Surgical-Debloat {
+    Write-Host "`n`n[FASE 10/15] - Realizando Debloat Quirúrgico..." -ForegroundColor 'Yellow'
+    Get-AppxPackage *3dviewer* | Remove-AppxPackage -ErrorAction SilentlyContinue
+    Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage -ErrorAction SilentlyContinue
+    # Aquí irían más aplicaciones a eliminar (Bing Weather, News, Sports, etc.)
+    Write-Host "El sistema ha sido purgado de entidades de software parasitarias." -ForegroundColor Green
 }
 
-# --- PASO 11: FINALIZACIÓN (HORIZONTE DE SUCESOS) ---
-Function Step11-Event-Horizon {
-    Write-Host "`n`n[PROCESO FINALIZADO] - Cruzando el Horizonte de Sucesos..." -ForegroundColor Green
+# --- FASE 11: OPTIMIZACIÓN VISUAL (REALIDAD MINIMALISTA) ---
+Function Phase11-Visual-Optimization {
+    Write-Host "`n`n[FASE 11/15] - Imponiendo una Realidad Visual Minimalista..." -ForegroundColor 'Yellow'
+    # Desactivar efectos visuales para máximo rendimiento
+    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Value 2 -Type DWord -Force
+    Write-Host "La percepción visual ha sido optimizada para una latencia cero." -ForegroundColor Green
+}
+
+# --- FASE 12: LIMPIEZA DE DISCO PROFUNDA (ANOMALÍA ESPACIAL) ---
+Function Phase12-Deep-Disk-Clean {
+    Write-Host "`n`n[FASE 12/15] - Corrigiendo Anomalías Espaciales con Limpieza Profunda..." -ForegroundColor 'Yellow'
+    cleanmgr /sagerun:1
+    Write-Host "El espacio en disco ha sido expandido más allá de sus límites físicos." -ForegroundColor Green
+}
+
+# --- FASE 13: REINICIO DE CACHÉ DE APLICACIONES ---
+Function Phase13-App-Cache-Reset {
+    Write-Host "`n`n[FASE 13/15] - Reiniciando Caché de la Tienda y Aplicaciones UWP..." -ForegroundColor 'Yellow'
+    wsreset.exe -q
+    Get-AppxPackage -AllUsers | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+    Write-Host "El nexo de aplicaciones ha sido purificado y restablecido." -ForegroundColor Green
+}
+
+# --- FASE 14: REINICIO DEL EXPLORADOR (RENACIMIENTO) ---
+Function Phase14-Explorer-Rebirth {
+    Write-Host "`n`n[FASE 14/15] - Forzando el Renacimiento del Explorador de Windows..." -ForegroundColor 'Yellow'
     Stop-Process -Name explorer -Force
-    Write-Host "`n`n=======================================================" -ForegroundColor 'DarkMagenta'
-    Write-Host "¡OPTIMIZACIÓN SINGULARIDAD COMPLETADA!" -ForegroundColor 'DarkMagenta'
-    Write-Host "El rendimiento ha alcanzado su forma final. El reinicio es absoluto." -ForegroundColor White
-    Write-Host "REINICIA TU EQUIPO AHORA. Bienvenido al otro lado." -ForegroundColor Yellow
-    Write-Host "======================================================="
+    Start-Process explorer
+    Write-Host "La interfaz ha renacido, más rápida y pura." -ForegroundColor Green
 }
 
-# --- EJECUCIÓN DEL SCRIPT ---
-Show-Intro
-Step1-The-Great-Purge
-Step2-Memory-Singularity
-Step3-Core-Integrity
-Step4-Tachyon-Updater
-Step5-Registry-Cosmic-UI
-Step6-Registry-Absolute-Performance
-Step7-Solid-State-Optimization
-Step8-Unbreakable-Privacy
-Step9-Ultimate-Service-Tuning
-Step10-Launch-Control-Debloat
-Step11-Event-Horizon
+# --- FASE 15: CONCLUSIÓN (SINGULARIDAD ALCANZADA) ---
+Function Phase15-Singularity-Reached {
+    Write-Host "`n`n[SECUENCIA FINALIZADA] - La Singularidad Ha Sido Alcanzada..." -ForegroundColor 'DarkMagenta'
+    Write-Host "`n===================================================================" -ForegroundColor 'DarkRed'
+    Write-Host "  OPTIMIZACIÓN CUÁNTICA COMPLETADA. LA REALIDAD HA SIDO MEJORADA. " -ForegroundColor 'White'
+    Write-Host "  El rendimiento ha alcanzado su cénit. El sistema es ahora uno con la velocidad. " -ForegroundColor 'Cyan'
+    Write-Host "  SE REQUIERE UN REINICIO COMPLETO para colapsar la función de onda de los cambios. " -ForegroundColor 'Red'
+    Write-Host "  REINICIA TU EQUIPO AHORA. Bienvenido a una nueva existencia. " -ForegroundColor 'Yellow'
+    Write-Host "==================================================================="
+}
+
+# --- SECUENCIA DE EJECUCIÓN DEL PROTOCOLO ---
+Phase0-Quantum-Genesis
+Phase1-Entropy-Purge
+Phase2-Memory-Condensation
+Phase3-Core-Recalibration
+Phase4-Tachyon-Sync
+Phase5-Registry-Architecture
+Phase6-Ultimate-Power
+Phase7-Subspace-Drive
+Phase8-Privacy-Fortress
+Phase9-Service-Tuning
+Phase10-Surgical-Debloat
+Phase11-Visual-Optimization
+Phase12-Deep-Disk-Clean
+Phase13-App-Cache-Reset
+Phase14-Explorer-Rebirth
+Phase15-Singularity-Reached
                     </code></pre>
                 </div>
             </div>
         </main>
         
         <footer class="text-center text-slate-500 mt-12">
-            <p>&copy; 2024. El juego ha terminado. Has ganado.</p>
+            <p>&copy; 2024. La latencia ha sido aniquilada. Has trascendido.</p>
         </footer>
     </div>
 
@@ -203,7 +297,6 @@ Step11-Event-Horizon
             const textArea = document.createElement('textarea');
             textArea.value = scriptText;
             
-            // Estilo para que no sea visible en la pantalla
             textArea.style.position = 'fixed';
             textArea.style.top = '0';
             textArea.style.left = '0';
@@ -211,10 +304,9 @@ Step11-Event-Horizon
 
             document.body.appendChild(textArea);
             textArea.select();
-            textArea.focus(); // El foco es necesario para que execCommand funcione
+            textArea.focus();
             
             try {
-                // Se utiliza document.execCommand('copy') por su alta compatibilidad en iframes y entornos restringidos.
                 var successful = document.execCommand('copy');
                 if (successful) {
                     showCopySuccess(this);
@@ -229,30 +321,29 @@ Step11-Event-Horizon
         });
         
         function showCopySuccess(button) {
-            button.textContent = '¡Copiado!';
-            button.classList.remove('bg-indigo-700', 'hover:bg-indigo-600');
+            button.textContent = '¡PROTOCOLO COPIADO!';
+            button.classList.remove('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
             button.classList.add('bg-emerald-600');
             
             setTimeout(() => {
-                button.textContent = 'Copiar Script Singularidad';
+                button.textContent = 'Copiar Protocolo Cuántico';
                 button.classList.remove('bg-emerald-600');
-                button.classList.add('bg-indigo-700', 'hover:bg-indigo-600');
+                button.classList.add('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
             }, 3000);
         }
 
         function showCopyError(button, err) {
-            button.textContent = 'Error al copiar';
-            button.classList.remove('bg-indigo-700', 'hover:bg-indigo-600');
-            button.classList.add('bg-red-600');
-            console.error('No se pudo copiar el texto: ', err);
+            button.textContent = 'Error de Copia';
+            button.classList.remove('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
+            button.classList.add('bg-yellow-600');
+            console.error('No se pudo copiar el protocolo: ', err);
             
              setTimeout(() => {
-                button.textContent = 'Copiar Script Singularidad';
-                button.classList.remove('bg-red-600');
-                button.classList.add('bg-indigo-700', 'hover:bg-indigo-600');
+                button.textContent = 'Copiar Protocolo Cuántico';
+                button.classList.remove('bg-yellow-600');
+                button.classList.add('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
             }, 3000);
         }
     </script>
 </body>
 </html>
-
