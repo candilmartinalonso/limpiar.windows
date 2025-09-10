@@ -211,21 +211,16 @@ Step11-Event-Horizon
 
             document.body.appendChild(textArea);
             textArea.select();
+            textArea.focus(); // El foco es necesario para que execCommand funcione
             
             try {
-                // Utiliza el API del portapapeles si está disponible para mayor seguridad
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(scriptText).then(() => {
-                        showCopySuccess(this);
-                    }).catch(err => {
-                        showCopyError(this, err);
-                    });
-                } else {
-                    // Método de respaldo para navegadores más antiguos
-                    document.execCommand('copy');
+                // Se utiliza document.execCommand('copy') por su alta compatibilidad en iframes y entornos restringidos.
+                var successful = document.execCommand('copy');
+                if (successful) {
                     showCopySuccess(this);
+                } else {
+                    showCopyError(this, new Error('El comando de copiado no tuvo éxito.'));
                 }
-
             } catch (err) {
                 showCopyError(this, err);
             } finally {
@@ -260,3 +255,4 @@ Step11-Event-Horizon
     </script>
 </body>
 </html>
+
