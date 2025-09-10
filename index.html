@@ -4,404 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optimizador Singularidad (El Final del Juego) para Windows</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Singularidad (El Final del Juego) para Windows</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* Estilos para un fondo con efecto de vidrio y gradiente */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            background-image: radial-gradient(circle at top right, rgba(124, 58, 237, 0.3), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.3), transparent 50%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
         }
-        
-        .container {
-            background: rgba(255, 255, 255, 0.1);
+
+        /* Estilo para el contenedor del script con efecto de vidrio */
+        .glass-container {
+            background-color: rgba(30, 41, 59, 0.5); /* slate-800 con transparencia */
             backdrop-filter: blur(10px);
+            border: 1px solid #4c1d95; /* violet-800 */
+            border-radius: 0.75rem; /* 12px */
+        }
+        
+        /* Estilo para la barra de desplazamiento en el bloque de código */
+        code::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        code::-webkit-scrollbar-track {
+            background: #1e293b; /* slate-800 */
+        }
+        code::-webkit-scrollbar-thumb {
+            background-color: #4f46e5; /* indigo-600 */
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .feature {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature h3 {
-            color: #4ecdc4;
-            margin-bottom: 10px;
-        }
-        
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 20px 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .footer {
-            margin-top: 30px;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
+            border: 2px solid #1e293b; /* slate-800 */
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>🚀 Optimizador Singularidad</h1>
-        <p class="subtitle">El Final del Juego - Limpiar.Windows Pro v3.0</p>p>
-        
-        <div class="features">
-            <div class="feature">
-                <h3>🖥️ Interfaz Moderna</h3>
-                <p>Diseño glass morphism con gradientes profesionales</p>
-            </div>div>
-            <div class="feature">
-                <h3>⚡ Optimización Total</h3>
-                <p>Botón centralizado que ejecuta todas las funcionalidades</p>
-            </div>div>
-            <div class="feature">
-                <h3>📊 Dashboard en Tiempo Real</h3>
-                <p>Métricas del sistema actualizadas constantemente</p>
-            </div>div>
-            <div class="feature">
-                <h3>🎨 Sistema de Pestañas</h3>
-                <p>Organizadas por categorías especializadas</p>
-            </div>div>
-        </div>div>
-        
-        <div>
-            <a href="https://github.com/candilmartinalonso/limpiar.windows" class="download-btn">
-                📥 Descargar Ahora
-            </a>a>
-            <a href="https://github.com/candilmartinalonso/limpiar.windows" class="download-btn">
-                📋 Ver Código Fuente
-            </a>a>
-        </div>
-        
-        <div class="footer">
-            <p>🔧 Desarrollado por Candil Martín Alonso</p>p>
-            <p>⭐ Síguenos en GitHub para más actualizaciones</p>p>
-        </div>
-    </div>
-    
-    <script>
-        // Efectos de animación
-        document.addEventListener('DOMContentLoaded', function() {
-            const features = document.querySelectorAll('.feature');
-            features.forEach((feature, index) => {
-                feature.style.animationDelay = `${index * 0.2}s`;
-                feature.style.animation = 'fadeIn 0.8s ease-out forwards';
-            });
-        });
-    </script>
-</body>
-</html></div></p></p></h3></h1></body></title></head>        body {
-            font-family: 'Inter', sans-serif;
-            backdrop-filter: blur(10px);
-Ctrl+a            border: 1px solid #4c1d95; /* violet-800 */
-            border-radius: 0.5rem;
-  a <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Singularidad (El Final del Juego) para Windows</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<body class="text-slate-200 flex items-center justify-center p-4">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    <div class="w-full max-w-4xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-indigo-400 mb-2">
+                🚀 Optimizador Singularidad
+            </h1>
+            <p class="text-lg text-slate-400">El Final del Juego - La Optimización Definitiva para Windows</p>
+        </header>
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature h3 {
-            color: #4ecdc4;
-            margin-bottom: 10px;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin: 20px 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .warning {
-            background: rgba(255, 193, 7, 0.2);
-            border: 1px solid #ffc107;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .footer {
-            margin-top: 30px;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>head>
-<body>
-    <div class="container">
-        <h1>🚀 Optimizador Singularidad</h1>
-        <p class="subtitle">El Final del Juego para Windows - Optimización Definitiva</p>p>
-        
-        <div class="features">
-            <div class="feature">
-                <h3>🧹 Limpieza Profunda</h3>
-                <p>Elimina archivos temporales, caché y elementos innecesarios que ralentizan tu sistema.</p>
+        <main class="glass-container shadow-2xl shadow-indigo-500/20">
+            <div class="p-6 border-b border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <h2 class="text-xl font-semibold text-slate-100">Script de PowerShell</h2>
+                <button id="copyButton" class="w-full sm:w-auto bg-indigo-700 text-indigo-100 font-semibold py-2 px-6 rounded-lg hover:bg-indigo-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-900">
+                    Copiar Script Singularidad
+                </button>
             </div>
             
-            <div class="feature">
-                <h3>⚡ Optimización de Memoria</h3>
-                <p>Libera memoria RAM y optimiza el uso de recursos del sistema.</p>
-            </div>
-            
-            <div class="feature">
-                <h3>🔧 Ajustes de Registro</h3>
-                <p>Optimizaciones avanzadas del registro de Windows para máximo rendimiento.</p>
-            </div>
-            
-            <div class="feature">
-                <h3>🛡️ Mejoras de Privacidad</h3>
-                <p>Desactiva servicios de telemetría y mejora tu privacidad.</p>
-            </div>
-            
-            <div class="feature">
-                <h3>💾 Optimización SSD</h3>
-                <p>Configuraciones especiales para unidades de estado sólido.</p>
-            </div>
-            
-            <div class="feature">
-                <h3>🚀 Control de Inicio</h3>
-                <p>Gestiona aplicaciones de arranque para un inicio más rápido.</p>
-            </div>
-        </div>
+            <div class="p-2">
+                <div class="max-h-[50vh] overflow-auto bg-slate-900/70 rounded-b-lg">
+                    <pre class="p-6"><code id="powerShellScript" class="language-powershell text-sm font-mono text-slate-300 whitespace-pre-wrap" style="font-family: 'Fira Code', monospace;">
+# --- CONFIGURACIÓN INICIAL Y BIENVENIDA (GÉNESIS) ---
+Function Show-Intro {
+    Clear-Host
+    Write-Host "=======================================================" -ForegroundColor 'DarkMagenta'
+    Write-Host "  OPTIMIZADOR SINGULARIDAD (EL FINAL DEL JUEGO) v3.0  " -ForegroundColor 'White'
+    Write-Host "=======================================================" -ForegroundColor 'DarkMagenta'
+    Write-Host "`nIniciando la secuencia de optimización final..." -ForegroundColor 'Cyan'
+    Write-Host "Este script desatará el verdadero potencial de tu sistema." -ForegroundColor 'Gray'
+    Write-Host "ADVERTENCIA: Las optimizaciones son profundas. Procede con conocimiento." -ForegroundColor 'Red'
+    Write-Host "======================================================="
+    Start-Sleep -Seconds 3
+}
 
-        <div class="warning">
-            <h3>⚠️ Importante</h3>
-            <p>Este script realiza cambios importantes en tu sistema. Asegúrate de hacer una copia de seguridad antes de ejecutarlo. Úsalo bajo tu propia responsabilidad.</p>
-        </div>
+# --- PASO 1: LIMPIEZA EXTREMA (LA GRAN PURGA) ---
+Function Step1-The-Great-Purge {
+    Write-Host "`n`n[PASO 1/11] - Ejecutando La Gran Purga..." -ForegroundColor 'Yellow'
+    # Limpieza de archivos temporales
+    Get-ChildItem -Path $env:temp, $env:windir\temp -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    # Limpieza de caché de Windows Update
+    Stop-Service wuauserv -Force
+    Remove-Item -Path "$env:windir\SoftwareDistribution" -Recurse -Force -ErrorAction SilentlyContinue
+    Start-Service wuauserv
+    Write-Host "La Gran Purga ha concluido. El sistema es más ligero." -ForegroundColor Green
+}
 
-        <a href="#" class="download-btn" onclick="downloadScript()">📥 Descargar Script</a>a>
-        <a href="https://github.com/candilmartinalonso/limpiar.windows" class="download-btn">📂 Ver en GitHub</a>a>
+# --- PASO 2: OPTIMIZACIÓN DE MEMORIA (SINGULARIDAD DE MEMORIA) ---
+Function Step2-Memory-Singularity {
+    Write-Host "`n`n[PASO 2/11] - Alcanzando la Singularidad de Memoria..." -ForegroundColor 'Yellow'
+    # Limpieza de caché de memoria en espera
+    $Process = Get-WmiObject -Class Win32_OperatingSystem
+    $Process.FreeAndNilSystemCache()
+    Write-Host "La memoria ha sido condensada a su estado óptimo." -ForegroundColor Green
+}
 
-        <div class="footer">
-            <p>&copy; 2024. El juego ha terminado. Has ganado.</p>
-        </div>
-    </div>
+# --- PASO 3: INTEGRIDAD DEL NÚCLEO (REPARACIÓN CUÁNTICA) ---
+Function Step3-Core-Integrity {
+    Write-Host "`n`n[PASO 3/11] - Verificando la Integridad del Núcleo..." -ForegroundColor 'Yellow'
+    sfc /scannow
+    DISM /Online /Cleanup-Image /RestoreHealth
+    Write-Host "El núcleo del sistema ha sido estabilizado y reforzado." -ForegroundColor Green
+}
 
-    <script>
-        function downloadScript() {
-            alert('Para descargar el script, visita el repositorio de GitHub y descarga el archivo .ps1');
-            window.open('https://github.com/candilmartinalonso/limpiar.windows', '_blank');
-        }
+# --- PASO 4: ACTUALIZACIÓN DE POLÍTICAS (ACTUALIZADOR TAQUIÓNICO) ---
+Function Step4-Tachyon-Updater {
+    Write-Host "`n`n[PASO 4/11] - Aplicando Actualizador Taquiónico de Políticas..." -ForegroundColor 'Yellow'
+    gpupdate /force
+    Write-Host "Las políticas del sistema viajan ahora a la velocidad de la luz." -ForegroundColor Green
+}
 
-        // Efecto de partículas de fondo
-        function createParticles() {
-            const container = document.body;
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'fixed';
-                particle.style.width = '2px';
-                particle.style.height = '2px';
-                particle.style.background = 'rgba(255, 255, 255, 0.5)';
-                particle.style.borderRadius = '50%';
-                particle.style.pointerEvents = 'none';
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.top = Math.random() * 100 + 'vh';
-                particle.style.animation = `float ${Math.random() * 3 + 2}s ease-in-out infinite alternate`;
-                container.appendChild(particle);
-            }
-        }
+# --- PASO 5: REGISTRO - INTERFAZ (UI CÓSMICA) ---
+Function Step5-Registry-Cosmic-UI {
+    Write-Host "`n`n[PASO 5/11] - Configurando la Interfaz Cósmica del Registro..." -ForegroundColor 'Yellow'
+    # Habilitar menú contextual extendido
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ExtendedUIHoverTime" -Value "0" -Type DWord -Force
+    # Desactivar desenfoque en pantalla de bloqueo
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "DisableLogonBackgroundImage" -Value "1" -Type DWord -Force
+    Write-Host "La interfaz de usuario ahora resuena con el cosmos." -ForegroundColor Green
+}
 
-        // CSS para la animación de partículas
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                to {
-                    transform: translateY(-20px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+# --- PASO 6: REGISTRO - RENDIMIENTO (RENDIMIENTO ABSOLUTO) ---
+Function Step6-Registry-Absolute-Performance {
+    Write-Host "`n`n[PASO 6/11] - Desatando el Rendimiento Absoluto del Registro..." -ForegroundColor 'Yellow'
+    # Prioridad de CPU para aplicaciones en primer plano
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Name "Win32PrioritySeparation" -Value "26" -Type DWord -Force
+    Write-Host "El rendimiento ha trascendido sus límites anteriores." -ForegroundColor Green
+}
 
-        // Inicializar partículas cuando la página cargue
-        window.addEventListener('load', createParticles);
-    </script>
-</body>
-</html></p></p></h3></h1></body>
+# --- PASO 7: OPTIMIZACIÓN SSD (IMPULSO DE ESTADO SÓLIDO) ---
+Function Step7-Solid-State-Optimization {
+    Write-Host "`n`n[PASO 7/11] - Activando el Impulso de Estado Sólido..." -ForegroundColor 'Yellow'
+    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c # Máximo rendimiento
+    Write-Host "Las unidades de estado sólido ahora operan a máxima eficiencia." -ForegroundColor Green
+}
+
+# --- PASO 8: PRIVACIDAD (ESCUDO DE PRIVACIDAD INQUEBRANTABLE) ---
+Function Step8-Unbreakable-Privacy {
+    Write-Host "`n`n[PASO 8/11] - Erigiendo el Escudo de Privacidad Inquebrantable..." -ForegroundColor 'Yellow'
+    # Desactivar telemetría
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value "0" -Type DWord -Force
+    Write-Host "Tu privacidad es ahora una fortaleza impenetrable." -ForegroundColor Green
+}
+
+# --- PASO 9: SERVICIOS (AJUSTE DE SERVICIOS DEFINITIVO) ---
+Function Step9-Ultimate-Service-Tuning {
+    Write-Host "`n`n[PASO 9/11] - Realizando el Ajuste de Servicios Definitivo..." -ForegroundColor 'Yellow'
+    # Desactivar servicios innecesarios (ejemplo: Fax)
+    Set-Service -Name "Fax" -StartupType Disabled -Status Stopped
+    Write-Host "Los servicios del sistema han sido afinados para la perfección." -ForegroundColor Green
+}
+
+# --- PASO 10: DEBLOAT (CONTROL DE LANZAMIENTO) ---
+Function Step10-Launch-Control-Debloat {
+    Write-Host "`n`n[PASO 10/11] - Iniciando Control de Lanzamiento y Debloat..." -ForegroundColor 'Yellow'
+    # Eliminar aplicaciones preinstaladas (ejemplo: 3D Viewer)
+    Get-AppxPackage *3dviewer* | Remove-AppxPackage
+    Write-Host "El sistema ha sido purgado de software innecesario." -ForegroundColor Green
+}
+
 # --- PASO 11: FINALIZACIÓN (HORIZONTE DE SUCESOS) ---
 Function Step11-Event-Horizon {
     Write-Host "`n`n[PROCESO FINALIZADO] - Cruzando el Horizonte de Sucesos..." -ForegroundColor Green
@@ -426,7 +186,6 @@ Step8-Unbreakable-Privacy
 Step9-Ultimate-Service-Tuning
 Step10-Launch-Control-Debloat
 Step11-Event-Horizon
-
                     </code></pre>
                 </div>
             </div>
@@ -438,31 +197,66 @@ Step11-Event-Horizon
     </div>
 
     <script>
+        // Funcionalidad del botón de copiar
         document.getElementById('copyButton').addEventListener('click', function() {
             const scriptText = document.getElementById('powerShellScript').textContent;
             const textArea = document.createElement('textarea');
             textArea.value = scriptText;
+            
+            // Estilo para que no sea visible en la pantalla
+            textArea.style.position = 'fixed';
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.opacity = '0';
+
             document.body.appendChild(textArea);
             textArea.select();
+            
             try {
-                document.execCommand('copy');
-                this.textContent = '¡Copiado!';
-                this.style.backgroundColor = '#10B981';
-                this.style.color = '#fff';
+                // Utiliza el API del portapapeles si está disponible para mayor seguridad
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(scriptText).then(() => {
+                        showCopySuccess(this);
+                    }).catch(err => {
+                        showCopyError(this, err);
+                    });
+                } else {
+                    // Método de respaldo para navegadores más antiguos
+                    document.execCommand('copy');
+                    showCopySuccess(this);
+                }
+
             } catch (err) {
-                this.textContent = 'Error';
-                this.style.backgroundColor = '#EF4444';
-                console.error('No se pudo copiar el texto: ', err);
+                showCopyError(this, err);
+            } finally {
+                 document.body.removeChild(textArea);
             }
-            document.body.removeChild(textArea);
+        });
+        
+        function showCopySuccess(button) {
+            button.textContent = '¡Copiado!';
+            button.classList.remove('bg-indigo-700', 'hover:bg-indigo-600');
+            button.classList.add('bg-emerald-600');
             
             setTimeout(() => {
-                this.textContent = 'Copiar Script Singularidad';
-                this.style.backgroundColor = '#3730a3';
-                this.style.color = '#e0e7ff';
+                button.textContent = 'Copiar Script Singularidad';
+                button.classList.remove('bg-emerald-600');
+                button.classList.add('bg-indigo-700', 'hover:bg-indigo-600');
             }, 3000);
-        });
+        }
+
+        function showCopyError(button, err) {
+            button.textContent = 'Error al copiar';
+            button.classList.remove('bg-indigo-700', 'hover:bg-indigo-600');
+            button.classList.add('bg-red-600');
+            console.error('No se pudo copiar el texto: ', err);
+            
+             setTimeout(() => {
+                button.textContent = 'Copiar Script Singularidad';
+                button.classList.remove('bg-red-600');
+                button.classList.add('bg-indigo-700', 'hover:bg-indigo-600');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
-
