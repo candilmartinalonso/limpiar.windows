@@ -8,10 +8,183 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Singularidad (El Final del Juego) para Windows</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature h3 {
+            color: #4ecdc4;
+            margin-bottom: 10px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Optimizador Singularidad</h1>
+        <p class="subtitle">El Final del Juego - Limpiar.Windows Pro v3.0</p>p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>🖥️ Interfaz Moderna</h3>
+                <p>Diseño glass morphism con gradientes profesionales</p>
+            </div>div>
+            <div class="feature">
+                <h3>⚡ Optimización Total</h3>
+                <p>Botón centralizado que ejecuta todas las funcionalidades</p>
+            </div>div>
+            <div class="feature">
+                <h3>📊 Dashboard en Tiempo Real</h3>
+                <p>Métricas del sistema actualizadas constantemente</p>
+            </div>div>
+            <div class="feature">
+                <h3>🎨 Sistema de Pestañas</h3>
+                <p>Organizadas por categorías especializadas</p>
+            </div>div>
+        </div>div>
+        
+        <div>
+            <a href="https://github.com/candilmartinalonso/limpiar.windows" class="download-btn">
+                📥 Descargar Ahora
+            </a>a>
+            <a href="https://github.com/candilmartinalonso/limpiar.windows" class="download-btn">
+                📋 Ver Código Fuente
+            </a>a>
+        </div>
+        
+        <div class="footer">
+            <p>🔧 Desarrollado por Candil Martín Alonso</p>p>
+            <p>⭐ Síguenos en GitHub para más actualizaciones</p>p>
+        </div>
+    </div>
+    
+    <script>
+        // Efectos de animación
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                feature.style.animationDelay = `${index * 0.2}s`;
+                feature.style.animation = 'fadeIn 0.8s ease-out forwards';
+            });
+        });
+    </script>
+</body>
+</html></div></p></p></h3></h1></body></title></head>        body {
             font-family: 'Inter', sans-serif;
-            background: #0c0a09 url('https://www.transparenttextures.com/patterns/subtle-prism.png');
             backdrop-filter: blur(10px);
 Ctrl+a            border: 1px solid #4c1d95; /* violet-800 */
             border-radius: 0.5rem;
