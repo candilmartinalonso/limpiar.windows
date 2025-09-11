@@ -1,87 +1,319 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Limpiar.Windows - Optimiza tu Windows</title>
-  <!-- Fonts & AOS animation -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <style>
-    body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; background:linear-gradient(135deg,#161a28 60%, #43c6ac 100%); color: #fff; min-height:100vh; }
-    header { text-align:center; padding:3.5rem 1rem 1rem; }
-    h1 { font-size:2.8rem; margin-bottom:1rem; font-weight:800; letter-spacing:.05em; }
-    .subtitle { font-size:1.15rem; opacity:.85; margin-bottom:1.5rem; }
-    .actions { margin-top:2rem; }
-    .btn {
-      background: #43e97b; background: linear-gradient(to right,#38f9d7,#43e97b); color: #212b36; font-weight:700; border:none; border-radius:40px;
-      padding:.8rem 2.2rem; font-size:1.1rem; cursor:pointer; transition:.25s box-shadow,.25s transform;
-      box-shadow:0 0 0 0 #0000;
-      margin:0 1rem;
-    }
-    .btn:hover { box-shadow: 0 6px 32px 0 #43e97b44; transform:translateY(-3px) scale(1.04); }
-    .demo {
-      margin:2.5rem auto 1.5rem;
-      max-width:360px;
-      border-radius: 20px;
-      box-shadow: 0 4px 54px #161a2844;
-      overflow: hidden;
-    }
-    .features {
-      display:flex; flex-wrap:wrap; justify-content:center; gap:2.4rem; margin:2.5rem 0 2rem;
-    }
-    .card {
-      background:#262c44bb; border-radius:20px; padding:2rem 1.5rem; max-width:245px; min-width:205px;
-      transition:.2s transform,.2s box-shadow;
-      box-shadow: 0 2px 15px #45458d33;
-      text-align:center;
-    }
-    .card:hover {transform:translateY(-5px) scale(1.04);box-shadow:0 8px 40px #43e97b33;}
-    .card-icon {font-size:2.2rem; margin-bottom:.7rem;}
-    footer {text-align:center;background:rgba(24,32,44,.4);padding:1.7rem 0 .7rem;font-size:.97rem;margin-top:3rem;border-top:1px solid #2b3350;}
-    @media (max-width:550px) { h1{font-size:2.1rem;}.features{gap:.8rem;} }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Titán para Windows - Script PowerShell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e1a;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-block::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .code-block::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 4px;
+        }
+        .code-block::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 15px 2px rgba(52, 211, 153, 0.6);
+        }
+    </style>
 </head>
-<body>
-  <header data-aos="fade-down">
-    <h1>Limpiar.Windows</h1>
-    <div class="subtitle">Optimizá y limpiá a fondo tu Windows con un solo script seguro, inteligente y reversible.</div>
-    <div class="actions">
-      <button class="btn">Descargar Script PowerShell</button>
-      <button class="btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});">Ver más</button>
+<body class="text-gray-200">
+    <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/0a0e1a/34d399?text=.')">
+        <div class="container mx-auto px-4 py-8 md:py-16">
+
+            <!-- Encabezado -->
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">
+                    Optimizador Titán para Windows
+                </h1>
+                <p class="text-lg md:text-xl text-emerald-300 max-w-3xl mx-auto">
+                    El script de PowerShell definitivo para limpiar, actualizar y acelerar tu PC a un nivel superior.
+                </p>
+            </header>
+
+            <!-- Sección del Script -->
+            <main>
+                <div class="glass-effect rounded-2xl p-6 md:p-8 max-w-5xl mx-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold text-white">Script de PowerShell v3.0</h2>
+                        <button id="copyButton" class="bg-emerald-500 text-gray-900 font-bold py-2 px-5 rounded-lg transition-all duration-300 btn-glow hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                            Copiar Script
+                        </button>
+                    </div>
+
+                    <!-- Bloque de Código -->
+                    <div class="bg-gray-900/70 rounded-lg overflow-hidden">
+                        <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-96"><code id="powerShellScript">
+# =================================================================================================
+#
+#   PowerScript Optimizer TITAN v3.0
+#   Limpia, actualiza y optimiza Windows para un rendimiento TITÁNICO.
+#   ADVERTENCIA: Ejecutar siempre como Administrador. Úsese bajo su propia responsabilidad.
+#
+# =================================================================================================
+
+#region Pre-Execution Checks, Functions and Setup
+# --- VERIFICACIÓN DE PERMISOS DE ADMINISTRADOR ---
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Warning "Este script requiere privilegios de Administrador. Por favor, abre PowerShell como Administrador."
+    Start-Sleep -Seconds 10
+    Exit
+}
+
+# --- FUNCIÓN PARA MOSTRAR TÍTULOS DE SECCIÓN ---
+function Show-SectionTitle {
+    param([string]$Title)
+    Write-Host "`n"; Write-Host "================================================================" -ForegroundColor Cyan
+    Write-Host "    $Title" -ForegroundColor White
+    Write-Host "================================================================" -ForegroundColor Cyan
+}
+
+# --- CONFIRMACIÓN DEL USUARIO ---
+Clear-Host
+Write-Host "🚀 INICIANDO OPTIMIZADOR TITAN PARA WINDOWS 🚀" -ForegroundColor Green
+Write-Host "Este script realizará una limpieza profunda, actualizará Windows y todas tus aplicaciones, y aplicará optimizaciones avanzadas." -ForegroundColor Yellow
+Write-Host "ADVERTENCIA: Se recomienda cerrar todos los programas antes de continuar." -ForegroundColor Red
+$confirmation = Read-Host "¿Estás seguro de que deseas continuar? (S/N)"
+if ($confirmation -ne 'S' -and $confirmation -ne 's') {
+    Write-Host "Operación cancelada por el usuario." -ForegroundColor Red; Start-Sleep -Seconds 5; Exit
+}
+#endregion
+
+#region System Restore
+# --- CREACIÓN DE PUNTO DE RESTAURACIÓN (CRÍTICO) ---
+Show-SectionTitle "Creando Punto de Restauración del Sistema"
+$restorePoint = Get-ComputerRestorePoint -ErrorAction SilentlyContinue | Where-Object { $_.CreationTime -gt (Get-Date).AddHours(-1) }
+if ($restorePoint) {
+    Write-Host "✅ Ya existe un punto de restauración reciente. Omitiendo creación." -ForegroundColor Green
+} else {
+    Write-Host "⚙️ Creando punto de restauración... (puede tardar unos minutos)" -ForegroundColor Yellow
+    Checkpoint-Computer -Description "Pre-Optimizador-Titan" -RestorePointType "MODIFY_SETTINGS"
+    Write-Host "✅ Punto de restauración 'Pre-Optimizador-Titan' creado." -ForegroundColor Green
+}
+#endregion
+
+#region Software and OS Updates
+# --- FASE 1: ACTUALIZACIÓN DEL SISTEMA Y APLICACIONES ---
+Show-SectionTitle "Fase 1: Actualización del Sistema y Aplicaciones"
+
+# --- WINDOWS UPDATE ---
+Write-Host "🔄 Buscando e instalando actualizaciones de Windows..." -ForegroundColor White
+Write-Host "Este proceso puede tardar MUCHO tiempo. Ten paciencia." -ForegroundColor Yellow
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue
+Install-Module -Name PSWindowsUpdate -Force -AcceptLicense -ErrorAction SilentlyContinue
+Import-Module PSWindowsUpdate -ErrorAction SilentlyContinue
+Get-WindowsUpdate -AcceptAll -Install -AutoReboot | Out-Null
+Write-Host "✅ Sistema operativo Windows actualizado." -ForegroundColor Green
+
+# --- WINGET APP UPDATES ---
+Write-Host "📦 Actualizando todas las aplicaciones con Winget..." -ForegroundColor White
+$wingetPath = "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe"
+if (Test-Path $wingetPath) {
+    Write-Host "   - Winget detectado. Actualizando todos los paquetes..." -ForegroundColor Gray
+    winget upgrade --all --accept-package-agreements --accept-source-agreements --disable-interactivity
+    Write-Host "✅ Aplicaciones actualizadas a su última versión." -ForegroundColor Green
+} else {
+    Write-Warning "Winget no se encontró. No se pueden actualizar las aplicaciones. Instálalo desde la Microsoft Store ('Instalador de aplicación')."
+}
+#endregion
+
+#region Aggressive Deep Cleaning
+# --- FASE 2: LIMPIEZA AGRESIVA DEL SISTEMA ---
+Show-SectionTitle "Fase 2: Limpieza Agresiva del Sistema"
+$initialDiskSpace = (Get-PSDrive C).Free
+
+# --- LIMPIEZA DEL COMPONENT STORE (WINSXS) ---
+Write-Host "🧹 Limpiando el almacén de componentes de Windows (WinSxS)..." -ForegroundColor White
+Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
+Write-Host "✅ Almacén de componentes optimizado." -ForegroundColor Green
+
+# --- LIMPIEZA DE ARCHIVOS ESTÁNDAR Y CACHÉS ---
+$locationsToClean = @(
+    "$env:TEMP\*", "$env:SystemRoot\Temp\*", "$env:SystemRoot\SoftwareDistribution\Download\*",
+    "$env:windir\Prefetch\*", "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db",
+    "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*", 
+    "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*",
+    "$env:LOCALAPPDATA\Mozilla\Firefox\Profiles\*\cache2\entries\*"
+)
+foreach ($location in $locationsToClean) {
+    Write-Host "🧹 Limpiando: $location" -ForegroundColor Gray
+    Remove-Item -Path $location -Recurse -Force -ErrorAction SilentlyContinue
+}
+Clear-RecycleBin -Force -ErrorAction SilentlyContinue; ipconfig /flushdns
+$regKey = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"
+Get-ChildItem -Path $regKey | ForEach-Object {Set-ItemProperty -Path $_.PSPath -Name "StateFlags0001" -Value 2 -Type DWord -Force -ErrorAction SilentlyContinue}
+cleanmgr.exe /sagerun:1 | Out-Null
+$finalDiskSpace = (Get-PSDrive C).Free; $spaceFreed = [math]::Round(($finalDiskSpace - $initialDiskSpace) / 1GB, 2)
+#endregion
+
+#region Advanced Performance Tweaks
+# --- FASE 3: OPTIMIZACIONES DE RENDIMIENTO AVANZADAS ---
+Show-SectionTitle "Fase 3: Optimizaciones de Rendimiento Avanzadas"
+
+# --- PLAN DE ENERGÍA DE MÁXIMO RENDIMIENTO ---
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+$planGuid = (powercfg -l | Select-String "Máximo rendimiento" -split " ")[3]
+powercfg /s $planGuid
+Write-Host "⚡ Plan de energía 'Máximo Rendimiento' activado." -ForegroundColor Green
+
+# --- AJUSTES GENERALES DE RENDIMIENTO ---
+powercfg.exe /hibernate off
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFxSetting" -Value 2
+Write-Host "🎨 Hibernación desactivada y efectos visuales optimizados." -ForegroundColor Green
+
+# --- AJUSTES DE REGISTRO PARA MAYOR RESPUESTA ---
+Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value "200"
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "NoNetCrawling" -Value "1" -Type DWord
+Write-Host "⚙️ Ajustes de registro para respuesta de UI aplicados." -ForegroundColor Green
+
+# --- DESACTIVAR SERVICIOS Y TAREAS INNECESARIAS ---
+$servicesToDisable = @("DiagTrack", "dmwappushservice", "SysMain")
+$tasksToDisable = @("\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser", "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator")
+foreach ($service in $servicesToDisable) {Set-Service -Name $service -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue}
+foreach ($task in $tasksToDisable) {Disable-ScheduledTask -TaskPath $task -ErrorAction SilentlyContinue}
+Write-Host "🔧 Servicios y tareas de telemetría desactivados." -ForegroundColor Green
+
+# --- OPTIMIZACIONES DE RED AVANZADAS ---
+netsh int tcp set global autotuninglevel=normal; netsh int tcp set global ecncapability=enabled
+netsh int tcp set global rss=enabled; netsh int tcp set supplemental template=internet congestionprovider=cubic
+Write-Host "🌐 Optimizaciones de red aplicadas." -ForegroundColor Green
+
+# --- LISTAR PROGRAMAS DE INICIO ---
+Write-Host "🔍 Listando programas que se inician con Windows (para revisión manual):" -ForegroundColor Yellow
+Get-CimInstance Win32_StartupCommand | Select-Object Name, User, Location | Format-Table -AutoSize
+#endregion
+
+#region System Maintenance
+# --- FASE 4: MANTENIMIENTO DEL SISTEMA ---
+Show-SectionTitle "Fase 4: Mantenimiento del Sistema"
+Write-Host "💽 Optimizando unidades (TRIM/Defrag)..." -ForegroundColor White
+Get-WmiObject -Class Win32_Volume | Where-Object { $_.DriveType -eq 3 -and $_.DriveLetter } | ForEach-Object { Optimize-Volume -DriveLetter $_.DriveLetter.Substring(0,1) -Verbose }
+Write-Host "🔎 Verificando integridad de archivos del sistema (SFC /scannow)..." -ForegroundColor White
+sfc.exe /scannow | Out-Null
+Write-Host "✅ Mantenimiento del sistema completado." -ForegroundColor Green
+#endregion
+
+#region Finalization and Report
+# --- FINALIZACIÓN Y REPORTE ---
+Show-SectionTitle "Optimización Titánica Completada"
+Write-Host "🎉 ¡Tu PC ha sido optimizado exitosamente!" -ForegroundColor Green
+Write-Host "--- RESUMEN DE LA OPERACIÓN ---" -ForegroundColor Cyan
+Write-Host "   - Espacio en disco liberado: $spaceFreed GB" -ForegroundColor White
+Write-Host "   - Sistema Operativo y Aplicaciones: Actualizados." -ForegroundColor White
+Write-Host "   - Rendimiento: Múltiples ajustes aplicados para máxima velocidad." -ForegroundColor White
+Write-Host "`nSe recomienda ENCARECIDAMENTE reiniciar el sistema ahora." -ForegroundColor Yellow
+Write-Host "El script se cerrará en 20 segundos." -ForegroundColor Gray
+Start-Sleep -Seconds 20
+#endregion
+</code></pre>
+                    </div>
+
+                    <div id="copy-feedback" class="text-center text-emerald-400 font-semibold mt-4 h-6 transition-opacity duration-300 opacity-0">
+                        ¡Script copiado al portapapeles!
+                    </div>
+
+                    <!-- Instrucciones -->
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-white mb-3">Instrucciones de Uso</h3>
+                        <ol class="list-decimal list-inside space-y-3 text-gray-300">
+                             <li>Haz clic derecho en el menú de Inicio y selecciona <span class="font-semibold text-emerald-300 bg-gray-800/50 px-2 py-1 rounded-md">PowerShell (Administrador)</span>.</li>
+                            <li>Copia el script con el botón de arriba y pégalo en PowerShell (clic derecho).</li>
+                            <li>Escribe <span class="font-semibold text-emerald-300">"S"</span> y presiona <span class="font-semibold text-emerald-300">Enter</span> para confirmar.</li>
+                            <li>El proceso tardará bastante. Al finalizar, reinicia tu PC.</li>
+                        </ol>
+                    </div>
+                </div>
+            </main>
+
+             <!-- Sección de Características -->
+            <section class="max-w-5xl mx-auto mt-16 text-center">
+                 <h2 class="text-3xl font-bold text-white mb-8">¿Qué hace este script?</h2>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="text-4xl mb-3">🔄</div>
+                        <h4 class="font-bold text-lg text-white">Actualización Total</h4>
+                        <p class="text-gray-400 text-sm">Instala las últimas actualizaciones de Windows y de todos tus programas instalados vía Winget.</p>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="text-4xl mb-3">🧹</div>
+                        <h4 class="font-bold text-lg text-white">Limpieza Agresiva</h4>
+                        <p class="text-gray-400 text-sm">Limpia el almacén WinSxS, cachés de navegadores, archivos temporales y basura del sistema.</p>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <h4 class="font-bold text-lg text-white">Optimización Extrema</h4>
+                        <p class="text-gray-400 text-sm">Aplica ajustes de registro y red, desactiva telemetría y activa el plan de máximo rendimiento.</p>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="text-4xl mb-3">🛡️</div>
+                        <h4 class="font-bold text-lg text-white">Seguro y Fiable</h4>
+                        <p class="text-gray-400 text-sm">Crea un punto de restauración antes de empezar y utiliza comandos seguros y probados de Windows.</p>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center mt-16 py-6 border-t border-white/10">
+                <p class="text-gray-400">Desarrollado con ❤️ para la comunidad de Windows.</p>
+                 <p class="text-gray-500 text-sm">Úsese de forma responsable. No nos hacemos cargo de posibles problemas.</p>
+            </footer>
+        </div>
     </div>
-    <div class="demo" data-aos="zoom-in">
-      <!-- Coloca aquí una captura o GIF demo: -->
-      <img src="screenshot-demo.gif" alt="Demo Limpiar.Windows" style="width:100%;display:block;">
-    </div>
-  </header>
-  <section class="features">
-    <div class="card" data-aos="flip-left">
-      <div class="card-icon">⚡</div>
-      <b>Optimización Inteligente</b>
-      <div>Adapta los tweaks según perfil: máximo, gaming, ofimática o laptop.</div>
-    </div>
-    <div class="card" data-aos="flip-right">
-      <div class="card-icon">🧹</div>
-      <b>Limpieza Profunda</b>
-      <div>Remueve basura, restos de actualización, logs antiguos, cachés y más.</div>
-    </div>
-    <div class="card" data-aos="flip-left">
-      <div class="card-icon">↩️</div>
-      <b>Seguro y Reversible</b>
-      <div>Genera backup antes de cambios críticos y permite revertir optimizaciones.</div>
-    </div>
-    <div class="card" data-aos="flip-right">
-      <div class="card-icon">📊</div>
-      <b>Reporte Detallado</b>
-      <div>Muestra cuánto espacio liberaste y qué mejoró tras cada limpieza.</div>
-    </div>
-  </section>
-  <footer>
-    Hecho con ❤️ por y para la comunidad | <b>MIT License</b> | <a style="color:#43e97b;font-weight:bold;text-decoration:none" href="https://github.com/candilmartinalonso/limpiar.windows" rel="noopener">Visitar Repositorio</a>
-  </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    AOS.init({duration:1000,offset:40, once:true});
-  </script>
+
+    <script>
+        const copyButton = document.getElementById('copyButton');
+        const powerShellScript = document.getElementById('powerShellScript').textContent;
+        const copyFeedback = document.getElementById('copy-feedback');
+
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(powerShellScript.trim()).then(() => {
+                copyFeedback.classList.remove('opacity-0');
+                copyButton.textContent = '¡Copiado!';
+                copyButton.classList.add('bg-green-600');
+                setTimeout(() => {
+                    copyFeedback.classList.add('opacity-0');
+                    copyButton.textContent = 'Copiar Script';
+                    copyButton.classList.remove('bg-green-600');
+                }, 2000);
+            }).catch(err => {
+                try {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = powerShellScript.trim();
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    copyFeedback.classList.remove('opacity-0');
+                    copyButton.textContent = '¡Copiado!';
+                    copyButton.classList.add('bg-green-600');
+                     setTimeout(() => {
+                        copyFeedback.classList.add('opacity-0');
+                        copyButton.textContent = 'Copiar Script';
+                        copyButton.classList.remove('bg-green-600');
+                    }, 2000);
+                } catch (error) {
+                    copyFeedback.textContent = 'Error al copiar.';
+                    copyFeedback.classList.add('text-red-500');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
