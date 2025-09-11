@@ -1,140 +1,87 @@
-<# 
-.SYNOPSIS
-  OptiClean-Ultra: Optimiza y limpia Windows de forma segura y avanzada.
-.DESCRIPTION
-  - Optimiza el plan de energía, efectos visuales, servicios innecesarios y aplica TRIM/defrag para SSD/HDD.
-  - Limpia archivos TEMP, papelera, caché de actualización, mini-volcados, CBS y más.
-  - Nivel Ultra: remueve *.tmp/*.log/*.etl antiguos fuera de rutas críticas.
-  - Soporta varios perfiles: Max, Gamer, Work, Laptop, y modos limpieza CleanAll/Ultra.
-  - Utiliza backup en JSON para revertir cambios críticos (no recuperación de archivos borrados).
-  - Lleva reporte del espacio liberado.
-.NOTES
-  Ejecutar como Administrador. Versión: 2025+. Respeta prácticas seguras, comentarios y modularización.
-#>
-
-[CmdletBinding()]
-param (
-  [switch]$Max,
-  [switch]$Gamer,
-  [switch]$Work,
-  [switch]$Laptop,
-
-  [switch]$EnableHwGpuSchedule,
-  [switch]$Deep,
-  [switch]$Revert,
-
-  [switch]$CleanAll,
-  [switch]$Ultra,
-  [int]$LogsDays = 7,
-  [switch]$BrowsersAll,
-  [switch]$OldUpgrades,
-  [switch]$ResetWU,
-  [switch]$RebuildIndex,
-  [switch]$Irreversible,
-  [switch]$Report
-)
-
-#region Helpers y Backup
-function Require-Admin {
-  $id = [Security.Principal.WindowsIdentity]::GetCurrent()
-  $p = New-Object Security.Principal.WindowsPrincipal($id)
-  if (-not $p.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {
-    Write-Error "Ejecutá PowerShell como Administrador."; exit 1
-  }
-}
-function Ensure-Key { param($Path) if(-not (Test-Path $Path)){ New-Item -Path $Path -Force |Out-Null}}
-function Load-Backup {
-  $dir = "$env:ProgramData\OptiCleanUltra"; $f="$dir\backup.json"
-  if (-not (Test-Path $dir)){New-Item -ItemType Directory -Path $dir | Out-Null}
-  if (Test-Path $f) {try {return (Get-Content $f -Encoding UTF8 | ConvertFrom-Json)} catch {}}
-  return [pscustomobject]@{PowerPlanGUID=$null; Registry=@{}; Services=@{}; HibernateWasOn=$null; Version="2025+"}
-}
-function Save-Backup($bk) {
-  $dir = "$env:ProgramData\OptiCleanUltra"; $f="$dir\backup.json"
-  $bk | ConvertTo-Json -Depth 6 | Set-Content -Path $f -Encoding UTF8
-}
-function Set-Registry-Backup {
-  param([string]$Key,[string]$Name,[string]$Type,[Parameter(Mandatory=$true)]$Value,[ref]$BackupObj)
-  Ensure-Key $Key; $bk=$BackupObj.Value
-  if(-not $bk.Registry.ContainsKey($Key)){$bk.Registry[$Key]=@{}}
-  if(-not $bk.Registry[$Key].ContainsKey($Name)){
-    try{$bk.Registry[$Key][$Name]=(Get-ItemProperty -Path $Key -Name $Name -ErrorAction Stop).$Name}catch{$bk.Registry[$Key][$Name]=$null}
-  }
-  if (Get-ItemProperty -Path $Key -Name $Name -ErrorAction SilentlyContinue) {
-    Set-ItemProperty -Path $Key -Name $Name -Value $Value -Force
-  } else {
-    New-ItemProperty -Path $Key -Name $Name -Value $Value -PropertyType $Type -Force | Out-Null
-  }
-}
-#endregion
-
-Require-Admin
-$bk = Load-Backup
-
-if ($Revert) {
-  # Revertir optimizaciones críticas con los datos guardados (sin restaurar archivos borrados)
-  # ...
-  Write-Host "Reversión completa. Reiniciá para finalizar." -ForegroundColor Green
-  exit
-}
-
-# Crear restore point por seguridad
-try { Checkpoint-Computer -Description "OptiClean-Ultra (previo)" -RestorePointType "MODIFY_SETTINGS" } catch {}
-
-#region Perfiles y ajustes
-# Ejemplo: Max: Ultimate Performance, sin hibernación, SysMain/Prefetcher stop, apps fondo mínimas...
-if ($Max) {
-  $guid="e9a42b02-d5df-448d-aa00-03f14749eb61"
-  powercfg -duplicatescheme $guid 2>$null | Out-Null
-  powercfg -setactive $guid 2>$null | Out-Null
-  powercfg -h off | Out-Null
-  # Servicios: SysMain/Pfadef/Prefetch off/disabled
-  # Apps fondo
-}
-if ($Gamer) {
-  # GameMode ON, Game Bar y DVR OFF, apps 2º plano mínimas
-}
-if ($Work) {
-  # Sin Bing/CloudSearch, menos anuncios, apps fondo estrictas
-}
-if ($Laptop) {
-  # Mantiene ahorro de batería, no fuerza CPU
-}
-if ($EnableHwGpuSchedule) {
-  # Reg key: HW Accelerated GPU Scheduling
-}
-#endregion
-
-#region Limpieza Base y Ultra
-# Limpiar TEMP (user/system), RecycleBin, Delivery Optimization, WU Download, Icon/Thumbnail Cache, Dumps, CBS.cab
-# Ultra: Borra *.tmp/*.log/*.etl viejos fuera de system/ProgramFiles (solo con Ultra y tras CleanAll)
-#endregion
-
-#region Opcionales
-if ($BrowsersAll) {
-  # Limpia caches de navegadores conocidos de todos los usuarios (Edge, Chrome, Firefox)
-}
-if ($OldUpgrades) {
-  # Elimina Windows.old y $WINDOWS.~BT
-}
-if ($ResetWU) {
-  # Renombra SoftwareDistribution y Catroot2 para reset profundo de WU
-}
-if ($RebuildIndex) {
-  # Reinicia y borra Search Index 
-}
-if ($Irreversible) {
-  # DISM /StartComponentCleanup /ResetBase (irreversible para liberar WinSxS)
-}
-#endregion
-
-#region Reporte
-if ($Report) {
-  # Muestra el espacio liberado por ruta y total (ejemplo con Get-FolderSizeBytes)
-}
-#endregion
-
-Save-Backup $bk
-Write-Host "`nOptiClean-Ultra finalizado. Reiniciá para consolidar los cambios." -ForegroundColor Green
-
-# --- Comenta y ajusta cada bloque según necesidad. Reutiliza helpers y manten modularidad ---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limpiar.Windows - Optimiza tu Windows</title>
+  <!-- Fonts & AOS animation -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; background:linear-gradient(135deg,#161a28 60%, #43c6ac 100%); color: #fff; min-height:100vh; }
+    header { text-align:center; padding:3.5rem 1rem 1rem; }
+    h1 { font-size:2.8rem; margin-bottom:1rem; font-weight:800; letter-spacing:.05em; }
+    .subtitle { font-size:1.15rem; opacity:.85; margin-bottom:1.5rem; }
+    .actions { margin-top:2rem; }
+    .btn {
+      background: #43e97b; background: linear-gradient(to right,#38f9d7,#43e97b); color: #212b36; font-weight:700; border:none; border-radius:40px;
+      padding:.8rem 2.2rem; font-size:1.1rem; cursor:pointer; transition:.25s box-shadow,.25s transform;
+      box-shadow:0 0 0 0 #0000;
+      margin:0 1rem;
+    }
+    .btn:hover { box-shadow: 0 6px 32px 0 #43e97b44; transform:translateY(-3px) scale(1.04); }
+    .demo {
+      margin:2.5rem auto 1.5rem;
+      max-width:360px;
+      border-radius: 20px;
+      box-shadow: 0 4px 54px #161a2844;
+      overflow: hidden;
+    }
+    .features {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:2.4rem; margin:2.5rem 0 2rem;
+    }
+    .card {
+      background:#262c44bb; border-radius:20px; padding:2rem 1.5rem; max-width:245px; min-width:205px;
+      transition:.2s transform,.2s box-shadow;
+      box-shadow: 0 2px 15px #45458d33;
+      text-align:center;
+    }
+    .card:hover {transform:translateY(-5px) scale(1.04);box-shadow:0 8px 40px #43e97b33;}
+    .card-icon {font-size:2.2rem; margin-bottom:.7rem;}
+    footer {text-align:center;background:rgba(24,32,44,.4);padding:1.7rem 0 .7rem;font-size:.97rem;margin-top:3rem;border-top:1px solid #2b3350;}
+    @media (max-width:550px) { h1{font-size:2.1rem;}.features{gap:.8rem;} }
+  </style>
+</head>
+<body>
+  <header data-aos="fade-down">
+    <h1>Limpiar.Windows</h1>
+    <div class="subtitle">Optimizá y limpiá a fondo tu Windows con un solo script seguro, inteligente y reversible.</div>
+    <div class="actions">
+      <button class="btn">Descargar Script PowerShell</button>
+      <button class="btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});">Ver más</button>
+    </div>
+    <div class="demo" data-aos="zoom-in">
+      <!-- Coloca aquí una captura o GIF demo: -->
+      <img src="screenshot-demo.gif" alt="Demo Limpiar.Windows" style="width:100%;display:block;">
+    </div>
+  </header>
+  <section class="features">
+    <div class="card" data-aos="flip-left">
+      <div class="card-icon">⚡</div>
+      <b>Optimización Inteligente</b>
+      <div>Adapta los tweaks según perfil: máximo, gaming, ofimática o laptop.</div>
+    </div>
+    <div class="card" data-aos="flip-right">
+      <div class="card-icon">🧹</div>
+      <b>Limpieza Profunda</b>
+      <div>Remueve basura, restos de actualización, logs antiguos, cachés y más.</div>
+    </div>
+    <div class="card" data-aos="flip-left">
+      <div class="card-icon">↩️</div>
+      <b>Seguro y Reversible</b>
+      <div>Genera backup antes de cambios críticos y permite revertir optimizaciones.</div>
+    </div>
+    <div class="card" data-aos="flip-right">
+      <div class="card-icon">📊</div>
+      <b>Reporte Detallado</b>
+      <div>Muestra cuánto espacio liberaste y qué mejoró tras cada limpieza.</div>
+    </div>
+  </section>
+  <footer>
+    Hecho con ❤️ por y para la comunidad | <b>MIT License</b> | <a style="color:#43e97b;font-weight:bold;text-decoration:none" href="https://github.com/candilmartinalonso/limpiar.windows" rel="noopener">Visitar Repositorio</a>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({duration:1000,offset:40, once:true});
+  </script>
+</body>
+</html>
