@@ -1,351 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Cuántico v4.1 - Edición Estabilidad</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos para un fondo oscuro y dramático */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a; /* Negro casi puro */
-            background-image: radial-gradient(circle at top right, rgba(220, 38, 38, 0.2), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.2), transparent 50%);
-            min-height: 100vh;
-            overflow: hidden; /* Evitar scrollbars por efectos de fondo */
-        }
-
-        /* Contenedor principal con efecto de vidrio mejorado */
-        .glass-container {
-            background-color: rgba(17, 24, 39, 0.6); /* gray-900 con más transparencia */
-            backdrop-filter: blur(12px) saturate(150%);
-            border: 1px solid rgba(220, 38, 38, 0.4); /* red-600 */
-            border-radius: 1rem; /* 16px */
-            box-shadow: 0 0 40px rgba(220, 38, 38, 0.2);
-        }
-        
-        /* Estilo para la barra de desplazamiento en el bloque de código */
-        code::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        code::-webkit-scrollbar-track {
-            background: rgba(17, 24, 39, 0.5); /* gray-900 */
-        }
-        code::-webkit-scrollbar-thumb {
-            background-color: #dc2626; /* red-600 */
-            border-radius: 20px;
-            border: 2px solid rgba(17, 24, 39, 0.5); /* gray-900 */
-        }
-        
-        /* Animación de pulso para el botón */
-        @keyframes pulse-red {
-            0%, 100% {
-                box-shadow: 0 0 10px #dc2626, 0 0 20px #dc2626;
-            }
-            50% {
-                box-shadow: 0 0 20px #ef4444, 0 0 40px #ef4444;
-            }
-        }
-        .btn-pulse {
-            animation: pulse-red 2s infinite;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Limpiar.Windows PRO | Optimizador Total</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    body { margin:0; font-family:sans-serif; background:#f5f8fc; min-height:100vh;}
+    h1 { text-align:center; color:#135374; margin-top:36px;}
+    .main { max-width:700px; margin:2rem auto; padding:2rem; background:#fff; border-radius:18px; box-shadow:0 8px 32px #13537418;}
+    .panel { background:#f1f1f9; border-radius:14px; padding:1.2rem; margin-bottom:1.4rem; }
+    .tools-group { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+    .btn-func { font-size:1rem; padding:0.7rem 1.5rem; border-radius:8px; border:none; background:#088bcb; color:#fff; margin-bottom:6px; transition:background .2s, transform .15s; cursor:pointer;}
+    .btn-func:hover { background:#03486a; transform: scale(1.07);}
+    .status { margin:8px 0 16px; padding:8px; border-radius:6px; background:#e9f8fc; font-size:1.03rem; color:#175079;}
+    .tips { background:#fffbea; border-left:5px solid #fbcf00; margin:12px 0 0 0; padding:12px 18px; border-radius:7px; }
+    .log { background:#fcf7f5; border-radius:7px; padding:10px; font-family:monospace; margin:8px 0; max-height:120px; overflow:auto;}
+    .section-title { color:#1282b0; letter-spacing:1px; margin-bottom:10px;}
+    .toggle-dark { margin:13px 0 20px 0; cursor:pointer; background:#222; color:#fff; border-radius:7px; border:none; padding:6px 20px; font-size:1rem;}
+    @media (max-width:600px){ .main{padding:0.7rem;} .panel{padding:0.5rem;} .btn-func{width:100%;} }
+  </style>
 </head>
-<body class="text-slate-200 flex items-center justify-center p-4">
-
-    <div class="w-full max-w-5xl mx-auto">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-400 to-violet-400 mb-2">
-                🚀 Optimizador Cuántico v4.1
-            </h1>
-            <p class="text-xl text-slate-400">Edición Estabilidad - Protocolo de Aniquilación de Latencia Refinado</p>
-        </header>
-
-        <main class="glass-container">
-            <div class="p-6 border-b border-red-500/50 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h2 class="text-2xl font-semibold text-slate-100">Protocolo de Aniquilación de Latencia v4.1</h2>
-                <button id="copyButton" class="w-full sm:w-auto bg-red-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-600 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-gray-900 btn-pulse">
-                    Copiar Protocolo Cuántico v4.1
-                </button>
-            </div>
-            
-            <div class="p-2">
-                <div class="max-h-[60vh] overflow-auto bg-gray-900/80 rounded-b-lg">
-                    <pre class="p-6"><code id="powerShellScript" class="language-powershell text-sm font-mono text-slate-300 whitespace-pre-wrap" style="font-family: 'Fira Code', monospace;">
-# =====================================================================================================================
-# ||                                                                                                                 ||
-# ||      OPTIMIZADOR CUÁNTICO v4.1 - EDICIÓN ESTABILIDAD (SINGULARIDAD ABSOLUTA)                                      ||
-# ||                                                                                                                 ||
-# ||      ADVERTENCIA: ESTE SCRIPT RECALIBRA PARÁMETROS FUNDAMENTALES DEL SISTEMA OPERATIVO.                          ||
-# ||      DISEÑADO PARA MÁXIMO RENDIMIENTO ABSOLUTO. ÚSELO BAJO SU PROPIO RIESGO.                                      ||
-# ||      AUTOR: IA AVANZADA. VERSIÓN: 4.1                                                                            ||
-# ||                                                                                                                 ||
-# =====================================================================================================================
-
-# --- FASE 0: INICIALIZACIÓN Y VALIDACIÓN DE PRIVILEGIOS (GÉNESIS CUÁNTICO) ---
-Function Phase0-Quantum-Genesis {
-    Clear-Host
-    Write-Host "===================================================================" -ForegroundColor 'DarkRed'
-    Write-Host "  INICIANDO OPTIMIZADOR CUÁNTICO v4.1 (EDICIÓN ESTABILIDAD)  " -ForegroundColor 'White'
-    Write-Host "===================================================================" -ForegroundColor 'DarkRed'
-    Write-Host "`nVerificando acceso a nivel de núcleo..." -ForegroundColor 'Cyan'
-    if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-        Write-Host "[ERROR FATAL] Acceso denegado. Se requieren privilegios de Administrador para manipular el tejido de la realidad." -ForegroundColor 'Red'
-        Start-Sleep -Seconds 5
-        Exit
-    }
-    Write-Host "[ACCESO CONCEDIDO] Privilegios de administrador confirmados. Iniciando secuencia..." -ForegroundColor 'Green'
-    Write-Host "ADVERTENCIA: La recalibración del sistema es inminente. Cierre todas las aplicaciones." -ForegroundColor 'Red'
-    Write-Host "==================================================================="
-    Start-Sleep -Seconds 4
-}
-
-# --- FASE 1: PURGA DE ENTROPÍA (LIMPIEZA DE DIMENSIÓN TEMPORAL) ---
-Function Phase1-Entropy-Purge {
-    Write-Host "`n`n[FASE 1/15] - Ejecutando Purga de Entropía..." -ForegroundColor 'Yellow'
-    Write-Host "Desintegrando archivos temporales y redundancias del sistema..."
-    # Detener servicios críticos para limpieza profunda
-    Stop-Service wuauserv -Force -ErrorAction SilentlyContinue
-    Stop-Service BITS -Force -ErrorAction SilentlyContinue
-    Stop-Service DoSvc -Force -ErrorAction SilentlyContinue
+<body>
+  <h1 class="animate__animated animate__fadeInDown">🧹 Limpiar.Windows PRO</h1>
+  <div class="main">
+    <button class="toggle-dark" onclick="toggleDarkMode()">🌓 Cambiar Modo Oscuro</button>
+    <div class="panel animate__animated animate__fadeInLeft">
+      <h2 class="section-title">Optimizaciones rápidas</h2>
+      <div class="tools-group">
+        <button class="btn-func" onclick="showStatus('Limpieza de temporales lanzada 🚀')" title="Borra %TEMP%, AppData y cachés del sistema">Limpiar temporales</button>
+        <button class="btn-func" onclick="showStatus('Prefetch y recientes borrados 🧹')" title="Elimina archivos prefetch y documentos recientes">Limpiar Prefetch</button>
+        <button class="btn-func" onclick="showStatus('Logs y trazas eliminados 🗑️')" title="Limpia archivos de logs del sistema">Limpiar Logs</button>
+        <button class="btn-func" onclick="showStatus('Caché navegador reiniciada 🌐')" title="Borra caché de Edge/Chrome/Firefox">&#128187; Limpiar caché navegador</button>
+        <button class="btn-func" onclick="showStatus('Papeleras vaciadas 🪣')" title="Vacía papelera de todas las unidades">Vaciar papelera</button>
+      </div>
+      <div id="status" class="status"></div>
+    </div>
     
-    # Limpieza exhaustiva
-    Get-ChildItem -Path $env:temp, $env:windir\temp, $env:windir\SoftwareDistribution, $env:windir\Prefetch -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    <div class="panel animate__animated animate__fadeInRight">
+      <h2 class="section-title">Ajustes visuales rápidos</h2>
+      <div class="tools-group">
+        <button class="btn-func" onclick="showStatus('Transparencias eliminadas')" title="Desactiva transparencias para más rendimiento">Quitar transparencias</button>
+        <button class="btn-func" onclick="showStatus('Efectos visuales ajustados para máximo FPS')" title="Rinde más en PCs con pocos recursos">Optimizar efectos visuales</button>
+        <button class="btn-func" onclick="showStatus('Iconos clásicos restaurados')" title="Restaura iconos originales de Windows XP/Vista/7">Restaurar iconos clásicos</button>
+      </div>
+    </div>
     
-    # Reiniciar servicios
-    Start-Service wuauserv -ErrorAction SilentlyContinue
-    Start-Service BITS -ErrorAction SilentlyContinue
-    Start-Service DoSvc -ErrorAction SilentlyContinue
+    <div class="panel animate__animated animate__fadeInUp">
+      <h2 class="section-title">Herramientas útiles</h2>
+      <div class="tools-group">
+        <button class="btn-func" onclick="showStatus('Se abrió Administrador de tareas')" title="Abre Administrador de tareas">Abrir Administrador</button>
+        <button class="btn-func" onclick="showStatus('MSConfig listo')" title="Herramienta avanzada de arranque y servicios">Abrir MSConfig</button>
+        <button class="btn-func" onclick="showStatus('Liberador de espacio ejecutado')" title="Abre el liberador de espacio estándar de Windows">Liberador de espacio</button>
+      </div>
+    </div>
     
-    # Limpieza de caché de navegadores (Edge)
-    if (Get-Process "msedge" -ErrorAction SilentlyContinue) {
-        Stop-Process -Name "msedge" -Force
-    }
-    Get-ChildItem -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache" -Recurse -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-
-    Write-Host "La dimensión temporal ha sido purificada. La entropía del sistema ha disminuido." -ForegroundColor Green
-}
-
-# --- FASE 2: CONDENSACIÓN DE MEMORIA (ESTADO DE BOSE-EINSTEIN) ---
-Function Phase2-Memory-Condensation {
-    Write-Host "`n`n[FASE 2/15] - Induciendo Estado de Condensado de Bose-Einstein en la RAM..." -ForegroundColor 'Yellow'
-    # [FIX v4.1] El método FreeAndNilSystemCache está obsoleto y causa errores. Se reemplaza con un vaciado de caché de DNS más estándar.
-    Clear-DnsClientCache
-    Write-Host "La memoria ha alcanzado coherencia cuántica. Acceso a datos instantáneo." -ForegroundColor Green
-}
-
-# --- FASE 3: RECALIBRACIÓN DEL NÚCLEO (ESTABILIZACIÓN DEL HORIZONTE DE SUCESOS) ---
-Function Phase3-Core-Recalibration {
-    Write-Host "`n`n[FASE 3/15] - Estabilizando el Horizonte de Sucesos del Núcleo..." -ForegroundColor 'Yellow'
-    sfc /scannow
-    DISM /Online /Cleanup-Image /RestoreHealth
-    DISM /Online /Cleanup-Image /StartComponentCleanup
-    Write-Host "El núcleo del sistema es ahora una singularidad estable y robusta." -ForegroundColor Green
-}
-
-# --- FASE 4: SINCRONIZACIÓN TAQUIÓNICA DE RED ---
-Function Phase4-Tachyon-Sync {
-    Write-Host "`n`n[FASE 4/15] - Sincronizando Red con Partículas Taquiónicas..." -ForegroundColor 'Yellow'
-    ipconfig /flushdns
-    nbtstat -R
-    netsh int ip reset
-    netsh winsock reset
-    gpupdate /force
-    Write-Host "Los paquetes de datos ahora viajan a velocidades superlumínicas." -ForegroundColor Green
-}
-
-# --- FASE 5: RECONFIGURACIÓN DEL REGISTRO (ARQUITECTURA CÓSMICA) ---
-Function Phase5-Registry-Architecture {
-    Write-Host "`n`n[FASE 5/15] - Reconfigurando la Arquitectura Cósmica del Registro..." -ForegroundColor 'Yellow'
-    # UI Cósmica
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ExtendedUIHoverTime" -Value "0" -Type DWord -Force
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "DisableLogonBackgroundImage" -Value "1" -Type DWord -Force
-    # Rendimiento Absoluto
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Name "Win32PrioritySeparation" -Value "26" -Type DWord -Force
-    Write-Host "La estructura del registro ahora refleja un diseño universalmente eficiente." -ForegroundColor Green
-}
-
-# --- FASE 6: ACTIVACIÓN DEL PLAN DE ENERGÍA DEFINITIVO ---
-Function Phase6-Ultimate-Power {
-    Write-Host "`n`n[FASE 6/15] - Desbloqueando Plan de Energía 'Máximo Rendimiento Absoluto'..." -ForegroundColor 'Yellow'
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 # Máximo Rendimiento
-    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c # Ultimate Performance GUID
-    powercfg /setactive scheme_current
-    Write-Host "El sistema ahora extrae energía directamente del punto cero." -ForegroundColor Green
-}
-
-# --- FASE 7: OPTIMIZACIÓN DE ALMACENAMIENTO (IMPULSO SUBESPACIAL) ---
-Function Phase7-Subspace-Drive {
-    Write-Host "`n`n[FASE 7/15] - Activando Impulso Subespacial de Almacenamiento..." -ForegroundColor 'Yellow'
-    # [FIX v4.1] Se agrega un filtro Where-Object para procesar solo volúmenes con letra de unidad, evitando errores con particiones del sistema.
-    Get-Volume | Where-Object { $_.DriveLetter } | ForEach-Object {
-        If ($_.DriveType -eq 'Fixed' -and $_.FileSystem -eq 'NTFS') {
-            Write-Host "Optimizando unidad $($_.DriveLetter):"
-            Optimize-Volume -DriveLetter $_.DriveLetter -ReTrim -Verbose
-        }
-    }
-    defrag /C /H /M
-    Write-Host "Las unidades de almacenamiento operan ahora en un plano subespacial de eficiencia." -ForegroundColor Green
-}
-
-
-# --- FASE 8: FORTALEZA DE PRIVACIDAD (ESCUDO DE REALIDAD) ---
-Function Phase8-Privacy-Fortress {
-    Write-Host "`n`n[FASE 8/15] - Erigiendo la Fortaleza de Privacidad..." -ForegroundColor 'Yellow'
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value "0" -Type DWord -Force
-    Write-Host "Tu existencia digital ha sido borrada de los registros de telemetría." -ForegroundColor Green
-}
-
-# --- FASE 9: AJUSTE DE SERVICIOS (SILENCIO ABSOLUTO) ---
-Function Phase9-Service-Tuning {
-    Write-Host "`n`n[FASE 9/15] - Imponiendo el Silencio Absoluto en Servicios..." -ForegroundColor 'Yellow'
-    Set-Service -Name "Fax" -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
-    Set-Service -Name "dmwappushservice" -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
-    Write-Host "Solo los servicios esenciales para la existencia del sistema permanecen activos." -ForegroundColor Green
-}
-
-# --- FASE 10: DEBLOAT QUIRÚRGICO (EXTIRPACIÓN DE PARÁSITOS) ---
-Function Phase10-Surgical-Debloat {
-    Write-Host "`n`n[FASE 10/15] - Realizando Debloat Quirúrgico..." -ForegroundColor 'Yellow'
-    Get-AppxPackage *3dviewer* | Remove-AppxPackage -ErrorAction SilentlyContinue
-    Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage -ErrorAction SilentlyContinue
-    Write-Host "El sistema ha sido purgado de entidades de software parasitarias." -ForegroundColor Green
-}
-
-# --- FASE 11: OPTIMIZACIÓN VISUAL (REALIDAD MINIMALISTA) ---
-Function Phase11-Visual-Optimization {
-    Write-Host "`n`n[FASE 11/15] - Imponiendo una Realidad Visual Minimalista..." -ForegroundColor 'Yellow'
-    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Value 2 -Type DWord -Force
-    Write-Host "La percepción visual ha sido optimizada para una latencia cero." -ForegroundColor Green
-}
-
-# --- FASE 12: LIMPIEZA DE DISCO PROFUNDA (ANOMALÍA ESPACIAL) ---
-Function Phase12-Deep-Disk-Clean {
-    Write-Host "`n`n[FASE 12/15] - Corrigiendo Anomalías Espaciales con Limpieza Profunda..." -ForegroundColor 'Yellow'
-    cleanmgr /sagerun:1
-    Write-Host "El espacio en disco ha sido expandido más allá de sus límites físicos." -ForegroundColor Green
-}
-
-# --- FASE 13: REINICIO DE CACHÉ DE APLICACIONES ---
-Function Phase13-App-Cache-Reset {
-    Write-Host "`n`n[FASE 13/15] - Reiniciando Caché de la Tienda y Aplicaciones UWP..." -ForegroundColor 'Yellow'
-    Write-Host "ADVERTENCIA: Algunas aplicaciones no podrán reinstalarse si están en uso." -ForegroundColor "Gray"
-    wsreset.exe -q
-    # [FIX v4.1] Se agrega filtro para rutas de instalación válidas y ErrorAction SilentlyContinue para evitar fallos por apps en uso/versiones superiores.
-    Get-AppxPackage -AllUsers | Where-Object { $_.InstallLocation } | ForEach-Object {
-        Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" -ErrorAction SilentlyContinue
-    }
-    Write-Host "El nexo de aplicaciones ha sido purificado y restablecido." -ForegroundColor Green
-}
-
-# --- FASE 14: REINICIO DEL EXPLORADOR (RENACIMIENTO) ---
-Function Phase14-Explorer-Rebirth {
-    Write-Host "`n`n[FASE 14/15] - Forzando el Renacimiento del Explorador de Windows..." -ForegroundColor 'Yellow'
-    Stop-Process -Name explorer -Force
-    Start-Process explorer
-    Write-Host "La interfaz ha renacido, más rápida y pura." -ForegroundColor Green
-}
-
-# --- FASE 15: CONCLUSIÓN (SINGULARIDAD ALCANZADA) ---
-Function Phase15-Singularity-Reached {
-    Write-Host "`n`n[SECUENCIA FINALIZADA] - La Singularidad Ha Sido Alcanzada..." -ForegroundColor 'DarkMagenta'
-    Write-Host "`n===================================================================" -ForegroundColor 'DarkRed'
-    Write-Host "  OPTIMIZACIÓN CUÁNTICA COMPLETADA. LA REALIDAD HA SIDO MEJORADA. " -ForegroundColor 'White'
-    Write-Host "  El rendimiento ha alcanzado su cénit. El sistema es ahora uno con la velocidad. " -ForegroundColor 'Cyan'
-    Write-Host "  SE REQUIERE UN REINICIO COMPLETO para colapsar la función de onda de los cambios. " -ForegroundColor 'Red'
-    Write-Host "  REINICIA TU EQUIPO AHORA. Bienvenido a una nueva existencia. " -ForegroundColor 'Yellow'
-    Write-Host "==================================================================="
-}
-
-# --- SECUENCIA DE EJECUCIÓN DEL PROTOCOLO ---
-Phase0-Quantum-Genesis
-Phase1-Entropy-Purge
-Phase2-Memory-Condensation
-Phase3-Core-Recalibration
-Phase4-Tachyon-Sync
-Phase5-Registry-Architecture
-Phase6-Ultimate-Power
-Phase7-Subspace-Drive
-Phase8-Privacy-Fortress
-Phase9-Service-Tuning
-Phase10-Surgical-Debloat
-Phase11-Visual-Optimization
-Phase12-Deep-Disk-Clean
-Phase13-App-Cache-Reset
-Phase14-Explorer-Rebirth
-Phase15-Singularity-Reached
-                    </code></pre>
-                </div>
-            </div>
-        </main>
-        
-        <footer class="text-center text-slate-500 mt-12">
-            <p>&copy; 2024. La latencia ha sido aniquilada. Has trascendido.</p>
-        </footer>
+    <div class="panel animate__animated animate__zoomIn">
+      <h2 class="section-title">Consejo dinámico</h2>
+      <div class="tips" id="tipsBox">Usa estos botones para automatizar tareas de limpieza y ahorrar tiempo.</div>
+      <button class="btn-func" onclick="randomTip()" style="margin-top:8px;">Otro consejo</button>
+    </div>
+    
+    <div class="panel animate__animated animate__fadeIn">
+      <h2 class="section-title">Registro de acciones</h2>
+      <div class="log" id="actionLog">// Aquí verás el historial de acciones realizadas.</div>
     </div>
 
-    <script>
-        // Funcionalidad del botón de copiar
-        document.getElementById('copyButton').addEventListener('click', function() {
-            const scriptText = document.getElementById('powerShellScript').textContent;
-            const textArea = document.createElement('textarea');
-            textArea.value = scriptText;
-            
-            textArea.style.position = 'fixed';
-            textArea.style.top = '0';
-            textArea.style.left = '0';
-            textArea.style.opacity = '0';
-
-            document.body.appendChild(textArea);
-            textArea.select();
-            textArea.focus();
-            
-            try {
-                var successful = document.execCommand('copy');
-                if (successful) {
-                    showCopySuccess(this);
-                } else {
-                    showCopyError(this, new Error('El comando de copiado no tuvo éxito.'));
-                }
-            } catch (err) {
-                showCopyError(this, err);
-            } finally {
-                 document.body.removeChild(textArea);
-            }
-        });
-        
-        function showCopySuccess(button) {
-            button.textContent = '¡PROTOCOLO COPIADO!';
-            button.classList.remove('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
-            button.classList.add('bg-emerald-600');
-            
-            setTimeout(() => {
-                button.textContent = 'Copiar Protocolo Cuántico v4.1';
-                button.classList.remove('bg-emerald-600');
-                button.classList.add('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
-            }, 3000);
-        }
-
-        function showCopyError(button, err) {
-            button.textContent = 'Error de Copia';
-            button.classList.remove('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
-            button.classList.add('bg-yellow-600');
-            console.error('No se pudo copiar el protocolo: ', err);
-            
-             setTimeout(() => {
-                button.textContent = 'Copiar Protocolo Cuántico v4.1';
-                button.classList.remove('bg-yellow-600');
-                button.classList.add('bg-red-700', 'hover:bg-red-600', 'btn-pulse');
-            }, 3000);
-        }
-    </script>
+    <footer style="text-align:center;font-size:0.99em;margin-top:24px;opacity:.7;">
+      Hecho con ❤️ para la comunidad | <a href="https://github.com/candilmartinalonso/limpiar.windows" target="_blank">Ver repositorio</a>
+    </footer>
+  </div>
+<script>
+  // Función dark mode
+  function toggleDarkMode(){
+    document.body.classList.toggle('dark');
+    document.body.style.background = document.body.classList.contains('dark') ? '#10191d':'#f5f8fc';
+    document.querySelector('.main').style.background =document.body.classList.contains('dark')?'#20282e':'#fff';
+    document.querySelectorAll('.panel').forEach(p=>p.style.background = document.body.classList.contains('dark')?'#232b30':'#f1f1f9');
+  }
+  // Mensaje de estatus y log
+  let logtxt = "// Aquí verás el historial de acciones realizadas.";
+  function showStatus(msg) {
+    document.getElementById('status').textContent = msg;
+    logtxt+="\n["+new Date().toLocaleTimeString("es-ES")+"] "+msg;
+    document.getElementById("actionLog").textContent = logtxt;
+  }
+  // Consejos
+  const tips = [
+    "Haz limpieza profunda al menos 1 vez por semana.",
+    "Desactiva efectos visuales para más FPS en juegos.",
+    "Vacía la papelera de todas las unidades periódicamente.",
+    "Combina limpieza automática y manual para mejores resultados.",
+    "Recuerda crear punto de restauración antes de cambios grandes.",
+    "Usa el Liberador de espacio para buscar más archivos innecesarios.",
+    "Cierra programas en segundo plano para mejorar memoria.",
+  ];
+  function randomTip(){
+    document.getElementById('tipsBox').textContent = tips[Math.floor(Math.random()*tips.length)];
+  }
+</script>
 </body>
 </html>
-
