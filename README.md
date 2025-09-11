@@ -1,63 +1,76 @@
-# 🚀 Limpiar.Windows – Windows System Optimizer
+🚀 Optimizador Titán para Windows
+Un script de PowerShell todo en uno, de nivel superior, diseñado para limpiar, actualizar, optimizar y acelerar tu sistema operativo Windows de forma segura y extremadamente eficiente.
 
-OptiClean-Ultra es un script y solución visual para optimizar y limpiar profundamente Windows de manera segura, profesional y eficiente.
+✨ Características Principales
+Actualización Integral del Sistema:
 
----
+Busca e instala todas las actualizaciones pendientes de Windows Update.
 
-## 📦 Características
+Utiliza Winget para buscar y actualizar todas las aplicaciones y programas instalados a su última versión de forma automática.
 
-- **Perfíles de optimización inteligentes:** (Máx. rendimiento, Gaming, Ofimática, Laptop-friendly).
-- **Limpieza profunda y ULTRA:** TEMP, Papelera, Delivery Optimization, Windows Update, logs viejos (*.tmp, *.log, *.etl), restos de instalación.
-- **Sin desinstalar programas ni dañar documentos personales.**
-- **Reversible:** guarda backup de configuraciones críticas para deshacer cambios.
-- **Reporte detallado** de espacio y mejoras.
-- **Interfaz Landing Page:** HTML responsive, animada y clara.
+Limpieza Profunda y Agresiva:
 
----
+Limpia y compacta la carpeta WinSxS (Almacén de componentes) para ahorrar espacio significativo.
 
-## 🖥️ Captura y Demo
+Elimina archivos temporales, cachés de sistema, restos de actualizaciones, logs y vacía la papelera.
 
-> ![Demo Landing Page](screenshot-demo.gif)
-> ![Ejemplo Reporte](screenshot-report.png)
+Limpia la caché de los navegadores más populares (Edge, Chrome, Firefox).
 
----
+Optimización de Rendimiento Extrema:
 
-## ⚡ Instalación & Uso
+Activa el plan de energía de "Máximo Rendimiento".
 
-### 1. Desde la interfaz web
-- Abrí [`index.html`](index.html) en tu navegador para leer instrucciones visuales y descargar el script.
+Aplica ajustes en el registro para reducir la latencia de la interfaz (MenuShowDelay).
 
-### 2. Ejecutar el script en PowerShell
+Implementa optimizaciones de red avanzadas para mejorar la estabilidad y velocidad de la conexión.
 
-- **Descarga:** desde la página o usando:
-- **Manual:** descarga y ejecuta:
+Desactiva servicios de telemetría, tareas programadas innecesarias y ajusta efectos visuales.
 
-#### **Ejemplo de comandos prácticos**
-- Limpieza y optimización máxima interactiva:
-`.\OptiClean-Ultra.ps1 -Max -CleanAll -Report`
-- Ultra limpieza (más agresiva):
-`.\OptiClean-Ultra.ps1 -Ultra -LogsDays 10`
-- Revertir optimizaciones:
-`.\OptiClean-Ultra.ps1 -Revert`
+Mantenimiento del Sistema:
 
----
+Optimiza automáticamente tus unidades de almacenamiento (TRIM para SSDs, Defragmentación para HDDs).
 
-## 🔒 Seguridad y advertencias
+Ejecuta SFC /scannow para verificar y reparar archivos corruptos del sistema.
 
-- **Siempre ejecutá como Administrador.**
-- Se recomienda crear punto de restauración (el script lo hace automáticamente).
-- Cambios en archivos son irreversibles; cambios de configuraciones sí se pueden revertir.
+Seguridad y Control:
 
----
+Verifica permisos de Administrador antes de ejecutarse.
 
-## 🛠️ Créditos
+Crea un Punto de Restauración automáticamente.
 
-- <b>Martín Candil Alonso</b> / PowerShell Windows Community.
-- Inspirado y mejorado a partir de feedback de usuarios.
-- Licencia: MIT
+Pide confirmación antes de iniciar el proceso.
 
----
+Muestra un listado de los programas de inicio para que puedas revisarlos manualmente.
 
-## 🤝 Contribuir
+⚡ ¿Cómo se usa?
+Abrir PowerShell como Administrador:
 
-- Cualquier feedback, reporte de bug o mejora es bienvenido en la pestaña Issues.
+Haz clic derecho en el menú de Inicio y selecciona "PowerShell (Administrador)".
+
+Copiar y Pegar el Script:
+
+Abre index.html y haz clic en "Copiar Script".
+
+Vuelve a PowerShell y haz clic derecho para pegar el contenido.
+
+Confirmar y Ejecutar:
+
+Presiona Enter. El script te pedirá confirmación.
+
+Escribe S y presiona Enter de nuevo para comenzar.
+
+Ser Paciente y Reiniciar:
+
+El proceso, especialmente la parte de las actualizaciones, puede tardar bastante tiempo. No cierres la ventana.
+
+Al finalizar, reinicia tu PC para aplicar todos los cambios.
+
+⚠️ Advertencia y Descargo de Responsabilidad
+Este script realiza cambios profundos en el sistema. Su uso es bajo tu propia responsabilidad.
+
+Aunque incluye medidas de seguridad como el Punto de Restauración, siempre es recomendable tener una copia de seguridad de tus archivos importantes.
+
+El autor o los contribuidores no se hacen responsables de ningún problema que pueda ocurrir.
+
+🛠️ Contribuciones
+Cualquier idea para mejorar el script es bienvenida. Puedes abrir un "Issue" o enviar un "Pull Request" en el repositorio del proyecto.
