@@ -3,132 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Fénix para Windows - Script Avanzado</title>
+    <title>Optimizador Leviatán para Windows - Script de Poder Extremo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* GitHub Dark */
+            background-color: #0d1117;
         }
         .glass-effect {
-            background: rgba(31, 41, 55, 0.3); /* gray-800 with opacity */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(13, 17, 23, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .code-block::-webkit-scrollbar { width: 8px; height: 8px; }
-        .code-block::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 4px; } /* Indigo */
+        .code-block::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 4px; } /* Cyan */
         .code-block::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
-        .btn-glow:hover { box-shadow: 0 0 20px 5px rgba(99, 102, 241, 0.5); } /* Indigo glow */
+        .btn-glow:hover { box-shadow: 0 0 25px 8px rgba(6, 182, 212, 0.4); }
+        .text-shadow-cyan { text-shadow: 0 0 15px rgba(6, 182, 212, 0.6); }
     </style>
 </head>
 <body class="text-gray-200">
-    <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/0d1117/6366f1?text=.')">
-        <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/0d1117/06b6d4?text=LEVIATAN')">
+        <div class="absolute inset-0 bg-black/70"></div>
+        <div class="relative container mx-auto px-4 py-8 md:py-16">
 
             <header class="text-center mb-12">
-                <h1 class="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">
-                    Optimizador Fénix para Windows
+                <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-cyan">
+                    Optimizador Leviatán
                 </h1>
-                <p class="text-lg md:text-xl text-indigo-300 max-w-3xl mx-auto">
-                    El renacer del rendimiento de tu PC. Un script de PowerShell para limpiar, actualizar, depurar y acelerar tu sistema a un nivel superior.
+                <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto">
+                    El poder abismal del rendimiento liberado. Un script de PowerShell definitivo para limpiar, actualizar, depurar y acelerar tu sistema hasta el límite.
                 </p>
             </header>
 
             <main>
-                <div class="glass-effect rounded-2xl p-6 md:p-8 max-w-5xl mx-auto">
+                <div class="glass-effect rounded-2xl p-6 md:p-8 max-w-6xl mx-auto">
                     <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
-                        <h2 class="text-2xl font-bold text-white">Script de PowerShell v4.0 - Fénix</h2>
-                        <button id="copyButton" class="w-full md:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-400">
-                            Copiar Script Completo
+                        <h2 class="text-2xl font-bold text-white">Script de PowerShell v5.0 - Leviatán</h2>
+                        <button id="copyButton" class="w-full md:w-auto bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-cyan-500 focus:outline-none focus:ring-4 focus:ring-cyan-400">
+                            Copiar Script Leviatán
                         </button>
                     </div>
 
-                    <div class="bg-black/60 rounded-lg overflow-hidden">
-                        <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[500px]"><code id="powerShellScript">
+                    <div class="bg-black/70 rounded-lg overflow-hidden border border-white/10">
+                        <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[550px]"><code id="powerShellScript">
 # =================================================================================================
 #
-#   PowerScript Optimizer FÉNIX v4.0
-#   Objetivo: Limpieza extrema, actualización universal de software, optimización profunda y
-#   depuración del sistema para un rendimiento superior.
+#   PowerScript Optimizer LEVIATÁN v5.0
+#   Objetivo: Limpieza exhaustiva, actualización universal, optimización a nivel de kernel,
+#   depuración profunda, liberación de RAM y reparación del sistema para un rendimiento MÁXIMO.
 #
-#   ADVERTENCIA: Ejecutar siempre como Administrador. Úsese bajo su propia responsabilidad.
-#   Este script es significativamente más potente que versiones anteriores.
+#   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
+#   Este script realiza cambios extremadamente profundos. Úsese bajo su propia responsabilidad.
 #
 # =================================================================================================
 
 #region PREPARACIÓN Y CONFIGURACIÓN INICIAL
-# --- VERIFICACIÓN DE PERMISOS DE ADMINISTRADOR ---
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia PowerShell como Administrador."
+    Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
     Start-Sleep -Seconds 10
     Exit
 }
 
-# --- FUNCIÓN PARA MOSTRAR TÍTULOS DE SECCIÓN ---
 function Show-SectionTitle {
     param([string]$Title)
     Write-Host "`n"
-    Write-Host "==================================================================" -ForegroundColor Magenta
+    Write-Host "==================================================================" -ForegroundColor Cyan
     Write-Host "    $Title" -ForegroundColor White
-    Write-Host "==================================================================" -ForegroundColor Magenta
+    Write-Host "==================================================================" -ForegroundColor Cyan
 }
 
-# --- CONFIGURACIÓN DEL LOG ---
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Fenix-Log.txt"
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log.txt"
 Function Write-Log {
-    param ([string]$Message)
+    param ([string]$Message, [string]$ForegroundColor = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logMessage = "[$timestamp] - $Message"
     $logMessage | Out-File -FilePath $logFile -Append
-    Write-Host $logMessage
+    Write-Host $logMessage -ForegroundColor $ForegroundColor
 }
 
-# --- MENÚ INTERACTIVO ---
 function Show-Menu {
     Clear-Host
-    Write-Host "╔════════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
-    Write-Host "║                🔥 OPTIMIZADOR FÉNIX PARA WINDOWS 🔥             ║" -ForegroundColor White
-    Write-Host "╚════════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
+    Write-Host "╔════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+    Write-Host "║              🐲 OPTIMIZADOR LEVIATÁN PARA WINDOWS 🐲             ║" -ForegroundColor White
+    Write-Host "╚════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "Este script realizará cambios profundos en el sistema." -ForegroundColor Yellow
-    Write-Host "Se recomienda encarecidamente cerrar todos los programas." -ForegroundColor Red
+    Write-Host "ADVERTENCIA: Herramienta de poder extremo. Proceda con precaución." -ForegroundColor Red
+    Write-Host "Se recomienda encarecidamente cerrar todos los programas." -ForegroundColor Yellow
     Write-Host ""
     Write-Host "Selecciona una opción:" -ForegroundColor Cyan
-    Write-Host "   [1] Limpieza Profunda del Sistema"
-    Write-Host "   [2] Actualización Universal (Windows, Winget, Chocolatey, Scoop)"
-    Write-Host "   [3] Optimización Extrema del Sistema y Red"
-    Write-Host "   [4] Depuración de Windows (Eliminar Bloatware)"
-    Write-Host "   [5] Aplicar TODO (Recomendado para la primera vez)"
+    Write-Host "   [1] Limpieza Exhaustiva del Sistema"
+    Write-Host "   [2] Actualización Universal (Windows, Winget, Choco, Scoop)"
+    Write-Host "   [3] Optimización Extrema y de Red (Puede requerir reinicio)"
+    Write-Host "   [4] Depuración Profunda de Windows (Eliminar Bloatware)"
+    Write-Host "   [5] Liberación de Memoria RAM (Limpieza de Standby List)"
+    Write-Host "   [6] Mantenimiento y Reparación del Sistema"
+    Write-Host "   [7] Utilidades del Sistema (Menú Contextual, Tweaks UI)"
+    Write-Host "   [8] ¡MODO APOCALIPSIS! (Aplicar TODO en orden óptimo)"
     Write-Host "   [Q] Salir"
     Write-Host ""
 }
 #endregion
 
 #region FUNCIONES PRINCIPALES
-# --- FUNCIÓN DE LIMPIEZA ---
-function Invoke-DeepClean {
-    Show-SectionTitle "Iniciando Limpieza Profunda"
+# --- [1] FUNCIÓN DE LIMPIEZA ---
+function Invoke-ExhaustiveClean {
+    Show-SectionTitle "Iniciando Limpieza Exhaustiva"
     $initialDiskSpace = (Get-PSDrive C).Free
     
-    Write-Log "Limpiando cachés de navegadores y aplicaciones..."
+    Write-Log "Limpiando cachés de sistema, navegadores y aplicaciones..."
     $locationsToClean = @(
         "$env:TEMP\*", "$env:SystemRoot\Temp\*", "$env:SystemRoot\SoftwareDistribution\Download\*",
         "$env:windir\Prefetch\*", "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db",
         "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*", 
         "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*",
         "$env:LOCALAPPDATA\Mozilla\Firefox\Profiles\*\cache2\entries\*",
+        "$env:APPDATA\discord\Cache\*", "$env:APPDATA\Spotify\Browser\Cache\*",
+        "$env:LOCALAPPDATA\Steam\htmlcache\*", "$env:APPDATA\Code\Cache\*", "$env:APPDATA\Code\CachedData\*",
         "$env:LOCALAPPDATA\NVIDIA\GLCache\*", "$env:LOCALAPPDATA\AMD\DxCache\*",
         "$env:LOCALAPPDATA\Microsoft\Windows\INetCache\*",
         "$env:LOCALAPPDATA\Microsoft\Office\16.0\OfficeFileCache\*",
         "$env:LOCALAPPDATA\Packages\Microsoft.WindowsStore_8wekyb3d8bbwe\LocalCache\*",
-        "$env:windir\logs\CBS\*"
+        "$env:windir\logs\CBS\*", "$env:windir\panther\*", "$env:ProgramData\Microsoft\Windows\WER\ReportQueue\*",
+        "$env:SystemRoot\System32\Winevt\Logs\*"
     )
     foreach ($location in $locationsToClean) {
         Write-Log "Limpiando: $location"
         Remove-Item -Path $location -Recurse -Force -ErrorAction SilentlyContinue
     }
+
+    Write-Log "Vaciando registros de eventos de Windows..."
+    wevtutil el | ForEach-Object { wevtutil cl "$_" }
 
     Write-Log "Limpiando caché de DNS y Papelera de Reciclaje..."
     Clear-DnsClientCache; ipconfig /flushdns
@@ -141,52 +148,44 @@ function Invoke-DeepClean {
 
     Write-Log "Limpiando el almacén de componentes de Windows (WinSxS)..."
     Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
-    Write-Log "Analizando almacén de componentes para posible recuperación de espacio..."
-    Dism.exe /online /Cleanup-Image /AnalyzeComponentStore | Out-File -FilePath $logFile -Append
     
     $finalDiskSpace = (Get-PSDrive C).Free
     $spaceFreed = [math]::Round(($finalDiskSpace - $initialDiskSpace) / 1GB, 2)
-    Write-Log "Limpieza Profunda Finalizada. Espacio liberado: $spaceFreed GB" -ForegroundColor Green
+    Write-Log "Limpieza Exhaustiva Finalizada. Espacio liberado: $spaceFreed GB" -ForegroundColor Green
 }
 
-# --- FUNCIÓN DE ACTUALIZACIÓN ---
+# --- [2] FUNCIÓN DE ACTUALIZACIÓN ---
 function Invoke-UniversalUpdate {
     Show-SectionTitle "Iniciando Actualización Universal"
     
     Write-Log "Fase 1: Actualizando Windows..."
     Write-Log "Esto puede tardar MUCHO tiempo. Ten paciencia."
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue
-    Install-Module -Name PSWindowsUpdate -Force -AcceptLicense -ErrorAction SilentlyContinue
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue | Out-Null
+    Install-Module -Name PSWindowsUpdate -Force -AcceptLicense -ErrorAction SilentlyContinue | Out-Null
     Import-Module PSWindowsUpdate -ErrorAction SilentlyContinue
     Get-WindowsUpdate -AcceptAll -Install -AutoReboot | Out-Null
     Write-Log "Sistema Operativo Windows actualizado." -ForegroundColor Green
 
     Write-Log "Fase 2: Actualizando aplicaciones con Winget..."
     if (Get-Command "winget" -ErrorAction SilentlyContinue) {
-        Write-Log "Winget detectado. Actualizando todos los paquetes..."
         winget upgrade --all --accept-package-agreements --accept-source-agreements --disable-interactivity
-        winget source reset --force | Out-Null
         Write-Log "Aplicaciones de Winget actualizadas." -ForegroundColor Green
-    } else { Write-Warning "Winget no encontrado." }
+    } else { Write-Log "Winget no encontrado." -ForegroundColor Yellow }
 
     Write-Log "Fase 3: Actualizando aplicaciones con Chocolatey..."
     if (Get-Command "choco" -ErrorAction SilentlyContinue) {
-        Write-Log "Chocolatey detectado. Actualizando todos los paquetes..."
         choco upgrade all -y --ignore-checksums
-        choco cache -d -y | Out-Null
         Write-Log "Aplicaciones de Chocolatey actualizadas." -ForegroundColor Green
-    } else { Write-Warning "Chocolatey no encontrado." }
+    } else { Write-Log "Chocolatey no encontrado." -ForegroundColor Yellow }
     
     Write-Log "Fase 4: Actualizando aplicaciones con Scoop..."
     if (Get-Command "scoop" -ErrorAction SilentlyContinue) {
-        Write-Log "Scoop detectado. Actualizando todos los paquetes..."
-        scoop update *
-        scoop cache rm *
+        scoop update *; scoop cleanup *
         Write-Log "Aplicaciones de Scoop actualizadas." -ForegroundColor Green
-    } else { Write-Warning "Scoop no encontrado." }
+    } else { Write-Log "Scoop no encontrado." -ForegroundColor Yellow }
 }
 
-# --- FUNCIÓN DE OPTIMIZACIÓN ---
+# --- [3] FUNCIÓN DE OPTIMIZACIÓN ---
 function Invoke-ExtremeOptimization {
     Show-SectionTitle "Aplicando Optimizaciones Extremas"
 
@@ -195,93 +194,58 @@ function Invoke-ExtremeOptimization {
     $planGuid = (powercfg -l | Select-String "Máximo rendimiento" -split " ")[3]
     powercfg /s $planGuid
     powercfg.exe /hibernate off
-    Write-Log "Plan de energía optimizado." -ForegroundColor Green
 
-    Write-Log "Desactivando 'Last Access Time' en NTFS para mejorar rendimiento de SSD..."
+    Write-Log "Optimizaciones de sistema y UI..."
     fsutil behavior set disablelastaccess 1
-    Write-Log "NTFS optimizado para SSD." -ForegroundColor Green
-
-    Write-Log "Ajustando efectos visuales para máximo rendimiento manteniendo legibilidad..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFxSetting" -Value 2
-    # Re-activar suavizado de fuentes
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "FontSmoothing" -Value "2"
-    SystemParametersInfo(0x1005, 1, 0, 1) # SPI_SETFONTSMOOTHING
-    Write-Log "Efectos visuales optimizados." -ForegroundColor Green
-
-    Write-Log "Aplicando ajustes de registro para mayor respuesta del sistema y UI..."
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value "100"
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "NoNetCrawling" -Value "1" -Type DWord -Force
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Value "380000" -Type DWord -Force # Para sistemas >3.5GB RAM
+    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value "0"
+    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "AutoEndTasks" -Value "1"
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "WaitToKillServiceTimeout" -Value "2000"
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Value 0
+    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Value 00000000 -Type dword -Force
+    
+    Write-Log "Activando Hardware-Accelerated GPU Scheduling..."
+    Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Value 2 -Type Dword -Force
 
     Write-Log "Desactivando servicios y tareas de telemetría/innecesarios..."
-    $servicesToDisable = @("DiagTrack", "dmwappushservice", "SysMain", "MapsBroker", "lfsvc", "DoSvc")
+    $servicesToDisable = @("DiagTrack", "dmwappushservice", "SysMain", "MapsBroker", "lfsvc", "DoSvc", "Spooler", "Fax")
     foreach ($service in $servicesToDisable) {
         Write-Log "Desactivando servicio: $service"
         Set-Service -Name $service -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
     }
-    Set-Service -Name "BITS" -StartupType Manual -ErrorAction SilentlyContinue # BITS en manual por compatibilidad
-
-    $tasksToDisable = @(
-        "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
-        "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
-        "\Microsoft\Windows\Diagnosis\Scheduled",
-        "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"
-    )
-    foreach ($task in $tasksToDisable) {
-        Write-Log "Desactivando tarea programada: $task"
-        Disable-ScheduledTask -TaskPath $task -ErrorAction SilentlyContinue
-    }
-    Write-Log "Servicios y tareas de telemetría neutralizados." -ForegroundColor Green
 
     Write-Log "Aplicando optimizaciones de red avanzadas (TCP Optimizer)..."
-    netsh int tcp set global autotuninglevel=normal
-    netsh int tcp set global ecncapability=enabled
-    netsh int tcp set global rss=enabled
-    netsh int tcp set supplemental template=internet congestionprovider=ctcp # CTCP para baja latencia
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" -Name "TcpAckFrequency" -Value 1 -ErrorAction SilentlyContinue
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" -Name "TCPNoDelay" -Value 1 -ErrorAction SilentlyContinue
-    Write-Log "Configuración de red optimizada para baja latencia." -ForegroundColor Green
+    netsh int tcp set global autotuninglevel=normal; netsh int tcp set global ecncapability=enabled; netsh int tcp set global rss=enabled
+    netsh int tcp set supplemental template=internet congestionprovider=ctcp
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TcpAckFrequency" -Value 1 -ErrorAction SilentlyContinue
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TCPNoDelay" -Value 1 -ErrorAction SilentlyContinue
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
 
-    Write-Log "Listando programas que se inician con Windows (para revisión manual):"
-    Get-CimInstance Win32_StartupCommand | Select-Object Name, User, Location | Format-Table -AutoSize | Out-File -FilePath $logFile -Append
+    Write-Log "¡EXTREMO! Desactivando mitigaciones de Spectre/Meltdown. Requiere reinicio." -ForegroundColor Yellow
+    $confirmation = Read-Host "¿Deseas aplicar esta optimización de CPU de ALTO RIESGO? (S/N)"
+    if ($confirmation -eq 'S') {
+        Write-Log "DESACTIVANDO mitigaciones. Aceptas el riesgo." -ForegroundColor Red
+        reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
+        reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f
+    }
+    Write-Log "Optimizaciones Extremas Aplicadas." -ForegroundColor Green
 }
 
-# --- FUNCIÓN DE DEPURACIÓN (BLOATWARE) ---
-function Invoke-Debloat {
-    Show-SectionTitle "Depuración de Windows (Bloatware)"
+# --- [4] FUNCIÓN DE DEPURACIÓN (BLOATWARE) ---
+function Invoke-DeepDebloat {
+    Show-SectionTitle "Depuración Profunda de Windows (Bloatware)"
     $appsToRemove = @(
-        "Microsoft.549981C3F5F10"           # Cortana
-        "*Microsoft.Windows.Search*"        # Búsqueda (Cuidado, puede afectar la barra de búsqueda)
-        "Microsoft.WindowsSoundRecorder"    # Grabadora de voz
-        "Microsoft.XboxApp"
-        "Microsoft.Xbox.TCUI"
-        "Microsoft.XboxGameOverlay"
-        "Microsoft.XboxGamingOverlay"
-        "Microsoft.XboxIdentityProvider"
-        "Microsoft.XboxSpeechToTextOverlay"
-        "Microsoft.ZuneMusic"               # Groove Music
-        "Microsoft.ZuneVideo"               # Películas y TV
-        "Microsoft.YourPhone"               # Tu Teléfono
-        "Microsoft.WindowsAlarms"           # Alarmas y Reloj
-        "Microsoft.WindowsMaps"             # Mapas
-        "Microsoft.SkypeApp"
-        "Microsoft.Getstarted"
-        "Microsoft.GetHelp"
-        "Microsoft.MicrosoftSolitaireCollection"
-        "Microsoft.People"                  # Contactos
-        "Microsoft.Office.OneNote"
-        "Microsoft.OneConnect"              # 3D Viewer
-        "Microsoft.Print3D"
-        "Microsoft.Wallet"
+        "Microsoft.549981C3F5F10", "*Cortana*", "*Microsoft.Windows.Search*", "Microsoft.WindowsSoundRecorder", 
+        "Microsoft.XboxApp", "Microsoft.Xbox.TCUI", "Microsoft.XboxGameOverlay", "Microsoft.XboxGamingOverlay", 
+        "Microsoft.XboxIdentityProvider", "Microsoft.XboxSpeechToTextOverlay", "Microsoft.ZuneMusic", 
+        "Microsoft.ZuneVideo", "Microsoft.YourPhone", "Microsoft.WindowsAlarms", "Microsoft.WindowsMaps", 
+        "Microsoft.SkypeApp", "Microsoft.Getstarted", "Microsoft.GetHelp", "Microsoft.MicrosoftSolitaireCollection", 
+        "Microsoft.People", "Microsoft.Office.OneNote", "Microsoft.OneConnect", "Microsoft.Print3D", "Microsoft.Wallet",
+        "Microsoft.MixedReality.Portal", "Microsoft.WindowsFeedbackHub", "Microsoft.WebMediaExtensions"
     )
-
-    Write-Host "Este proceso eliminará aplicaciones preinstaladas de Windows." -ForegroundColor Yellow
-    Write-Host "REVISA LA LISTA CUIDADOSAMENTE en el script si deseas conservar alguna." -ForegroundColor Yellow
+    Write-Host "Este proceso eliminará una lista EXTENSA de aplicaciones preinstaladas." -ForegroundColor Yellow
     $confirmation = Read-Host "¿Estás seguro de que deseas eliminar estas aplicaciones? (S/N)"
-    if ($confirmation -ne 'S' -and $confirmation -ne 's') {
-        Write-Log "Depuración cancelada por el usuario."
-        return
-    }
+    if ($confirmation -ne 'S') { Write-Log "Depuración cancelada."; return }
 
     foreach ($app in $appsToRemove) {
         Write-Log "Intentando eliminar: $app"
@@ -291,134 +255,256 @@ function Invoke-Debloat {
     Write-Log "Depuración de bloatware completada." -ForegroundColor Green
 }
 
-# --- FUNCIÓN DE MANTENIMIENTO FINAL ---
-function Invoke-FinalMaintenance {
-    Show-SectionTitle "Mantenimiento Final del Sistema"
+# --- [5] FUNCIÓN DE LIBERACIÓN DE RAM ---
+function Invoke-FreeRAM {
+    Show-SectionTitle "Liberando Memoria RAM (Limpiando Standby List)"
+    Write-Log "Esta operación fuerza a Windows a liberar memoria en caché."
+    try {
+        $Code = @"
+        using System;
+        using System.Runtime.InteropServices;
+        public class MemoryTool {
+            [DllImport("psapi.dll")]
+            public static extern bool EmptyWorkingSet(IntPtr hProcess);
+
+            [DllImport("advapi32.dll", SetLastError=true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            static extern bool AdjustTokenPrivileges(IntPtr TokenHandle, [MarshalAs(UnmanagedType.Bool)]bool DisableAllPrivileges, ref TOKEN_PRIVILEGES NewState, UInt32 BufferLength, IntPtr PreviousState, IntPtr ReturnLength);
+
+            [DllImport("kernel32.dll", SetLastError=true)]
+            static extern IntPtr GetCurrentProcess();
+
+            [DllImport("advapi32.dll", SetLastError=true, CharSet=CharSet.Auto)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            static extern bool OpenProcessToken(IntPtr ProcessHandle, UInt32 DesiredAccess, out IntPtr TokenHandle);
+            
+            [DllImport("advapi32.dll", SetLastError=true, CharSet=CharSet.Auto)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            static extern bool LookupPrivilegeValue(string lpSystemName, string lpName, out LUID lpLuid);
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct LUID { public uint LowPart; public int HighPart; }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct TOKEN_PRIVILEGES { public uint PrivilegeCount; public LUID_AND_ATTRIBUTES Privileges; }
+            
+            [StructLayout(LayoutKind.Sequential)]
+            public struct LUID_AND_ATTRIBUTES { public LUID Luid; public uint Attributes; }
+            
+            const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
+            const uint TOKEN_QUERY = 0x0008;
+            const uint SE_PRIVILEGE_ENABLED = 0x00000002;
+            const string SE_INCREASE_QUOTA_NAME = "SeIncreaseQuotaPrivilege";
+            
+            public static void ClearStandbyCache() {
+                IntPtr hToken;
+                OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out hToken);
+                TOKEN_PRIVILEGES tkp = new TOKEN_PRIVILEGES{ PrivilegeCount = 1, Privileges = new LUID_AND_ATTRIBUTES { Attributes = SE_PRIVILEGE_ENABLED }};
+                LookupPrivilegeValue(null, SE_INCREASE_QUOTA_NAME, out tkp.Privileges.Luid);
+                AdjustTokenPrivileges(hToken, false, ref tkp, 0, IntPtr.Zero, IntPtr.Zero);
+                
+                long originalSize = 1024L * 1024 * 256; // 256MB
+                long maxSize = 1024L * 1024 * 1024 * 16; // 16GB
+                try {
+                    GC.AddMemoryPressure(originalSize);
+                    for (int i=0; i<10; i++) System.Threading.Thread.Sleep(100);
+                    EmptyWorkingSet(GetCurrentProcess());
+                } finally {
+                    GC.RemoveMemoryPressure(originalSize);
+                }
+            }
+        }
+"@
+        Add-Type -TypeDefinition $Code -Language CSharp
+        $memBefore = (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1024
+        Write-Log "Memoria libre ANTES: $([math]::Round($memBefore, 2)) MB"
+        [MemoryTool]::ClearStandbyCache()
+        Start-Sleep -Seconds 2
+        $memAfter = (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1024
+        $freedMem = $memAfter - $memBefore
+        Write-Log "Memoria libre DESPUÉS: $([math]::Round($memAfter, 2)) MB"
+        Write-Log "¡Se han liberado $([math]::Round($freedMem, 2)) MB de RAM!" -ForegroundColor Green
+    } catch {
+        Write-Warning "Error al ejecutar la limpieza de RAM. Puede que el entorno de ejecución lo impida."
+    }
+}
+
+# --- [6] FUNCIÓN DE MANTENIMIENTO ---
+function Invoke-SystemMaintenance {
+    Show-SectionTitle "Mantenimiento y Reparación del Sistema"
     
     Write-Log "Optimizando unidades (TRIM/Defrag)..."
     Get-WmiObject -Class Win32_Volume | Where-Object { $_.DriveType -eq 3 -and $_.DriveLetter } | ForEach-Object { 
-        Write-Log "Optimizando unidad $($_.DriveLetter)..."
         Optimize-Volume -DriveLetter $_.DriveLetter.Substring(0,1) -Verbose 
     }
 
-    Write-Log "Verificando integridad de archivos del sistema (SFC /scannow)..."
+    Write-Log "Verificando y reparando archivos del sistema (SFC /scannow)..."
     sfc.exe /scannow | Out-Null
-    Write-Log "Verificación SFC completada." -ForegroundColor Green
+    Write-Log "SFC completado."
+
+    Write-Log "Verificando y reparando imagen de Windows (DISM)..."
+    Dism.exe /Online /Cleanup-Image /ScanHealth | Out-Null
+    Dism.exe /Online /Cleanup-Image /CheckHealth | Out-Null
+    Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null
+    Write-Log "DISM completado."
+
+    $confirmation = Read-Host "¿Deseas programar un escaneo del disco (chkdsk) en el próximo reinicio? (S/N)"
+    if ($confirmation -eq 'S') {
+        Write-Log "Programando chkdsk /f en la unidad C: para el próximo reinicio." -ForegroundColor Yellow
+        chkdsk C: /f
+    }
+    Write-Log "Mantenimiento del sistema completado." -ForegroundColor Green
+}
+
+# --- [7] FUNCIÓN DE UTILIDADES ---
+function Invoke-SystemUtilities {
+    Show-SectionTitle "Utilidades del Sistema"
+    $scriptPath = $MyInvocation.MyCommand.Path
+    $regPath = "HKCU:\Software\Classes\DesktopBackground\Shell\OptimizadorLeviatan"
+    $commandPath = "HKCU:\Software\Classes\DesktopBackground\Shell\OptimizadorLeviatan\command"
+
+    Write-Host " [1] Añadir Optimizador al Menú Contextual del Escritorio"
+    Write-Host " [2] Quitar Optimizador del Menú Contextual"
+    Write-Host " [3] Mostrar archivos ocultos y extensiones"
+    Write-Host " [4] Ocultar archivos ocultos y extensiones"
+    $utilChoice = Read-Host "Elige una utilidad"
     
-    Write-Log "Verificando salud de la imagen de Windows (DISM CheckHealth)..."
-    Dism.exe /Online /Cleanup-Image /CheckHealth | Out-File -FilePath $logFile -Append
-    Write-Log "Verificación DISM completada." -ForegroundColor Green
+    switch ($utilChoice) {
+        '1' {
+            Write-Log "Añadiendo al menú contextual..."
+            New-Item -Path $regPath -Name "Icon" -Value "imageres.dll,-109" -Force
+            New-Item -Path $regPath -Name "Position" -Value "Bottom" -Force
+            New-Item -Path $commandPath -Value "powershell.exe -NoExit -Command `". '$scriptPath'`"" -Force
+            Write-Log "¡Listo! Haz clic derecho en el escritorio." -ForegroundColor Green
+        }
+        '2' {
+            Write-Log "Quitando del menú contextual..."
+            Remove-Item -Path $regPath -Recurse -Force -ErrorAction SilentlyContinue
+            Write-Log "Eliminado con éxito." -ForegroundColor Green
+        }
+        '3' {
+            Write-Log "Mostrando archivos ocultos y extensiones..."
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0
+            Stop-Process -Name explorer -Force
+        }
+        '4' {
+            Write-Log "Ocultando archivos ocultos y extensiones..."
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 2
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 1
+            Stop-Process -Name explorer -Force
+        }
+        default { Write-Log "Opción no válida." -ForegroundColor Red }
+    }
 }
 #endregion
 
 #region EJECUCIÓN DEL SCRIPT
-# --- BUCLE PRINCIPAL DEL MENÚ ---
 $choice = ''
 while ($choice -ne 'q') {
     Show-Menu
     $choice = Read-Host "Introduce tu elección"
 
-    # --- Creación de Punto de Restauración ---
-    if ($choice -in '1','2','3','4','5') {
+    if ($choice -in '1','2','3','4','6','8') {
         Show-SectionTitle "Creando Punto de Restauración del Sistema"
-        $restorePoint = Get-ComputerRestorePoint -ErrorAction SilentlyContinue | Where-Object { $_.CreationTime -gt (Get-Date).AddHours(-2) }
-        if ($restorePoint) {
-            Write-Log "Ya existe un punto de restauración reciente. Omitiendo creación." -ForegroundColor Green
-        } else {
-            Write-Log "Creando punto de restauración 'Pre-Fenix-Optimizer'..."
-            Checkpoint-Computer -Description "Pre-Fenix-Optimizer" -RestorePointType "MODIFY_SETTINGS"
+        if (-NOT (Get-Service -Name VSS -ErrorAction SilentlyContinue).Status -eq "Running") {
+            Write-Log "El servicio de Volume Shadow Copy no está activo. Intentando iniciarlo." -ForegroundColor Yellow
+            Start-Service -Name VSS
+            Start-Sleep -Seconds 2
+        }
+        if ((Get-ComputerRestorePoint -ErrorAction SilentlyContinue).Count -gt 0) {
+            Write-Log "Creando punto de restauración 'Pre-Leviatan-Optimizer'..."
+            Checkpoint-Computer -Description "Pre-Leviatan-Optimizer" -RestorePointType "MODIFY_SETTINGS"
             Write-Log "Punto de restauración creado con éxito." -ForegroundColor Green
+        } else {
+            Write-Log "La creación de puntos de restauración parece estar deshabilitada en tu sistema. Omitiendo." -ForegroundColor Red
         }
     }
 
     switch ($choice) {
-        '1' { Invoke-DeepClean }
+        '1' { Invoke-ExhaustiveClean }
         '2' { Invoke-UniversalUpdate }
         '3' { Invoke-ExtremeOptimization }
-        '4' { Invoke-Debloat }
-        '5' {
-            Invoke-DeepClean
+        '4' { Invoke-DeepDebloat }
+        '5' { Invoke-FreeRAM }
+        '6' { Invoke-SystemMaintenance }
+        '7' { Invoke-SystemUtilities }
+        '8' {
+            Write-Log "¡MODO APOCALIPSIS INICIADO!" -ForegroundColor Red
+            Invoke-ExhaustiveClean
             Invoke-UniversalUpdate
             Invoke-ExtremeOptimization
-            Invoke-Debloat
-            Invoke-FinalMaintenance
+            Invoke-DeepDebloat
+            Invoke-FreeRAM
+            Invoke-SystemMaintenance
         }
         'q' { break }
         default { Write-Host "Opción no válida." -ForegroundColor Red }
     }
 
-    if ($choice -in '1','2','3','4','5') {
+    if ($choice -in '1','2','3','4','5','6','7', '8') {
         Show-SectionTitle "Operación Completada"
         Write-Host "🎉 ¡La operación seleccionada ha finalizado!" -ForegroundColor Green
         Write-Host "Se ha creado un registro detallado en tu escritorio:" -ForegroundColor Cyan
         Write-Host "$logFile" -ForegroundColor White
-        Write-Host "Se recomienda ENCARECIDAMENTE reiniciar el sistema si has realizado optimizaciones o actualizaciones." -ForegroundColor Yellow
+        Write-Host "Se recomienda ENCARECIDAMENTE reiniciar el sistema para que todos los cambios surtan efecto." -ForegroundColor Yellow
         Read-Host "Presiona Enter para volver al menú..."
     }
 }
 
-Write-Host "Gracias por usar Optimizador Fénix. ¡Hasta la próxima!" -ForegroundColor Magenta
+Write-Host "Gracias por usar Optimizador Leviatán. ¡Disfruta del poder!" -ForegroundColor Cyan
 Start-Sleep -Seconds 3
 #endregion
 </code></pre>
                     </div>
 
-                    <div id="copy-feedback" class="text-center text-indigo-400 font-semibold mt-4 h-6 transition-opacity duration-300 opacity-0">
-                        ¡Script Fénix copiado al portapapeles!
-                    </div>
-
-                    <div class="mt-8">
-                        <h3 class="text-xl font-bold text-white mb-3">Instrucciones de Uso</h3>
-                        <ol class="list-decimal list-inside space-y-3 text-gray-300">
-                             <li>Haz clic derecho en el menú de Inicio y selecciona <span class="font-semibold text-indigo-300 bg-gray-900/50 px-2 py-1 rounded-md">Terminal (Administrador)</span> o <span class="font-semibold text-indigo-300 bg-gray-900/50 px-2 py-1 rounded-md">PowerShell (Administrador)</span>.</li>
-                            <li>Copia el script con el botón de arriba y pégalo en la terminal (clic derecho).</li>
-                            <li>Presiona <span class="font-semibold text-indigo-300">Enter</span> para ejecutarlo. Aparecerá un menú interactivo.</li>
-                            <li>Selecciona la opción que desees (se recomienda <span class="font-semibold text-indigo-300">"5"</span> para la primera vez) y presiona <span class="font-semibold text-indigo-300">Enter</span>.</li>
-                            <li>Sigue las instrucciones en pantalla. Al finalizar, reinicia tu PC.</li>
-                        </ol>
+                    <div id="copy-feedback" class="text-center text-cyan-400 font-semibold mt-4 h-6 transition-opacity duration-300 opacity-0">
+                        ¡Script Leviatán copiado al portapapeles!
                     </div>
                 </div>
             </main>
 
-            <section class="max-w-5xl mx-auto mt-16 text-center">
-                 <h2 class="text-3xl font-bold text-white mb-8">Novedades de la Versión Fénix</h2>
-                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section class="max-w-6xl mx-auto mt-16">
+                 <h2 class="text-3xl font-bold text-white mb-8 text-center">Novedades de la Versión Leviatán</h2>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="glass-effect rounded-xl p-6">
-                        <div class="text-4xl mb-3">🛠️</div>
-                        <h4 class="font-bold text-lg text-white">Menú Interactivo</h4>
-                        <p class="text-gray-400 text-sm">Control total. Elige qué tareas ejecutar: limpieza, actualizaciones, optimización, depuración o todo a la vez.</p>
+                        <div class="text-4xl mb-3">🧠</div>
+                        <h4 class="font-bold text-lg text-white">Liberador de RAM</h4>
+                        <p class="text-gray-400 text-sm">Nueva función que fuerza la limpieza de la "Standby List" de Windows, liberando GB de RAM en caché al instante.</p>
                     </div>
                     <div class="glass-effect rounded-xl p-6">
-                        <div class="text-4xl mb-3">🔄</div>
-                        <h4 class="font-bold text-lg text-white">Actualizador Universal</h4>
-                        <p class="text-gray-400 text-sm">No solo actualiza Windows. Detecta y actualiza apps de Winget, Chocolatey y Scoop para tener TODO al día.</p>
-                    </div>
-                    <div class="glass-effect rounded-xl p-6">
-                        <div class="text-4xl mb-3">🗑️</div>
-                        <h4 class="font-bold text-lg text-white">Depurador de Bloatware</h4>
-                        <p class="text-gray-400 text-sm">Opción para eliminar de forma segura decenas de aplicaciones preinstaladas inútiles de Windows, liberando recursos.</p>
-                    </div>
-                    <div class="glass-effect rounded-xl p-6">
-                        <div class="text-4xl mb-3">🧹</div>
-                        <h4 class="font-bold text-lg text-white">Limpieza Hiper-agresiva</h4>
-                        <p class="text-gray-400 text-sm">Limpia más a fondo que nunca: cachés de GPU (NVIDIA/AMD), de Office, de la Tienda de Windows y mucho más.</p>
-                    </div>
-                    <div class="glass-effect rounded-xl p-6">
-                        <div class="text-4xl mb-3">⚡</div>
+                        <div class="text-4xl mb-3">💥</div>
                         <h4 class="font-bold text-lg text-white">Optimización Extrema</h4>
-                        <p class="text-gray-400 text-sm">Nuevos ajustes de registro, optimización de red para baja latencia (gaming) y mejoras específicas para SSDs.</p>
+                        <p class="text-gray-400 text-sm">Opción de alto riesgo para desactivar mitigaciones de CPU (Spectre/Meltdown) y habilitar el planificador de GPU por hardware.</p>
                     </div>
-                     <div class="glass-effect rounded-xl p-6">
-                        <div class="text-4xl mb-3">📜</div>
-                        <h4 class="font-bold text-lg text-white">Registro Detallado</h4>
-                        <p class="text-gray-400 text-sm">Crea un archivo de registro (log) en tu escritorio con cada acción realizada, para tu total transparencia y control.</p>
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="text-4xl mb-3">🖱️</div>
+                        <h4 class="font-bold text-lg text-white">Menú Contextual</h4>
+                        <p class="text-gray-400 text-sm">Un nuevo módulo de utilidades te permite añadir o quitar el script del menú contextual del escritorio para un acceso rápido.</p>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="text-4xl mb-3">✨</div>
+                        <h4 class="font-bold text-lg text-white">Limpieza Exhaustiva</h4>
+                        <p class="text-gray-400 text-sm">Ahora limpia cachés de Discord, Steam, Spotify, VSCode, logs de eventos de Windows y reportes de errores.</p>
                     </div>
                  </div>
             </section>
 
+             <div class="mt-12 glass-effect rounded-2xl p-6 md:p-8 max-w-6xl mx-auto">
+                <h3 class="text-xl font-bold text-white mb-3">Instrucciones de Uso</h3>
+                <ol class="list-decimal list-inside space-y-3 text-gray-300">
+                     <li>Haz clic derecho en el menú de Inicio y selecciona <span class="font-semibold text-cyan-300 bg-gray-900/50 px-2 py-1 rounded-md">Terminal (Administrador)</span>.</li>
+                    <li>Copia el script con el botón de arriba y pégalo en la terminal (normalmente con clic derecho).</li>
+                    <li>Presiona <span class="font-semibold text-cyan-300">Enter</span> para cargar el script. Aparecerá el menú interactivo Leviatán.</li>
+                    <li>Selecciona la opción que desees (se recomienda <span class="font-semibold text-cyan-300">"8"</span> para una optimización total) y presiona <span class="font-semibold text-cyan-300">Enter</span>.</li>
+                    <li>Sigue las instrucciones en pantalla. Al finalizar, reinicia tu PC para aplicar todos los cambios.</li>
+                </ol>
+            </div>
+
+
             <footer class="text-center mt-16 py-6 border-t border-white/10">
-                <p class="text-gray-400">Reconstruido con 🔥 para la comunidad de usuarios avanzados de Windows.</p>
-                 <p class="text-gray-500 text-sm">Úsese de forma responsable. El poder conlleva responsabilidad.</p>
+                <p class="text-gray-400">Forjado con poder abismal para la comunidad de entusiastas de Windows.</p>
+                 <p class="text-gray-500 text-sm">Un gran poder conlleva una gran responsabilidad. Úsese con sabiduría.</p>
             </footer>
         </div>
     </div>
@@ -432,14 +518,16 @@ Start-Sleep -Seconds 3
             navigator.clipboard.writeText(powerShellScript.trim()).then(() => {
                 copyFeedback.classList.remove('opacity-0');
                 copyButton.textContent = '¡Copiado!';
-                copyButton.classList.add('bg-green-600');
+                copyButton.classList.remove('bg-cyan-600');
+                copyButton.classList.add('bg-green-500');
                 setTimeout(() => {
                     copyFeedback.classList.add('opacity-0');
-                    copyButton.textContent = 'Copiar Script Completo';
-                    copyButton.classList.remove('bg-green-600');
-                }, 2000);
+                    copyButton.textContent = 'Copiar Script Leviatán';
+                    copyButton.classList.remove('bg-green-500');
+                    copyButton.classList.add('bg-cyan-600');
+                }, 2500);
             }).catch(err => {
-                // Fallback for older browsers or environments without clipboard API access
+                // Fallback for older browsers
                 try {
                     const textArea = document.createElement('textarea');
                     textArea.value = powerShellScript.trim();
@@ -451,12 +539,14 @@ Start-Sleep -Seconds 3
                     
                     copyFeedback.classList.remove('opacity-0');
                     copyButton.textContent = '¡Copiado!';
-                    copyButton.classList.add('bg-green-600');
+                    copyButton.classList.remove('bg-cyan-600');
+                    copyButton.classList.add('bg-green-500');
                      setTimeout(() => {
                         copyFeedback.classList.add('opacity-0');
-                        copyButton.textContent = 'Copiar Script Completo';
-                        copyButton.classList.remove('bg-green-600');
-                    }, 2000);
+                        copyButton.textContent = 'Copiar Script Leviatán';
+                        copyButton.classList.remove('bg-green-500');
+                        copyButton.classList.add('bg-cyan-600');
+                    }, 2500);
                 } catch (error) {
                     copyFeedback.textContent = 'Error al copiar.';
                     copyFeedback.classList.add('text-red-500');
