@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Leviatán v8.1 - Suite de Rendimiento Total</title>
+    <title>Optimizador Leviatán v8.2 - Suite de Rendimiento Total</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -39,7 +39,7 @@
         <!-- Header -->
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-red">
-                Optimizador Leviatán v8.1
+                Optimizador Leviatán v8.2
             </h1>
             <p class="text-lg md:text-xl text-rose-300 max-w-3xl mx-auto">
                 La suite de rendimiento definitiva inspirada en System Mechanic Pro. Limpia, acelera, protege y repara tu sistema con un poder sin precedentes.
@@ -51,7 +51,7 @@
             <!-- Code Block Section -->
             <div class="glass-effect rounded-2xl p-6 md:p-8 mb-12">
                 <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - v8.1 Corregido y Mejorado</h2>
+                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - v8.2 Estable y Corregido</h2>
                     <button id="copyButton" class="w-full md:w-auto bg-rose-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-500">
                         Copiar Script Leviatán
                     </button>
@@ -61,12 +61,12 @@
                 <div class="bg-black/70 rounded-lg overflow-hidden border border-white/10">
                     <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[550px]"><code id="powerShellScript"># =================================================================================================
 #
-#   PowerScript Optimizador LEVIATÁN v8.1 - Edición Mecánico del Sistema (Corregido)
+#   PowerScript Optimizador LEVIATÁN v8.2 - Edición Mecánico del Sistema (Estable)
 #   Inspirado en las capacidades de System Mechanic Pro para una optimización integral.
 #   Objetivo: Limpieza, aceleración, protección y reparación del sistema a nivel experto.
 #
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-#   Este script realiza cambios profundos (incluyendo en el registro). Úsese bajo su propia responsabilidad.
+#   Este script realiza cambios profundos. Úsese bajo su propia responsabilidad.
 #
 # =================================================================================================
 
@@ -97,14 +97,10 @@ Function Write-Log {
 function Create-RestorePoint {
     Show-SectionTitle "Creando Punto de Restauración del Sistema"
     try {
-        if (-NOT (Get-Service -Name VSS -ErrorAction SilentlyContinue).Status -eq "Running") {
-            Write-Log "El servicio de Volume Shadow Copy no está activo. Intentando iniciarlo." -ForegroundColor Yellow
-            Start-Service -Name VSS
-            Start-Sleep -Seconds 2
-        }
-        if (Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty "SystemRestoreEnabled") {
-            Write-Log "Creando punto de restauración 'Pre-Leviatan-v8.1-Optimizer'..."
-            $restorePoint = Checkpoint-Computer -Description "Pre-Leviatan-v8.1-Optimizer" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
+        $srEnabled = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "DisableSR" -ErrorAction SilentlyContinue).DisableSR -eq 0
+        if ($srEnabled) {
+            Write-Log "Creando punto de restauración 'Pre-Leviatan-v8.2-Optimizer'..."
+            Checkpoint-Computer -Description "Pre-Leviatan-v8.2-Optimizer" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
             Write-Log "Punto de restauración creado con éxito." -ForegroundColor Green
         } else {
             Write-Log "La creación de puntos de restauración parece estar deshabilitada en tu sistema. Omitiendo." -ForegroundColor Red
@@ -133,7 +129,7 @@ function Invoke-ExhaustiveClean {
         Remove-Item -Path $location -Recurse -Force -ErrorAction SilentlyContinue
     }
     Write-Log "Vaciando registros de eventos, DNS y Papelera..."
-    wevtutil el | ForEach-Object { wevtutil cl "$_" -ErrorAction SilentlyContinue }
+    wevtutil el | Where-Object { $_ } | ForEach-Object { wevtutil cl "$_" -ErrorAction SilentlyContinue }
     ipconfig /flushdns | Out-Null
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
     Write-Log "Limpiando el almacén de componentes de Windows (WinSxS)..."
@@ -167,8 +163,10 @@ function Invoke-RegistryClean {
 
 function Invoke-BloatwareRemoval {
     Show-SectionTitle "Depuración Profunda de Windows (Bloatware)"
-    Import-Module Appx -ErrorAction SilentlyContinue
-    Import-Module Dism -ErrorAction SilentlyContinue
+    if (-not (Get-Command Get-AppxPackage -ErrorAction SilentlyContinue) -or -not (Get-Command Get-AppxProvisionedPackage -ErrorAction SilentlyContinue)) {
+        Write-Log "Los comandos para eliminar bloatware (Appx/Dism) no están disponibles en esta sesión. Omitiendo." -ForegroundColor Red
+        return
+    }
      $appsToRemove = @(
         "Microsoft.549981C3F5F10", "*Cortana*", "Microsoft.WindowsSoundRecorder", 
         "Microsoft.Xbox*", "Microsoft.ZuneMusic", "Microsoft.ZuneVideo", "Microsoft.YourPhone", 
@@ -220,15 +218,12 @@ function Invoke-Defrag {
 
 function Invoke-ExtremeOptimization {
     Show-SectionTitle "Aplicando Optimizaciones Extremas Seguras"
-    Write-Log "Activando plan 'Máximo Rendimiento' y optimizando sistema..."
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
-    $maxPerfGuid = ((powercfg -l | Select-String "Máximo rendimiento").Line -split " ")[3]
-    if ($maxPerfGuid) {
-        powercfg /s $maxPerfGuid
-        Write-Log "Plan de energía 'Máximo Rendimiento' activado." -ForegroundColor Green
-    } else {
-        Write-Log "No se pudo encontrar el plan de energía 'Máximo Rendimiento'." -ForegroundColor Yellow
-    }
+    $ultimatePerformanceGuid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
+    Write-Log "Activando plan 'Máximo Rendimiento'..."
+    powercfg -duplicatescheme $ultimatePerformanceGuid | Out-Null
+    powercfg /s $ultimatePerformanceGuid
+    Write-Log "Plan de energía 'Máximo Rendimiento' activado." -ForegroundColor Green
+    
     powercfg.exe /hibernate off
     fsutil behavior set disablelastaccess 1
     Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "WaitToKillServiceTimeout" -Value "2000"
@@ -321,7 +316,7 @@ function Invoke-DiskCheck {
 function Show-MainMenu {
     Clear-Host
     Write-Host "╔════════════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
-    Write-Host "║        🐲 OPTIMIZADOR LEVIATÁN v8.1 - Edición Mecánico 🐲         ║" -ForegroundColor White
+    Write-Host "║        🐲 OPTIMIZADOR LEVIATÁN v8.2 - Edición Mecánico 🐲         ║" -ForegroundColor White
     Write-Host "╚════════════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
     Write-Host ""
     Write-Host "ADVERTENCIA: Herramienta de poder extremo. Proceda con precaución." -ForegroundColor Red
