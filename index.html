@@ -1,12 +1,75 @@
-# =================================================================================================
-#
-#   PowerScript Optimizer LEVIATÁN v6.0 - EDICIÓN PROFESIONAL
-#   Objetivo: Limpieza exhaustiva, optimización profunda, mantenimiento preventivo y diagnóstico avanzado.
-#
-#   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-#   Este script realiza cambios profundos. Úsese bajo su propia responsabilidad.
-#
-# =================================================================================================
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizador Leviatán para Windows - Script de Poder Extremo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+        }
+        .glass-effect {
+            background: rgba(13, 17, 23, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-block {
+            scrollbar-width: thin;
+            scrollbar-color: #06b6d4 transparent;
+        }
+        .code-block::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .code-block::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 4px;
+        }
+        .code-block::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 25px 8px rgba(6, 182, 212, 0.4);
+        }
+        .text-shadow-cyan {
+            text-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+        }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/0d1117/06b6d4?text=LEVIATAN');">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative container mx-auto px-4 py-8 md:py-16">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-cyan">
+                Optimizador Leviatán
+            </h1>
+            <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto">
+                El poder abismal del rendimiento liberado. Un script de PowerShell definitivo para limpiar, actualizar, depurar y acelerar tu sistema hasta el límite.
+            </p>
+        </header>
+        
+        <main class="max-w-6xl mx-auto">
+            <div class="glass-effect rounded-2xl p-6 md:p-8 mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
+                    <h2 class="text-2xl font-bold text-white">Script de PowerShell v6.0 - Leviatán</h2>
+                    <button id="copyButton" class="w-full md:w-auto bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-cyan-500 focus:outline-none focus:ring-4 focus:ring-cyan-400">
+                        Copiar Script Leviatán
+                    </button>
+                </div>
+                <div class="bg-black/70 rounded-lg overflow-hidden border border-white/10">
+                    <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[550px]"><code id="powerShellScript">// =================================================================================================
+//
+//   PowerScript Optimizador LEVIATÁN v6.0
+//   Objetivo: Limpieza exhaustiva, optimización extrema, mantenimiento preventivo y diagnóstico avanzado.
+//
+//   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
+//   Este script realiza cambios profundos. Úsese bajo su propia responsabilidad.
+//
+// =================================================================================================
 #region PREPARACIÓN Y CONFIGURACIÓN INICIAL
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
@@ -33,20 +96,20 @@ Function Write-Log {
 
 function Show-Menu {
     Clear-Host
-    Write-Host "╔════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+    Write-Host "╔══════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
     Write-Host "║              🐲 OPTIMIZADOR LEVIATÁN PARA WINDOWS 🐲             ║" -ForegroundColor White
-    Write-Host "╚════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host "╚══════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "ADVERTENCIA: Herramienta de poder extremo. Proceda con precaución." -ForegroundColor Red
     Write-Host "Se recomienda encarecidamente cerrar todos los programas." -ForegroundColor Yellow
     Write-Host ""
     Write-Host "Selecciona una opción:" -ForegroundColor Cyan
-    Write-Host "   [1] Limpieza Exhaustiva del Sistema (Profunda)"
+    Write-Host "   [1] Limpieza Exhaustiva del Sistema"
     Write-Host "   [2] Actualización Universal (Windows, Apps, Drivers)"
     Write-Host "   [3] Optimización Extrema y de Red (Riesgo Controlado)"
     Write-Host "   [4] Depuración Profunda de Windows (Bloatware + Seguridad)"
     Write-Host "   [5] Liberación de Memoria RAM (Limpieza Avanzada)"
-    Write-Host "   [6] Mantenimiento y Reparación del Sistema (Integral)"
+    Write-Host "   [6] Mantenimiento y Reparación del Sistema"
     Write-Host "   [7] Diagnóstico Avanzado (Rendimiento, Salud del Sistema)"
     Write-Host "   [8] Utilidades del Sistema (Contextual, Tweaks, Monitor)"
     Write-Host "   [9] ¡MODO APOCALIPSIS! (Todo en Orden Óptimo)"
@@ -72,7 +135,7 @@ function Create-RestorePoint {
 #endregion
 
 #region FUNCIONES PRINCIPALES MEJORADAS
-# --- [1] FUNCIÓN DE LIMPIEZA PROFUNDA ---
+# --- [1] FUNCIÓN DE LIMPJEZA PROFUNDA ---
 function Invoke-ExhaustiveClean {
     Show-SectionTitle "Iniciando Limpieza Exhaustiva Profunda"
     $initialDiskSpace = (Get-PSDrive C).Free
@@ -81,7 +144,7 @@ function Invoke-ExhaustiveClean {
     $locationsToClean = @(
         "$env:TEMP\*", "$env:SystemRoot\Temp\*", "$env:SystemRoot\SoftwareDistribution\Download\*",
         "$env:windir\Prefetch\*", "$env:windir\Logs\*", "$env:windir\Panther\*",
-        "$env:SystemRoot\System32\Winevt\Logs\*", "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db",
+        "$env:SystemRoot\System32\Winevt\Logs\*", 
         
         # Navegadores
         "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*", 
@@ -108,7 +171,7 @@ function Invoke-ExhaustiveClean {
         # Otros
         "$env:USERPROFILE\AppData\LocalLow\Sun\Java\Deployment\cache\*",
         "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Themes\*.theme",
-        "$env:USERPROFILE\AppData\Roamming\Microsoft\Windows\WebCache\*"
+        "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\WebCache\*"
     )
     
     foreach ($location in $locationsToClean) {
@@ -130,7 +193,7 @@ function Invoke-ExhaustiveClean {
     cleanmgr.exe /sagerun:1 | Out-Null
     
     Write-Log "Limpiando el almacén de componentes de Windows (WinSxS)..."
-    Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
+    Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
     
     $finalDiskSpace = (Get-PSDrive C).Free
     $spaceFreed = [math]::Round(($finalDiskSpace - $initialDiskSpace) / 1GB, 2)
@@ -191,18 +254,14 @@ function Invoke-ExtremeOptimization {
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value "0"
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "AutoEndTasks" -Value "1"
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "WaitToKillServiceTimeout" -Value "2000"
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Value 0
-    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Value 00000000 -Type dword -Force
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Value 0
+    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Value 00000000 -Type dword -Force
     
     Write-Log "Activando Hardware-Accelerated GPU Scheduling..."
     Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Value 2 -Type Dword -Force
     
     Write-Log "Desactivando servicios innecesarios..."
-    $servicesToDisable = @(
-        "DiagTrack", "dmwappushservice", "SysMain", "MapsBroker", "lfsvc", "DoSvc", 
-        "Fax", "RemoteRegistry", "TabletInputService", "WMPNetworkSvc", "XblAuthManager",
-        "XblGameSave", "XboxNetApiSvc", "Print Spooler", "Adobe Acrobat Update Service"
-    )
+    $servicesToDisable = @("DiagTrack", "dmwappushservice", "SysMain", "MapsBroker", "lfsvc", "DoSvc", "Fax", "RemoteRegistry", "TabletInputService", "WMPNetworkSvc", "XblAuthManager", "XblGameSave", "XboxNetApiSvc", "Print Spooler", "Adobe Acrobat Update Service")
     foreach ($service in $servicesToDisable) {
         Write-Log "Desactivando servicio: $service"
         Set-Service -Name $service -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
@@ -213,7 +272,7 @@ function Invoke-ExtremeOptimization {
     netsh int tcp set supplemental template=internet congestionprovider=ctcp
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TcpAckFrequency" -Value 1 -ErrorAction SilentlyContinue
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TCPNoDelay" -Value 1 -ErrorAction SilentlyContinue
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
     
     Write-Log "Configuraciones de SSD..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "EnableSuperfetch" -Value 0 -Type DWord -Force
@@ -237,8 +296,7 @@ function Invoke-DeepDebloat {
         "Microsoft.People", "Microsoft.Office.OneNote", "Microsoft.OneConnect", "Microsoft.Print3D", "Microsoft.Wallet",
         "Microsoft.MixedReality.Portal", "Microsoft.WindowsFeedbackHub", "Microsoft.WebMediaExtensions",
         "Microsoft.BingWeather", "Microsoft.GetOffice", "Microsoft.WindowsCamera", "Microsoft.Windows.Photos",
-        "Microsoft.GrooveMusic", "Microsoft.ZuneSocial", "Microsoft.WindowsCalculator", "Microsoft.WindowsVoiceRecorder",
-        "Microsoft.WindowsStore", "Microsoft.Windows.Photos", "Microsoft.MicrosoftStickyNotes"
+        "Microsoft.GrooveMusic", "Microsoft.ZuneSocial", "Microsoft.WindowsCalculator", "Microsoft.WindowsVoiceRecorder"
     )
     
     $confirmation = Read-Host "¿Estás seguro de que deseas eliminar estas aplicaciones? (S/N)"
@@ -347,20 +405,19 @@ function Invoke-SystemMaintenance {
     Get-WmiObject -Class Win32_Volume | Where-Object { $_.DriveType -eq 3 -and $_.DriveLetter } | ForEach-Object { 
         Optimize-Volume -DriveLetter $_.DriveLetter.Substring(0,1) -Verbose 
     }
-    
     Write-Log "Verificando y reparando archivos del sistema (SFC /scannow)..."
     sfc.exe /scannow | Out-Null
     Write-Log "SFC completado."
     
     Write-Log "Verificando y reparando imagen de Windows (DISM)..."
-    Dism.exe /online /Cleanup-Image /ScanHealth | Out-Null
-    Dism.exe /online /Cleanup-Image /CheckHealth | Out-Null
-    Dism.exe /online /Cleanup-Image /RestoreHealth | Out-Null
+    Dism.exe /Online /Cleanup-Image /ScanHealth | Out-Null
+    Dism.exe /Online /Cleanup-Image /CheckHealth | Out-Null
+    Dism.exe /Online /Cleanup-Image /RestoreHealth | Out-Null
     Write-Log "DISM completado."
     
-    Write-Log "Realizando chequeo de disco (chkdsk)..."
+    Write-Log "Programando chequeo de disco (chkdsk)..."
     $drive = (Get-CimInstance Win32_LogicalDisk | Where-Object {$_.DeviceID -eq "C:"}).DeviceID
-    chkdsk $drive /f /r
+    chkdsk $drive /f
     Write-Log "Chequeo de disco programado para el próximo reinicio."
     
     Write-Log "Verificando integridad de archivos del sistema..."
@@ -440,67 +497,7 @@ function Invoke-ApocalypseMode {
 }
 #endregion
 
-#region FUNCIONES AUXILIARES
-function Add-ContextMenuEntry {
-    $scriptPath = $MyInvocation.MyCommand.Path
-    $regPath = "HKCU:\Software\Classes\DesktopBackground\Shell\OptimizadorLeviatan"
-    $commandPath = "HKCU:\Software\Classes\DesktopBackground\Shell\OptimizadorLeviatan\command"
-    
-    New-Item -Path $regPath -Name "Icon" -Value "imageres.dll,-109" -Force
-    New-Item -Path $regPath -Name "Position" -Value "Bottom" -Force
-    New-Item -Path $commandPath -Value "powershell.exe -NoExit -Command `". '$scriptPath'`"" -Force
-    
-    Write-Log "Menú contextual añadido. Haz clic derecho en el escritorio." -ForegroundColor Green
-}
-
-function Remove-ContextMenuEntry {
-    $regPath = "HKCU:\Software\Classes\DesktopBackground\Shell\OptimizadorLeviatan"
-    Remove-Item -Path $regPath -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Log "Menú contextual eliminado." -ForegroundColor Green
-}
-
-function ToggleHiddenFiles {
-    $currentValue = (Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced").Hidden
-    $newValue = if ($currentValue -eq 1) { 2 } else { 1 }
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value $newValue
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value ($newValue -eq 2 ? 1 : 0)
-    Stop-Process -Name explorer -Force
-    Write-Log "Archivos ocultos y extensiones cambiados." -ForegroundColor Green
-}
-
-function DisableHibernate {
-    powercfg.exe /hibernate off
-    Write-Log "Hibernación desactivada." -ForegroundColor Green
-}
-
-function EnablePowerSaver {
-    powercfg -setactive SCHEME_MIN | Out-Null
-    Write-Log "Modo Portátil activado." -ForegroundColor Green
-}
-
-function GenerateSystemReport {
-    Write-Log "Generando informe detallado del sistema..."
-    systeminfo | Out-File "$env:USERPROFILE\Desktop\Informe_Sistema.txt"
-    Get-EventLog -LogName System -Newest 50 | Out-File -Append "$env:USERPROFILE\Desktop\Informe_Sistema.txt"
-    Get-EventLog -LogName Application -Newest 50 | Out-File -Append "$env:USERPROFILE\Desktop\Informe_Sistema.txt"
-    Write-Log "Informe generado en: $env:USERPROFILE\Desktop\Informe_Sistema.txt" -ForegroundColor Green
-}
-
-function Start-ResourceMonitor {
-    Write-Log "Iniciando monitor de recursos en segundo plano..."
-    while ($true) {
-        $cpu = (Get-Counter "\Processor(_Total)\% Processor Time").CounterSamples.CookedValue
-        $ram = (Get-Counter "\Memory\Available MBytes").CounterSamples.CookedValue
-        $disk = (Get-Counter "\LogicalDisk(C:)\% Disk Time").CounterSamples.CookedValue
-        $temp = (Get-WmiObject -Namespace root\WMI -Class MSAcpi_ThermalZoneTemperature).CurrentTemperature / 10
-        
-        Write-Host "`rCPU: $([math]::Round($cpu,1))% | RAM: $([math]::Round($ram,0))MB | Disco: $([math]::Round($disk,1))% | Temp: $([math]::Round($temp,1))°C" -NoNewline
-        Start-Sleep -Milliseconds 500
-    }
-}
-#endregion
-
-#region EJECUCIÓN PRINCIPAL
+#region EJECUCIÓN DEL SCRIPT
 $choice = ''
 while ($choice -ne 'q') {
     Show-Menu
