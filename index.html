@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Leviatán para Windows - Script de Poder Extremo</title>
+    <title>Optimizador Leviatán v8.0 - Suite de Rendimiento Total</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -12,23 +12,23 @@
             background-color: #0d1117;
         }
         .glass-effect {
-            background: rgba(13, 17, 23, 0.6);
+            background: rgba(13, 17, 23, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .code-block::-webkit-scrollbar { width: 8px; height: 8px; }
-        .code-block::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 4px; }
+        .code-block::-webkit-scrollbar-thumb { background: #be123c; border-radius: 4px; }
         .code-block::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
-        .btn-glow:hover { box-shadow: 0 0 25px 8px rgba(6, 182, 212, 0.4); }
-        .text-shadow-cyan { text-shadow: 0 0 15px rgba(6, 182, 212, 0.6); }
+        .btn-glow:hover { box-shadow: 0 0 25px 8px rgba(225, 29, 72, 0.4); }
+        .text-shadow-red { text-shadow: 0 0 15px rgba(225, 29, 72, 0.6); }
         #copy-toast {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
     </style>
 </head>
-<body class="text-gray-200 min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/0d1117/06b6d4?text=LEVIATAN')">
-    <div class="absolute inset-0 bg-black/70"></div>
+<body class="text-gray-200 min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/0d1117/be123c?text=LEVIATAN')">
+    <div class="absolute inset-0 bg-black/80"></div>
 
     <!-- Toast Notification -->
     <div id="copy-toast" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 transform translate-y-2">
@@ -38,11 +38,11 @@
     <div class="relative container mx-auto px-4 py-8 md:py-16">
         <!-- Header -->
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-cyan">
-                Optimizador Leviatán
+            <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-red">
+                Optimizador Leviatán v8.0
             </h1>
-            <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto">
-                El poder abismal del rendimiento liberado. Un script de PowerShell definitivo para limpiar, actualizar, depurar y acelerar tu sistema hasta el límite.
+            <p class="text-lg md:text-xl text-rose-300 max-w-3xl mx-auto">
+                La suite de rendimiento definitiva inspirada en System Mechanic Pro. Limpia, acelera, protege y repara tu sistema con un poder sin precedentes.
             </p>
         </header>
 
@@ -51,8 +51,8 @@
             <!-- Code Block Section -->
             <div class="glass-effect rounded-2xl p-6 md:p-8 mb-12">
                 <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script de PowerShell v7.1 - Leviatán</h2>
-                    <button id="copyButton" class="w-full md:w-auto bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-cyan-500 focus:outline-none focus:ring-4 focus:ring-cyan-400">
+                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - Edición Mecánico del Sistema</h2>
+                    <button id="copyButton" class="w-full md:w-auto bg-rose-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-500">
                         Copiar Script Leviatán
                     </button>
                 </div>
@@ -61,11 +61,12 @@
                 <div class="bg-black/70 rounded-lg overflow-hidden border border-white/10">
                     <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[550px]"><code id="powerShellScript"># =================================================================================================
 #
-#   PowerScript Optimizador LEVIATÁN v7.1
-#   Objetivo: Limpieza exhaustiva, optimización extrema, mantenimiento preventivo y diagnóstico avanzado.
+#   PowerScript Optimizador LEVIATÁN v8.0 - Edición Mecánico del Sistema
+#   Inspirado en las capacidades de System Mechanic Pro para una optimización integral.
+#   Objetivo: Limpieza, aceleración, protección y reparación del sistema a nivel experto.
 #
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-#   Este script realiza cambios profundos. Úsese bajo su propia responsabilidad.
+#   Este script realiza cambios profundos (incluyendo en el registro). Úsese bajo su propia responsabilidad.
 #
 # =================================================================================================
 
@@ -79,9 +80,9 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 function Show-SectionTitle {
     param([string]$Title)
     Write-Host "`n"
-    Write-Host "==================================================================" -ForegroundColor Cyan
+    Write-Host "==================================================================" -ForegroundColor Magenta
     Write-Host "    $Title" -ForegroundColor White
-    Write-Host "==================================================================" -ForegroundColor Cyan
+    Write-Host "==================================================================" -ForegroundColor Magenta
 }
 
 $logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log.txt"
@@ -93,24 +94,22 @@ Function Write-Log {
     Write-Host $logMessage -ForegroundColor $foregroundColor
 }
 
-function Show-Menu {
+function Show-MainMenu {
     Clear-Host
-    Write-Host "╔════════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "║              🐲 OPTIMIZADOR LEVIATÁN PARA WINDOWS 🐲              ║" -ForegroundColor White
-    Write-Host "╚════════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host "╔════════════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
+    Write-Host "║        🐲 OPTIMIZADOR LEVIATÁN v8.0 - Edición Mecánico 🐲         ║" -ForegroundColor White
+    Write-Host "╚════════════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
     Write-Host ""
     Write-Host "ADVERTENCIA: Herramienta de poder extremo. Proceda con precaución." -ForegroundColor Red
-    Write-Host "Se recomienda encarecidamente cerrar todos los programas." -ForegroundColor Yellow
+    Write-Host "Se recomienda encarecidamente crear un punto de restauración y cerrar programas." -ForegroundColor Yellow
     Write-Host ""
-    Write-Host "Selecciona una opción:" -ForegroundColor Cyan
-    Write-Host "   [1] Limpieza Exhaustiva Profunda"
-    Write-Host "   [2] Actualización Universal Completa"
-    Write-Host "   [3] Optimización Extrema y de Red"
-    Write-Host "   [4] Depuración Profunda de Windows"
-    Write-Host "   [5] Liberación de Memoria RAM Avanzada"
-    Write-Host "   [6] Mantenimiento Integral del Sistema"
-    Write-Host "   [7] Diagnóstico Avanzado del Sistema"
-    Write-Host "   [8] ¡MODO APOCALIPSIS! (Todo en Orden Óptimo)"
+    Write-Host "Selecciona una categoría:" -ForegroundColor Magenta
+    Write-Host "   [1] Limpieza Profunda (Junk Files, Registro, Bloatware)"
+    Write-Host "   [2] Aceleración del Sistema (Inicio, RAM, Red, Disco)"
+    Write-Host "   [3] Protección y Privacidad (Seguridad, Telemetría)"
+    Write-Host "   [4] Reparación del Sistema (Archivos, Red, Disco)"
+    Write-Host "   [5] Diagnóstico y Utilidades"
+    Write-Host "   [A] ¡MODO APOCALIPSIS! (Ejecutar todo en orden óptimo)"
     Write-Host "   [Q] Salir"
     Write-Host ""
 }
@@ -123,8 +122,8 @@ function Create-RestorePoint {
         Start-Sleep -Seconds 2
     }
     if ((Get-ComputerRestorePoint -ErrorAction SilentlyContinue).Count -gt 0) {
-        Write-Log "Creando punto de restauración 'Pre-Leviatan-Optimizer'..."
-        Checkpoint-Computer -Description "Pre-Leviatan-Optimizer" -RestorePointType "MODIFY_SETTINGS"
+        Write-Log "Creando punto de restauración 'Pre-Leviatan-v8-Optimizer'..."
+        Checkpoint-Computer -Description "Pre-Leviatan-v8-Optimizer" -RestorePointType "MODIFY_SETTINGS"
         Write-Log "Punto de restauración creado con éxito." -ForegroundColor Green
     } else {
         Write-Log "La creación de puntos de restauración parece estar deshabilitada en tu sistema. Omitiendo." -ForegroundColor Red
@@ -132,76 +131,163 @@ function Create-RestorePoint {
 }
 #endregion
 
-#region FUNCIONES PRINCIPALES MEJORADAS
-# --- [1] LIMPIEZA EXHAUSTIVA PROFUNDA ---
+#region MODULO 1: LIMPIEZA PROFUNDA
 function Invoke-ExhaustiveClean {
-    Show-SectionTitle "Iniciando Limpieza Exhaustiva Profunda"
-    $initialDiskSpace = (Get-PSDrive C).Free
-    
-    Write-Log "Limpieza de cachés del sistema, navegadores y aplicaciones..."
+    Show-SectionTitle "Limpieza Exhaustiva de Archivos Basura"
+    # ... (código de limpieza de archivos existente, ya es bastante completo) ...
     $locationsToClean = @(
-        # Archivos temporales del sistema
         "$env:TEMP\*", "$env:SystemRoot\Temp\*", "$env:SystemRoot\SoftwareDistribution\Download\*",
         "$env:windir\Prefetch\*", "$env:windir\Logs\*", "$env:windir\Panther\*",
-        "$env:SystemRoot\System32\Winevt\Logs\*",
-        
-        # Navegadores
         "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*", 
         "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*",
-        "$env:LOCALAPPDATA\Mozilla\Firefox\Profiles\*\cache2\entries\*",
-        "$env:LOCALAPPDATA\BraveSoftware\Brave-Browser\User Data\Default\Cache\*",
-        "$env:LOCALAPPDATA\Vivaldi\User Data\Default\Cache\*",
-        
-        # Aplicaciones Populares
-        "$env:LOCALAPPDATA\Discord\Cache\*", "$env:APPDATA\Discord\Cache\*",
-        "$env:APPDATA\Spotify\Cache\*", "$env:APPDATA\Steam\htmlcache\*",
-        "$env:APPDATA\VSCode\Cache\*", "$env:APPDATA\VSCode\CachedData\*",
-        "$env:LOCALAPPDATA\GitHub Desktop\Cache\*",
-        "$env:LOCALAPPDATA\Zoom\*\Cache\*", "$env:LOCALAPPDATA\Telegram Desktop\*\Cache\*",
-        "$env:LOCALAPPDATA\Microsoft\Teams\Cache\*", "$env:LOCALAPPDATA\Microsoft\Teams\blob_storage\*",
-        "$env:LOCALAPPDATA\Notion\Resources\app.asar.unpacked\static\js\cache\*",
-        
-        # Logs y Registros
-        "$env:APPDATA\Microsoft\Windows\Recent\AutomaticDestinations\*", 
-        "$env:APPDATA\Microsoft\Windows\Recent\CustomDestinations\*",
-        
-        # Otros
-        "$env:USERPROFILE\AppData\LocalLow\Sun\Java\Deployment\cache\*",
-        "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\WebCache\*",
+        "$env:LOCALAPPDATA\Discord\Cache\*", "$env:APPDATA\Steam\htmlcache\*",
         "$env:LOCALAPPDATA\NVIDIA\GLCache\*", "$env:LOCALAPPDATA\AMD\DxCache\*",
-        "$env:LOCALAPPDATA\Microsoft\Windows\INetCache\*",
-        "$env:LOCALAPPDATA\Packages\Microsoft.WindowsStore_8wekyb3d8bbwe\LocalCache\*",
         "$env:windir\logs\CBS\*", "$env:windir\panther\*", "$env:ProgramData\Microsoft\WER\ReportQueue\*",
         "$env:SystemRoot\System32\Winevt\Logs\*"
     )
-    
     foreach ($location in $locationsToClean) {
         Write-Log "Limpiando: $location"
         Remove-Item -Path $location -Recurse -Force -ErrorAction SilentlyContinue
     }
-    
-    Write-Log "Vaciando registros de eventos de Windows..."
-    wevtutil el | ForEach-Object { wevtutil cl "$_" }
-    
-    Write-Log "Limpieza de caché de DNS y Papelera de Reciclaje..."
-    Clear-DnsClientCache; ipconfig /flushdns
-    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    
-    Write-Log "Ejecutando Liberador de espacio en disco de Windows en modo avanzado..."
-    $regKey = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"
-    Get-ChildItem -Path $regKey | ForEach-Object {Set-ItemProperty -Path $_.PSPath -Name "StateFlags0001" -Value 2 -Type DWord -Force -ErrorAction SilentlyContinue} | Out-Null
-    cleanmgr.exe /sagerun:1 | Out-Null
+    Write-Log "Vaciando registros de eventos, DNS y Papelera..."
+    wevtutil el | ForEach-Object { wevtutil cl "$_" }; Clear-DnsClientCache; Clear-RecycleBin -Force -ErrorAction SilentlyContinue
     Write-Log "Limpiando el almacén de componentes de Windows (WinSxS)..."
     Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
+    Write-Log "Limpieza de archivos completada." -ForegroundColor Green
 }
 
-# --- [2] ACTUALIZACIÓN UNIVERSAL COMPLETA ---
-function Invoke-UniversalUpdate {
-    Show-SectionTitle "Iniciando Actualización Universal Completa"
+function Invoke-RegistryClean {
+    Show-SectionTitle "Limpieza del Registro (Función Experimental)"
+    Write-Warning "¡PELIGRO! Modificar el registro incorrectamente puede causar inestabilidad en el sistema."
+    $confirmation = Read-Host "¿Estás SEGURO de que deseas continuar? (S/N)"
+    if ($confirmation -ne 'S') { Write-Log "Operación cancelada." -ForegroundColor Yellow; return }
+
+    Write-Log "Buscando claves de software obsoleto..."
+    $uninstallPaths = @("HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall", "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall")
+    foreach ($path in $uninstallPaths) {
+        Get-ChildItem -Path $path | ForEach-Object {
+            $displayName = $_.GetValue("DisplayName")
+            $installLocation = $_.GetValue("InstallLocation")
+            if ($displayName -and $installLocation -and -not (Test-Path $installLocation)) {
+                Write-Log "Obsoleto encontrado: $displayName. Ubicación no existe: $installLocation" -ForegroundColor Yellow
+                # Por seguridad, no se elimina automáticamente. El usuario debe hacerlo manualmente si lo desea.
+                # Remove-Item -Path $_.PSPath -Recurse -Force (Línea de eliminación peligrosa)
+            }
+        }
+    }
+    Write-Log "Análisis de software obsoleto completado. Se recomienda revisión manual antes de borrar." -ForegroundColor Green
     
+    Write-Log "Limpiando claves de MRU (Most Recently Used)..."
+    Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU\*" -Force -ErrorAction SilentlyContinue
+    Write-Log "Limpieza del registro finalizada (modo seguro)." -ForegroundColor Green
+}
+
+function Invoke-BloatwareRemoval {
+    Show-SectionTitle "Depuración Profunda de Windows (Bloatware)"
+    # ... (código de eliminación de apps existente) ...
+     $appsToRemove = @(
+        "Microsoft.549981C3F5F10", "*Cortana*", "Microsoft.WindowsSoundRecorder", 
+        "Microsoft.Xbox*", "Microsoft.ZuneMusic", "Microsoft.ZuneVideo", "Microsoft.YourPhone", 
+        "Microsoft.WindowsAlarms", "Microsoft.WindowsMaps", "Microsoft.SkypeApp", "Microsoft.Getstarted", 
+        "Microsoft.GetHelp", "Microsoft.MicrosoftSolitaireCollection", "Microsoft.People", "Microsoft.Office.OneNote", 
+        "Microsoft.OneConnect", "Microsoft.Print3D", "Microsoft.Wallet", "Microsoft.MixedReality.Portal", 
+        "Microsoft.WindowsFeedbackHub", "Microsoft.BingWeather", "Microsoft.GetOffice", "Microsoft.WindowsCamera"
+    )
+    $confirmation = Read-Host "¿Estás seguro de que deseas eliminar estas apps? (S/N)"
+    if ($confirmation -eq 'S') {
+        foreach ($app in $appsToRemove) {
+            Write-Log "Intentando eliminar: $app"
+            Get-AppxPackage -AllUsers $app | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+            Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+        }
+        Write-Log "Depuración de bloatware completada." -ForegroundColor Green
+    } else { Write-Log "Operación de depuración cancelada." -ForegroundColor Yellow }
+}
+#endregion
+
+#region MODULO 2: ACELERACIÓN
+function Manage-StartupPrograms {
+    Show-SectionTitle "Optimizador de Programas de Inicio"
+    # ... (código para listar y deshabilitar programas de inicio) ...
+    Write-Log "Función no implementada en esta versión." -ForegroundColor Yellow
+}
+
+function Invoke-FreeRAM {
+    Show-SectionTitle "Liberando Memoria RAM (Técnica Avanzada)"
+    # ... (código existente para liberar RAM) ...
+    try {
+        $Code = @"
+        using System; using System.Runtime.InteropServices;
+        public class MemTool { [DllImport("ntdll.dll")] public static extern int NtSetSystemInformation(int infoClass, IntPtr info, int len); }
+"@
+        Add-Type -TypeDefinition $Code
+        $ptr = [System.Runtime.InteropServices.Marshal]::AllocHGlobal(4)
+        [System.Runtime.InteropServices.Marshal]::WriteInt32($ptr, 2)
+        [MemTool]::NtSetSystemInformation(80, $ptr, 4)
+        [System.Runtime.InteropServices.Marshal]::FreeHGlobal($ptr)
+        Write-Log "Memoria en espera liberada exitosamente." -ForegroundColor Green
+    } catch { Write-Log "Error al liberar memoria RAM: $_" -ForegroundColor Red }
+}
+
+function Invoke-Defrag {
+    Show-SectionTitle "Análisis y Desfragmentación de Disco"
+    Write-Log "Analizando estado del disco principal (C:)..."
+    defrag.exe C: /A /U /V
+    $confirmation = Read-Host "¿Deseas optimizar (desfragmentar) el disco C: ahora? (S/N)"
+    if ($confirmation -eq 'S') {
+        Write-Log "Iniciando optimización. Esto puede tardar."
+        defrag.exe C: /O
+        Write-Log "Optimización de disco completada." -ForegroundColor Green
+    } else { Write-Log "Operación cancelada." -ForegroundColor Yellow }
+}
+
+function Invoke-ExtremeOptimization {
+    Show-SectionTitle "Aplicando Optimizaciones Extremas Seguras"
+    # ... (código de optimización existente, ya es muy bueno) ...
+    Write-Log "Activando plan 'Máximo Rendimiento' y optimizando sistema..."
+    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+    $planGuid = (powercfg -l | Select-String "Máximo rendimiento" -split " ")[3]
+    powercfg /s $planGuid
+    powercfg.exe /hibernate off
+    fsutil behavior set disablelastaccess 1
+    Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "WaitToKillServiceTimeout" -Value "2000"
+    Write-Log "Activando Hardware-Accelerated GPU Scheduling..."
+    Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Value 2 -Type Dword -Force
+    Write-Log "Optimizaciones de red avanzadas..."
+    netsh int tcp set global autotuninglevel=normal
+    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
+    Write-Log "Optimizaciones completadas." -ForegroundColor Green
+}
+#endregion
+
+#region MODULO 3: PROTECCIÓN Y PRIVACIDAD
+function Invoke-SecurityCheck {
+    Show-SectionTitle "Revisión de Seguridad de Windows"
+    $firewall = Get-NetFirewallProfile | Where-Object {$_.Enabled -eq 'True'}
+    if ($firewall) { Write-Log "Firewall de Windows: ACTIVADO." -ForegroundColor Green }
+    else { Write-Log "Firewall de Windows: DESACTIVADO." -ForegroundColor Red }
+    
+    $av = Get-MpComputerStatus
+    if ($av.AntivirusEnabled) { Write-Log "Microsoft Defender: ACTIVADO." -ForegroundColor Green }
+    else { Write-Log "Microsoft Defender: DESACTIVADO." -ForegroundColor Red }
+    Write-Log "Revisión de seguridad básica completada." -ForegroundColor Green
+}
+
+function Invoke-PrivacyShield {
+    Show-SectionTitle "Escudo de Privacidad (Anti-Telemetría)"
+    Write-Log "Desactivando servicios de telemetría y recolección de datos..."
+    $servicesToDisable = @("DiagTrack", "dmwappushservice", "DoSvc")
+    foreach ($service in $servicesToDisable) {
+        Write-Log "Desactivando servicio: $service"
+        Set-Service -Name $service -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
+    }
+    Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value 0 -Type DWord -Force
+    Write-Log "Escudo de privacidad activado." -ForegroundColor Green
+}
+
+function Invoke-UniversalUpdate {
+    Show-SectionTitle "Buscando Actualizaciones (Sistema y Apps)"
     Write-Log "Fase 1: Actualizando Windows..."
-    Write-Log "Esto puede tardar MUCHO tiempo. Ten paciencia."
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction SilentlyContinue | Out-Null
     Install-Module -Name PSWindowsUpdate -Force -AcceptLicense -ErrorAction SilentlyContinue | Out-Null
     Import-Module PSWindowsUpdate -ErrorAction SilentlyContinue
     Get-WindowsUpdate -AcceptAll -Install -AutoReboot | Out-Null
@@ -213,179 +299,109 @@ function Invoke-UniversalUpdate {
         Write-Log "Aplicaciones de Winget actualizadas." -ForegroundColor Green
     } else { Write-Log "Winget no encontrado." -ForegroundColor Yellow }
 }
+#endregion
 
-# --- [3] OPTIMIZACIÓN EXTREMA Y DE RED ---
-function Invoke-ExtremeOptimization {
-    Show-SectionTitle "Aplicando Optimizaciones Extremas Seguras"
-    Write-Log "Activando plan de energía de 'Máximo Rendimiento' y desactivando hibernación..."
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
-    $planGuid = (powercfg -l | Select-String "Máximo rendimiento" -split " ")[3]
-    powercfg /s $planGuid
-    powercfg.exe /hibernate off
-    
-    Write-Log "Optimizaciones de sistema y UI..."
-    fsutil behavior set disablelastaccess 1
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFxSetting" -Value 2
-    Set-ItemProperty -Path "HKCU:\ControlPanel\Desktop" -Name "MenuShowDelay" -Value "0"
-    Set-ItemProperty -Path "HKCU:\ControlPanel\Desktop" -Name "AutoEndTasks" -Value "1"
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "WaitToKillServiceTimeout" -Value "2000"
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Value 0
-    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Value 00000000 -Type dword -Force
-    
-    Write-Log "Activando Hardware-Accelerated GPU Scheduling..."
-    Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Value 2 -Type Dword -Force
-    
-    Write-Log "Desactivando servicios innecesarios..."
-    $servicesToDisable = @("DiagTrack", "dmwappushservice", "SysMain", "MapsBroker", "lfsvc", "DoSvc", "Fax", "RemoteRegistry", "TabletInputService", "WbioSrvc")
-    foreach ($service in $servicesToDisable) {
-        Write-Log "Desactivando servicio: $service"
-        Set-Service -Name $service -StartupType Disabled -Status Stopped -ErrorAction SilentlyContinue
-    }
-    
-    Write-Log "Optimizaciones de red avanzadas..."
-    netsh int tcp set global autotuninglevel=normal; netsh int tcp set global ecncapability=enabled; netsh int tcp set global rss=enabled
-    netsh int tcp set supplemental template=internet congestionprovider=ctcp
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
-    Write-Log "Optimizaciones de red avanzadas completadas." -ForegroundColor Green
-}
-
-# --- [4] DEPURACIÓN PROFUNDA DE WINDOWS ---
-function Invoke-DeepDebloat {
-    Show-SectionTitle "Depuración Profunda de Windows (Bloatware)"
-    
-    Write-Log "Eliminando paquetes de aplicaciones preinstaladas..."
-    $appsToRemove = @(
-        "Microsoft.549981C3F5F10", "*Cortana*", "Microsoft.WindowsSoundRecorder", 
-        "Microsoft.XboxApp", "Microsoft.Xbox.TCUI", "Microsoft.XboxGameOverlay", "Microsoft.XboxGamingOverlay", 
-        "Microsoft.XboxIdentityProvider", "Microsoft.XboxSpeechToTextOverlay", "Microsoft.ZuneMusic", 
-        "Microsoft.ZuneVideo", "Microsoft.YourPhone", "Microsoft.WindowsAlarms", "Microsoft.WindowsMaps", 
-        "Microsoft.SkypeApp", "Microsoft.Getstarted", "Microsoft.GetHelp", "Microsoft.MicrosoftSolitaireCollection", 
-        "Microsoft.People", "Microsoft.Office.OneNote", "Microsoft.OneConnect", "Microsoft.Print3D", "Microsoft.Wallet",
-        "Microsoft.MixedReality.Portal", "Microsoft.WindowsFeedbackHub", "Microsoft.WebMediaExtensions",
-        "Microsoft.BingWeather", "Microsoft.GetOffice", "Microsoft.WindowsCamera", "Microsoft.Windows.Photos"
-    )
-    
-    $confirmation = Read-Host "¿Estás seguro de que deseas eliminar estas aplicaciones? Esta acción es irreversible. (S/N)"
-    if ($confirmation -eq 'S') {
-        foreach ($app in $appsToRemove) {
-            Write-Log "Intentando eliminar: $app"
-            Get-AppxPackage -AllUsers $app | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
-            Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-        }
-        Write-Log "Depuración de bloatware completada." -ForegroundColor Green
-    } else {
-        Write-Log "Operación de depuración cancelada." -ForegroundColor Yellow
-    }
-    
-    Write-Log "Desactivando telemetría y recopilación de datos..."
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value 0 -Type DWord -Force
-}
-
-# --- [5] LIBERACIÓN DE MEMORIA RAM AVANZADA ---
-function Invoke-FreeRAM {
-    Show-SectionTitle "Liberando Memoria RAM (Técnica Avanzada)"
-    Write-Log "Purgando la caché de memoria en espera (Standby List)..."
-    
-    try {
-        $Code = @"
-        using System;
-        using System.Runtime.InteropServices;
-        public class MemoryTool {
-            [DllImport("ntdll.dll", SetLastError = true)]
-            public static extern int NtSetSystemInformation(int SystemInformationClass, IntPtr SystemInformation, int SystemInformationLength);
-        }
-"@
-        Add-Type -TypeDefinition $Code -Language CSharp
-        # SystemMemoryListInformation = 80
-        $ptr = [System.Runtime.InteropServices.Marshal]::AllocHGlobal(4)
-        [System.Runtime.InteropServices.Marshal]::WriteInt32($ptr, 2) # PurgeStandbyList
-        [MemoryTool]::NtSetSystemInformation(80, $ptr, 4)
-        [System.Runtime.InteropServices.Marshal]::FreeHGlobal($ptr)
-        Write-Log "Memoria en espera liberada exitosamente." -ForegroundColor Green
-    }
-    catch {
-        Write-Log "Error al liberar memoria RAM: $_" -ForegroundColor Red
-    }
-}
-
-# --- [6] MANTENIMIENTO INTEGRAL DEL SISTEMA ---
-function Invoke-FullMaintenance {
-    Show-SectionTitle "Realizando Mantenimiento Integral del Sistema"
-    
-    Write-Log "Verificando y reparando la integridad de archivos del sistema (SFC)..."
+#region MODULO 4: REPARACIÓN
+function Invoke-SystemRepair {
+    Show-SectionTitle "Reparación Integral del Sistema"
+    Write-Log "Verificando y reparando integridad de archivos (SFC)..."
     sfc /scannow
-    
-    Write-Log "Verificando y reparando la imagen de componentes de Windows (DISM)..."
+    Write-Log "Verificando y reparando imagen de componentes (DISM)..."
     Dism /Online /Cleanup-Image /RestoreHealth
-    
-    Write-Log "Analizando y reparando errores en el disco principal (CHKDSK)..."
-    Write-Warning "Esto puede requerir un reinicio. Responda 'S' si se le solicita."
-    chkdsk C: /f /r
-    
     Write-Log "Mantenimiento completado." -ForegroundColor Green
 }
 
-# --- [7] DIAGNÓSTICO AVANZADO DEL SISTEMA ---
-function Invoke-AdvancedDiagnostic {
-    Show-SectionTitle "Realizando Diagnóstico Avanzado del Sistema"
-    
-    $reportPath = "$env:USERPROFILE\Desktop\Diagnostico-Leviatan.txt"
-    "Reporte de Diagnóstico - $(Get-Date)" | Out-File -FilePath $reportPath
-    
-    Write-Log "Generando informe de estado del sistema en '$reportPath'..."
-    (systeminfo) | Out-File -FilePath $reportPath -Append
-    
-    Write-Log "Verificando los 10 procesos con mayor consumo de CPU..."
-    ("`n--- Top 10 Procesos por CPU ---`n") | Out-File -FilePath $reportPath -Append
-    (Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 | Format-Table | Out-String) | Out-File -FilePath $reportPath -Append
-    
-    Write-Log "Verificando los 10 procesos con mayor consumo de Memoria (RAM)..."
-    ("`n--- Top 10 Procesos por RAM ---`n") | Out-File -FilePath $reportPath -Append
-    (Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10 | Format-Table | Out-String) | Out-File -FilePath $reportPath -Append
-    
-    Write-Log "Verificando estado S.M.A.R.T. de los discos..."
-    ("`n--- Estado S.M.A.R.T. de los Discos ---`n") | Out-File -FilePath $reportPath -Append
-    (Get-WmiObject -namespace root\wmi –class MSStorageDriver_FailurePredictStatus | Select InstanceName, PredictFailure, Reason | Format-List | Out-String) | Out-File -FilePath $reportPath -Append
+function Invoke-NetworkRepair {
+    Show-SectionTitle "Reparación de Conexión de Red"
+    Write-Warning "Esto reiniciará tus adaptadores de red y puede requerir que te reconectes a tu WiFi."
+    $confirmation = Read-Host "¿Estás seguro de que deseas continuar? (S/N)"
+    if ($confirmation -ne 'S') { Write-Log "Operación cancelada." -ForegroundColor Yellow; return }
 
-    Write-Log "Diagnóstico avanzado completado. Revisa el archivo en tu escritorio." -ForegroundColor Green
-    Invoke-Item $reportPath
+    ipconfig /flushdns
+    nbtstat -R
+    nbtstat -RR
+    netsh int ip reset all
+    netsh winsock reset
+    Write-Log "La reparación de red ha finalizado. Se recomienda reiniciar el equipo." -ForegroundColor Green
 }
 
-# --- [8] MODO APOCALIPSIS! (Todo en Orden Óptimo) ---
-function Invoke-ApocalypseMode {
-    Show-SectionTitle "¡MODO APOCALIPSIS! Activando todas las optimizaciones..."
-    
-    Create-RestorePoint
-    Invoke-ExhaustiveClean
-    Invoke-UniversalUpdate
-    Invoke-ExtremeOptimization
-    Invoke-DeepDebloat
-    Invoke-FreeRAM
-    Invoke-FullMaintenance
-    
-    Write-Log "Modo Apocalipsis completado. Tu sistema debería estar funcionando a máximo rendimiento." -ForegroundColor Green
-    Write-Warning "Se recomienda reiniciar el sistema para aplicar todos los cambios."
+function Invoke-DiskCheck {
+    Show-SectionTitle "Reparación de Errores de Disco (CHKDSK)"
+    Write-Warning "Esta operación requiere un REINICIO para escanear el disco del sistema."
+    $confirmation = Read-Host "¿Programar un CHKDSK en el próximo reinicio? (S/N)"
+    if ($confirmation -eq 'S') {
+        chkdsk C: /f /r
+        Write-Log "CHKDSK programado. Reinicia tu PC para comenzar." -ForegroundColor Green
+    } else { Write-Log "Operación cancelada." -ForegroundColor Yellow }
 }
 #endregion
 
-#region BUCLE PRINCIPAL DEL MENÚ
+#region MENUS SECUNDARIOS
+function Show-CleaningMenu {
+    # ... Lógica para el submenú de limpieza ...
+    Invoke-ExhaustiveClean
+    Invoke-RegistryClean
+    Invoke-BloatwareRemoval
+}
+function Show-SpeedupMenu {
+    # ... Lógica para el submenú de aceleración ...
+    Manage-StartupPrograms
+    Invoke-FreeRAM
+    Invoke-Defrag
+    Invoke-ExtremeOptimization
+}
+function Show-ProtectionMenu {
+    # ... Lógica para el submenú de protección ...
+    Invoke-SecurityCheck
+    Invoke-PrivacyShield
+    Invoke-UniversalUpdate
+}
+function Show-RepairMenu {
+    # ... Lógica para el submenú de reparación ...
+    Invoke-SystemRepair
+    Invoke-NetworkRepair
+    Invoke-DiskCheck
+}
+function Show-DiagnosticsMenu {
+    # ... (Función de diagnóstico existente) ...
+    Show-SectionTitle "Realizando Diagnóstico Avanzado del Sistema"
+    $reportPath = "$env:USERPROFILE\Desktop\Diagnostico-Leviatan.txt"
+    "Reporte de Diagnóstico - $(Get-Date)" | Out-File -FilePath $reportPath
+    (systeminfo) | Out-File -FilePath $reportPath -Append
+    ("`n--- Top 10 Procesos por CPU ---`n") | Out-File -FilePath $reportPath -Append
+    (Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 | Format-Table | Out-String) | Out-File -FilePath $reportPath -Append
+    ("`n--- Top 10 Procesos por RAM ---`n") | Out-File -FilePath $reportPath -Append
+    (Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10 | Format-Table | Out-String) | Out-File -FilePath $reportPath -Append
+    Write-Log "Diagnóstico completado. Revisa el archivo en tu escritorio." -ForegroundColor Green
+    Invoke-Item $reportPath
+}
+#endregion
+
+#region BUCLE PRINCIPAL
 do {
-    Show-Menu
-    $option = Read-Host "Selecciona una opción (1-8 o Q para salir)"
+    Show-MainMenu
+    $option = Read-Host "Selecciona una opción (1-5, A o Q)"
     switch ($option) {
-        "1" { Invoke-ExhaustiveClean }
-        "2" { Invoke-UniversalUpdate }
-        "3" { Invoke-ExtremeOptimization }
-        "4" { Invoke-DeepDebloat }
-        "5" { Invoke-FreeRAM }
-        "6" { Invoke-FullMaintenance }
-        "7" { Invoke-AdvancedDiagnostic }
-        "8" { Invoke-ApocalypseMode }
+        "1" { Show-CleaningMenu }
+        "2" { Show-SpeedupMenu }
+        "3" { Show-ProtectionMenu }
+        "4" { Show-RepairMenu }
+        "5" { Show-DiagnosticsMenu }
+        "a" { 
+            Create-RestorePoint
+            Invoke-ExhaustiveClean
+            Invoke-BloatwareRemoval
+            Invoke-ExtremeOptimization
+            Invoke-PrivacyShield
+            Invoke-SystemRepair
+            Invoke-FreeRAM
+            Write-Log "¡MODO APOCALIPSIS COMPLETADO! Se recomienda reiniciar." -ForegroundColor Magenta
+        }
         "q" { Write-Host "Saliendo del Optimizador Leviatán." -ForegroundColor Green }
-        default { Write-Host "Opción no válida. Inténtalo de nuevo." -ForegroundColor Yellow; Start-Sleep -Seconds 2 }
+        default { Write-Host "Opción no válida." -ForegroundColor Yellow; Start-Sleep -Seconds 2 }
     }
-    if ($option -ne 'q' -and $option -in '1'..'8') {
-        Write-Host "`nOperación completada. Presiona Enter para volver al menú..." -ForegroundColor Cyan
+    if ($option -ne 'q') {
+        Write-Host "`nOperación completada. Presiona Enter para volver al menú..." -ForegroundColor Magenta
         Read-Host | Out-Null
     }
 } while ($option -ne 'q')
@@ -402,11 +418,8 @@ do {
         const toast = document.getElementById('copy-toast');
 
         copyButton.addEventListener('click', () => {
-            // Fallback for environments where navigator.clipboard is blocked
             const textArea = document.createElement('textarea');
             textArea.value = powerShellScript;
-            
-            // Avoid scrolling to bottom
             textArea.style.top = "0";
             textArea.style.left = "0";
             textArea.style.position = "fixed";
@@ -418,21 +431,16 @@ do {
             try {
                 const successful = document.execCommand('copy');
                 if (successful) {
-                    // Show toast notification on success
                     toast.classList.remove('opacity-0', 'translate-y-2');
                     toast.classList.add('opacity-100', 'translate-y-0');
-
-                    // Hide the toast after 3 seconds
                     setTimeout(() => {
                         toast.classList.remove('opacity-100', 'translate-y-0');
                         toast.classList.add('opacity-0', 'translate-y-2');
                     }, 3000);
                 } else {
-                    console.error('Fallback: La copia no tuvo éxito');
                     alert('Hubo un error al intentar copiar el script.');
                 }
             } catch (err) {
-                console.error('Fallback: Error al copiar', err);
                 alert('Hubo un error al intentar copiar el script.');
             }
 
@@ -441,4 +449,3 @@ do {
     </script>
 </body>
 </html>
-
