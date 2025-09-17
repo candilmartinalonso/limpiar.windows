@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador Leviatán v9.0 - Suite de Rendimiento Total</title>
+    <title>Optimizador Leviatán v9.1 - Suite de Rendimiento Total</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -39,7 +39,7 @@
         <!-- Header -->
         <header class="text-center mb-12 fade-in">
             <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-cyan">
-                Optimizador Leviatán v9.0
+                Optimizador Leviatán v9.1
             </h1>
             <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto">
                 Una suite de rendimiento evolucionada para limpiar, acelerar y diagnosticar tu sistema con precisión quirúrgica.
@@ -62,7 +62,7 @@
             <!-- Code Block Section -->
             <div class="glass-effect rounded-2xl p-6 md:p-8 fade-in" style="animation-delay: 400ms;">
                 <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - v9.0 Optimizado</h2>
+                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - v9.1 Corregido</h2>
                     <button id="copyButton" class="w-full md:w-auto bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-cyan-600 focus:outline-none focus:ring-4 focus:ring-cyan-500">
                         Copiar Script Leviatán
                     </button>
@@ -72,7 +72,7 @@
                 <div class="bg-black/70 rounded-lg overflow-hidden border border-white/10">
                     <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[550px]"><code id="powerShellScript"># =================================================================================================
 #
-#   PowerScript Optimizador LEVIATÁN v9.0 - Edición Optimizada
+#   PowerScript Optimizador LEVIATÁN v9.1 - Edición Corregida y Optimizada
 #   Objetivo: Limpieza, aceleración, protección y reparación del sistema a nivel experto.
 #
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
@@ -95,7 +95,7 @@ function Show-SectionTitle {
     Write-Host "==================================================================" -ForegroundColor Cyan
 }
 
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v9.0.txt"
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v9.1.txt"
 Function Write-Log {
     param ([string]$Message, [string]$ForegroundColor = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -104,7 +104,7 @@ Function Write-Log {
     Write-Host $logMessage -ForegroundColor $foregroundColor
 }
 
-Write-Log "Inicio del script Leviatán v9.0."
+Write-Log "Inicio del script Leviatán v9.1."
 #endregion
 
 #region CONFIGURACIÓN CENTRALIZADA
@@ -127,6 +127,9 @@ $config = @{
         "Microsoft.OneConnect", "Microsoft.Print3D", "Microsoft.Wallet", "Microsoft.MixedReality.Portal", 
         "Microsoft.WindowsFeedbackHub", "Microsoft.BingWeather", "Microsoft.GetOffice", "Microsoft.WindowsCamera"
     )
+    AppsToExclude = @(
+        "Microsoft.XboxGameOverlay", "Microsoft.XboxGamingOverlay", "Microsoft.XboxSpeechToTextOverlay"
+    )
     ServicesToDisable = @("DiagTrack", "dmwappushservice", "DoSvc")
     UltimatePerformanceGuid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
 }
@@ -136,12 +139,14 @@ $config = @{
 function Create-RestorePoint {
     Show-SectionTitle "Creando Punto de Restauración del Sistema"
     try {
-        if ((Get-ComputerInfo).OsHardwareAbstractionLayer -notlike "*7*") { # Heuristic for non-Win7
-            Write-Log "Creando punto de restauración 'Pre-Leviatan-v9.0'..."
-            Checkpoint-Computer -Description "Pre-Leviatan-v9.0" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
+        $restoreService = Get-Service -Name "VSS" -ErrorAction SilentlyContinue
+        if ($restoreService -and $restoreService.Status -eq 'Running') {
+            Write-Log "Creando punto de restauración 'Pre-Leviatan-v9.1'..."
+            Checkpoint-Computer -Description "Pre-Leviatan-v9.1" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
             Write-Log "Punto de restauración creado con éxito." -ForegroundColor Green
         } else {
-            Write-Log "La creación de puntos de restauración no es totalmente compatible en esta versión. Omitiendo." -ForegroundColor Yellow
+            Write-Log "El servicio de restauración del sistema (VSS) no está activo. Omitiendo creación de punto de restauración." -ForegroundColor Yellow
+            Write-Log "Puedes activarlo manualmente en 'services.msc' o en 'Propiedades del Sistema > Protección del sistema'." -ForegroundColor Yellow
         }
     } catch {
         Write-Log "No se pudo crear un nuevo punto de restauración. Motivo: $($_.Exception.Message)" -ForegroundColor Red
@@ -162,7 +167,7 @@ function Invoke-ExhaustiveClean {
         }
     }
     Write-Log "Vaciando registros de eventos, DNS y Papelera..."
-    wevtutil el | ForEach-Object { wevtutil cl "$_" -ErrorAction SilentlyContinue }
+    wevtutil el | Where-Object { $_ } | ForEach-Object { wevtutil cl "$_" -ErrorAction SilentlyContinue }
     ipconfig /flushdns | Out-Null
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
     Write-Log "Limpiando el almacén de componentes de Windows (WinSxS)..."
@@ -176,11 +181,11 @@ function Invoke-BloatwareRemoval {
     if ($confirmation.ToLower() -eq 's') {
         foreach ($app in $config.AppsToRemove) {
             Write-Log "Intentando eliminar patrón: $app"
-            $packages = Get-AppxPackage -AllUsers -Name $app
+            $packages = Get-AppxPackage -AllUsers -Name $app | Where-Object { $config.AppsToExclude -notcontains $_.Name }
             if ($packages) {
                 $packages | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
             }
-            $provisioned = Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app }
+            $provisioned = Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app -and $config.AppsToExclude -notcontains $_.PackageName }
             if ($provisioned) {
                 $provisioned | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
             }
@@ -200,7 +205,7 @@ function Invoke-FreeRAM {
         Add-Type -TypeDefinition $Code -ErrorAction Stop
         $ptr = [System.Runtime.InteropServices.Marshal]::AllocHGlobal(4)
         [System.Runtime.InteropServices.Marshal]::WriteInt32($ptr, 2)
-        [MemTool]::NtSetSystemInformation(80, $ptr, 4)
+        [MemTool]::NtSetSystemInformation(80, $ptr, 4) | Out-Null
         [System.Runtime.InteropServices.Marshal]::FreeHGlobal($ptr)
         Write-Log "Memoria en espera liberada exitosamente." -ForegroundColor Green
     } catch { Write-Log "Error al liberar memoria RAM: $($_.Exception.Message)" -ForegroundColor Red }
@@ -228,7 +233,10 @@ function Invoke-StorageOptimization {
 function Invoke-ExtremeOptimization {
     Show-SectionTitle "Aplicando Optimizaciones de Rendimiento"
     Write-Log "Activando plan 'Máximo Rendimiento'..."
-    powercfg -duplicatescheme $config.UltimatePerformanceGuid | Out-Null
+    $ultimatePlan = powercfg /l | Where-Object { $_ -match $config.UltimatePerformanceGuid }
+    if (-not $ultimatePlan) {
+        powercfg -duplicatescheme $config.UltimatePerformanceGuid | Out-Null
+    }
     powercfg /s $config.UltimatePerformanceGuid
     Write-Log "'Máximo Rendimiento' activado." -ForegroundColor Green
     
@@ -328,7 +336,7 @@ function Get-DiskHealth {
 function Show-MainMenu {
     Clear-Host
     Write-Host "╔══════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "║        🐲 OPTIMIZADOR LEVIATÁN v9.0 - Edición Optimizada 🐲       ║" -ForegroundColor White
+    Write-Host "║        🐲 OPTIMIZADOR LEVIATÁN v9.1 - Edición Corregida 🐲        ║" -ForegroundColor White
     Write-Host "╚══════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host "`nADVERTENCIA: Herramienta de poder extremo. Proceda con precaución." -ForegroundColor Red
     Write-Host "`nSelecciona una categoría:" -ForegroundColor Cyan
@@ -445,3 +453,4 @@ do {
     </script>
 </body>
 </html>
+
