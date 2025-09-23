@@ -1,66 +1,83 @@
 
-# ================================================================================================
-#   PowerScript Optimizador LEVIATÁN v11.0 - Edición Extrema y Avanzada
-#   Objetivo: Limpieza, aceleración, optimización, actualización y diagnóstico total del sistema.
-#   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-# ================================================================================================
+# 🐲 PowerScript Optimizador LEVIATÁN v11.0
 
-#region VALIDACIÓN ADMINISTRADOR
-if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
-    Start-Sleep -Seconds 10
-    Exit
-}
-#endregion
+**LEVIATÁN** es un script de PowerShell ⚡ diseñado para realizar una limpieza 🧹, optimización 🚀 y reparación 🛠️ **profunda** del sistema operativo Windows. Ideal para usuarios exigentes, técnicos y entusiastas que desean mantener su equipo funcionando al máximo.
 
-#region VARIABLES Y LOG
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v11.0.txt"
-Function Write-Log { param ([string]$Message, [string]$Color = 'Gray')
-    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    Write-Host "[$timestamp] $Message" -ForegroundColor $Color
-    Add-Content -Path $logFile -Value "[$timestamp] $Message"
-}
-#endregion
+> ⚠️ **Advertencia:** Ejecutar SIEMPRE como **Administrador** 🧑‍💻. Este script realiza cambios sensibles en el sistema operativo.
 
-#region LIMPIEZA BÁSICA Y AVANZADA
-Write-Log "Iniciando limpieza de archivos temporales..."
-Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-Cleanmgr /sagerun:1
+---
 
-Write-Log "Limpiando cachés del sistema..."
-ipconfig /flushdns
-Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-del "$env:SystemRoot\SoftwareDistribution\Download\*" -Force -Recurse -ErrorAction SilentlyContinue
-del "$env:SystemRoot\Logs\CBS\*" -Force -Recurse -ErrorAction SilentlyContinue
-#endregion
+## ✨ Funciones Principales
 
-#region OPTIMIZACIÓN DE RED
-Write-Log "Reiniciando adaptadores de red..."
-Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
-#endregion
+| Categoría        | Descripción |
+|------------------|-------------|
+| 🧼 Limpieza Profunda | Elimina archivos temporales, registros, cachés del sistema, restos de actualizaciones, WER logs, logs de CBS, etc. |
+| 🚀 Aceleración del Sistema | Libera memoria RAM, aplica configuración de energía máxima, optimiza red y DNS, desactiva servicios innecesarios. |
+| 🗑️ Eliminación de Bloatware | Detiene/desactiva servicios como Xbox, Cortana, Telemetría, WMP, entre otros. |
+| 🛠️ Reparación Automática | Ejecuta `SFC`, `DISM`, `CHKDSK` y verifica la integridad del sistema. |
+| 🔒 Privacidad & Seguridad | Desactiva funciones de recopilación de datos y limpia certificados caducados. |
+| 📜 Registro de Actividades | Crea un archivo de log detallado en el escritorio del usuario. |
 
-#region OPTIMIZACIÓN DE MEMORIA
-Write-Log "Liberando memoria RAM..."
-[System.GC]::Collect()
-#endregion
+---
 
-#region DESACTIVACIÓN DE SERVICIOS INNECESARIOS
-Write-Log "Deteniendo servicios innecesarios..."
-$servicios = @("DiagTrack", "dmwappushservice", "XblGameSave", "WMPNetworkSvc", "MapsBroker")
-foreach ($svc in $servicios) {
-    Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-    Set-Service -Name $svc -StartupType Disabled
-}
-#endregion
+## 📦 ¿Qué Limpia?
 
-#region DIAGNÓSTICO Y REPARACIÓN
-Write-Log "Ejecutando diagnóstico de sistema..."
-sfc /scannow
-DISM /Online /Cleanup-Image /RestoreHealth
-chkdsk C: /scan
-#endregion
+🧹 Directorios y cachés limpiados:
 
-Write-Log "✅ Optimización finalizada. Revisa el archivo de log en tu escritorio." "Green"
-Pause
+- `C:\Windows\Temp`
+- `%TEMP%`
+- `SoftwareDistribution\Download`
+- `Logs\CBS`
+- Cachés de DNS
+- Papelera de reciclaje 🗑️
+- Registros de errores de Windows (WER)
+- Aplicaciones preinstaladas innecesarias
+
+---
+
+## ⚙️ Requisitos
+
+- 💻 Windows 10 o superior (x64)
+- 🧩 PowerShell ≥ 5.1
+- 🧑‍💻 Ejecutar como **Administrador**
+
+---
+
+## 🚀 ¿Cómo usarlo?
+
+1. Haz clic derecho sobre el archivo `.ps1` y selecciona **"Ejecutar con PowerShell como Administrador"** ⚡
+2. Espera a que finalice el proceso ⏳
+3. Revisa el archivo `Optimizador-Leviatan-Log-v11.0.txt` en tu Escritorio 📝
+
+---
+
+## 🔍 Diagnóstico Incluido
+
+🔧 El script ejecuta automáticamente:
+
+- `sfc /scannow`
+- `DISM /Online /Cleanup-Image /RestoreHealth`
+- `chkdsk C: /scan`
+
+---
+
+## 🕓 Log de Cambios
+
+- **v11.0** (2025): Limpieza más profunda, desactivación de más servicios, reinicio de red, liberación de RAM, limpieza WER y CBS.
+- **v10.2**: Inclusión de log de ejecución y mejoras visuales.
+- **v9.0**: Soporte extendido para más versiones de Windows.
+- **v8.3**: Versión base pública.
+
+---
+
+## 👨‍💻 Autor
+
+**Martín Alonso Candil**  
+📎 [GitHub](https://github.com/candilmartinalonso) | 📧 `candilmartinalonso@gmail.com`
+
+---
+
+## 📝 Licencia
+
+Este script se distribuye bajo la licencia **MIT**.  
+Úsalo bajo tu propia responsabilidad ⚠️
