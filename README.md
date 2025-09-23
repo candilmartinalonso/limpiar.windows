@@ -1,33 +1,66 @@
-🐲 Optimizador Leviatán para Windows
-Leviatán v8.3 es un script de PowerShell diseñado para la optimización exhaustiva, limpieza y reparación de sistemas Windows. Reúne en una única suite interactiva las herramientas más potentes para maximizar el rendimiento del sistema.
 
-✨ Características Principales
-Limpieza Profunda: Elimina archivos temporales, cachés de aplicaciones (Discord, Steam, Navegadores), registros de eventos y restos de actualizaciones de Windows.
+# ================================================================================================
+#   PowerScript Optimizador LEVIATÁN v11.0 - Edición Extrema y Avanzada
+#   Objetivo: Limpieza, aceleración, optimización, actualización y diagnóstico total del sistema.
+#   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
+# ================================================================================================
 
-Aceleración del Sistema: Libera memoria RAM en espera (Standby List), activa el plan de energía de "Máximo Rendimiento", optimiza la red y habilita el "Hardware-Accelerated GPU Scheduling".
+#region VALIDACIÓN ADMINISTRADOR
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
+    Start-Sleep -Seconds 10
+    Exit
+}
+#endregion
 
-Eliminación de Bloatware: Desinstala aplicaciones preinstaladas de Windows que consumen recursos.
+#region VARIABLES Y LOG
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v11.0.txt"
+Function Write-Log { param ([string]$Message, [string]$Color = 'Gray')
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    Write-Host "[$timestamp] $Message" -ForegroundColor $Color
+    Add-Content -Path $logFile -Value "[$timestamp] $Message"
+}
+#endregion
 
-Reparación del Sistema: Ejecuta herramientas nativas como SFC /scannow y DISM /RestoreHealth para verificar y reparar la integridad de los archivos del sistema.
+#region LIMPIEZA BÁSICA Y AVANZADA
+Write-Log "Iniciando limpieza de archivos temporales..."
+Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
+Cleanmgr /sagerun:1
 
-Privacidad: Desactiva servicios de telemetría y recolección de datos de Microsoft.
+Write-Log "Limpiando cachés del sistema..."
+ipconfig /flushdns
+Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+del "$env:SystemRoot\SoftwareDistribution\Download\*" -Force -Recurse -ErrorAction SilentlyContinue
+del "$env:SystemRoot\Logs\CBS\*" -Force -Recurse -ErrorAction SilentlyContinue
+#endregion
 
-Menú Interactivo: Una interfaz de consola clara y fácil de usar para ejecutar tareas específicas o todas a la vez con el "Modo Apocalipsis".
+#region OPTIMIZACIÓN DE RED
+Write-Log "Reiniciando adaptadores de red..."
+Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
+#endregion
 
-🚀 Uso Rápido
-Abrir como Administrador: Haz clic derecho en el menú de Inicio y selecciona "Terminal (Administrador)" o "PowerShell (Administrador)".
+#region OPTIMIZACIÓN DE MEMORIA
+Write-Log "Liberando memoria RAM..."
+[System.GC]::Collect()
+#endregion
 
-Copiar el Script: Abre el archivo index.html y haz clic en el botón "Copiar Script Leviatán".
+#region DESACTIVACIÓN DE SERVICIOS INNECESARIOS
+Write-Log "Deteniendo servicios innecesarios..."
+$servicios = @("DiagTrack", "dmwappushservice", "XblGameSave", "WMPNetworkSvc", "MapsBroker")
+foreach ($svc in $servicios) {
+    Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
+    Set-Service -Name $svc -StartupType Disabled
+}
+#endregion
 
-Pegar en la Terminal: Vuelve a la terminal, haz clic derecho para pegar el script y presiona Enter.
+#region DIAGNÓSTICO Y REPARACIÓN
+Write-Log "Ejecutando diagnóstico de sistema..."
+sfc /scannow
+DISM /Online /Cleanup-Image /RestoreHealth
+chkdsk C: /scan
+#endregion
 
-Navegar y Ejecutar: Usa los números para navegar por el menú y aplicar las optimizaciones que desees.
-
-⚠️ Advertencia Importante
-Este script realiza cambios profundos en la configuración del sistema. Su uso es bajo tu entera responsabilidad.
-
-Crea un Punto de Restauración: El script ofrece esta opción (o hazlo manualmente). Es tu principal medida de seguridad para revertir cambios.
-
-Respalda tus Archivos: Antes de una optimización mayor, asegúrate de que tus datos importantes están a salvo.
-
-El autor no se hace responsable de ninguna inestabilidad, pérdida de datos o daño que pueda ocurrir.
+Write-Log "✅ Optimización finalizada. Revisa el archivo de log en tu escritorio." "Green"
+Pause
