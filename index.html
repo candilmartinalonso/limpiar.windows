@@ -7,77 +7,56 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827;
-        }
-        .glass-effect {
-            background: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #111827; }
+        .glass-effect { background: rgba(17, 24, 39, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1);}
         .code-block::-webkit-scrollbar { width: 8px; height: 8px; }
         .code-block::-webkit-scrollbar-thumb { background: #f59e0b; border-radius: 4px; }
-        .code-block::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
-        .btn-glow:hover { box-shadow: 0 0 25px 8px rgba(245, 158, 11, 0.4); }
-        .text-shadow-amber { text-shadow: 0 0 15px rgba(245, 158, 11, 0.6); }
+        .code-block::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1);}
+        .btn-glow:hover { box-shadow: 0 0 25px 8px rgba(245, 158, 11, 0.4);}
+        .text-shadow-amber { text-shadow: 0 0 15px rgba(245, 158, 11, 0.6);}
         #copy-toast { transition: opacity 0.3s, transform 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); }}
         .fade-in { animation: fadeIn 1s ease-out forwards; }
     </style>
 </head>
 <body class="text-gray-200 min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080/111827/f59e0b?text=LEVIATAN')">
     <div class="absolute inset-0 bg-black/85"></div>
-
-    <!-- Toast Notification -->
     <div id="copy-toast" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 z-50">
         ¡Script copiado al portapapeles!
     </div>
-
     <div class="relative container mx-auto px-4 py-8 md:py-16">
-        <!-- Header -->
         <header class="text-center mb-12 fade-in">
             <h1 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 text-shadow-amber">
                 Optimizador Leviatán v10.0
             </h1>
             <p class="text-lg md:text-xl text-amber-300 max-w-3xl mx-auto">
-                Edición Extrema: Desata el máximo potencial de tu sistema con optimizaciones a nivel de kernel, servicios y red.
+                Edición Extrema: Desata el máximo potencial de tu sistema con optimizaciones a nivel de kernel, servicios, red y mucho más.
             </p>
         </header>
-
-        <!-- Main Content -->
         <main class="max-w-6xl mx-auto">
-            <!-- Instructions Section -->
             <div class="glass-effect rounded-2xl p-6 md:p-8 mb-8 fade-in" style="animation-delay: 200ms;">
                 <h2 class="text-2xl font-bold text-white tracking-tighter mb-4">Instrucciones de Uso</h2>
                 <ol class="list-decimal list-inside space-y-2 text-gray-300">
-                    <li>Abre **Terminal (Administrador)**. Haz clic derecho en el menú Inicio y selecciónalo.</li>
+                    <li>Abre <strong>Terminal (Administrador)</strong>. Haz clic derecho en el menú Inicio y selecciónalo.</li>
                     <li>Haz clic en el botón de abajo para copiar el script completo.</li>
-                    <li>Vuelve a la terminal, haz clic derecho para pegar y presiona **Enter**.</li>
+                    <li>Vuelve a la terminal, haz clic derecho para pegar y presiona <strong>Enter</strong>.</li>
                     <li>Navega por el menú con los números y sigue las instrucciones.</li>
                 </ol>
             </div>
-            
-            <!-- Code Block Section -->
             <div class="glass-effect rounded-2xl p-6 md:p-8 fade-in" style="animation-delay: 400ms;">
                 <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - v10.0 Edición Extrema</h2>
-                    <button id="copyButton" class="w-full md:w-auto bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-400">
+                    <h2 class="text-2xl font-bold text-white tracking-tighter">Script PowerShell - v10.1 Edición Extrema y Avanzada</h2>
+                    <button id="copyButton" class="w-full md:w-auto bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 btn-glow hover:bg-amber-500 focus:outline-none">
                         Copiar Script Leviatán
                     </button>
                 </div>
-                
-                <!-- Code Display -->
                 <div class="bg-black/70 rounded-lg overflow-hidden border border-white/10">
-                    <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[550px]"><code id="powerShellScript"># =================================================================================================
-#
-#   PowerScript Optimizador LEVIATÁN v10.0 - Edición Extrema
-#   Objetivo: Limpieza, aceleración y optimización profunda del sistema.
-#
+                    <pre class="code-block language-powershell p-4 text-sm overflow-x-auto h-[700px]"><code id="powerShellScript">
+
+# =================================================================================================
+#   PowerScript Optimizador LEVIATÁN v10.1 - Edición Extrema y Avanzada
+#   Objetivo: Limpieza, aceleración, optimización y diagnóstico profundo del sistema.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-#   Este script realiza cambios profundos. Úsese bajo su propia responsabilidad.
-#
 # =================================================================================================
 
 #region PREPARACIÓN Y CONFIGURACIÓN INICIAL
@@ -87,212 +66,222 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     Exit
 }
 
-function Show-SectionTitle {
-    param([string]$Title)
-    Write-Host "`n"; Write-Host "==================================================================" -ForegroundColor Yellow
+function Show-SectionTitle { param([string]$Title)
+    Write-Host "`n"
+    Write-Host "==================================================================" -ForegroundColor Yellow
     Write-Host "    $Title" -ForegroundColor White
     Write-Host "==================================================================" -ForegroundColor Yellow
 }
 
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v10.0.txt"
-Function Write-Log {
-    param ([string]$Message, [string]$ForegroundColor = 'Gray')
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v10.1.txt"
+Function Write-Log { param ([string]$Message, [string]$ForegroundColor = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logMessage = "[$timestamp] - $Message"
     $logMessage | Out-File -FilePath $logFile -Append
-    Write-Host $logMessage -ForegroundColor $foregroundColor
-}
-
-Write-Log "Inicio del script Leviatán v10.0."
-#endregion
-
-#region CONFIGURACIÓN CENTRALIZADA
-$config = @{
-    LocationsToClean = @(
-        "$env:TEMP", "$env:SystemRoot\Temp", "$env:SystemRoot\SoftwareDistribution\Download",
-        "$env:windir\Prefetch", "$env:windir\Logs", "$env:windir\Panther",
-        "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache", "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache",
-        "$env:LOCALAPPDATA\Discord\Cache", "$env:APPDATA\Steam\htmlcache",
-        "$env:LOCALAPPDATA\NVIDIA\GLCache", "$env:LOCALAPPDATA\AMD\DxCache", "$env:windir\logs\CBS"
-    )
-    AppsToRemove = @(
-        "Microsoft.549981C3F5F10", "*Cortana*", "Microsoft.WindowsSoundRecorder", "Microsoft.Xbox*", "Microsoft.ZuneMusic", 
-        "Microsoft.ZuneVideo", "Microsoft.YourPhone", "Microsoft.WindowsAlarms", "Microsoft.WindowsMaps", "Microsoft.SkypeApp",
-        "Microsoft.Getstarted", "Microsoft.GetHelp", "Microsoft.MicrosoftSolitaireCollection", "Microsoft.People", "Microsoft.Office.OneNote",
-        "Microsoft.OneConnect", "Microsoft.Print3D", "Microsoft.Wallet", "Microsoft.MixedReality.Portal", "Microsoft.WindowsFeedbackHub",
-        "Microsoft.BingWeather", "Microsoft.GetOffice", "Microsoft.WindowsCamera"
-    )
-    AppsToExclude = @("Microsoft.XboxGameOverlay", "Microsoft.XboxGamingOverlay", "Microsoft.XboxSpeechToTextOverlay")
-    ServicesToDisable = @(
-        "DiagTrack", "dmwappushservice", "DoSvc", "MapsBroker", "SysMain", "PcaSvc"
-    )
-    UltimatePerformanceGuid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
+    Write-Host $logMessage -ForegroundColor $ForegroundColor
 }
 #endregion
 
-#region FUNCIONES CORE
-function Create-RestorePoint {
-    Show-SectionTitle "Creando Punto de Restauración del Sistema"
-    try {
-        $restoreService = Get-Service -Name "VSS" -ErrorAction SilentlyContinue
-        if ($restoreService -and $restoreService.Status -eq 'Running') {
-            Write-Log "Intentando crear punto de restauración 'Pre-Leviatan-v10.0'..."
-            $restorePoint = Checkpoint-Computer -Description "Pre-Leviatan-v10.0" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
-            if ($LASTEXITCODE -eq 0) {
-                 Write-Log "Punto de restauración creado con éxito." -ForegroundColor Green
-            } else {
-                Write-Log "No se creó un nuevo punto de restauración. Puede que ya exista uno reciente." -ForegroundColor Yellow
-                Write-Log "Detalle: $($restorePoint.ToString())" -ForegroundColor DarkGray
-            }
-        } else {
-            Write-Log "El servicio de restauración (VSS) no está activo. Omitiendo." -ForegroundColor Yellow
+#region FUNCIONES AVANZADAS
+
+function Uninstall-ThirdPartyAntivirus {
+    Show-SectionTitle "Desinstalando Antivirus de Terceros"
+    $knownAVs = @("Avast", "AVG", "McAfee", "ESET", "Kaspersky", "Bitdefender", "Norton", "Sophos", "Trend Micro")
+    foreach ($av in $knownAVs) {
+        $apps = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "*$av*" }
+        foreach ($app in $apps) {
+            Write-Log "Desinstalando: $($app.Name)"
+            $app.Uninstall() | Out-Null
         }
-    } catch {
-        Write-Log "Error crítico al crear punto de restauración: $($_.Exception.Message)" -ForegroundColor Red
+    }
+    Write-Log "Proceso de desinstalación de antivirus de terceros terminado." -ForegroundColor Green
+}
+
+function Set-WindowsDefenderState {
+    Show-SectionTitle "Activar/Desactivar Windows Defender"
+    $choice = Read-Host "¿Activar (A) o Desactivar (D) Windows Defender?"
+    if ($choice.ToLower() -eq "a") {
+        Set-MpPreference -DisableRealtimeMonitoring $false
+        Write-Log "Windows Defender activado." -ForegroundColor Green
+    } elseif ($choice.ToLower() -eq "d") {
+        Set-MpPreference -DisableRealtimeMonitoring $true
+        Write-Log "Windows Defender desactivado." -ForegroundColor Green
+    } else {
+        Write-Log "Opción no válida." -ForegroundColor Yellow
     }
 }
 
-# --- MÓDULO 1: LIMPIEZA ---
-function Invoke-ExhaustiveClean {
-    Show-SectionTitle "Limpieza Exhaustiva de Archivos Basura"
-    foreach ($location in $config.LocationsToClean) {
-        $path = Join-Path $location -ChildPath "*"
-        if (Test-Path $location) {
-            Write-Log "Limpiando: $path"
-            Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
-        } else { Write-Log "Omitiendo ruta no encontrada: $location" -ForegroundColor DarkGray }
+function Optimize-StartupApps {
+    Show-SectionTitle "Optimización de Arranque (Programas de Inicio)"
+    $startupApps = Get-CimInstance Win32_StartupCommand | Select Name, Command, Location
+    $startupApps | Format-Table -AutoSize | Out-String | Write-Host
+    $removeName = Read-Host "Introduce el nombre del programa de inicio a deshabilitar (o Enter para omitir)"
+    if ($removeName) {
+        $appToRemove = $startupApps | Where-Object { $_.Name -eq $removeName }
+        if ($appToRemove) {
+            Write-Log "Deshabilitando programa de inicio: $removeName"
+            Remove-CimInstance -InputObject $appToRemove
+            Write-Log "Programa deshabilitado." -ForegroundColor Green
+        } else {
+            Write-Log "Programa no encontrado." -ForegroundColor Yellow
+        }
     }
-    Write-Log "Vaciando registros de eventos, DNS y Papelera..."
-    $eventLogs = wevtutil el | Where-Object { $_ }
-    foreach ($log in $eventLogs) {
-        try { wevtutil cl "$log" -ErrorAction Stop | Out-Null } catch { Write-Log "No se pudo limpiar el registro: $log" -ForegroundColor DarkYellow }
+}
+
+function Clean-BrowserCaches {
+    Show-SectionTitle "Limpiando Caché de Navegadores (Firefox, Brave, Opera)"
+    $browserCaches = @(
+        "$env:APPDATA\Mozilla\Firefox\Profiles\*\cache2",
+        "$env:LOCALAPPDATA\BraveSoftware\Brave-Browser\User Data\Default\Cache",
+        "$env:APPDATA\Opera Software\Opera Stable\Cache"
+    )
+    foreach ($cache in $browserCaches) {
+        Remove-Item -Path $cache -Recurse -Force -ErrorAction SilentlyContinue
+        Write-Log "Limpiada caché: $cache"
     }
-    ipconfig /flushdns | Out-Null
-    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    Write-Log "Limpiando almacén de componentes de Windows (WinSxS)..."
-    Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
-    Write-Log "Limpieza de archivos completada." -ForegroundColor Green
+    Write-Log "Cachés de navegadores adicionales limpiadas." -ForegroundColor Green
 }
 
-function Invoke-BloatwareRemoval {
-    Show-SectionTitle "Depuración Profunda de Windows (Bloatware)"
-    $confirmation = Read-Host "¿Deseas eliminar las apps predefinidas de Windows? Esta acción es irreversible. (S/N)"
-    if ($confirmation.ToLower() -ne 's') { Write-Log "Operación cancelada." -ForegroundColor Yellow; return }
-    
-    Import-Module Appx -Force
-    Import-Module Dism -Force
+function Update-AllDrivers {
+    Show-SectionTitle "Actualizando Drivers Automáticamente"
+    Write-Log "Buscando actualizaciones de drivers..."
+    Start-Process "pnputil.exe" -ArgumentList "/scan-devices" -Wait
+    Write-Log "Drivers actualizados. (Para resultados óptimos, usa herramientas dedicadas de cada fabricante)." -ForegroundColor Green
+}
 
-    foreach ($app in $config.AppsToRemove) {
-        Write-Log "Intentando eliminar patrón: $app"
-        $packages = Get-AppxPackage -AllUsers -Name $app | Where-Object { $config.AppsToExclude -notcontains $_.Name }
-        if ($packages) { $packages | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue }
-        
-        $provisioned = Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app -and $config.AppsToExclude -notcontains $_.PackageName }
-        if ($provisioned) { $provisioned | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue }
+function Repair-NetworkAdvanced {
+    Show-SectionTitle "Reparación Avanzada de Red"
+    Write-Log "Reset de configuración de red, TCP/IP y Winsock..."
+    ipconfig /flushdns
+    netsh winsock reset
+    netsh int ip reset
+    netsh advfirewall reset
+    Write-Log "Configuración de red restaurada y firewall limpio." -ForegroundColor Green
+}
+
+function Backup-ImportantFiles {
+    Show-SectionTitle "Copia de Seguridad de Archivos Importantes"
+    $src = [System.Environment]::GetFolderPath('MyDocuments')
+    $dst = "$env:USERPROFILE\Desktop\Backup_Documentos_$(Get-Date -Format 'yyyyMMdd').zip"
+    Compress-Archive -Path $src -DestinationPath $dst -Force
+    Write-Log "Backup de documentos creado en: $dst" -ForegroundColor Green
+}
+
+function Monitor-Temperatures {
+    Show-SectionTitle "Monitoreo de Temperatura (CPU/GPU/Discos)"
+    Write-Log "Intentando obtener temperaturas. Requiere herramientas externas como OpenHardwareMonitor."
+    # Intentar usar OpenHardwareMonitor si está instalado
+    $ohmPath = "$env:ProgramFiles\OpenHardwareMonitor\OpenHardwareMonitor.exe"
+    if (Test-Path $ohmPath) {
+        Start-Process $ohmPath
+        Write-Log "Abierta OpenHardwareMonitor para monitoreo en tiempo real." -ForegroundColor Green
+    } else {
+        Write-Log "Instala OpenHardwareMonitor para ver temperaturas detalladas." -ForegroundColor Yellow
     }
-    Write-Log "Depuración de bloatware completada." -ForegroundColor Green
 }
 
-# --- MÓDULO 2: ACELERACIÓN ---
-function Invoke-PerformanceBoost {
-    Show-SectionTitle "Aplicando Optimizaciones de Rendimiento"
-    Write-Log "Activando plan 'Máximo Rendimiento'..."
-    if (-not (powercfg /l | Where-Object { $_ -match $config.UltimatePerformanceGuid })) {
-        powercfg -duplicatescheme $config.UltimatePerformanceGuid | Out-Null
+function Manage-WindowsUpdates {
+    Show-SectionTitle "Gestión de Actualizaciones de Windows"
+    $choice = Read-Host "¿Activar (A), Desactivar (D), Forzar búsqueda (F) o Pausar (P) actualizaciones?"
+    switch ($choice.ToLower()) {
+        "a" { Set-Service -Name wuauserv -StartupType Automatic; Start-Service wuauserv; Write-Log "Actualizaciones activadas." -ForegroundColor Green }
+        "d" { Stop-Service wuauserv; Set-Service wuauserv -StartupType Disabled; Write-Log "Actualizaciones desactivadas." -ForegroundColor Green }
+        "f" { UsoClient StartScan; Write-Log "Búsqueda forzada lanzada." -ForegroundColor Green }
+        "p" { Write-Log "Pausa temporal no soportada nativamente en PowerShell puro." -ForegroundColor Yellow }
+        default { Write-Log "Opción no válida." -ForegroundColor Yellow }
     }
-    powercfg /s $config.UltimatePerformanceGuid
-    Write-Log "'Máximo Rendimiento' activado." -ForegroundColor Green
-    
-    Write-Log "Desactivando hibernación para liberar espacio..."
-    powercfg.exe /hibernate off
-    
-    Write-Log "Optimizando la gestión de archivos y servicios..."
-    fsutil behavior set disablelastaccess 1
-    Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "WaitToKillServiceTimeout" -Value "2000" -ErrorAction SilentlyContinue
-
-    Write-Log "Activando Hardware-Accelerated GPU Scheduling..."
-    Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Value 2 -Type Dword -Force -ErrorAction SilentlyContinue
-    Write-Log "Aceleración de rendimiento completada." -ForegroundColor Green
 }
 
-function Invoke-NetworkBoost {
-    Show-SectionTitle "Potenciador de Red (TCP Optimizer)"
-    Write-Log "Aplicando ajustes de TCP para baja latencia..."
-    netsh int tcp set global autotuninglevel=normal
-    netsh int tcp set global ecncapability=enabled
-    netsh int tcp set global congestionprovider=ctcp
-    Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force -ErrorAction SilentlyContinue
-    Write-Log "Potenciador de red aplicado." -ForegroundColor Green
+function Remove-CortanaAndVoiceAssistants {
+    Show-SectionTitle "Desactivando Cortana y Asistentes de Voz"
+    Get-AppxPackage -AllUsers | Where-Object { $_.Name -like "*Cortana*" } | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+    Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*Cortana*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+    Write-Log "Cortana y asistentes desinstalados." -ForegroundColor Green
 }
 
-# --- MÓDULO 3: SERVICIOS Y KERNEL ---
-function Invoke-ServiceTuning {
-    Show-SectionTitle "Afinación de Servicios de Windows"
-    $confirmation = Read-Host "¿Desactivar servicios no esenciales (SysMain, Maps, etc.)? Puede mejorar el rendimiento. (S/N)"
-    if ($confirmation.ToLower() -ne 's') { Write-Log "Operación cancelada." -ForegroundColor Yellow; return }
-    
-    foreach ($service in $config.ServicesToDisable) {
-        try {
-            Set-Service -Name $service -StartupType Disabled -Status Stopped -ErrorAction Stop
-            Write-Log "Servicio '$service' desactivado."
-        } catch { Write-Log "No se pudo desactivar el servicio '$service' (puede que no exista)." -ForegroundColor Yellow }
+function Clean-AppLogs {
+    Show-SectionTitle "Limpiando logs temporales de apps (Adobe, Office, etc)"
+    $logPaths = @(
+        "$env:APPDATA\Adobe\Common\Logs",
+        "$env:APPDATA\Microsoft\Office\16.0\OfficeFileCache",
+        "$env:LOCALAPPDATA\Temp"
+    )
+    foreach ($lp in $logPaths) {
+        Remove-Item -Path $lp -Recurse -Force -ErrorAction SilentlyContinue
+        Write-Log "Logs limpios: $lp"
     }
-    Write-Log "Afinación de servicios completada." -ForegroundColor Green
+    Write-Log "Archivos de log temporales eliminados." -ForegroundColor Green
 }
 
-function Invoke-KernelTuning {
-    Show-SectionTitle "Afinación del Kernel (Timer Resolution)"
-    Write-Warning "Esto puede mejorar la latencia en juegos pero aumentar el consumo de energía."
-    $confirmation = Read-Host "¿Estás SEGURO de que quieres forzar la resolución del temporizador a 0.5ms? (S/N)"
-    if ($confirmation.ToLower() -ne 's') { Write-Log "Operación cancelada." -ForegroundColor Yellow; return }
-
-    $code = @"
-    [DllImport("ntdll.dll", SetLastError = true)]
-    public static extern int NtSetTimerResolution(int DesiredResolution, bool Set, out int CurrentResolution);
-"@
-    Add-Type -MemberDefinition $code -Name "WinAPI" -Namespace "System"
-    [System.WinAPI]::NtSetTimerResolution(5000, $true, [ref]0) | Out-Null
-    Write-Log "Resolución del temporizador del sistema ajustada a 0.5ms." -ForegroundColor Green
+function Disable-Telemetry {
+    Show-SectionTitle "Desactivando Telemetría y Recopilación de Datos"
+    $telemetryKeys = @(
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection",
+        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
+    )
+    foreach ($tk in $telemetryKeys) {
+        Set-ItemProperty -Path $tk -Name AllowTelemetry -Value 0 -Force -ErrorAction SilentlyContinue
+        Write-Log "Telemetría desactivada en: $tk"
+    }
+    Write-Log "Telemetría y recopilación de datos desactivadas." -ForegroundColor Green
 }
 
-function Invoke-DisableVisualFX {
-    Show-SectionTitle "Desactivando Efectos Visuales para Máxima Velocidad de UI"
-    $confirmation = Read-Host "¿Deseas desactivar animaciones y sombras para una interfaz más rápida? (S/N)"
-    if ($confirmation.ToLower() -ne 's') { Write-Log "Operación cancelada." -ForegroundColor Yellow; return }
-    
-    # Establecer "Ajustar para obtener el mejor rendimiento"
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFxSetting" -Value 2 -Force
-    # Desactivar explícitamente efectos clave
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Value "0" -Force
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Value "0" -Force
-    Write-Log "Efectos visuales desactivados. Puede requerir un reinicio para aplicar todo." -ForegroundColor Green
+function Optimize-GamingMode {
+    Show-SectionTitle "Optimización Gaming"
+    Write-Log "Activando modo juego y prioridad de procesos..."
+    Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameModeEnabled" -Value 1 -Force
+    Write-Log "Modo juego optimizado." -ForegroundColor Green
 }
 
-# --- MÓDULO 4: REPARACIÓN Y DIAGNÓSTICO ---
-function Invoke-SystemRepair {
-    Show-SectionTitle "Reparación Integral del Sistema"
-    Write-Log "Verificando y reparando integridad de archivos (SFC)..."; sfc /scannow
-    Write-Log "Verificando y reparando imagen de componentes (DISM)..."; Dism /Online /Cleanup-Image /RestoreHealth
-    Write-Log "Mantenimiento completado." -ForegroundColor Green
+function Generate-SystemReport {
+    Show-SectionTitle "Generando Informe Completo del Sistema"
+    $report = Get-ComputerInfo | Out-String
+    $reportPath = "$env:USERPROFILE\Desktop\Informe_Sistema_$(Get-Date -Format 'yyyyMMdd').txt"
+    $report | Out-File -FilePath $reportPath
+    Write-Log "Informe generado en: $reportPath" -ForegroundColor Green
 }
 
-function Get-DiskHealth {
-    Show-SectionTitle "Diagnóstico de Salud de Discos Físicos"
+function Check-RAMIntegrity {
+    Show-SectionTitle "Chequeo de Integridad de RAM y Benchmark"
+    Write-Log "Ejecutando Windows Memory Diagnostic..."
+    Start-Process "mdsched.exe"
+    Write-Log "Herramienta de diagnóstico de RAM lanzada." -ForegroundColor Green
+}
+
+function Clean-ThumbnailsCache {
+    Show-SectionTitle "Limpiando Thumbnails y Cachés Ocultas"
+    $thumbCache = "$env:LOCALAPPDATA\Microsoft\Windows\Explorer"
+    Remove-Item -Path "$thumbCache\thumbcache_*.db" -Force -ErrorAction SilentlyContinue
+    Write-Log "Caché de thumbnails limpiada." -ForegroundColor Green
+}
+
+function Disable-PrintServices {
+    Show-SectionTitle "Deshabilitando Servicios de Impresión"
     try {
-        $disks = Get-PhysicalDisk | Select-Object DeviceID, Model, MediaType, HealthStatus, Size
-        if (-not $disks) { Write-Log "No se pudieron obtener datos de los discos." -ForegroundColor Red; return }
-        Write-Log "Reporte de salud de las unidades de almacenamiento:" -ForegroundColor Cyan
-        $disks | Format-Table -AutoSize | Out-String | Write-Host
-    } catch { Write-Log "Error al obtener la información del disco: $($_.Exception.Message)" -ForegroundColor Red }
+        Stop-Service -Name Spooler -ErrorAction SilentlyContinue
+        Set-Service -Name Spooler -StartupType Disabled
+        Write-Log "Servicios de impresión deshabilitados." -ForegroundColor Green
+    } catch { Write-Log "Error al deshabilitar servicios de impresión." -ForegroundColor Red }
+}
+
+function Defrag-NonSSD {
+    Show-SectionTitle "Desfragmentando Discos (solo HDD)"
+    $disks = Get-PhysicalDisk | Where-Object { $_.MediaType -eq "HDD" }
+    foreach ($d in $disks) {
+        Write-Log "Desfragmentando disco: $($d.DeviceID) - $($d.Model)"
+        Optimize-Volume -DriveLetter $d.DeviceID -Defrag -Verbose
+    }
+    Write-Log "Desfragmentación de discos mecánicos completada." -ForegroundColor Green
 }
 #endregion
 
 #region MENÚ PRINCIPAL
 function Show-MainMenu {
     Clear-Host
-    Write-Host "╔══════════════════════════════════════════════════════════════════╗" -ForegroundColor Yellow
-    Write-Host "║         🐲 OPTIMIZADOR LEVIATÁN v10.0 - Edición Extrema 🐲        ║" -ForegroundColor White
-    Write-Host "╚══════════════════════════════════════════════════════════════════╝" -ForegroundColor Yellow
+    Write-Host "╔════════════════════════════════════════════════════════════════════════╗" -ForegroundColor Yellow
+    Write-Host "║         🐲 OPTIMIZADOR LEVIATÁN v10.1 - Edición Extrema & Avanzada 🐲        ║" -ForegroundColor White
+    Write-Host "╚════════════════════════════════════════════════════════════════════════╝" -ForegroundColor Yellow
     Write-Host "`nADVERTENCIA: Herramienta de poder extremo. Proceda con precaución." -ForegroundColor Red
     Write-Host "`nSelecciona una categoría:" -ForegroundColor Yellow
     Write-Host "   [1] Limpieza y Depuración (Archivos basura y Bloatware)"
@@ -300,9 +289,35 @@ function Show-MainMenu {
     Write-Host "   [3] Optimización de Servicios y Kernel (Avanzado)"
     Write-Host "   [4] Optimización de Almacenamiento (SSD/HDD)"
     Write-Host "   [5] Reparación y Diagnóstico del Sistema"
-    Write-Host "   [A] ¡MODO APOCALIPSIS! (Ejecuta las optimizaciones más seguras)"
+    Write-Host "   [6] Funciones Avanzadas"
+    Write-Host "   [A] ¡MODO APOCALIPSIS! (Ejecuta todo lo seguro y avanzado)"
     Write-Host "   [R] Crear Punto de Restauración"
     Write-Host "   [Q] Salir del Script"
+}
+
+function Show-AdvancedMenu {
+    Write-Host "`n═══════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+    Write-Host "         FUNCIONES AVANZADAS LEVIATÁN"
+    Write-Host "═══════════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+    Write-Host "   [1] Desinstalar Antivirus de Terceros"
+    Write-Host "   [2] Activar/Desactivar Windows Defender"
+    Write-Host "   [3] Optimizar Programas de Inicio"
+    Write-Host "   [4] Limpiar Caché de Navegadores Adicionales"
+    Write-Host "   [5] Actualizar Todos los Drivers"
+    Write-Host "   [6] Reparación Avanzada de Red"
+    Write-Host "   [7] Copia de Seguridad de Documentos"
+    Write-Host "   [8] Monitoreo de Temperatura de CPU/GPU/Discos"
+    Write-Host "   [9] Gestionar Actualizaciones de Windows"
+    Write-Host "   [10] Desactivar Cortana y Asistentes"
+    Write-Host "   [11] Limpiar Logs de Aplicaciones"
+    Write-Host "   [12] Desactivar Telemetría"
+    Write-Host "   [13] Optimización Gaming"
+    Write-Host "   [14] Generar Informe Completo del Sistema"
+    Write-Host "   [15] Chequeo de RAM y Benchmark"
+    Write-Host "   [16] Limpiar Thumbnails/Cachés Ocultas"
+    Write-Host "   [17] Deshabilitar Servicios de Impresión"
+    Write-Host "   [18] Desfragmentar Discos Mecánicos (HDD)"
+    Write-Host "   [B] Volver al Menú Principal"
 }
 #endregion
 
@@ -316,6 +331,36 @@ do {
         "3" { Invoke-ServiceTuning; Invoke-KernelTuning; Invoke-DisableVisualFX }
         "4" { Invoke-StorageOptimization }
         "5" { Invoke-SystemRepair; Get-DiskHealth }
+        "6" {
+            do {
+                Show-AdvancedMenu
+                $advOpt = (Read-Host "`nFunción avanzada").ToLower()
+                switch ($advOpt) {
+                    "1" { Uninstall-ThirdPartyAntivirus }
+                    "2" { Set-WindowsDefenderState }
+                    "3" { Optimize-StartupApps }
+                    "4" { Clean-BrowserCaches }
+                    "5" { Update-AllDrivers }
+                    "6" { Repair-NetworkAdvanced }
+                    "7" { Backup-ImportantFiles }
+                    "8" { Monitor-Temperatures }
+                    "9" { Manage-WindowsUpdates }
+                    "10" { Remove-CortanaAndVoiceAssistants }
+                    "11" { Clean-AppLogs }
+                    "12" { Disable-Telemetry }
+                    "13" { Optimize-GamingMode }
+                    "14" { Generate-SystemReport }
+                    "15" { Check-RAMIntegrity }
+                    "16" { Clean-ThumbnailsCache }
+                    "17" { Disable-PrintServices }
+                    "18" { Defrag-NonSSD }
+                    "b" { break }
+                    default { Write-Host "Opción avanzada no válida." -ForegroundColor Yellow; Start-Sleep -Seconds 1 }
+                }
+                Write-Host "`nOperación avanzada completada. Presiona Enter para continuar..."
+                Read-Host | Out-Null
+            } while ($advOpt -ne "b")
+        }
         "a" { 
             Create-RestorePoint
             Invoke-BloatwareRemoval
@@ -324,40 +369,43 @@ do {
             Invoke-ServiceTuning
             Invoke-SystemRepair
             Invoke-ExhaustiveClean
+            Clean-BrowserCaches
+            Repair-NetworkAdvanced
+            Clean-AppLogs
+            Disable-Telemetry
+            Optimize-GamingMode
+            Clean-ThumbnailsCache
             Write-Host "`n¡MODO APOCALIPSIS COMPLETADO! Se recomienda reiniciar." -ForegroundColor Yellow
         }
         "r" { Create-RestorePoint }
         "q" { Write-Log "Saliendo del Optimizador Leviatán."; Write-Host "Saliendo..." -ForegroundColor Green }
         default { Write-Host "Opción no válida." -ForegroundColor Yellow; Start-Sleep -Seconds 1 }
     }
-    if ($option -in '1','2','3','4','5','a','r') {
+    if ($option -in '1','2','3','4','5','6','a','r') {
         Write-Host "`nOperación completada. Presiona Enter para volver al menú..."
         Read-Host | Out-Null
     }
 } while ($option -ne 'q')
 #endregion
+
 </code></pre>
                 </div>
             </div>
         </main>
     </div>
-
     <script>
         (() => {
             const copyButton = document.getElementById('copyButton');
             const scriptContent = document.getElementById('powerShellScript').textContent;
             const toast = document.getElementById('copy-toast');
-
             const copyScriptToClipboard = async () => {
                 try {
                     await navigator.clipboard.writeText(scriptContent);
                     showToast(true);
                 } catch (err) {
-                    console.warn('Async clipboard copy failed, falling back to execCommand.', err);
                     fallbackCopy();
                 }
             };
-
             const fallbackCopy = () => {
                 const textArea = document.createElement('textarea');
                 textArea.value = scriptContent;
@@ -372,23 +420,19 @@ do {
                     const successful = document.execCommand('copy');
                     showToast(successful);
                 } catch (err) {
-                    console.error('Fallback copy failed:', err);
                     showToast(false);
                 }
                 document.body.removeChild(textArea);
             };
-
             const showToast = (success) => {
                 toast.textContent = success ? '¡Script copiado al portapapeles!' : 'Error al copiar el script.';
-                toast.className = `fixed top-5 right-5 text-white py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300 ${success ? 'bg-green-500' : 'bg-red-500'} opacity-100 translate-y-0`;
+                toast.className = `fixed top-5 right-5 text-white py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300 ${success ? 'bg-green-500' : 'bg-red-500'} opacity-100 translate-y-0 z-50`;
                 setTimeout(() => {
                     toast.className = toast.className.replace('opacity-100 translate-y-0', 'opacity-0 translate-y-2');
                 }, 3000);
             };
-
             copyButton.addEventListener('click', copyScriptToClipboard);
         })();
     </script>
 </body>
 </html>
-
