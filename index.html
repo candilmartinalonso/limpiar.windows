@@ -1,8 +1,55 @@
-# =================================================================================================
-#   PowerScript Optimizador LEVIATÁN v10.2 - Edición Extrema y Avanzada
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Script Mejorado - LEVIATÁN v11.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .script-box {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: Consolas, monospace;
+            max-height: 600px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Script Mejorado - LEVIATÁN v11.0</h1>
+    <div class="script-box" id="scriptContent">
+# ================================================================================================
+#   PowerScript Optimizador LEVIATÁN v11.0 - Edición Extrema y Avanzada
 #   Objetivo: Limpieza, aceleración, optimización, actualización y diagnóstico total del sistema.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-# =================================================================================================
+# ================================================================================================
 
 #region VALIDACIÓN ADMINISTRADOR
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -10,139 +57,71 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     Start-Sleep -Seconds 10
     Exit
 }
+#endregion
 
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v10.2.txt"
-Function Write-Log { param ([string]$Message, [string]$ForegroundColor = 'Gray')
+#region VARIABLES Y LOG
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v11.0.txt"
+Function Write-Log { param ([string]$Message, [string]$Color = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    $logMessage = "[$timestamp] - $Message"
-    $logMessage | Out-File -FilePath $logFile -Append
-    Write-Host $logMessage -ForegroundColor $ForegroundColor
+    Write-Host "[$timestamp] $Message" -ForegroundColor $Color
+    Add-Content -Path $logFile -Value "[$timestamp] $Message"
 }
 #endregion
 
-#region FUNCIONES DE LIMPIEZA PROFUNDA
-function Invoke-DeepClean {
-    Write-Log "Iniciando limpieza profunda..."
+#region LIMPIEZA BÁSICA Y AVANZADA
+Write-Log "Iniciando limpieza de archivos temporales..."
+Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
+Cleanmgr /sagerun:1
 
-    # Limpiar carpetas temporales y de caché
-    $cleanPaths = @(
-        "$env:TEMP",
-        "$env:WINDIR\Temp",
-        "$env:LOCALAPPDATA\Temp",
-        "$env:APPDATA\Microsoft\Windows\Recent",
-        "$env:LOCALAPPDATA\Microsoft\Windows\Explorer",
-        "$env:LOCALAPPDATA\Microsoft\Windows\INetCache",
-        "$env:LOCALAPPDATA\Microsoft\Windows\WebCache",
-        "$env:LOCALAPPDATA\Packages",
-        "$env:USERPROFILE\AppData\Local\Microsoft\Windows\WER\ReportArchive",
-        "$env:USERPROFILE\AppData\Local\Microsoft\Windows\WER\ReportQueue",
-        "$env:USERPROFILE\AppData\Local\CrashDumps"
-    )
-    foreach ($path in $cleanPaths) {
-        Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
-        Write-Log "Limpieza realizada en: $path"
-    }
-
-    # Limpiar Microsoft Store cache
-    Remove-Item "$env:LOCALAPPDATA\Packages\*\LocalCache" -Recurse -Force -ErrorAction SilentlyContinue
-
-    # Limpiar prefetch
-    Remove-Item "$env:WINDIR\Prefetch\*" -Force -ErrorAction SilentlyContinue
-
-    # Limpiar archivos de actualización de Windows obsoletos
-    Start-Process "cleanmgr.exe" -ArgumentList "/sagerun:1" -Wait
-
-    # Limpiar archivos de miniaturas
-    Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\Explorer\thumbcache_*.db" -Force -ErrorAction SilentlyContinue
-
-    Write-Log "Limpieza profunda completada." -ForegroundColor Green
-}
-
+Write-Log "Limpiando cachés del sistema..."
+ipconfig /flushdns
+Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+del "$env:SystemRoot\SoftwareDistribution\Download\*" -Force -Recurse -ErrorAction SilentlyContinue
+del "$env:SystemRoot\Logs\CBS\*" -Force -Recurse -ErrorAction SilentlyContinue
 #endregion
 
-#region ACTUALIZACIÓN TOTAL DEL SISTEMA
-function Invoke-UpdateAll {
-    Write-Log "Iniciando actualización de sistema y aplicaciones..."
+#region OPTIMIZACIÓN DE RED
+Write-Log "Reiniciando adaptadores de red..."
+Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
+#endregion
 
-    # Actualizar Windows
-    UsoClient StartScan
-    Write-Log "Forzando búsqueda de actualizaciones de Windows..."
+#region OPTIMIZACIÓN DE MEMORIA
+Write-Log "Liberando memoria RAM..."
+[System.GC]::Collect()
+#endregion
 
-    # Actualizar drivers con pnputil (recomendable usar software dedicado para drivers de fabricante)
-    Start-Process "pnputil.exe" -ArgumentList "/scan-devices" -Wait
-    Write-Log "Drivers actualizados con pnputil."
-
-    # Actualizar todas las aplicaciones instaladas (winget)
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        winget upgrade --all --silent
-        Write-Log "Aplicaciones actualizadas con winget." -ForegroundColor Green
-    } else {
-        Write-Log "Winget no está instalado. Instala Winget para actualizar apps automáticamente." -ForegroundColor Yellow
-    }
+#region DESACTIVACIÓN DE SERVICIOS INNECESARIOS
+Write-Log "Deteniendo servicios innecesarios..."
+$servicios = @("DiagTrack", "dmwappushservice", "XblGameSave", "WMPNetworkSvc", "MapsBroker")
+foreach ($svc in $servicios) {
+    Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
+    Set-Service -Name $svc -StartupType Disabled
 }
 #endregion
 
-#region OPTIMIZACIÓN PARA SSD
-function Optimize-SSD {
-    Write-Log "Optimizando discos SSD..."
+#region DIAGNÓSTICO Y REPARACIÓN
+Write-Log "Ejecutando diagnóstico de sistema..."
+sfc /scannow
+DISM /Online /Cleanup-Image /RestoreHealth
+chkdsk C: /scan
+#endregion
 
-    # Activar TRIM (ya suele estar activo, pero se fuerza)
-    fsutil behavior set DisableDeleteNotify 0
-    Write-Log "TRIM activado en SSD." -ForegroundColor Green
+Write-Log "✅ Optimización finalizada. Revisa el archivo de log en tu escritorio." "Green"
+Pause
+</div>
+    <button onclick="copyToClipboard()">Copiar Script</button>
 
-    # Deshabilitar desfragmentación en SSD
-    $ssdList = Get-PhysicalDisk | Where-Object { $_.MediaType -eq "SSD" }
-    foreach ($ssd in $ssdList) {
-        try {
-            Optimize-Volume -DriveLetter $ssd.DeviceID -ReTrim -Verbose
-            Write-Log "TRIM ejecutado en disco: $($ssd.DeviceID)" -ForegroundColor Green
-        } catch {
-            Write-Log "Error al optimizar SSD: $($_.Exception.Message)" -ForegroundColor Red
+    <script>
+        function copyToClipboard() {
+            const text = document.getElementById('scriptContent').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('¡Script copiado al portapapeles!');
+            }, function(err) {
+                alert('Error al copiar: ', err);
+            });
         }
-    }
-
-    # Deshabilitar Superfetch (SysMain) para SSD
-    Stop-Service -Name "SysMain" -ErrorAction SilentlyContinue
-    Set-Service -Name "SysMain" -StartupType Disabled
-    Write-Log "Superfetch (SysMain) deshabilitado para SSD." -ForegroundColor Green
-
-    # Ajustar opciones de energía para SSD
-    powercfg -change -disk-timeout-ac 0
-    powercfg -change -disk-timeout-dc 0
-    Write-Log "Opciones de energía ajustadas para SSD." -ForegroundColor Green
-}
-
-#endregion
-
-#region MANTENIMIENTO PREVENTIVO
-function PreventiveMaintenance {
-    Write-Log "Ejecutando mantenimiento preventivo..."
-
-    # Reparar archivos de sistema
-    sfc /scannow
-    Write-Log "Comprobación de archivos de sistema completada."
-
-    # Reparación avanzada de red
-    ipconfig /flushdns
-    netsh winsock reset
-    netsh int ip reset
-    netsh advfirewall reset
-    Write-Log "Red y firewall restaurados." -ForegroundColor Green
-
-    # Crear punto de restauración
-    powershell.exe -Command "Checkpoint-Computer -Description 'Prevención Leviatán v10.2' -RestorePointType 'MODIFY_SETTINGS'"
-    Write-Log "Punto de restauración creado." -ForegroundColor Green
-}
-
-#endregion
-
-#region MENÚ AUTOMÁTICO EXTREMO
-Write-Log "Ejecutando optimización extrema completa..."
-Invoke-DeepClean
-Invoke-UpdateAll
-Optimize-SSD
-PreventiveMaintenance
-Write-Log "Optimización extrema finalizada. Se recomienda reiniciar el sistema." -ForegroundColor Yellow
-Write-Host "`nOptimización Leviatán v10.2 completada. Reinicia tu PC para aplicar todos los cambios." -ForegroundColor Green
-
-#endregion
+    </script>
+</body>
+</html>
