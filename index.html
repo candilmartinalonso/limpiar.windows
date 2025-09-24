@@ -1,172 +1,235 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Script LEVIAT脕N v11.0 - Limpieza, aceleraci贸n y optimizaci贸n extrema de Windows.">
-  <title>LEVIAT脕N v11.0 - Optimizador Extremo</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-  <style>
-    :root {
-      color-scheme: light dark;
-      --bg-light: #f4f4f4;
-      --bg-dark: #1e1e1e;
-      --text-light: #333;
-      --text-dark: #dcdcdc;
-      --primary: #007acc;
-      --primary-hover: #005a9e;
-    }
-    body {
-      font-family: system-ui, Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: var(--bg-light);
-      color: var(--text-light);
-      transition: background 0.3s, color 0.3s;
-    }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: var(--bg-dark);
-        color: var(--text-dark);
-      }
-    }
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    .script-box {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-      padding: 20px;
-      border-radius: 12px;
-      overflow-x: auto;
-      font-family: Consolas, monospace;
-      max-height: 70vh;
-      white-space: pre;
-      line-height: 1.4;
-    }
-    pre {
-      margin: 0;
-    }
-    .buttons {
-      margin-top: 20px;
-      text-align: center;
-    }
-    button {
-      margin: 5px;
-      padding: 10px 18px;
-      font-size: 15px;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-    button:hover {
-      background-color: var(--primary-hover);
-      transform: scale(1.05);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Script LEVIATÁN v11.0 - Limpieza, aceleración y optimización extrema de Windows.">
+    <title>LEVIATÁN v11.0 - Optimizador Extremo</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg-light: #f4f4f4;
+            --bg-dark: #1e1e1e;
+            --text-light: #333;
+            --text-dark: #dcdcdc;
+            --primary: #007acc;
+            --primary-hover: #005a9e;
+        }
+        body {
+            font-family: system-ui, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.3s, color 0.3s;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-dark);
+                color: var(--text-dark);
+            }
+        }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .script-box {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+            max-height: 70vh;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        pre {
+            margin: 0;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 18px;
+            font-size: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+        }
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        .message-box.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
 </head>
 <body>
-  <h1>馃殌 LEVIAT脕N v11.0 - Optimizador Extremo</h1>
-  <div class="script-box">
-    <pre><code class="language-powershell" id="scriptContent"># ================================================================================================
-#   PowerScript Optimizador LEVIAT脕N v11.0 - Edici贸n Extrema y Avanzada
-#   Objetivo: Limpieza, aceleraci贸n, optimizaci贸n, actualizaci贸n y diagn贸stico total del sistema.
+    <h1>🌟 LEVIATÁN v11.0 - Optimizador Extremo</h1>
+    <div class="script-box">
+        <pre><code class="language-powershell" id="scriptContent"># ================================================================================================
+#   PowerScript Optimizador LEVIATÁN v11.0 - Edición Extrema y Avanzada
+#   Objetivo: Limpieza, aceleración, optimización, actualización y diagnóstico total del sistema.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
 # ================================================================================================
 
-#region VALIDACI脫N ADMINISTRADOR
-if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
-    Start-Sleep -Seconds 10
-    Exit
-}
-#endregion
-
 #region VARIABLES Y LOG
 $logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v11.0.txt"
-Function Write-Log { param ([string]$Message, [string]$Color = 'Gray')
+Function Write-Log { 
+    param ([string]$Message, [string]$Color = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     Write-Host "[$timestamp] $Message" -ForegroundColor $Color
     Add-Content -Path $logFile -Value "[$timestamp] $Message"
 }
 #endregion
 
-#region LIMPIEZA B脕SICA Y AVANZADA
-Write-Log "Iniciando limpieza de archivos temporales..."
-Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-Cleanmgr /sagerun:1
+#region FUNCIONES
+Function Check-Admin {
+    if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
+        Start-Sleep -Seconds 10
+        Exit
+    }
+}
 
-Write-Log "Limpiando cach茅s del sistema..."
-ipconfig /flushdns
-Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-del "$env:SystemRoot\SoftwareDistribution\Download\*" -Force -Recurse -ErrorAction SilentlyContinue
-del "$env:SystemRoot\Logs\CBS\*" -Force -Recurse -ErrorAction SilentlyContinue
-#endregion
+Function Clean-System {
+    Write-Log "Iniciando limpieza de archivos temporales..."
+    Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Cleanmgr /sagerun:1
 
-#region OPTIMIZACI脫N DE RED
-Write-Log "Reiniciando adaptadores de red..."
-Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
-#endregion
+    Write-Log "Limpiando cachés del sistema..."
+    ipconfig /flushdns
+    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+    del "$env:SystemRoot\SoftwareDistribution\Download\*" -Force -Recurse -ErrorAction SilentlyContinue
+    del "$env:SystemRoot\Logs\CBS\*" -Force -Recurse -ErrorAction SilentlyContinue
+}
 
-#region OPTIMIZACI脫N DE MEMORIA
-Write-Log "Liberando memoria RAM..."
-[System.GC]::Collect()
-#endregion
+Function Optimize-Network {
+    Write-Log "Reiniciando adaptadores de red..."
+    Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
+}
 
-#region DESACTIVACI脫N DE SERVICIOS INNECESARIOS
-Write-Log "Deteniendo servicios innecesarios..."
-$servicios = @("DiagTrack", "dmwappushservice", "XblGameSave", "WMPNetworkSvc", "MapsBroker")
-foreach ($svc in $servicios) {
-    Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-    Set-Service -Name $svc -StartupType Disabled
+Function Optimize-Memory {
+    Write-Log "Liberando memoria RAM..."
+    [System.GC]::Collect()
+}
+
+Function Stop-UnnecessaryServices {
+    Write-Log "Deteniendo servicios innecesarios..."
+    $servicios = @("DiagTrack", "dmwappushservice", "XblGameSave", "WMPNetworkSvc", "MapsBroker")
+    foreach ($svc in $servicios) {
+        Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
+        Set-Service -Name $svc -StartupType Disabled
+    }
+}
+
+Function Diagnose-System {
+    Write-Log "Ejecutando diagnóstico de sistema..."
+    sfc /scannow
+    DISM /Online /Cleanup-Image /RestoreHealth
+    chkdsk C: /scan
+}
+
+Function Main-Function {
+    # Validar permisos de administrador
+    Check-Admin
+
+    # Realizar optimizaciones
+    Clean-System
+    Optimize-Network
+    Optimize-Memory
+    Stop-UnnecessaryServices
+    Diagnose-System
+
+    Write-Log "✔️ Optimización finalizada. Revisa el archivo de log en tu escritorio." "Green"
+    Pause
 }
 #endregion
 
-#region DIAGN脫STICO Y REPARACI脫N
-Write-Log "Ejecutando diagn贸stico de sistema..."
-sfc /scannow
-DISM /Online /Cleanup-Image /RestoreHealth
-chkdsk C: /scan
-#endregion
+#region EJECUCIÓN
+Main-Function
+#endregion</code></pre>
+    </div>
+    <div class="buttons">
+        <button onclick="copyScript()">📋 Copiar Script</button>
+        <button onclick="downloadScript()">📥 Descargar Script</button>
+    </div>
 
-Write-Log "鉁?Optimizaci贸n finalizada. Revisa el archivo de log en tu escritorio." "Green"
-Pause</code></pre>
-  </div>
-  <div class="buttons">
-    <button onclick="copyScript()">馃搵 Copiar Script</button>
-    <button onclick="downloadScript()">猬囷笍 Descargar Script</button>
-  </div>
+    <div id="message-box" class="message-box"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
-  <script>
-    function copyScript() {
-      const scriptText = document.getElementById('scriptContent').innerText;
-      navigator.clipboard.writeText(scriptText).then(() => {
-        alert('鉁?Script copiado al portapapeles.');
-      });
-    }
-    function downloadScript() {
-      const scriptText = document.getElementById('scriptContent').innerText;
-      const blob = new Blob([scriptText], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = "Leviatan_v11.ps1";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+    <script>
+        function showMessage(message) {
+            const msgBox = document.getElementById('message-box');
+            msgBox.textContent = message;
+            msgBox.classList.add('visible');
+            setTimeout(() => {
+                msgBox.classList.remove('visible');
+            }, 3000);
+        }
+
+        function copyScript() {
+            const scriptText = document.getElementById('scriptContent').innerText;
+            
+            // Use a temporary textarea to copy text to clipboard
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = scriptText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showMessage('✔️ Script copiado al portapapeles.');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showMessage('❌ Error al copiar el script.');
+            } finally {
+                document.body.removeChild(tempTextArea);
+            }
+        }
+        
+        function downloadScript() {
+            const scriptText = document.getElementById('scriptContent').innerText;
+            const blob = new Blob([scriptText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Leviatan_v11.ps1";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showMessage('📥 Descargando script...');
+        }
+    </script>
 </body>
 </html>
