@@ -100,6 +100,7 @@
 # ================================================================================================
 
 #region VARIABLES Y LOG
+# Define la ubicación del archivo de log en el escritorio del usuario
 $logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v11.0.txt"
 Function Write-Log { 
     param ([string]$Message, [string]$Color = 'Gray')
@@ -109,8 +110,9 @@ Function Write-Log {
 }
 #endregion
 
-#region FUNCIONES
+#region FUNCIONES DE OPTIMIZACIÓN
 Function Check-Admin {
+    # Verifica si el script se está ejecutando con permisos de administrador
     if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         Write-Warning "Este script requiere privilegios de Administrador. Por favor, reinicia la terminal como Administrador."
         Start-Sleep -Seconds 10
@@ -119,43 +121,106 @@ Function Check-Admin {
 }
 
 Function Clean-System {
-    Write-Log "Iniciando limpieza de archivos temporales..."
+    Write-Log "Iniciando limpieza de archivos temporales del sistema y de usuario..."
+    # Limpia directorios temporales de usuario y del sistema
     Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+    # Limpia carpetas de reportes de error
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Cleanmgr /sagerun:1
-
-    Write-Log "Limpiando cachés del sistema..."
-    ipconfig /flushdns
+    # Limpia archivos temporales de internet y cachés de Windows Update
+    Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
+    # Limpia la papelera de reciclaje
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    del "$env:SystemRoot\SoftwareDistribution\Download\*" -Force -Recurse -ErrorAction SilentlyContinue
-    del "$env:SystemRoot\Logs\CBS\*" -Force -Recurse -ErrorAction SilentlyContinue
+    # Ejecuta el Limpiador de Disco de Windows con la configuración guardada
+    Cleanmgr /sagerun:1
+    Write-Log "Limpieza de archivos completada."
 }
 
 Function Optimize-Network {
-    Write-Log "Reiniciando adaptadores de red..."
+    Write-Log "Optimizando red: Reiniciando adaptadores y restableciendo la pila TCP/IP..."
+    # Reinicia todos los adaptadores de red
     Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
+    # Restablece la pila TCP/IP y el catálogo Winsock
+    netsh int ip reset -c null
+    netsh winsock reset
+    # Limpia la caché de DNS
+    ipconfig /flushdns
+    Write-Log "Optimización de red completada."
 }
 
 Function Optimize-Memory {
     Write-Log "Liberando memoria RAM..."
+    # Fuerza al recolector de basura de .NET a liberar memoria no utilizada
     [System.GC]::Collect()
+    Write-Log "Memoria RAM liberada."
 }
 
 Function Stop-UnnecessaryServices {
-    Write-Log "Deteniendo servicios innecesarios..."
-    $servicios = @("DiagTrack", "dmwappushservice", "XblGameSave", "WMPNetworkSvc", "MapsBroker")
+    Write-Log "Deteniendo y deshabilitando servicios innecesarios..."
+    # Lista de servicios a detener y deshabilitar
+    $servicios = @(
+        "DiagTrack",         # Servicio de seguimiento de diagnóstico
+        "dmwappushservice",  # Servicio de telemetría y push
+        "XblGameSave",       # Servicio de guardado de juegos de Xbox
+        "WMPNetworkSvc",     # Servicio de uso compartido de red del Reproductor de Windows Media
+        "Fax",               # Servicio de fax (si no se usa)
+        "Spooler",           # Servicio de cola de impresión (si no se usa)
+        "SysMain",           # Superfetch/Prefetch (puede causar problemas en SSDs)
+        "PcaSvc"             # Servicio de compatibilidad de programas
+    )
     foreach ($svc in $servicios) {
-        Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-        Set-Service -Name $svc -StartupType Disabled
+        if (Get-Service -Name $svc -ErrorAction SilentlyContinue) {
+            Write-Log "Deteniendo servicio: $svc"
+            Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
+            Set-Service -Name $svc -StartupType Disabled
+        }
     }
+    Write-Log "Servicios detenidos y deshabilitados."
+}
+
+Function Remove-Bloatware {
+    Write-Log "Eliminando aplicaciones de bloatware de la Microsoft Store..."
+    $appsToRemove = @(
+        "Microsoft.BingNews",
+        "Microsoft.SkypeApp",
+        "Microsoft.Windows.Photos",
+        "Microsoft.ZuneVideo",
+        "Microsoft.ZuneMusic",
+        "Microsoft.YourPhone",
+        "Microsoft.XboxApp"
+    )
+    foreach ($app in $appsToRemove) {
+        Write-Log "Eliminando paquete: $app"
+        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
+        Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*$app*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+    }
+    Write-Log "Eliminación de bloatware completada."
+}
+
+Function Optimize-PowerPlan {
+    Write-Log "Configurando el plan de energía en 'Alto Rendimiento'..."
+    # Obtiene el GUID del plan de energía de alto rendimiento
+    $highPerfGUID = (powercfg -list | Select-String "Alto rendimiento").ToString().Split()[3]
+    # Establece el plan de energía activo
+    powercfg -setactive $highPerfGUID
+    Write-Log "Plan de energía ajustado a Alto Rendimiento."
+}
+
+Function Disable-Hibernation {
+    Write-Log "Deshabilitando la hibernación para liberar espacio en disco..."
+    powercfg.exe /hibernate off
+    Write-Log "Hibernación deshabilitada."
 }
 
 Function Diagnose-System {
-    Write-Log "Ejecutando diagnóstico de sistema..."
+    Write-Log "Iniciando diagnóstico y reparación del sistema..."
+    # Escanea y repara archivos corruptos del sistema
     sfc /scannow
+    # Repara la imagen de Windows con DISM
     DISM /Online /Cleanup-Image /RestoreHealth
+    # Escanea el disco C: en busca de errores
     chkdsk C: /scan
+    Write-Log "Diagnóstico de sistema finalizado."
 }
 
 Function Main-Function {
@@ -163,10 +228,14 @@ Function Main-Function {
     Check-Admin
 
     # Realizar optimizaciones
+    Write-Log "Iniciando la secuencia de optimización LEVIATÁN v11.0..."
     Clean-System
     Optimize-Network
     Optimize-Memory
     Stop-UnnecessaryServices
+    Remove-Bloatware
+    Optimize-PowerPlan
+    Disable-Hibernation
     Diagnose-System
 
     Write-Log "✔️ Optimización finalizada. Revisa el archivo de log en tu escritorio." "Green"
