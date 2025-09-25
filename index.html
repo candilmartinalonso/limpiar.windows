@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script LEVIATÁN v11.0 - Limpieza, aceleración y optimización extrema de Windows.">
-    <title>LEVIATÁN v11.0 - Optimizador Extremo</title>
+    <meta name="description" content="Script LEVIATÁN v12.0 - Limpieza, aceleración y optimización extrema de Windows con menú interactivo y mayor seguridad.">
+    <title>LEVIATÁN v12.0 - Optimizador Extremo</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -91,17 +91,19 @@
     </style>
 </head>
 <body>
-    <h1>🌟 LEVIATÁN v11.0 - Optimizador Extremo</h1>
+    <h1>🌟 LEVIATÁN v12.0 - Optimizador Extremo</h1>
     <div class="script-box">
-        <pre><code class="language-powershell" id="scriptContent"># ================================================================================================
-#   PowerScript Optimizador LEVIATÁN v11.0 - Edición Extrema y Avanzada
-#   Objetivo: Limpieza, aceleración, optimización, actualización y diagnóstico total del sistema.
+        <pre><code class="language-powershell" id="scriptContent"># ===================================================================================================
+#   PowerScript Optimizador LEVIATÁN v12.0 - Edición Extrema, Segura y Avanzada
+#   Objetivo: Limpieza, aceleración, optimización y actualización total del sistema.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
-# ================================================================================================
+#
+#   Este script presenta un menú interactivo para que selecciones las optimizaciones a ejecutar.
+# ===================================================================================================
 
 #region VARIABLES Y LOG
 # Define la ubicación del archivo de log en el escritorio del usuario
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v11.0.txt"
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v12.0.txt"
 Function Write-Log { 
     param ([string]$Message, [string]$Color = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -110,7 +112,7 @@ Function Write-Log {
 }
 #endregion
 
-#region FUNCIONES DE OPTIMIZACIÓN
+#region FUNCIONES DE VALIDACIÓN Y UTILERÍAS
 Function Check-Admin {
     # Verifica si el script se está ejecutando con permisos de administrador
     if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -120,19 +122,38 @@ Function Check-Admin {
     }
 }
 
+Function Check-Module {
+    param ([string]$ModuleName)
+    if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
+        Write-Host "El módulo '$ModuleName' no está instalado. Instalándolo..." -ForegroundColor Yellow
+        try {
+            Install-Module -Name $ModuleName -Force -Confirm:$false -ErrorAction Stop
+            Write-Host "Módulo '$ModuleName' instalado correctamente." -ForegroundColor Green
+        } catch {
+            Write-Host "ERROR: No se pudo instalar el módulo '$ModuleName'. La función que lo requiere no se ejecutará." -ForegroundColor Red
+            return $false
+        }
+    }
+    return $true
+}
+#endregion
+
+#region FUNCIONES DE OPTIMIZACIÓN
 Function Clean-System {
-    Write-Log "Iniciando limpieza de archivos temporales del sistema y de usuario..."
+    Write-Log "Iniciando limpieza profunda de archivos temporales..."
     # Limpia directorios temporales de usuario y del sistema
     Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+    # Limpia cachés de Windows Store
+    WSReset.exe -c
     # Limpia carpetas de reportes de error
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
     # Limpia archivos temporales de internet y cachés de Windows Update
     Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
     # Limpia la papelera de reciclaje
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    # Ejecuta el Limpiador de Disco de Windows con la configuración guardada
-    Cleanmgr /sagerun:1
+    # Ejecuta el Limpiador de Disco de Windows con la configuración de limpieza extrema
+    Cleanmgr /sagerun:65535
     Write-Log "Limpieza de archivos completada."
 }
 
@@ -156,17 +177,25 @@ Function Optimize-Memory {
 }
 
 Function Stop-UnnecessaryServices {
+    Write-Host "ADVERTENCIA: Detener y deshabilitar servicios puede afectar la funcionalidad del sistema." -ForegroundColor Red
+    $confirm = Read-Host "Deseas continuar? (S/N)"
+    if ($confirm -ne 'S') {
+        Write-Log "Acción cancelada por el usuario."
+        return
+    }
     Write-Log "Deteniendo y deshabilitando servicios innecesarios..."
     # Lista de servicios a detener y deshabilitar
     $servicios = @(
         "DiagTrack",         # Servicio de seguimiento de diagnóstico
-        "dmwappushservice",  # Servicio de telemetría y push
+        "dmwappushservice",  # Servicio de telemetría
         "XblGameSave",       # Servicio de guardado de juegos de Xbox
-        "WMPNetworkSvc",     # Servicio de uso compartido de red del Reproductor de Windows Media
-        "Fax",               # Servicio de fax (si no se usa)
-        "Spooler",           # Servicio de cola de impresión (si no se usa)
-        "SysMain",           # Superfetch/Prefetch (puede causar problemas en SSDs)
-        "PcaSvc"             # Servicio de compatibilidad de programas
+        "WMPNetworkSvc",     # Reproductor de Windows Media
+        "Fax",               # Servicio de fax
+        "Spooler",           # Servicio de cola de impresión (si no se usa impresora)
+        "SysMain",           # Superfetch/Prefetch (inútil en SSDs, puede causar problemas)
+        "PcaSvc",            # Servicio de compatibilidad de programas
+        "XboxGipSvc",        # Xbox Game Input Service
+        "XboxNetApiSvc"      # Xbox Live Networking Service
     )
     foreach ($svc in $servicios) {
         if (Get-Service -Name $svc -ErrorAction SilentlyContinue) {
@@ -179,15 +208,25 @@ Function Stop-UnnecessaryServices {
 }
 
 Function Remove-Bloatware {
+    Write-Host "ADVERTENCIA: Se eliminarán aplicaciones preinstaladas de la Microsoft Store. Esto es irreversible." -ForegroundColor Red
+    $confirm = Read-Host "Deseas continuar? (S/N)"
+    if ($confirm -ne 'S') {
+        Write-Log "Acción cancelada por el usuario."
+        return
+    }
     Write-Log "Eliminando aplicaciones de bloatware de la Microsoft Store..."
     $appsToRemove = @(
         "Microsoft.BingNews",
         "Microsoft.SkypeApp",
-        "Microsoft.Windows.Photos",
         "Microsoft.ZuneVideo",
         "Microsoft.ZuneMusic",
         "Microsoft.YourPhone",
-        "Microsoft.XboxApp"
+        "Microsoft.XboxApp",
+        "Microsoft.Xbox.TCUI",
+        "Microsoft.XboxGameOverlay",
+        "Microsoft.XboxGamingOverlay",
+        "Microsoft.XboxIdentityProvider",
+        "Microsoft.XboxSpeechToTextOverlay"
     )
     foreach ($app in $appsToRemove) {
         Write-Log "Eliminando paquete: $app"
@@ -197,19 +236,39 @@ Function Remove-Bloatware {
     Write-Log "Eliminación de bloatware completada."
 }
 
-Function Optimize-PowerPlan {
-    Write-Log "Configurando el plan de energía en 'Alto Rendimiento'..."
-    # Obtiene el GUID del plan de energía de alto rendimiento
-    $highPerfGUID = (powercfg -list | Select-String "Alto rendimiento").ToString().Split()[3]
-    # Establece el plan de energía activo
-    powercfg -setactive $highPerfGUID
-    Write-Log "Plan de energía ajustado a Alto Rendimiento."
+Function Update-System {
+    Write-Log "Actualizando Windows y aplicaciones instaladas..."
+    
+    # 1. Actualizar Windows
+    if (Check-Module "PSWindowsUpdate") {
+        Write-Log "Buscando e instalando actualizaciones de Windows..."
+        Get-WUList | Out-File -FilePath "$env:USERPROFILE\Desktop\Windows-Updates-List.txt"
+        Install-WindowsUpdate -AcceptAll -AutoReboot -Verbose -Confirm:$false
+        Write-Log "Actualización de Windows finalizada."
+    }
+
+    # 2. Actualizar aplicaciones con Winget
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        Write-Log "Buscando y actualizando aplicaciones con Winget..."
+        winget upgrade --all --silent --accept-source-agreements --accept-package-agreements
+        Write-Log "Actualización de aplicaciones con Winget finalizada."
+    } else {
+        Write-Log "El comando 'winget' no se encontró. No se pueden actualizar las aplicaciones." -Color Yellow
+    }
 }
 
-Function Disable-Hibernation {
-    Write-Log "Deshabilitando la hibernación para liberar espacio en disco..."
+Function Optimize-SSD {
+    Write-Log "Iniciando optimización de SSD..."
+    # Deshabilita la hibernación para liberar espacio y reducir escrituras
+    Write-Log "Deshabilitando la hibernación..."
     powercfg.exe /hibernate off
-    Write-Log "Hibernación deshabilitada."
+    # Deshabilita la indexación de archivos para la unidad C:
+    Write-Log "Deshabilitando la indexación de búsqueda en la unidad C:..."
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
+    # Realiza la optimización (TRIM) de la unidad de sistema
+    Write-Log "Ejecutando TRIM en la unidad C:..."
+    Optimize-Volume -DriveLetter C -ReTrim -Verbose
+    Write-Log "Optimización de SSD completada."
 }
 
 Function Diagnose-System {
@@ -223,28 +282,103 @@ Function Diagnose-System {
     Write-Log "Diagnóstico de sistema finalizado."
 }
 
-Function Main-Function {
-    # Validar permisos de administrador
-    Check-Admin
-
-    # Realizar optimizaciones
-    Write-Log "Iniciando la secuencia de optimización LEVIATÁN v11.0..."
+Function Run-AllOptimizations {
+    Write-Log "INICIANDO EJECUCIÓN COMPLETA DE TODAS LAS OPTIMIZACIONES" "Yellow"
+    Write-Host "==========================================================================================" -ForegroundColor Red
+    Write-Host " ADVERTENCIA: Esta opción ejecutará TODAS las optimizaciones sin pedir confirmación." -ForegroundColor Red
+    Write-Host " Esto incluye detener servicios y eliminar bloatware, acciones que son irreversibles." -ForegroundColor Red
+    Write-Host " Continúa bajo tu propia responsabilidad." -ForegroundColor Red
+    Write-Host "==========================================================================================" -ForegroundColor Red
+    Start-Sleep -Seconds 5
+    
     Clean-System
     Optimize-Network
     Optimize-Memory
-    Stop-UnnecessaryServices
-    Remove-Bloatware
-    Optimize-PowerPlan
-    Disable-Hibernation
+    Update-System
+    Optimize-SSD
     Diagnose-System
 
-    Write-Log "✔️ Optimización finalizada. Revisa el archivo de log en tu escritorio." "Green"
-    Pause
+    # Acciones que normalmente requieren confirmación, ejecutadas de forma forzada
+    Write-Log "Deteniendo y deshabilitando servicios innecesarios (sin confirmación)..."
+    $servicios = @(
+        "DiagTrack",
+        "dmwappushservice",
+        "XblGameSave",
+        "WMPNetworkSvc",
+        "Fax",
+        "Spooler",
+        "SysMain",
+        "PcaSvc",
+        "XboxGipSvc",
+        "XboxNetApiSvc"
+    )
+    foreach ($svc in $servicios) {
+        if (Get-Service -Name $svc -ErrorAction SilentlyContinue) {
+            Write-Log "Deteniendo servicio: $svc"
+            Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
+            Set-Service -Name $svc -StartupType Disabled
+        }
+    }
+
+    Write-Log "Eliminando aplicaciones de bloatware (sin confirmación)..."
+    $appsToRemove = @(
+        "Microsoft.BingNews",
+        "Microsoft.SkypeApp",
+        "Microsoft.ZuneVideo",
+        "Microsoft.ZuneMusic",
+        "Microsoft.YourPhone",
+        "Microsoft.XboxApp",
+        "Microsoft.Xbox.TCUI",
+        "Microsoft.XboxGameOverlay",
+        "Microsoft.XboxGamingOverlay",
+        "Microsoft.XboxIdentityProvider",
+        "Microsoft.XboxSpeechToTextOverlay"
+    )
+    foreach ($app in $appsToRemove) {
+        Write-Log "Eliminando paquete: $app"
+        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
+        Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*$app*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+    }
+
+    Write-Log "EJECUCIÓN COMPLETA FINALIZADA" "Green"
 }
 #endregion
 
 #region EJECUCIÓN
-Main-Function
+Check-Admin
+
+Write-Log "✔️ Bienvenido a LEVIATÁN v12.0. Por favor, selecciona las opciones que deseas ejecutar." "Green"
+
+while ($true) {
+    Write-Host "`n================ MENÚ DE OPTIMIZACIÓN ================" -ForegroundColor Cyan
+    Write-Host "1. Limpieza profunda del sistema"
+    Write-Host "2. Optimizar red"
+    Write-Host "3. Liberar memoria RAM"
+    Write-Host "4. Detener servicios innecesarios (REQUIERE CONFIRMACIÓN)"
+    Write-Host "5. Eliminar Bloatware (REQUIERE CONFIRMACIÓN)"
+    Write-Host "6. Actualizar Windows y programas instalados"
+    Write-Host "7. Optimizar SSD"
+    Write-Host "8. Diagnóstico y reparación del sistema"
+    Write-Host "9. Ejecutar todas las optimizaciones (ADVERTENCIA: Sin confirmación)"
+    Write-Host "0. Salir"
+    Write-Host "======================================================" -ForegroundColor Cyan
+    
+    $selection = Read-Host "Ingresa el número de tu opción"
+
+    switch ($selection) {
+        "1" { Clean-System }
+        "2" { Optimize-Network }
+        "3" { Optimize-Memory }
+        "4" { Stop-UnnecessaryServices }
+        "5" { Remove-Bloatware }
+        "6" { Update-System }
+        "7" { Optimize-SSD }
+        "8" { Diagnose-System }
+        "9" { Run-AllOptimizations }
+        "0" { Write-Log "Saliendo del script. ¡Optimización finalizada!"; break }
+        default { Write-Log "Opción no válida. Inténtalo de nuevo."; Start-Sleep -Seconds 1 }
+    }
+}
 #endregion</code></pre>
     </div>
     <div class="buttons">
@@ -268,13 +402,11 @@ Main-Function
 
         function copyScript() {
             const scriptText = document.getElementById('scriptContent').innerText;
-            
-            // Use a temporary textarea to copy text to clipboard
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = scriptText;
             document.body.appendChild(tempTextArea);
             tempTextArea.select();
-            
+
             try {
                 document.execCommand('copy');
                 showMessage('✔️ Script copiado al portapapeles.');
@@ -285,14 +417,14 @@ Main-Function
                 document.body.removeChild(tempTextArea);
             }
         }
-        
+
         function downloadScript() {
             const scriptText = document.getElementById('scriptContent').innerText;
             const blob = new Blob([scriptText], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = "Leviatan_v11.ps1";
+            a.download = "Leviatan_v12.0_Extremo.ps1";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
