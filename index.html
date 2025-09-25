@@ -3,98 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script LEVIATÁN v12.0 - Limpieza, aceleración y optimización extrema de Windows con menú interactivo y mayor seguridad.">
-    <title>LEVIATÁN v12.0 - Optimizador Extremo</title>
+    <meta name="description" content="Script LEVIATÁN v13.0 - Limpieza, aceleración y optimización extrema de Windows con menú interactivo y mayor seguridad.">
+    <title>LEVIATÁN v13.0 - Optimizador Extremo (Mejorado)</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'Arial', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
     <style>
-        :root {
-            color-scheme: light dark;
-            --bg-light: #f4f4f4;
-            --bg-dark: #1e1e1e;
-            --text-light: #333;
-            --text-dark: #dcdcdc;
-            --primary: #007acc;
-            --primary-hover: #005a9e;
-        }
         body {
-            font-family: system-ui, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg-light);
-            color: var(--text-light);
-            transition: background 0.3s, color 0.3s;
-        }
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: var(--bg-dark);
-                color: var(--text-dark);
-            }
-        }
-        h1 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .script-box {
-            background-color: var(--bg-dark);
-            color: var(--text-dark);
-            padding: 20px;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-family: Consolas, monospace;
-            max-height: 70vh;
-            white-space: pre;
-            line-height: 1.4;
-        }
-        pre {
-            margin: 0;
-        }
-        .buttons {
-            margin-top: 20px;
-            text-align: center;
-        }
-        button {
-            margin: 5px;
-            padding: 10px 18px;
-            font-size: 15px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-        button:hover {
-            background-color: var(--primary-hover);
-            transform: scale(1.05);
-        }
-        .message-box {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            pointer-events: none;
-        }
-        .message-box.visible {
-            opacity: 1;
-            pointer-events: auto;
+            font-family: 'Inter', system-ui, Arial, sans-serif;
         }
     </style>
 </head>
-<body>
-    <h1>🌟 LEVIATÁN v12.0 - Optimizador Extremo</h1>
-    <div class="script-box">
-        <pre><code class="language-powershell" id="scriptContent"># ===================================================================================================
-#   PowerScript Optimizador LEVIATÁN v12.0 - Edición Extrema, Segura y Avanzada
+<body class="bg-gray-100 dark:bg-zinc-900 text-gray-800 dark:text-gray-200 min-h-screen p-4 flex flex-col items-center justify-center transition-colors duration-300">
+    <div class="max-w-4xl w-full">
+        <h1 class="text-center text-4xl font-extrabold mb-6 text-indigo-600 dark:text-indigo-400">
+            <span class="inline-block animate-pulse">🌟</span> LEVIATÁN v13.0 - Optimizador Extremo (Mejorado)
+        </h1>
+        <div class="bg-zinc-800 text-gray-200 dark:bg-zinc-800 dark:text-gray-200 p-6 rounded-2xl shadow-xl overflow-auto border-4 border-indigo-500">
+            <pre><code class="language-powershell" id="scriptContent"># ===================================================================================================
+#   PowerScript Optimizador LEVIATÁN v13.0 - Edición Extrema, Segura y Avanzada
 #   Objetivo: Limpieza, aceleración, optimización y actualización total del sistema.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
 #
@@ -103,7 +42,9 @@
 
 #region VARIABLES Y LOG
 # Define la ubicación del archivo de log en el escritorio del usuario
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v12.0.txt"
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v13.0.txt"
+
+# Función para escribir mensajes en la consola y en el archivo de log
 Function Write-Log { 
     param ([string]$Message, [string]$Color = 'Gray')
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -125,16 +66,27 @@ Function Check-Admin {
 Function Check-Module {
     param ([string]$ModuleName)
     if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
-        Write-Host "El módulo '$ModuleName' no está instalado. Instalándolo..." -ForegroundColor Yellow
+        Write-Log "El módulo '$ModuleName' no está instalado. Instalándolo..." -Color Yellow
         try {
             Install-Module -Name $ModuleName -Force -Confirm:$false -ErrorAction Stop
-            Write-Host "Módulo '$ModuleName' instalado correctamente." -ForegroundColor Green
+            Write-Log "Módulo '$ModuleName' instalado correctamente." -Color Green
         } catch {
-            Write-Host "ERROR: No se pudo instalar el módulo '$ModuleName'. La función que lo requiere no se ejecutará." -ForegroundColor Red
+            Write-Log "ERROR: No se pudo instalar el módulo '$ModuleName'. La función que lo requiere no se ejecutará." -Color Red
             return $false
         }
     }
     return $true
+}
+
+Function New-SystemRestorePoint {
+    # Crea un punto de restauración del sistema para mayor seguridad
+    Write-Log "Creando un punto de restauración del sistema..." -Color Yellow
+    try {
+        Checkpoint-Computer -Description "LEVIATÁN v13.0 - Antes de la optimización" -RestorePointType "MODIFY_SETTINGS"
+        Write-Log "Punto de restauración creado con éxito." -Color Green
+    } catch {
+        Write-Log "ERROR: No se pudo crear el punto de restauración. Asegúrate de que la protección del sistema esté habilitada." -Color Red
+    }
 }
 #endregion
 
@@ -142,51 +94,85 @@ Function Check-Module {
 Function Clean-System {
     Write-Log "Iniciando limpieza profunda de archivos temporales..."
     # Limpia directorios temporales de usuario y del sistema
-    Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-    # Limpia cachés de Windows Store
-    WSReset.exe -c
-    # Limpia carpetas de reportes de error
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\WER\*" -Recurse -Force -ErrorAction SilentlyContinue
-    # Limpia archivos temporales de internet y cachés de Windows Update
-    Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
-    # Limpia la papelera de reciclaje
-    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+    try {
+        Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:USERPROFILE\AppData\Local\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Write-Log "Directorios temporales limpiados."
+    } catch {
+        Write-Log "Error al limpiar directorios temporales: $_" -Color Red
+    }
+    
+    # Limpia cachés de Windows Store, la papelera de reciclaje y cachés de paquetes
+    try {
+        WSReset.exe -c | Out-Null
+        Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+        Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
+        Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
+        Write-Log "Cachés de Windows limpiadas."
+    } catch {
+        Write-Log "Error al limpiar cachés: $_" -Color Red
+    }
+
+    # Limpia la caché de Windows Update
+    try {
+        Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Write-Log "Caché de Windows Update limpiada."
+    } catch {
+        Write-Log "Error al limpiar la caché de Windows Update: $_" -Color Red
+    }
+
     # Ejecuta el Limpiador de Disco de Windows con la configuración de limpieza extrema
-    Cleanmgr /sagerun:65535
+    try {
+        Cleanmgr /sagerun:65535
+        Write-Log "Limpiador de disco de Windows ejecutado."
+    } catch {
+        Write-Log "Error al ejecutar Cleanmgr: $_" -Color Red
+    }
     Write-Log "Limpieza de archivos completada."
 }
 
 Function Optimize-Network {
     Write-Log "Optimizando red: Reiniciando adaptadores y restableciendo la pila TCP/IP..."
-    # Reinicia todos los adaptadores de red
-    Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction SilentlyContinue
-    # Restablece la pila TCP/IP y el catálogo Winsock
-    netsh int ip reset -c null
-    netsh winsock reset
-    # Limpia la caché de DNS
-    ipconfig /flushdns
-    Write-Log "Optimización de red completada."
+    try {
+        # Reinicia todos los adaptadores de red
+        Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction Stop
+        # Restablece la pila TCP/IP y el catálogo Winsock
+        netsh int ip reset -c null | Out-Null
+        netsh winsock reset | Out-Null
+        # Limpia la caché de DNS
+        ipconfig /flushdns
+        Write-Log "Optimización de red completada."
+    } catch {
+        Write-Log "ERROR: No se pudo optimizar la red: $_" -Color Red
+    }
 }
 
 Function Optimize-Memory {
     Write-Log "Liberando memoria RAM..."
-    # Fuerza al recolector de basura de .NET a liberar memoria no utilizada
-    [System.GC]::Collect()
-    Write-Log "Memoria RAM liberada."
+    try {
+        # Fuerza al recolector de basura de .NET a liberar memoria no utilizada
+        [System.GC]::Collect()
+        Write-Log "Memoria RAM liberada."
+    } catch {
+        Write-Log "ERROR: No se pudo liberar memoria RAM: $_" -Color Red
+    }
 }
 
 Function Stop-UnnecessaryServices {
-    Write-Host "ADVERTENCIA: Detener y deshabilitar servicios puede afectar la funcionalidad del sistema." -ForegroundColor Red
-    $confirm = Read-Host "Deseas continuar? (S/N)"
-    if ($confirm -ne 'S') {
-        Write-Log "Acción cancelada por el usuario."
-        return
+    param ([switch]$Force)
+    if (-not $Force) {
+        Write-Host "ADVERTENCIA: Detener y deshabilitar servicios puede afectar la funcionalidad del sistema." -ForegroundColor Red
+        $confirm = Read-Host "Deseas continuar? (S/N)"
+        if ($confirm -ne 'S') {
+            Write-Log "Acción cancelada por el usuario."
+            return
+        }
     }
     Write-Log "Deteniendo y deshabilitando servicios innecesarios..."
     # Lista de servicios a detener y deshabilitar
     $servicios = @(
-        "DiagTrack",         # Servicio de seguimiento de diagnóstico
+        "DiagTrack",       # Servicio de seguimiento de diagnóstico
         "dmwappushservice",  # Servicio de telemetría
         "XblGameSave",       # Servicio de guardado de juegos de Xbox
         "WMPNetworkSvc",     # Reproductor de Windows Media
@@ -198,21 +184,30 @@ Function Stop-UnnecessaryServices {
         "XboxNetApiSvc"      # Xbox Live Networking Service
     )
     foreach ($svc in $servicios) {
-        if (Get-Service -Name $svc -ErrorAction SilentlyContinue) {
-            Write-Log "Deteniendo servicio: $svc"
-            Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-            Set-Service -Name $svc -StartupType Disabled
+        try {
+            if (Get-Service -Name $svc -ErrorAction SilentlyContinue) {
+                Write-Log "Deteniendo servicio: $svc"
+                Stop-Service -Name $svc -Force -ErrorAction Stop
+                Set-Service -Name $svc -StartupType Disabled
+            } else {
+                Write-Log "Servicio '$svc' no encontrado. Saltando." -Color Yellow
+            }
+        } catch {
+            Write-Log "ERROR al detener/deshabilitar '$svc': $_" -Color Red
         }
     }
     Write-Log "Servicios detenidos y deshabilitados."
 }
 
 Function Remove-Bloatware {
-    Write-Host "ADVERTENCIA: Se eliminarán aplicaciones preinstaladas de la Microsoft Store. Esto es irreversible." -ForegroundColor Red
-    $confirm = Read-Host "Deseas continuar? (S/N)"
-    if ($confirm -ne 'S') {
-        Write-Log "Acción cancelada por el usuario."
-        return
+    param ([switch]$Force)
+    if (-not $Force) {
+        Write-Host "ADVERTENCIA: Se eliminarán aplicaciones preinstaladas de la Microsoft Store. Esto es irreversible." -ForegroundColor Red
+        $confirm = Read-Host "Deseas continuar? (S/N)"
+        if ($confirm -ne 'S') {
+            Write-Log "Acción cancelada por el usuario."
+            return
+        }
     }
     Write-Log "Eliminando aplicaciones de bloatware de la Microsoft Store..."
     $appsToRemove = @(
@@ -229,9 +224,13 @@ Function Remove-Bloatware {
         "Microsoft.XboxSpeechToTextOverlay"
     )
     foreach ($app in $appsToRemove) {
-        Write-Log "Eliminando paquete: $app"
-        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
-        Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*$app*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+        try {
+            Write-Log "Eliminando paquete: $app"
+            Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
+            Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*$app*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+        } catch {
+            Write-Log "ERROR al eliminar el paquete '$app': $_" -Color Red
+        }
     }
     Write-Log "Eliminación de bloatware completada."
 }
@@ -242,16 +241,24 @@ Function Update-System {
     # 1. Actualizar Windows
     if (Check-Module "PSWindowsUpdate") {
         Write-Log "Buscando e instalando actualizaciones de Windows..."
-        Get-WUList | Out-File -FilePath "$env:USERPROFILE\Desktop\Windows-Updates-List.txt"
-        Install-WindowsUpdate -AcceptAll -AutoReboot -Verbose -Confirm:$false
-        Write-Log "Actualización de Windows finalizada."
+        try {
+            Get-WUList | Out-File -FilePath "$env:USERPROFILE\Desktop\Windows-Updates-List.txt"
+            Install-WindowsUpdate -AcceptAll -AutoReboot -Verbose -Confirm:$false -ErrorAction Stop
+            Write-Log "Actualización de Windows finalizada." -Color Green
+        } catch {
+            Write-Log "ERROR al actualizar Windows: $_" -Color Red
+        }
     }
 
     # 2. Actualizar aplicaciones con Winget
     if (Get-Command winget -ErrorAction SilentlyContinue) {
         Write-Log "Buscando y actualizando aplicaciones con Winget..."
-        winget upgrade --all --silent --accept-source-agreements --accept-package-agreements
-        Write-Log "Actualización de aplicaciones con Winget finalizada."
+        try {
+            winget upgrade --all --silent --accept-source-agreements --accept-package-agreements
+            Write-Log "Actualización de aplicaciones con Winget finalizada." -Color Green
+        } catch {
+            Write-Log "ERROR al actualizar con Winget: $_" -Color Red
+        }
     } else {
         Write-Log "El comando 'winget' no se encontró. No se pueden actualizar las aplicaciones." -Color Yellow
     }
@@ -259,86 +266,110 @@ Function Update-System {
 
 Function Optimize-SSD {
     Write-Log "Iniciando optimización de SSD..."
-    # Deshabilita la hibernación para liberar espacio y reducir escrituras
-    Write-Log "Deshabilitando la hibernación..."
-    powercfg.exe /hibernate off
-    # Deshabilita la indexación de archivos para la unidad C:
-    Write-Log "Deshabilitando la indexación de búsqueda en la unidad C:..."
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
-    # Realiza la optimización (TRIM) de la unidad de sistema
-    Write-Log "Ejecutando TRIM en la unidad C:..."
-    Optimize-Volume -DriveLetter C -ReTrim -Verbose
-    Write-Log "Optimización de SSD completada."
+    try {
+        # Deshabilita la hibernación para liberar espacio y reducir escrituras
+        Write-Log "Deshabilitando la hibernación..."
+        powercfg.exe /hibernate off
+        # Deshabilita la indexación de archivos para la unidad C:
+        Write-Log "Deshabilitando la indexación de búsqueda en la unidad C:..."
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
+        # Realiza la optimización (TRIM) de la unidad de sistema
+        Write-Log "Ejecutando TRIM en la unidad C:..."
+        Optimize-Volume -DriveLetter C -ReTrim -Verbose -ErrorAction Stop
+        Write-Log "Optimización de SSD completada." -Color Green
+    } catch {
+        Write-Log "ERROR al optimizar SSD: $_" -Color Red
+    }
+}
+
+Function Defrag-Drives {
+    Write-Log "Iniciando desfragmentación de unidades no-SSD..."
+    try {
+        Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.FileSystemType -ne 'NTFS' -and $_.HealthStatus -eq 'Healthy' } | ForEach-Object {
+            Write-Log "Desfragmentando la unidad $($_.DriveLetter):..."
+            Optimize-Volume -DriveLetter $_.DriveLetter -Defrag -Verbose -ErrorAction Stop
+            Write-Log "Desfragmentación de $($_.DriveLetter) completada." -Color Green
+        }
+    } catch {
+        Write-Log "ERROR al desfragmentar unidades: $_" -Color Red
+    }
+}
+
+Function Clear-EventLogs {
+    Write-Log "Limpiando registros de eventos..."
+    try {
+        Get-EventLog -List | ForEach-Object {
+            $logName = $_.Log
+            Write-Log "Limpiando el registro '$logName'..."
+            Clear-EventLog -LogName $logName -ErrorAction SilentlyContinue
+        }
+        Write-Log "Limpieza de registros de eventos completada." -Color Green
+    } catch {
+        Write-Log "ERROR al limpiar registros de eventos: $_" -Color Red
+    }
+}
+
+Function Optimize-Startup {
+    Write-Log "Optimizando tareas de inicio programadas..."
+    try {
+        $tasksToDisable = @(
+            "OneDrive Standalone Update Task",
+            "GoogleUpdateTaskMachineUA",
+            "GoogleUpdateTaskMachineCore",
+            "Adobe Acrobat Update Task",
+            "MicrosoftEdgeUpdateTaskMachineUA",
+            "MicrosoftEdgeUpdateTaskMachineCore"
+        )
+        foreach ($taskName in $tasksToDisable) {
+            if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
+                Write-Log "Deshabilitando tarea de inicio: '$taskName'..."
+                Disable-ScheduledTask -TaskName $taskName -ErrorAction Stop
+            }
+        }
+        Write-Log "Optimización de tareas de inicio completada." -Color Green
+    } catch {
+        Write-Log "ERROR al optimizar tareas de inicio: $_" -Color Red
+    }
 }
 
 Function Diagnose-System {
     Write-Log "Iniciando diagnóstico y reparación del sistema..."
-    # Escanea y repara archivos corruptos del sistema
-    sfc /scannow
-    # Repara la imagen de Windows con DISM
-    DISM /Online /Cleanup-Image /RestoreHealth
-    # Escanea el disco C: en busca de errores
-    chkdsk C: /scan
-    Write-Log "Diagnóstico de sistema finalizado."
+    try {
+        # Escanea y repara archivos corruptos del sistema
+        sfc /scannow
+        # Repara la imagen de Windows con DISM
+        DISM /Online /Cleanup-Image /RestoreHealth
+        # Escanea el disco C: en busca de errores
+        chkdsk C: /scan
+        Write-Log "Diagnóstico de sistema finalizado." -Color Green
+    } catch {
+        Write-Log "ERROR al diagnosticar el sistema: $_" -Color Red
+    }
 }
 
 Function Run-AllOptimizations {
     Write-Log "INICIANDO EJECUCIÓN COMPLETA DE TODAS LAS OPTIMIZACIONES" "Yellow"
     Write-Host "==========================================================================================" -ForegroundColor Red
-    Write-Host " ADVERTENCIA: Esta opción ejecutará TODAS las optimizaciones sin pedir confirmación." -ForegroundColor Red
-    Write-Host " Esto incluye detener servicios y eliminar bloatware, acciones que son irreversibles." -ForegroundColor Red
+    Write-Host " ADVERTENCIA: Esta opción ejecutará TODAS las optimizaciones de forma forzada." -ForegroundColor Red
     Write-Host " Continúa bajo tu propia responsabilidad." -ForegroundColor Red
     Write-Host "==========================================================================================" -ForegroundColor Red
     Start-Sleep -Seconds 5
     
+    # Crea un punto de restauración antes de empezar
+    New-SystemRestorePoint
+
+    # Ejecuta todas las funciones de optimización
     Clean-System
     Optimize-Network
     Optimize-Memory
+    Stop-UnnecessaryServices -Force
+    Remove-Bloatware -Force
     Update-System
     Optimize-SSD
+    Defrag-Drives
+    Clear-EventLogs
+    Optimize-Startup
     Diagnose-System
-
-    # Acciones que normalmente requieren confirmación, ejecutadas de forma forzada
-    Write-Log "Deteniendo y deshabilitando servicios innecesarios (sin confirmación)..."
-    $servicios = @(
-        "DiagTrack",
-        "dmwappushservice",
-        "XblGameSave",
-        "WMPNetworkSvc",
-        "Fax",
-        "Spooler",
-        "SysMain",
-        "PcaSvc",
-        "XboxGipSvc",
-        "XboxNetApiSvc"
-    )
-    foreach ($svc in $servicios) {
-        if (Get-Service -Name $svc -ErrorAction SilentlyContinue) {
-            Write-Log "Deteniendo servicio: $svc"
-            Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-            Set-Service -Name $svc -StartupType Disabled
-        }
-    }
-
-    Write-Log "Eliminando aplicaciones de bloatware (sin confirmación)..."
-    $appsToRemove = @(
-        "Microsoft.BingNews",
-        "Microsoft.SkypeApp",
-        "Microsoft.ZuneVideo",
-        "Microsoft.ZuneMusic",
-        "Microsoft.YourPhone",
-        "Microsoft.XboxApp",
-        "Microsoft.Xbox.TCUI",
-        "Microsoft.XboxGameOverlay",
-        "Microsoft.XboxGamingOverlay",
-        "Microsoft.XboxIdentityProvider",
-        "Microsoft.XboxSpeechToTextOverlay"
-    )
-    foreach ($app in $appsToRemove) {
-        Write-Log "Eliminando paquete: $app"
-        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
-        Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*$app*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-    }
 
     Write-Log "EJECUCIÓN COMPLETA FINALIZADA" "Green"
 }
@@ -347,7 +378,7 @@ Function Run-AllOptimizations {
 #region EJECUCIÓN
 Check-Admin
 
-Write-Log "✔️ Bienvenido a LEVIATÁN v12.0. Por favor, selecciona las opciones que deseas ejecutar." "Green"
+Write-Log "✔️ Bienvenido a LEVIATÁN v13.0. Por favor, selecciona las opciones que deseas ejecutar." "Green"
 
 while ($true) {
     Write-Host "`n================ MENÚ DE OPTIMIZACIÓN ================" -ForegroundColor Cyan
@@ -358,8 +389,11 @@ while ($true) {
     Write-Host "5. Eliminar Bloatware (REQUIERE CONFIRMACIÓN)"
     Write-Host "6. Actualizar Windows y programas instalados"
     Write-Host "7. Optimizar SSD"
-    Write-Host "8. Diagnóstico y reparación del sistema"
-    Write-Host "9. Ejecutar todas las optimizaciones (ADVERTENCIA: Sin confirmación)"
+    Write-Host "8. Desfragmentar discos duros no-SSD"
+    Write-Host "9. Limpiar registros de eventos"
+    Write-Host "10. Optimizar tareas de inicio"
+    Write-Host "11. Diagnóstico y reparación del sistema"
+    Write-Host "12. Ejecutar todas las optimizaciones (ADVERTENCIA: Sin confirmación)"
     Write-Host "0. Salir"
     Write-Host "======================================================" -ForegroundColor Cyan
     
@@ -373,30 +407,48 @@ while ($true) {
         "5" { Remove-Bloatware }
         "6" { Update-System }
         "7" { Optimize-SSD }
-        "8" { Diagnose-System }
-        "9" { Run-AllOptimizations }
+        "8" { Defrag-Drives }
+        "9" { Clear-EventLogs }
+        "10" { Optimize-Startup }
+        "11" { Diagnose-System }
+        "12" { Run-AllOptimizations }
         "0" { Write-Log "Saliendo del script. ¡Optimización finalizada!"; break }
         default { Write-Log "Opción no válida. Inténtalo de nuevo."; Start-Sleep -Seconds 1 }
     }
 }
 #endregion</code></pre>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center mt-6 space-y-4 sm:space-y-0 sm:space-x-4 w-full">
+            <button onclick="copyScript()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 transform hover:scale-105 shadow-lg">
+                📋 Copiar Script
+            </button>
+            <button onclick="downloadScript()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 transform hover:scale-105 shadow-lg">
+                📥 Descargar Script
+            </button>
+        </div>
     </div>
-    <div class="buttons">
-        <button onclick="copyScript()">📋 Copiar Script</button>
-        <button onclick="downloadScript()">📥 Descargar Script</button>
-    </div>
-
-    <div id="message-box" class="message-box"></div>
+    
+    <div id="message-box" class="fixed top-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white py-3 px-6 rounded-xl shadow-2xl opacity-0 transition-opacity duration-500 pointer-events-none z-50"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
     <script>
-        function showMessage(message) {
+        function showMessage(message, type = 'success') {
             const msgBox = document.getElementById('message-box');
             msgBox.textContent = message;
-            msgBox.classList.add('visible');
+            msgBox.className = `fixed top-6 left-1/2 -translate-x-1/2 py-3 px-6 rounded-xl shadow-2xl opacity-0 transition-opacity duration-500 pointer-events-none z-50`;
+            
+            if (type === 'success') {
+                msgBox.classList.add('bg-green-600');
+            } else if (type === 'error') {
+                msgBox.classList.add('bg-red-600');
+            } else {
+                msgBox.classList.add('bg-gray-900');
+            }
+
+            msgBox.classList.add('opacity-100', 'pointer-events-auto');
             setTimeout(() => {
-                msgBox.classList.remove('visible');
+                msgBox.classList.remove('opacity-100', 'pointer-events-auto');
             }, 3000);
         }
 
@@ -412,7 +464,7 @@ while ($true) {
                 showMessage('✔️ Script copiado al portapapeles.');
             } catch (err) {
                 console.error('Failed to copy text: ', err);
-                showMessage('❌ Error al copiar el script.');
+                showMessage('❌ Error al copiar el script.', 'error');
             } finally {
                 document.body.removeChild(tempTextArea);
             }
@@ -424,7 +476,7 @@ while ($true) {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = "Leviatan_v12.0_Extremo.ps1";
+            a.download = "Leviatan_v13.0_Extremo.ps1";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
