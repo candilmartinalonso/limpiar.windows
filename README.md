@@ -1,83 +1,73 @@
+🌊 PowerScript Optimizador LEVIATÁN v15.0 - Edición Extrema
+LEVIATÁN v15.0 es la versión más potente y agresiva de este script de PowerShell ⚡. Está diseñado para realizar una limpieza, optimización, y actualización del sistema operativo Windows de forma interactiva y profunda. Ideal para conseguir el máximo rendimiento.
 
-# 🐲 PowerScript Optimizador LEVIATÁN v11.0
+⚠️ Advertencia: Ejecutar SIEMPRE como Administrador 🧑‍💻. Este script realiza cambios sensibles en el sistema y aplica tweaks extremos en el registro para mejorar la velocidad.
 
-**LEVIATÁN** es un script de PowerShell ⚡ diseñado para realizar una limpieza 🧹, optimización 🚀 y reparación 🛠️ **profunda** del sistema operativo Windows. Ideal para usuarios exigentes, técnicos y entusiastas que desean mantener su equipo funcionando al máximo.
+✨ Novedades y Funciones Extr-mas
+Categoría
 
-> ⚠️ **Advertencia:** Ejecutar SIEMPRE como **Administrador** 🧑‍💻. Este script realiza cambios sensibles en el sistema operativo.
+Descripción
 
----
+Opción del Menú
 
-## ✨ Funciones Principales
+🔄 Actualización COMPLETA
 
-| Categoría        | Descripción |
-|------------------|-------------|
-| 🧼 Limpieza Profunda | Elimina archivos temporales, registros, cachés del sistema, restos de actualizaciones, WER logs, logs de CBS, etc. |
-| 🚀 Aceleración del Sistema | Libera memoria RAM, aplica configuración de energía máxima, optimiza red y DNS, desactiva servicios innecesarios. |
-| 🗑️ Eliminación de Bloatware | Detiene/desactiva servicios como Xbox, Cortana, Telemetría, WMP, entre otros. |
-| 🛠️ Reparación Automática | Ejecuta `SFC`, `DISM`, `CHKDSK` y verifica la integridad del sistema. |
-| 🔒 Privacidad & Seguridad | Desactiva funciones de recopilación de datos y limpia certificados caducados. |
-| 📜 Registro de Actividades | Crea un archivo de log detallado en el escritorio del usuario. |
+Instala todas las actualizaciones de Windows (incluyendo drivers) usando el módulo PSWindowsUpdate y actualiza todos los programas instalados usando Winget.
 
----
+6
 
-## 📦 ¿Qué Limpia?
+🧼 Limpieza PROFUNDA
 
-🧹 Directorios y cachés limpiados:
+Limpieza estándar + cachés de navegadores (Chrome, Edge, Firefox), cachés de miniaturas, MSI Installer Cache y ejecución extrema de Cleanmgr /sagerun:65535.
 
-- `C:\Windows\Temp`
-- `%TEMP%`
-- `SoftwareDistribution\Download`
-- `Logs\CBS`
-- Cachés de DNS
-- Papelera de reciclaje 🗑️
-- Registros de errores de Windows (WER)
-- Aplicaciones preinstaladas innecesarias
+1
 
----
+🚀 Tweaks de Registro
 
-## ⚙️ Requisitos
+Aplica ajustes extremos en el Registro: Deshabilita PagingExecutive, Network Throttling, Power Throttling y acelera el apagado del sistema.
 
-- 💻 Windows 10 o superior (x64)
-- 🧩 PowerShell ≥ 5.1
-- 🧑‍💻 Ejecutar como **Administrador**
+9
 
----
+🗑️ Servicios/Bloatware
 
-## 🚀 ¿Cómo usarlo?
+Lista de servicios innecesarios ampliada (incluye Telemetría, Xbox, WSearch, etc.). Eliminación forzada de más aplicaciones preinstaladas de la Store.
 
-1. Haz clic derecho sobre el archivo `.ps1` y selecciona **"Ejecutar con PowerShell como Administrador"** ⚡
-2. Espera a que finalice el proceso ⏳
-3. Revisa el archivo `Optimizador-Leviatan-Log-v11.0.txt` en tu Escritorio 📝
+4 y 5
 
----
+🔒 Privacidad/Diagnóstico
 
-## 🔍 Diagnóstico Incluido
+Opción dedicada para deshabilitar toda la Telemetría y Diagnóstico de Windows a través de Servicios y Registro.
 
-🔧 El script ejecuta automáticamente:
+10
 
-- `sfc /scannow`
-- `DISM /Online /Cleanup-Image /RestoreHealth`
-- `chkdsk C: /scan`
+🛠️ Reparación
 
----
+Ejecuta sfc /scannow, DISM /RestoreHealth y chkdsk C: /scan.
 
-## 🕓 Log de Cambios
+13
 
-- **v11.0** (2025): Limpieza más profunda, desactivación de más servicios, reinicio de red, liberación de RAM, limpieza WER y CBS.
-- **v10.2**: Inclusión de log de ejecución y mejoras visuales.
-- **v9.0**: Soporte extendido para más versiones de Windows.
-- **v8.3**: Versión base pública.
+💻 ¿Cómo Usar el Menú Interactivo?
+Asegúrate de ejecutar PowerShell como Administrador.
 
----
+Ejecuta el script.
 
-## 👨‍💻 Autor
+El script te mostrará un MENÚ con 14 opciones.
 
-**Martín Alonso Candil**  
-📎 [GitHub](https://github.com/candilmartinalonso) | 📧 `candilmartinalonso@gmail.com`
+Ingresa el número de la opción que deseas ejecutar (ej: 1 para Limpieza Profunda) o 14 para ejecutar todas las optimizaciones de forma forzada.
 
----
+Revisa el archivo de log generado en tu escritorio: Optimizador-Leviatan-Log-v15.0.txt 📝
 
-## 📝 Licencia
+⚠️ Puntos Clave
+Punto de Restauración: El script siempre intenta crear un punto de restauración antes de hacer cualquier cambio (especialmente con la Opción 14).
 
-Este script se distribuye bajo la licencia **MIT**.  
+Actualizaciones: La Opción 6 y 14 requieren permisos de administrador y pueden tardar mucho tiempo si hay muchas actualizaciones pendientes.
+
+Reinicio: Se recomienda encarecidamente reiniciar el sistema después de una ejecución completa (Opción 14) para que todos los cambios en el registro y servicios surtan efecto.
+
+👨‍💻 Autor
+Martín Alonso Candil  
+📎 GitHub | 📧 candilmartinalonso@gmail.com
+
+📝 Licencia
+Este script se distribuye bajo la licencia MIT.  
 Úsalo bajo tu propia responsabilidad ⚠️
