@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script LEVIATÁN v13.0 - Limpieza, aceleración y optimización extrema de Windows con menú interactivo y mayor seguridad.">
-    <title>LEVIATÁN v13.0 - Optimizador Extremo (Mejorado)</title>
+    <meta name="description" content="Script LEVIATÁN v15.0 - Limpieza, aceleración y optimización extrema de Windows con menú interactivo, seguridad y control de telemetría.">
+    <title>LEVIATÁN v15.0 - Optimizador Extremo Avanzado</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -23,18 +23,26 @@
     <style>
         body {
             font-family: 'Inter', system-ui, Arial, sans-serif;
+            background-color: #0d1117; 
+        }
+        .dark\:bg-zinc-900 {
+            background-color: #0d1117;
+        }
+        .dark\:text-gray-200 {
+            color: #c9d1d9;
         }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-zinc-900 text-gray-800 dark:text-gray-200 min-h-screen p-4 flex flex-col items-center justify-center transition-colors duration-300">
     <div class="max-w-4xl w-full">
-        <h1 class="text-center text-4xl font-extrabold mb-6 text-indigo-600 dark:text-indigo-400">
-            <span class="inline-block animate-pulse">🌟</span> LEVIATÁN v13.0 - Optimizador Extremo (Mejorado)
+        <h1 class="text-center text-4xl font-extrabold mb-6 text-indigo-500 dark:text-indigo-400">
+            <span class="inline-block animate-bounce">🌊</span> LEVIATÁN v15.0 - Optimizador Extremo Avanzado
         </h1>
-        <div class="bg-zinc-800 text-gray-200 dark:bg-zinc-800 dark:text-gray-200 p-6 rounded-2xl shadow-xl overflow-auto border-4 border-indigo-500">
+        <div class="bg-zinc-800 text-gray-200 dark:bg-zinc-800 dark:text-gray-200 p-6 rounded-2xl shadow-2xl overflow-auto border-4 border-indigo-600">
+            <!-- El código de PowerShell ahora está en la versión 15.0 -->
             <pre><code class="language-powershell" id="scriptContent"># ===================================================================================================
-#   PowerScript Optimizador LEVIATÁN v13.0 - Edición Extrema, Segura y Avanzada
-#   Objetivo: Limpieza, aceleración, optimización y actualización total del sistema.
+#   PowerScript Optimizador LEVIATÁN v15.0 - Edición EXTREMA, Segura y Avanzada
+#   Objetivo: Limpieza Profunda, aceleración máxima, optimización de red y REGISTRO.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
 #
 #   Este script presenta un menú interactivo para que selecciones las optimizaciones a ejecutar.
@@ -42,7 +50,7 @@
 
 #region VARIABLES Y LOG
 # Define la ubicación del archivo de log en el escritorio del usuario
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v13.0.txt"
+$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v15.0.txt"
 
 # Función para escribir mensajes en la consola y en el archivo de log
 Function Write-Log { 
@@ -82,7 +90,7 @@ Function New-SystemRestorePoint {
     # Crea un punto de restauración del sistema para mayor seguridad
     Write-Log "Creando un punto de restauración del sistema..." -Color Yellow
     try {
-        Checkpoint-Computer -Description "LEVIATÁN v13.0 - Antes de la optimización" -RestorePointType "MODIFY_SETTINGS"
+        Checkpoint-Computer -Description "LEVIATÁN v15.0 - Antes de la optimización" -RestorePointType "MODIFY_SETTINGS"
         Write-Log "Punto de restauración creado con éxito." -Color Green
     } catch {
         Write-Log "ERROR: No se pudo crear el punto de restauración. Asegúrate de que la protección del sistema esté habilitada." -Color Red
@@ -90,50 +98,74 @@ Function New-SystemRestorePoint {
 }
 #endregion
 
-#region FUNCIONES DE OPTIMIZACIÓN
+#region FUNCIONES DE OPTIMIZACIÓN Y LIMPIEZA EXTREMA
 Function Clean-System {
-    Write-Log "Iniciando limpieza profunda de archivos temporales..."
-    # Limpia directorios temporales de usuario y del sistema
-    try {
-        Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:WINDIR\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:USERPROFILE\AppData\Local\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-        Write-Log "Directorios temporales limpiados."
-    } catch {
-        Write-Log "Error al limpiar directorios temporales: $_" -Color Red
-    }
+    Write-Log "Iniciando limpieza PROFUNDA de archivos temporales..." -Color Cyan
     
-    # Limpia cachés de Windows Store, la papelera de reciclaje y cachés de paquetes
+    # 1. Limpia directorios temporales estándar
+    $tempPaths = @(
+        "$env:TEMP\*",
+        "$env:WINDIR\Temp\*",
+        "$env:USERPROFILE\AppData\Local\Temp\*"
+    )
+    foreach ($path in $tempPaths) {
+        Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
+    }
+    Write-Log "Directorios temporales estándar limpios."
+
+    # 2. Limpia cachés de Windows (Store, Papelera, Componentes, Logs)
     try {
         WSReset.exe -c | Out-Null
         Clear-RecycleBin -Force -ErrorAction SilentlyContinue
         Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
         Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
-        Write-Log "Cachés de Windows limpiadas."
-    } catch {
-        Write-Log "Error al limpiar cachés: $_" -Color Red
-    }
-
-    # Limpia la caché de Windows Update
-    try {
         Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
-        Write-Log "Caché de Windows Update limpiada."
+        Remove-Item -Path "$env:SystemRoot\Logs\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Write-Log "Cachés de Windows, Update y Logs de sistema limpios."
     } catch {
-        Write-Log "Error al limpiar la caché de Windows Update: $_" -Color Red
+        Write-Log "Error al limpiar cachés de Windows: $_" -Color Red
     }
 
-    # Ejecuta el Limpiador de Disco de Windows con la configuración de limpieza extrema
+    # 3. Limpieza de cachés de miniaturas y prefetch
+    try {
+        # Limpiar caché de miniaturas
+        $shell = New-Object -ComObject Shell.Application
+        $shell.Namespace(10).ParseName("C:\").InvokeVerb("clean") | Out-Null
+        Remove-Item -Path "$env:SystemRoot\Prefetch\*.pf" -Force -ErrorAction SilentlyContinue
+        Write-Log "Cachés de miniaturas y Prefetch limpiadas."
+    } catch {
+        Write-Log "Error al limpiar cachés de Windows Shell/Prefetch: $_" -Color Red
+    }
+    
+    # 4. Limpieza de cachés de navegadores (Chrome, Edge, Firefox - Requiere cerrar navegadores)
+    Write-Log "Limpiando cachés de navegadores (puede requerir cerrar las aplicaciones)..."
+    $browserCaches = @(
+        "$env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Cache\*",
+        "$env:USERPROFILE\AppData\Local\Microsoft\Edge\User Data\Default\Cache\*",
+        "$env:USERPROFILE\AppData\Local\Mozilla\Firefox\Profiles\*\cache2\entries\*"
+    )
+    foreach ($cache in $browserCaches) {
+        Remove-Item -Path $cache -Recurse -Force -ErrorAction SilentlyContinue
+    }
+    Write-Log "Cachés de navegadores principales limpiadas."
+
+    # 5. Limpieza de caché de instaladores MSI (Advertencia: puede afectar la reparación de programas)
+    Write-Log "Limpiando caché de instaladores (MSI) antiguos..."
+    Remove-Item -Path "HKLM:\SOFTWARE\Classes\Installer\Products\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Log "Caché de MSI limpiada."
+
+    # 6. Ejecuta el Limpiador de Disco de Windows (Extremo)
     try {
         Cleanmgr /sagerun:65535
         Write-Log "Limpiador de disco de Windows ejecutado."
     } catch {
         Write-Log "Error al ejecutar Cleanmgr: $_" -Color Red
     }
-    Write-Log "Limpieza de archivos completada."
+    Write-Log "Limpieza de archivos completada." -Color Green
 }
 
 Function Optimize-Network {
-    Write-Log "Optimizando red: Reiniciando adaptadores y restableciendo la pila TCP/IP..."
+    Write-Log "Optimizando red: Reiniciando adaptadores y restableciendo la pila TCP/IP..." -Color Cyan
     try {
         # Reinicia todos los adaptadores de red
         Get-NetAdapter | Restart-NetAdapter -Confirm:$false -ErrorAction Stop
@@ -142,18 +174,17 @@ Function Optimize-Network {
         netsh winsock reset | Out-Null
         # Limpia la caché de DNS
         ipconfig /flushdns
-        Write-Log "Optimización de red completada."
+        Write-Log "Optimización de red completada." -Color Green
     } catch {
         Write-Log "ERROR: No se pudo optimizar la red: $_" -Color Red
     }
 }
 
 Function Optimize-Memory {
-    Write-Log "Liberando memoria RAM..."
+    Write-Log "Liberando memoria RAM (forzando GC)..." -Color Cyan
     try {
-        # Fuerza al recolector de basura de .NET a liberar memoria no utilizada
         [System.GC]::Collect()
-        Write-Log "Memoria RAM liberada."
+        Write-Log "Memoria RAM liberada." -Color Green
     } catch {
         Write-Log "ERROR: No se pudo liberar memoria RAM: $_" -Color Red
     }
@@ -169,19 +200,27 @@ Function Stop-UnnecessaryServices {
             return
         }
     }
-    Write-Log "Deteniendo y deshabilitando servicios innecesarios..."
-    # Lista de servicios a detener y deshabilitar
+    Write-Log "Deteniendo y deshabilitando servicios innecesarios..." -Color Cyan
+    # Lista de servicios a detener y deshabilitar (Ampliada en v15.0 para mayor agresividad segura)
     $servicios = @(
-        "DiagTrack",       # Servicio de seguimiento de diagnóstico
-        "dmwappushservice",  # Servicio de telemetría
-        "XblGameSave",       # Servicio de guardado de juegos de Xbox
-        "WMPNetworkSvc",     # Reproductor de Windows Media
-        "Fax",               # Servicio de fax
-        "Spooler",           # Servicio de cola de impresión (si no se usa impresora)
-        "SysMain",           # Superfetch/Prefetch (inútil en SSDs, puede causar problemas)
-        "PcaSvc",            # Servicio de compatibilidad de programas
-        "XboxGipSvc",        # Xbox Game Input Service
-        "XboxNetApiSvc"      # Xbox Live Networking Service
+        "DiagTrack",        # Servicio de seguimiento de diagnóstico
+        "dmwappushservice", # Servicio de telemetría
+        "XblGameSave",      # Servicio de guardado de juegos de Xbox
+        "WMPNetworkSvc",    # Reproductor de Windows Media
+        "Fax",              # Servicio de fax
+        "SysMain",          # Superfetch/Prefetch (inútil en SSDs)
+        "PcaSvc",           # Servicio de compatibilidad de programas
+        "XboxGipSvc",       # Xbox Game Input Service
+        "XboxNetApiSvc",    # Xbox Live Networking Service
+        "cbdhsvc",          # Servicio de portapapeles de usuario
+        "CDPSvc",           # Plataforma de dispositivos conectados (sincronización entre dispositivos)
+        "MapsBroker",       # Servicio de mapas de Windows
+        "WbioSrvc",         # Servicio de biometría de Windows
+        "WSearch",          # Servicio de búsqueda de Windows
+        "RetailDemo",       # Servicio de modo demo para minoristas
+        "PhoneSvc",         # Servicio de teléfono
+        "CDPUserSvc",       # Servicios de usuario de la Plataforma de dispositivos conectados
+        "MessagingService"  # Servicio de mensajería
     )
     foreach ($svc in $servicios) {
         try {
@@ -196,7 +235,7 @@ Function Stop-UnnecessaryServices {
             Write-Log "ERROR al detener/deshabilitar '$svc': $_" -Color Red
         }
     }
-    Write-Log "Servicios detenidos y deshabilitados."
+    Write-Log "Servicios detenidos y deshabilitados." -Color Green
 }
 
 Function Remove-Bloatware {
@@ -209,50 +248,52 @@ Function Remove-Bloatware {
             return
         }
     }
-    Write-Log "Eliminando aplicaciones de bloatware de la Microsoft Store..."
+    Write-Log "Eliminando aplicaciones de bloatware de la Microsoft Store..." -Color Cyan
     $appsToRemove = @(
-        "Microsoft.BingNews",
-        "Microsoft.SkypeApp",
-        "Microsoft.ZuneVideo",
-        "Microsoft.ZuneMusic",
-        "Microsoft.YourPhone",
-        "Microsoft.XboxApp",
-        "Microsoft.Xbox.TCUI",
-        "Microsoft.XboxGameOverlay",
-        "Microsoft.XboxGamingOverlay",
-        "Microsoft.XboxIdentityProvider",
-        "Microsoft.XboxSpeechToTextOverlay"
+        "*BingNews*",
+        "*SkypeApp*",
+        "*ZuneVideo*",
+        "*ZuneMusic*",
+        "*YourPhone*",
+        "*Xbox*",
+        "*MixedReality*",
+        "*GetHelp*",
+        "*MicrosoftSolitaireCollection*",
+        "*Paint3D*",
+        "*Messaging*",
+        "*OneNote*"
     )
     foreach ($app in $appsToRemove) {
         try {
-            Write-Log "Eliminando paquete: $app"
+            Write-Log "Eliminando paquete que coincide con: $app"
             Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
-            Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like "*$app*" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+            Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
         } catch {
             Write-Log "ERROR al eliminar el paquete '$app': $_" -Color Red
         }
     }
-    Write-Log "Eliminación de bloatware completada."
+    Write-Log "Eliminación de bloatware completada." -Color Green
 }
 
 Function Update-System {
-    Write-Log "Actualizando Windows y aplicaciones instaladas..."
+    Write-Log "Actualizando Windows y aplicaciones instaladas (EXTREMO)..." -Color Magenta
     
-    # 1. Actualizar Windows
+    # 1. Actualizar Windows (MANDATORIO)
     if (Check-Module "PSWindowsUpdate") {
-        Write-Log "Buscando e instalando actualizaciones de Windows..."
+        Write-Log "Buscando e instalando actualizaciones de Windows (incluye drivers)..."
         try {
             Get-WUList | Out-File -FilePath "$env:USERPROFILE\Desktop\Windows-Updates-List.txt"
-            Install-WindowsUpdate -AcceptAll -AutoReboot -Verbose -Confirm:$false -ErrorAction Stop
-            Write-Log "Actualización de Windows finalizada." -Color Green
+            # Buscar e instalar todas las actualizaciones, incluyendo drivers, sin reiniciar automáticamente
+            Install-WindowsUpdate -AcceptAll -IgnoreUserInput -Verbose -Confirm:$false -ErrorAction Stop
+            Write-Log "Actualización de Windows finalizada. (Puede requerir reinicio)" -Color Green
         } catch {
             Write-Log "ERROR al actualizar Windows: $_" -Color Red
         }
     }
 
-    # 2. Actualizar aplicaciones con Winget
+    # 2. Actualizar aplicaciones con Winget (MANDATORIO)
     if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Log "Buscando y actualizando aplicaciones con Winget..."
+        Write-Log "Buscando y actualizando todas las aplicaciones con Winget..."
         try {
             winget upgrade --all --silent --accept-source-agreements --accept-package-agreements
             Write-Log "Actualización de aplicaciones con Winget finalizada." -Color Green
@@ -262,19 +303,21 @@ Function Update-System {
     } else {
         Write-Log "El comando 'winget' no se encontró. No se pueden actualizar las aplicaciones." -Color Yellow
     }
+    
+    Write-Log "Proceso de actualización completo." -Color Green
 }
 
 Function Optimize-SSD {
-    Write-Log "Iniciando optimización de SSD..."
+    Write-Log "Iniciando optimización de SSD..." -Color Cyan
     try {
         # Deshabilita la hibernación para liberar espacio y reducir escrituras
-        Write-Log "Deshabilitando la hibernación..."
         powercfg.exe /hibernate off
         # Deshabilita la indexación de archivos para la unidad C:
-        Write-Log "Deshabilitando la indexación de búsqueda en la unidad C:..."
         Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
+        # Deshabilita Superfetch/Prefetch (si el servicio no se detuvo antes)
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" -Name "EnablePrefetcher" -Value 0 -Type DWord -Force
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" -Name "EnableSuperfetch" -Value 0 -Type DWord -Force
         # Realiza la optimización (TRIM) de la unidad de sistema
-        Write-Log "Ejecutando TRIM en la unidad C:..."
         Optimize-Volume -DriveLetter C -ReTrim -Verbose -ErrorAction Stop
         Write-Log "Optimización de SSD completada." -Color Green
     } catch {
@@ -282,25 +325,91 @@ Function Optimize-SSD {
     }
 }
 
-Function Defrag-Drives {
-    Write-Log "Iniciando desfragmentación de unidades no-SSD..."
+Function Optimize-RegistryTweaks {
+    Write-Log "Aplicando Tweaks de Registro EXTREMOS para rendimiento..." -Color Cyan
     try {
-        Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.FileSystemType -ne 'NTFS' -and $_.HealthStatus -eq 'Healthy' } | ForEach-Object {
-            Write-Log "Desfragmentando la unidad $($_.DriveLetter):..."
-            Optimize-Volume -DriveLetter $_.DriveLetter -Defrag -Verbose -ErrorAction Stop
-            Write-Log "Desfragmentación de $($_.DriveLetter) completada." -Color Green
-        }
+        # 1. Reducir el tiempo de espera para matar servicios (apagado más rápido)
+        $path = "HKLM:\SYSTEM\CurrentControlSet\Control"
+        Set-ItemProperty -Path $path -Name "WaitToKillServiceTimeout" -Value "1000" -Type String -Force # Más agresivo (1000ms)
+        Write-Log "WaitToKillServiceTimeout establecido a 1000ms."
+
+        # 2. Deshabilitar PagingExecutive (fuerza a mantener componentes del kernel en memoria física)
+        $path = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
+        Set-ItemProperty -Path $path -Name "DisablePagingExecutive" -Value 1 -Type DWord -Force
+        Write-Log "DisablePagingExecutive habilitado (Kernel en RAM)."
+        
+        # 3. Optimizar UI Responsiveness
+        $path = "HKCU:\Control Panel\Desktop"
+        Set-ItemProperty -Path $path -Name "MenuShowDelay" -Value "0" -Type String -Force
+        Set-ItemProperty -Path $path -Name "WaitToKillAppTimeout" -Value "2000" -Type String -Force
+        Write-Log "Tweaks de UI aplicados para mayor rapidez."
+
+        # 4. Deshabilitar Power Throttling
+        $path = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling"
+        If (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
+        Set-ItemProperty -Path $path -Name "PowerThrottlingOff" -Value 1 -Type DWord -Force
+        Write-Log "PowerThrottling deshabilitado."
+
+        # 5. Deshabilitar Network Throttling
+        $path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
+        Set-ItemProperty -Path $path -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
+        Write-Log "NetworkThrottlingIndex deshabilitado para mejor rendimiento de red."
+
+        Write-Log "Optimización de registro finalizada." -Color Green
     } catch {
-        Write-Log "ERROR al desfragmentar unidades: $_" -Color Red
+        Write-Log "ERROR al aplicar tweaks de registro: $_" -Color Red
+    }
+}
+
+Function Disable-Telemetry {
+    param ([switch]$Force)
+    if (-not $Force) {
+        Write-Host "ADVERTENCIA: Esta opción deshabilita TODA la recolección de datos y diagnóstico de Windows." -ForegroundColor Red
+        $confirm = Read-Host "Deseas continuar? (S/N)"
+        if ($confirm -ne 'S') {
+            Write-Log "Acción cancelada por el usuario."
+            return
+        }
+    }
+    Write-Log "Deshabilitando Telemetría, Diagnóstico y Recolección de Datos..." -Color Cyan
+
+    try {
+        # 1. Deshabilitar Telemetría vía Registro
+        $path = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+        If (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
+        Set-ItemProperty -Path $path -Name "AllowTelemetry" -Value 0 -Type DWord -Force
+        Write-Log "Telemetría de Windows deshabilitada (Registro)."
+
+        # 2. Deshabilitar Experiencias de Usuario Conectadas (Servicios)
+        $serviceName = "DiagTrack"
+        Stop-Service -Name $serviceName -Force -ErrorAction SilentlyContinue
+        Set-Service -Name $serviceName -StartupType Disabled -ErrorAction SilentlyContinue
+        Write-Log "Servicio de diagnóstico detenido/deshabilitado."
+
+        # 3. Deshabilitar WAP Push Message Routing Service (Telemetría de mensajes)
+        $serviceName = "dmwappushservice"
+        Stop-Service -Name $serviceName -Force -ErrorAction SilentlyContinue
+        Set-Service -Name $serviceName -StartupType Disabled -ErrorAction SilentlyContinue
+        Write-Log "Servicio DMWAP Push detenido/deshabilitado."
+        
+        # 4. Deshabilitar Log de diagnóstico (Registry)
+        $path = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\Settings"
+        If (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
+        Set-ItemProperty -Path $path -Name "DisableLog" -Value 1 -Type DWord -Force
+        Write-Log "Log de diagnóstico deshabilitado."
+
+        Write-Log "Telemetría y Diagnóstico deshabilitados." -Color Green
+
+    } catch {
+        Write-Log "ERROR al deshabilitar telemetría: $_" -Color Red
     }
 }
 
 Function Clear-EventLogs {
-    Write-Log "Limpiando registros de eventos..."
+    Write-Log "Limpiando registros de eventos..." -Color Cyan
     try {
         Get-EventLog -List | ForEach-Object {
             $logName = $_.Log
-            Write-Log "Limpiando el registro '$logName'..."
             Clear-EventLog -LogName $logName -ErrorAction SilentlyContinue
         }
         Write-Log "Limpieza de registros de eventos completada." -Color Green
@@ -310,7 +419,7 @@ Function Clear-EventLogs {
 }
 
 Function Optimize-Startup {
-    Write-Log "Optimizando tareas de inicio programadas..."
+    Write-Log "Optimizando tareas de inicio programadas..." -Color Cyan
     try {
         $tasksToDisable = @(
             "OneDrive Standalone Update Task",
@@ -318,12 +427,14 @@ Function Optimize-Startup {
             "GoogleUpdateTaskMachineCore",
             "Adobe Acrobat Update Task",
             "MicrosoftEdgeUpdateTaskMachineUA",
-            "MicrosoftEdgeUpdateTaskMachineCore"
+            "MicrosoftEdgeUpdateTaskMachineCore",
+            "NvContainerTask" # NVIDIA Telemetry/Updates
         )
         foreach ($taskName in $tasksToDisable) {
-            if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
-                Write-Log "Deshabilitando tarea de inicio: '$taskName'..."
-                Disable-ScheduledTask -TaskName $taskName -ErrorAction Stop
+            # Búsqueda más amplia en carpetas de tareas
+            Get-ScheduledTask -TaskPath "\" | Where-Object { $_.TaskName -like "*$taskName*" } | ForEach-Object {
+                Write-Log "Deshabilitando tarea de inicio: '$($_.TaskName)' en '$($_.TaskPath)'..."
+                Disable-ScheduledTask -TaskPath $_.TaskPath -TaskName $_.TaskName -ErrorAction Stop
             }
         }
         Write-Log "Optimización de tareas de inicio completada." -Color Green
@@ -333,13 +444,16 @@ Function Optimize-Startup {
 }
 
 Function Diagnose-System {
-    Write-Log "Iniciando diagnóstico y reparación del sistema..."
+    Write-Log "Iniciando diagnóstico y reparación del sistema..." -Color Cyan
     try {
         # Escanea y repara archivos corruptos del sistema
         sfc /scannow
         # Repara la imagen de Windows con DISM
+        Write-Log "Ejecutando DISM para restaurar la salud de la imagen de Windows..."
+        DISM /Online /Cleanup-Image /ScanHealth
         DISM /Online /Cleanup-Image /RestoreHealth
-        # Escanea el disco C: en busca de errores
+        # Escanea el disco C: en busca de errores (programado para el siguiente reinicio si es necesario)
+        Write-Log "Escaneando el disco C: en busca de errores (chkdsk)..."
         chkdsk C: /scan
         Write-Log "Diagnóstico de sistema finalizado." -Color Green
     } catch {
@@ -348,52 +462,55 @@ Function Diagnose-System {
 }
 
 Function Run-AllOptimizations {
-    Write-Log "INICIANDO EJECUCIÓN COMPLETA DE TODAS LAS OPTIMIZACIONES" "Yellow"
+    Write-Log "INICIANDO EJECUCIÓN COMPLETA DE TODAS LAS OPTIMIZACIONES (EXTREMO)" "Red"
     Write-Host "==========================================================================================" -ForegroundColor Red
-    Write-Host " ADVERTENCIA: Esta opción ejecutará TODAS las optimizaciones de forma forzada." -ForegroundColor Red
-    Write-Host " Continúa bajo tu propia responsabilidad." -ForegroundColor Red
+    Write-Host " ADVERTENCIA: Esta opción ejecutará TODAS las optimizaciones de forma forzada y sin preguntar." -ForegroundColor Red
+    Write-Host " Espere un tiempo considerable, especialmente en la actualización de Windows." -ForegroundColor Red
     Write-Host "==========================================================================================" -ForegroundColor Red
-    Start-Sleep -Seconds 5
+    Start-Sleep -Seconds 7
     
-    # Crea un punto de restauración antes de empezar
     New-SystemRestorePoint
 
     # Ejecuta todas las funciones de optimización
+    Update-System # Se ejecuta primero para asegurar que el sistema está actualizado
     Clean-System
     Optimize-Network
     Optimize-Memory
     Stop-UnnecessaryServices -Force
     Remove-Bloatware -Force
-    Update-System
     Optimize-SSD
     Defrag-Drives
+    Disable-Telemetry -Force # Ahora se incluye por defecto
+    Optimize-RegistryTweaks 
     Clear-EventLogs
     Optimize-Startup
     Diagnose-System
 
-    Write-Log "EJECUCIÓN COMPLETA FINALIZADA" "Green"
+    Write-Log "EJECUCIÓN COMPLETA FINALIZADA. SE RECOMIENDA REINICIAR EL SISTEMA." "Green"
 }
 #endregion
 
 #region EJECUCIÓN
 Check-Admin
 
-Write-Log "✔️ Bienvenido a LEVIATÁN v13.0. Por favor, selecciona las opciones que deseas ejecutar." "Green"
+Write-Log "✔️ Bienvenido a LEVIATÁN v15.0. Por favor, selecciona las opciones que deseas ejecutar." "Green"
 
 while ($true) {
-    Write-Host "`n================ MENÚ DE OPTIMIZACIÓN ================" -ForegroundColor Cyan
-    Write-Host "1. Limpieza profunda del sistema"
-    Write-Host "2. Optimizar red"
-    Write-Host "3. Liberar memoria RAM"
-    Write-Host "4. Detener servicios innecesarios (REQUIERE CONFIRMACIÓN)"
-    Write-Host "5. Eliminar Bloatware (REQUIERE CONFIRMACIÓN)"
-    Write-Host "6. Actualizar Windows y programas instalados"
-    Write-Host "7. Optimizar SSD"
+    Write-Host "`n================ MENÚ DE OPTIMIZACIÓN EXTREMA ================" -ForegroundColor Cyan
+    Write-Host "1. Limpieza PROFUNDA (Incluye cachés, prefetch, navegadores, MSI)"
+    Write-Host "2. Optimizar red (Restablecimiento TCP/IP)"
+    Write-Host "3. Liberar memoria RAM (Forzar GC)"
+    Write-Host "4. Detener servicios innecesarios (Ampliado v15.0)"
+    Write-Host "5. Eliminar Bloatware (Ampliado v15.0 - REQUIERE CONFIRMACIÓN)"
+    Write-Host "6. Actualizar Windows y programas instalados (COMPLETO)"
+    Write-Host "7. Optimizar SSD (TRIM, Deshabilitar hibernación, Prefetch)"
     Write-Host "8. Desfragmentar discos duros no-SSD"
-    Write-Host "9. Limpiar registros de eventos"
-    Write-Host "10. Optimizar tareas de inicio"
-    Write-Host "11. Diagnóstico y reparación del sistema"
-    Write-Host "12. Ejecutar todas las optimizaciones (ADVERTENCIA: Sin confirmación)"
+    Write-Host "9. Optimizar ajustes de rendimiento (Tweaks de Registro Extremos)"
+    Write-Host "10. Deshabilitar Telemetría y Diagnóstico (REQUIERE CONFIRMACIÓN)"
+    Write-Host "11. Limpiar registros de eventos"
+    Write-Host "12. Optimizar tareas de inicio (Incluye NVIDIA)"
+    Write-Host "13. Diagnóstico y reparación del sistema (SFC/DISM)"
+    Write-Host "14. Ejecutar TODAS las optimizaciones (ADVERTENCIA: Extrema y Forzada)"
     Write-Host "0. Salir"
     Write-Host "======================================================" -ForegroundColor Cyan
     
@@ -408,22 +525,21 @@ while ($true) {
         "6" { Update-System }
         "7" { Optimize-SSD }
         "8" { Defrag-Drives }
-        "9" { Clear-EventLogs }
-        "10" { Optimize-Startup }
-        "11" { Diagnose-System }
-        "12" { Run-AllOptimizations }
+        "9" { Optimize-RegistryTweaks }
+        "10" { Disable-Telemetry }
+        "11" { Clear-EventLogs }
+        "12" { Optimize-Startup }
+        "13" { Diagnose-System }
+        "14" { Run-AllOptimizations }
         "0" { Write-Log "Saliendo del script. ¡Optimización finalizada!"; break }
         default { Write-Log "Opción no válida. Inténtalo de nuevo."; Start-Sleep -Seconds 1 }
     }
 }
 #endregion</code></pre>
         </div>
-        <div class="flex flex-col sm:flex-row justify-center mt-6 space-y-4 sm:space-y-0 sm:space-x-4 w-full">
+        <div class="flex justify-center mt-6 w-full">
             <button onclick="copyScript()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 transform hover:scale-105 shadow-lg">
                 📋 Copiar Script
-            </button>
-            <button onclick="downloadScript()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 transform hover:scale-105 shadow-lg">
-                📥 Descargar Script
             </button>
         </div>
     </div>
@@ -439,11 +555,11 @@ while ($true) {
             msgBox.className = `fixed top-6 left-1/2 -translate-x-1/2 py-3 px-6 rounded-xl shadow-2xl opacity-0 transition-opacity duration-500 pointer-events-none z-50`;
             
             if (type === 'success') {
-                msgBox.classList.add('bg-green-600');
+                msgBox.classList.add('bg-green-600', 'text-white');
             } else if (type === 'error') {
-                msgBox.classList.add('bg-red-600');
+                msgBox.classList.add('bg-red-600', 'text-white');
             } else {
-                msgBox.classList.add('bg-gray-900');
+                msgBox.classList.add('bg-gray-900', 'text-white');
             }
 
             msgBox.classList.add('opacity-100', 'pointer-events-auto');
@@ -453,6 +569,7 @@ while ($true) {
         }
 
         function copyScript() {
+            // Se usa innerText para obtener el contenido formateado y limpio dentro del tag <code>
             const scriptText = document.getElementById('scriptContent').innerText;
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = scriptText;
@@ -468,20 +585,6 @@ while ($true) {
             } finally {
                 document.body.removeChild(tempTextArea);
             }
-        }
-
-        function downloadScript() {
-            const scriptText = document.getElementById('scriptContent').innerText;
-            const blob = new Blob([scriptText], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "Leviatan_v13.0_Extremo.ps1";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showMessage('📥 Descargando script...');
         }
     </script>
 </body>
