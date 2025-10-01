@@ -572,9 +572,15 @@ while ($true) {
             // Se usa innerText para obtener el contenido formateado y limpio dentro del tag <code>
             const scriptText = document.getElementById('scriptContent').innerText;
             const tempTextArea = document.createElement('textarea');
+            
+            // Ocultar el textarea para que no sea visible
+            tempTextArea.style.position = 'absolute';
+            tempTextArea.style.left = '-9999px';
+            
             tempTextArea.value = scriptText;
             document.body.appendChild(tempTextArea);
             tempTextArea.select();
+            tempTextArea.setSelectionRange(0, 99999); // Para compatibilidad móvil
 
             try {
                 document.execCommand('copy');
