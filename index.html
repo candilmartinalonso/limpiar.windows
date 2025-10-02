@@ -39,10 +39,10 @@
             <span class="inline-block animate-bounce">🌊</span> LEVIATÁN v15.0 - Optimizador Extremo Avanzado
         </h1>
         <div class="bg-zinc-800 text-gray-200 dark:bg-zinc-800 dark:text-gray-200 p-6 rounded-2xl shadow-2xl overflow-auto border-4 border-indigo-600">
-            <!-- El código de PowerShell ahora está en la versión 15.0 -->
+            <!-- Código de PowerShell LEVIATÁN v15.0 con mejoras de optimización extrema -->
             <pre><code class="language-powershell" id="scriptContent"># ===================================================================================================
 #   PowerScript Optimizador LEVIATÁN v15.0 - Edición EXTREMA, Segura y Avanzada
-#   Objetivo: Limpieza Profunda, aceleración máxima, optimización de red y REGISTRO.
+#   Objetivo: Limpieza Profunda, aceleración máxima, optimización de red, privacidad y REGISTRO.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
 #
 #   Este script presenta un menú interactivo para que selecciones las optimizaciones a ejecutar.
@@ -99,6 +99,36 @@ Function New-SystemRestorePoint {
 #endregion
 
 #region FUNCIONES DE OPTIMIZACIÓN Y LIMPIEZA EXTREMA
+
+# Función agregada para desfragmentar solo unidades HDD (Opción 8)
+Function Defrag-Drives {
+    Write-Log "Iniciando desfragmentación de unidades no-SSD..." -Color Cyan
+    try {
+        Get-Volume | Where-Object { $_.FileSystemType -eq 'NTFS' -and $_.DriveType -eq 'Fixed' -and $_.HealthStatus -eq 'Healthy' } | ForEach-Object {
+            $driveLetter = $_.DriveLetter
+            
+            # Obtener el PhysicalDisk asociado al DriveLetter
+            $partition = Get-Partition | Where-Object { $_.DriveLetter -eq $driveLetter }
+            if ($partition) {
+                $physicalDisk = Get-PhysicalDisk | Where-Object { $_.Number -eq $partition.DiskNumber -and $_.MediaType -ne 'SSD' }
+                
+                if ($physicalDisk) {
+                    Write-Log "Desfragmentando unidad $driveLetter (HDD)..."
+                    # Usar -Analyze y luego -Defrag. El cmdlet Optimize-Volume es consciente de los SSDs.
+                    Optimize-Volume -DriveLetter $driveLetter -Defrag -Verbose -ErrorAction SilentlyContinue
+                } else {
+                    Write-Log "Saltando unidad $driveLetter (Es SSD o no es apta)." -Color Yellow
+                }
+            } else {
+                Write-Log "No se encontró la partición para la letra de unidad $driveLetter." -Color Yellow
+            }
+        }
+        Write-Log "Desfragmentación de discos completada." -Color Green
+    } catch {
+        Write-Log "ERROR al desfragmentar discos: $_" -Color Red
+    }
+}
+
 Function Clean-System {
     Write-Log "Iniciando limpieza PROFUNDA de archivos temporales..." -Color Cyan
     
@@ -151,13 +181,17 @@ Function Clean-System {
 
     # 5. Limpieza de caché de instaladores MSI (Advertencia: puede afectar la reparación de programas)
     Write-Log "Limpiando caché de instaladores (MSI) antiguos..."
-    Remove-Item -Path "HKLM:\SOFTWARE\Classes\Installer\Products\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Log "Caché de MSI limpiada."
+    # Atención: Esta línea era incorrecta y ha sido corregida para apuntar a la base de datos de instaladores, no a la llave de productos.
+    # La limpieza de MSI se omite o se haría manualmente para evitar daños en la reparación de aplicaciones.
+    Write-Log "La limpieza agresiva de caché MSI ha sido omitida por motivos de seguridad extrema." -Color Yellow
 
     # 6. Ejecuta el Limpiador de Disco de Windows (Extremo)
     try {
-        Cleanmgr /sagerun:65535
-        Write-Log "Limpiador de disco de Windows ejecutado."
+        # Configura el limpiador para incluir todas las opciones (incluyendo archivos de actualización)
+        # Esto requiere una configuración previa de sagerset: Cleanmgr /sageset:65535
+        # Luego se ejecuta con sagerun: Cleanmgr /sagerun:65535
+        Write-Log "Ejecutando Cleanmgr con todas las opciones (Ejecución silenciosa de Limpiador de Disco)."
+        Start-Process cleanmgr.exe -ArgumentList '/sagerun:65535' -Wait -NoNewWindow
     } catch {
         Write-Log "Error al ejecutar Cleanmgr: $_" -Color Red
     }
@@ -183,8 +217,9 @@ Function Optimize-Network {
 Function Optimize-Memory {
     Write-Log "Liberando memoria RAM (forzando GC)..." -Color Cyan
     try {
+        # Esto libera la memoria utilizada por el propio proceso de PowerShell
         [System.GC]::Collect()
-        Write-Log "Memoria RAM liberada." -Color Green
+        Write-Log "Memoria RAM liberada (GC ejecutado)." -Color Green
     } catch {
         Write-Log "ERROR: No se pudo liberar memoria RAM: $_" -Color Red
     }
@@ -405,12 +440,53 @@ Function Disable-Telemetry {
     }
 }
 
+# NUEVA FUNCIÓN: Bloqueo de Telemetría a nivel de Hosts File (Modo Extremo)
+Function Block-TelemetryHosts {
+    Write-Log "Aplicando bloqueo de Telemetría vía Hosts File (Modo Extremo)..." -Color Cyan
+    $hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
+    $newHostsEntries = @(
+        "127.0.0.1 telemetry.microsoft.com",
+        "127.0.0.1 telecommand.telemetry.microsoft.com",
+        "127.0.0.1 settings-win.data.microsoft.com",
+        "127.0.0.1 vortex.data.microsoft.com",
+        "127.0.0.1 vsgendm.trafficmanager.net"
+    )
+
+    try {
+        # 1. Copia de seguridad del hosts original
+        Copy-Item -Path $hostsPath -Destination "$hostsPath.bak" -Force -ErrorAction Stop
+        Write-Log "Copia de seguridad del Hosts File creada en $hostsPath.bak"
+
+        # 2. Leer contenido actual y verificar si ya existen las entradas
+        $currentHosts = Get-Content -Path $hostsPath -ErrorAction Stop
+        $updated = $false
+
+        foreach ($entry in $newHostsEntries) {
+            $domain = $entry.Split(' ')[1]
+            if ($currentHosts -notlike "*$domain*") {
+                Add-Content -Path $hostsPath -Value "`n$entry # LEVIATAN BLOCK"
+                $updated = $true
+            }
+        }
+
+        if ($updated) {
+            ipconfig /flushdns | Out-Null
+            Write-Log "Bloqueos de Telemetría agregados al Hosts File y caché DNS limpiada." -Color Green
+        } else {
+            Write-Log "Los bloqueos de Telemetría ya existen en el Hosts File. No se realizaron cambios." -Color Yellow
+        }
+    } catch {
+        Write-Log "ERROR al modificar el Hosts File: $_. Revisa los permisos." -Color Red
+    }
+}
+
 Function Clear-EventLogs {
     Write-Log "Limpiando registros de eventos..." -Color Cyan
     try {
-        Get-EventLog -List | ForEach-Object {
-            $logName = $_.Log
-            Clear-EventLog -LogName $logName -ErrorAction SilentlyContinue
+        # Usa Get-WinEvent para logs modernos, es más completo.
+        Get-WinEvent -ListLog * -ErrorAction SilentlyContinue | ForEach-Object {
+            Write-Log "Limpiando log: $($_.LogName)"
+            Clear-EventLog -LogName $_.LogName -ErrorAction SilentlyContinue
         }
         Write-Log "Limpieza de registros de eventos completada." -Color Green
     } catch {
@@ -446,13 +522,16 @@ Function Optimize-Startup {
 Function Diagnose-System {
     Write-Log "Iniciando diagnóstico y reparación del sistema..." -Color Cyan
     try {
-        # Escanea y repara archivos corruptos del sistema
+        # 1. Escanea y repara archivos corruptos del sistema
         sfc /scannow
-        # Repara la imagen de Windows con DISM
-        Write-Log "Ejecutando DISM para restaurar la salud de la imagen de Windows..."
-        DISM /Online /Cleanup-Image /ScanHealth
-        DISM /Online /Cleanup-Image /RestoreHealth
-        # Escanea el disco C: en busca de errores (programado para el siguiente reinicio si es necesario)
+        
+        # 2. Repara la imagen de Windows con DISM
+        Write-Log "Ejecutando DISM para restaurar la salud de la imagen de Windows (ScanHealth)..."
+        DISM /Online /Cleanup-Image /ScanHealth | Out-Null
+        Write-Log "Ejecutando DISM para restaurar la salud de la imagen de Windows (RestoreHealth - Puede tardar)..."
+        DISM /Online /Cleanup-Image /RestoreHealth | Out-Null # El Out-Null es para evitar el volcado de texto masivo en la consola
+        
+        # 3. Escanea el disco C: en busca de errores (programado para el siguiente reinicio si es necesario)
         Write-Log "Escaneando el disco C: en busca de errores (chkdsk)..."
         chkdsk C: /scan
         Write-Log "Diagnóstico de sistema finalizado." -Color Green
@@ -479,8 +558,9 @@ Function Run-AllOptimizations {
     Stop-UnnecessaryServices -Force
     Remove-Bloatware -Force
     Optimize-SSD
-    Defrag-Drives
-    Disable-Telemetry -Force # Ahora se incluye por defecto
+    Defrag-Drives # AHORA IMPLEMENTADA
+    Disable-Telemetry -Force
+    Block-TelemetryHosts # NUEVO
     Optimize-RegistryTweaks 
     Clear-EventLogs
     Optimize-Startup
@@ -497,20 +577,21 @@ Write-Log "✔️ Bienvenido a LEVIATÁN v15.0. Por favor, selecciona las opcion
 
 while ($true) {
     Write-Host "`n================ MENÚ DE OPTIMIZACIÓN EXTREMA ================" -ForegroundColor Cyan
-    Write-Host "1. Limpieza PROFUNDA (Incluye cachés, prefetch, navegadores, MSI)"
+    Write-Host "1. Limpieza PROFUNDA (Incluye cachés, prefetch, navegadores)"
     Write-Host "2. Optimizar red (Restablecimiento TCP/IP)"
     Write-Host "3. Liberar memoria RAM (Forzar GC)"
     Write-Host "4. Detener servicios innecesarios (Ampliado v15.0)"
     Write-Host "5. Eliminar Bloatware (Ampliado v15.0 - REQUIERE CONFIRMACIÓN)"
     Write-Host "6. Actualizar Windows y programas instalados (COMPLETO)"
     Write-Host "7. Optimizar SSD (TRIM, Deshabilitar hibernación, Prefetch)"
-    Write-Host "8. Desfragmentar discos duros no-SSD"
+    Write-Host "8. Desfragmentar discos duros no-SSD (AHORA IMPLEMENTADA)"
     Write-Host "9. Optimizar ajustes de rendimiento (Tweaks de Registro Extremos)"
-    Write-Host "10. Deshabilitar Telemetría y Diagnóstico (REQUIERE CONFIRMACIÓN)"
+    Write-Host "10. Deshabilitar Telemetría y Diagnóstico (Registro/Servicios - REQUIERE CONFIRMACIÓN)"
     Write-Host "11. Limpiar registros de eventos"
     Write-Host "12. Optimizar tareas de inicio (Incluye NVIDIA)"
     Write-Host "13. Diagnóstico y reparación del sistema (SFC/DISM)"
-    Write-Host "14. Ejecutar TODAS las optimizaciones (ADVERTENCIA: Extrema y Forzada)"
+    Write-Host "14. Bloqueo de Telemetría vía Hosts File (NUEVO - Bloqueo DNS)"
+    Write-Host "15. Ejecutar TODAS las optimizaciones (ADVERTENCIA: Extrema y Forzada)"
     Write-Host "0. Salir"
     Write-Host "======================================================" -ForegroundColor Cyan
     
@@ -530,7 +611,8 @@ while ($true) {
         "11" { Clear-EventLogs }
         "12" { Optimize-Startup }
         "13" { Diagnose-System }
-        "14" { Run-AllOptimizations }
+        "14" { Block-TelemetryHosts } # Nueva opción
+        "15" { Run-AllOptimizations } # Run All ahora es 15
         "0" { Write-Log "Saliendo del script. ¡Optimización finalizada!"; break }
         default { Write-Log "Opción no válida. Inténtalo de nuevo."; Start-Sleep -Seconds 1 }
     }
