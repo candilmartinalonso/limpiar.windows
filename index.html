@@ -10,7 +10,7 @@
         // Inline critical CSS to prevent render blocking
         document.documentElement.classList.add('no-js');
         (function() {
-            var css = `body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background-color:#0d1117;color:#c9d1d9;margin:0;padding:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:background-color .3s}.container{max-width:min(95%,1200px);width:100%;padding:1rem}.header{text-align:center;margin-bottom:1.5rem}.title{font-size:2.25rem;font-weight:800;margin-bottom:.5rem;color:#818cf8}.code-container{background-color:#1e293b;color:#c9d1d9;padding:1.5rem;border-radius:1rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);overflow:auto;border:4px solid #4f46e5}.code-container pre{white-space:pre-wrap;word-break:break-all;margin:0;font-family:'Consolas','Monaco','Courier New',monospace;font-size:.875rem;line-height:1.5}.button-container{display:flex;justify-content:center;margin-top:1.5rem;width:100%}.copy-btn{background-color:#4f46e5;color:white;font-weight:700;padding:.75rem 1.5rem;border-radius:.5rem;border:none;cursor:pointer;transition:all .2s;box-shadow:0 10px 15px -3px rgba(0,0,0,.1)}.copy-btn:hover{background-color:#4338ca;transform:scale(1.05)}.message-box{position:fixed;top:1.5rem;left:50%;transform:translateX(-50%);background-color:#1f2937;color:white;padding:.75rem 1.5rem;border-radius:.75rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);opacity:0;transition:opacity .5s;pointer-events:none;z-index:50}.message-box.show{opacity:1;pointer-events:auto}.message-box.success{background-color:#059669}.message-box.error{background-color:#dc2626}@media (max-width:768px){.title{font-size:1.875rem}.code-container{padding:1rem}.copy-btn{width:100%}}`;
+            var css = `body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background-color:#0d1117;color:#c9d1d9;margin:0;padding:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background-color .3s}.container{max-width:min(95%,1200px);width:100%;padding:1rem}.header{text-align:center;margin-bottom:1.5rem}.title{font-size:2.25rem;font-weight:800;margin-bottom:.5rem;color:#818cf8}.code-container{background-color:#1e293b;color:#c9d1d9;padding:1.5rem;border-radius:1rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);overflow:auto;border:4px solid #4f46e5;position:relative}.code-container pre{white-space:pre-wrap;word-break:break-all;margin:0;font-family:'Consolas','Monaco','Courier New',monospace;font-size:.875rem;line-height:1.5}.button-container{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.5rem;width:100%}.btn{background-color:#4f46e5;color:white;font-weight:700;padding:.75rem 1.5rem;border-radius:.5rem;border:none;cursor:pointer;transition:all .2s;box-shadow:0 10px 15px -3px rgba(0,0,0,.1)}.btn:hover{background-color:#4338ca;transform:scale(1.05)}.btn-secondary{background-color:#374151}.btn-secondary:hover{background-color:#4b5563}.btn-success{background-color:#059669}.btn-success:hover{background-color:#047857}.message-box{position:fixed;top:1.5rem;left:50%;transform:translateX(-50%);background-color:#1f2937;color:white;padding:.75rem 1.5rem;border-radius:.75rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);opacity:0;transition:opacity .5s;pointer-events:none;z-index:50}.message-box.show{opacity:1;pointer-events:auto}.message-box.success{background-color:#059669}.message-box.error{background-color:#dc2626}.theme-toggle{position:absolute;top:1rem;right:1rem;background:transparent;border:none;cursor:pointer;font-size:1.5rem}.search-container{position:relative;margin-bottom:1rem}.search-box{width:100%;padding:.75rem 1rem;border-radius:.5rem;border:2px solid #4f46e5;background-color:#1e293b;color:#c9d1d9;font-size:1rem}.search-box:focus{outline:none;border-color:#818cf8}.search-results{position:absolute;top:100%;left:0;right:0;background-color:#1e293b;border:1px solid #4f46e5;border-top:none;border-radius:0 0 .5rem .5rem;max-height:200px;overflow-y:auto;z-index:10}.search-result-item{padding:.5rem 1rem;cursor:pointer;border-bottom:1px solid #374151}.search-result-item:hover{background-color:#374151}.highlight{background-color:#fef08a;color:#1e293b;padding:0 2px;border-radius:2px}.function-info{background-color:#374151;border-left:4px solid #4f46e5;padding:1rem;margin:1rem 0;border-radius:0 .5rem .5rem 0}.function-info h3{margin-top:0;color:#818cf8}.function-info p{margin-bottom:.5rem}.progress-container{width:100%;background-color:#374151;border-radius:.5rem;overflow:hidden;margin:1rem 0}.progress-bar{height:8px;background-color:#4f46e5;width:0;transition:width .3s}@media (max-width:768px){.title{font-size:1.875rem}.code-container{padding:1rem}.btn{width:100%}}body.light-mode{background-color:#f9fafb;color:#1f2937}.light-mode .code-container{background-color:#ffffff;color:#1f2937;border-color:#818cf8;box-shadow:0 4px 6px -1px rgba(0,0,0,.1)}.light-mode .btn{box-shadow:0 4px 6px -1px rgba(0,0,0,.1)}.light-mode .search-box{background-color:#ffffff;color:#1f2937;border-color:#818cf8}.light-mode .function-info{background-color:#e5e7eb;color:#1f2937}.light-mode .progress-container{background-color:#e5e7eb}`;
             var style = document.createElement('style');
             style.textContent = css;
             document.head.appendChild(style);
@@ -23,11 +23,48 @@
             <h1 class="title">
                 <span aria-hidden="true">🌊</span> LEVIATÁN v15.0 - Optimizador Extremo Avanzado
             </h1>
+            <p>Script PowerShell para limpieza profunda, aceleración máxima y optimización de Windows</p>
         </header>
         
         <main>
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="Buscar en el script (funciones, comandos, etc.)">
+                <div class="search-results" id="searchResults" style="display: none;"></div>
+            </div>
+            
             <section class="code-container" aria-label="Código del script de optimización">
-                <pre><code class="script-content" id="scriptContent"># ===================================================================================================
+                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">🌓</button>
+                <pre><code class="script-content" id="scriptContent"># Cargando script LEVIATÁN v15.0...</code></pre>
+            </section>
+            
+            <div class="function-info" id="functionInfo" style="display: none;">
+                <h3 id="functionName">Nombre de la función</h3>
+                <p id="functionDescription">Descripción de la función</p>
+                <p id="functionUsage"><strong>Uso:</strong> <code id="functionUsageCode"></code></p>
+            </div>
+            
+            <div class="button-container">
+                <button onclick="copyScript()" class="btn" aria-label="Copiar script al portapapeles">
+                    📋 Copiar Script
+                </button>
+                <button onclick="downloadScript()" class="btn btn-secondary" aria-label="Descargar script como archivo">
+                    ⬇️ Descargar Script
+                </button>
+                <button onclick="showStepByStep()" class="btn btn-success" aria-label="Ver modo paso a paso">
+                    🚶 Modo Paso a Paso
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <div id="message-box" class="message-box" role="alert" aria-live="polite"></div>
+
+    <script>
+        // Remove no-js class once JavaScript is loaded
+        document.documentElement.classList.remove('no-js');
+        
+        // Script content with enhanced functions
+        const scriptContent = `# ===================================================================================================
 #   PowerScript Optimizador LEVIATÁN v15.0 - Edición EXTREMA, Segura y Avanzada
 #   Objetivo: Limpieza Profunda, aceleración máxima, optimización de red, privacidad y REGISTRO.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
@@ -37,7 +74,7 @@
 
 #region VARIABLES Y LOG
 # Define la ubicación del archivo de log en el escritorio del usuario
-$logFile = "$env:USERPROFILE\Desktop\Optimizador-Leviatan-Log-v15.0.txt"
+$logFile = "$env:USERPROFILE\\Desktop\\Optimizador-Leviatan-Log-v15.0.txt"
 
 # Función para escribir mensajes en la consola y en el archivo de log
 Function Write-Log { 
@@ -121,9 +158,9 @@ Function Clean-System {
     
     # 1. Limpia directorios temporales estándar
     $tempPaths = @(
-        "$env:TEMP\*",
-        "$env:WINDIR\Temp\*",
-        "$env:USERPROFILE\AppData\Local\Temp\*"
+        "$env:TEMP\\*",
+        "$env:WINDIR\\Temp\\*",
+        "$env:USERPROFILE\\AppData\\Local\\Temp\\*"
     )
     foreach ($path in $tempPaths) {
         Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
@@ -136,8 +173,8 @@ Function Clean-System {
         Clear-RecycleBin -Force -ErrorAction SilentlyContinue
         Dism.exe /online /Cleanup-Image /StartComponentCleanup | Out-Null
         Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
-        Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:SystemRoot\Logs\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:SystemRoot\\SoftwareDistribution\\Download\\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:SystemRoot\\Logs\\*" -Recurse -Force -ErrorAction SilentlyContinue
         Write-Log "Cachés de Windows, Update y Logs de sistema limpios."
     } catch {
         Write-Log "Error al limpiar cachés de Windows: $_" -Color Red
@@ -147,8 +184,8 @@ Function Clean-System {
     try {
         # Limpiar caché de miniaturas
         $shell = New-Object -ComObject Shell.Application
-        $shell.Namespace(10).ParseName("C:\").InvokeVerb("clean") | Out-Null
-        Remove-Item -Path "$env:SystemRoot\Prefetch\*.pf" -Force -ErrorAction SilentlyContinue
+        $shell.Namespace(10).ParseName("C:\\").InvokeVerb("clean") | Out-Null
+        Remove-Item -Path "$env:SystemRoot\\Prefetch\\*.pf" -Force -ErrorAction SilentlyContinue
         Write-Log "Cachés de miniaturas y Prefetch limpiadas."
     } catch {
         Write-Log "Error al limpiar cachés de Windows Shell/Prefetch: $_" -Color Red
@@ -157,9 +194,9 @@ Function Clean-System {
     # 4. Limpieza de cachés de navegadores (Chrome, Edge, Firefox - Requiere cerrar navegadores)
     Write-Log "Limpiando cachés de navegadores (puede requerir cerrar las aplicaciones)..."
     $browserCaches = @(
-        "$env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Cache\*",
-        "$env:USERPROFILE\AppData\Local\Microsoft\Edge\User Data\Default\Cache\*",
-        "$env:USERPROFILE\AppData\Local\Mozilla\Firefox\Profiles\*\cache2\entries\*"
+        "$env:USERPROFILE\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*",
+        "$env:USERPROFILE\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*",
+        "$env:USERPROFILE\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\entries\\*"
     )
     foreach ($cache in $browserCaches) {
         Remove-Item -Path $cache -Recurse -Force -ErrorAction SilentlyContinue
@@ -304,7 +341,7 @@ Function Update-System {
     if (Check-Module "PSWindowsUpdate") {
         Write-Log "Buscando e instalando actualizaciones de Windows (incluye drivers)..."
         try {
-            Get-WUList | Out-File -FilePath "$env:USERPROFILE\Desktop\Windows-Updates-List.txt"
+            Get-WUList | Out-File -FilePath "$env:USERPROFILE\\Desktop\\Windows-Updates-List.txt"
             # Buscar e instalar todas las actualizaciones, incluyendo drivers, sin reiniciar automáticamente
             Install-WindowsUpdate -AcceptAll -IgnoreUserInput -Verbose -Confirm:$false -ErrorAction Stop
             Write-Log "Actualización de Windows finalizada. (Puede requerir reinicio)" -Color Green
@@ -335,10 +372,10 @@ Function Optimize-SSD {
         # Deshabilita la hibernación para liberar espacio y reducir escrituras
         powercfg.exe /hibernate off
         # Deshabilita la indexación de archivos para la unidad C:
-        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
+        Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem" -Name "NtfsDisableLastAccessUpdate" -Value 1 -Type DWord -Force
         # Deshabilita Superfetch/Prefetch (si el servicio no se detuvo antes)
-        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" -Name "EnablePrefetcher" -Value 0 -Type DWord -Force
-        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" -Name "EnableSuperfetch" -Value 0 -Type DWord -Force
+        Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters" -Name "EnablePrefetcher" -Value 0 -Type DWord -Force
+        Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters" -Name "EnableSuperfetch" -Value 0 -Type DWord -Force
         # Realiza la optimización (TRIM) de la unidad de sistema
         Optimize-Volume -DriveLetter C -ReTrim -Verbose -ErrorAction Stop
         Write-Log "Optimización de SSD completada." -Color Green
@@ -351,29 +388,29 @@ Function Optimize-RegistryTweaks {
     Write-Log "Aplicando Tweaks de Registro EXTREMOS para rendimiento..." -Color Cyan
     try {
         # 1. Reducir el tiempo de espera para matar servicios (apagado más rápido)
-        $path = "HKLM:\SYSTEM\CurrentControlSet\Control"
+        $path = "HKLM:\\SYSTEM\\CurrentControlSet\\Control"
         Set-ItemProperty -Path $path -Name "WaitToKillServiceTimeout" -Value "1000" -Type String -Force # Más agresivo (1000ms)
         Write-Log "WaitToKillServiceTimeout establecido a 1000ms."
 
         # 2. Deshabilitar PagingExecutive (fuerza a mantener componentes del kernel en memoria física)
-        $path = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
+        $path = "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management"
         Set-ItemProperty -Path $path -Name "DisablePagingExecutive" -Value 1 -Type DWord -Force
         Write-Log "DisablePagingExecutive habilitado (Kernel en RAM)."
         
         # 3. Optimizar UI Responsiveness
-        $path = "HKCU:\Control Panel\Desktop"
+        $path = "HKCU:\\Control Panel\\Desktop"
         Set-ItemProperty -Path $path -Name "MenuShowDelay" -Value "0" -Type String -Force
         Set-ItemProperty -Path $path -Name "WaitToKillAppTimeout" -Value "2000" -Type String -Force
         Write-Log "Tweaks de UI aplicados para mayor rapidez."
 
         # 4. Deshabilitar Power Throttling
-        $path = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling"
+        $path = "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling"
         If (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
         Set-ItemProperty -Path $path -Name "PowerThrottlingOff" -Value 1 -Type DWord -Force
         Write-Log "PowerThrottling deshabilitado."
 
         # 5. Deshabilitar Network Throttling
-        $path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
+        $path = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile"
         Set-ItemProperty -Path $path -Name "NetworkThrottlingIndex" -Value 0xFFFFFFFF -Type DWord -Force
         Write-Log "NetworkThrottlingIndex deshabilitado para mejor rendimiento de red."
 
@@ -397,7 +434,7 @@ Function Disable-Telemetry {
 
     try {
         # 1. Deshabilitar Telemetría vía Registro
-        $path = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+        $path = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"
         If (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
         Set-ItemProperty -Path $path -Name "AllowTelemetry" -Value 0 -Type DWord -Force
         Write-Log "Telemetría de Windows deshabilitada (Registro)."
@@ -415,7 +452,7 @@ Function Disable-Telemetry {
         Write-Log "Servicio DMWAP Push detenido/deshabilitado."
         
         # 4. Deshabilitar Log de diagnóstico (Registry)
-        $path = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\Settings"
+        $path = "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Diagnostics\\DiagTrack\\Settings"
         If (-not (Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
         Set-ItemProperty -Path $path -Name "DisableLog" -Value 1 -Type DWord -Force
         Write-Log "Log de diagnóstico deshabilitado."
@@ -430,7 +467,7 @@ Function Disable-Telemetry {
 # NUEVA FUNCIÓN: Bloqueo de Telemetría a nivel de Hosts File (Modo Extremo)
 Function Block-TelemetryHosts {
     Write-Log "Aplicando bloqueo de Telemetría vía Hosts File (Modo Extremo)..." -Color Cyan
-    $hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
+    $hostsPath = "$env:SystemRoot\\System32\\drivers\\etc\\hosts"
     $newHostsEntries = @(
         "127.0.0.1 telemetry.microsoft.com",
         "127.0.0.1 telecommand.telemetry.microsoft.com",
@@ -451,7 +488,7 @@ Function Block-TelemetryHosts {
         foreach ($entry in $newHostsEntries) {
             $domain = $entry.Split(' ')[1]
             if ($currentHosts -notlike "*$domain*") {
-                Add-Content -Path $hostsPath -Value "`n$entry # LEVIATAN BLOCK"
+                Add-Content -Path $hostsPath -Value "\`n$entry # LEVIATAN BLOCK"
                 $updated = $true
             }
         }
@@ -495,7 +532,7 @@ Function Optimize-Startup {
         )
         foreach ($taskName in $tasksToDisable) {
             # Búsqueda más amplia en carpetas de tareas
-            Get-ScheduledTask -TaskPath "\" | Where-Object { $_.TaskName -like "*$taskName*" } | ForEach-Object {
+            Get-ScheduledTask -TaskPath "\\" | Where-Object { $_.TaskName -like "*$taskName*" } | ForEach-Object {
                 Write-Log "Deshabilitando tarea de inicio: '$($_.TaskName)' en '$($_.TaskPath)'..."
                 Disable-ScheduledTask -TaskPath $_.TaskPath -TaskName $_.TaskName -ErrorAction Stop
             }
@@ -527,6 +564,49 @@ Function Diagnose-System {
     }
 }
 
+# NUEVA FUNCIÓN: Limpieza de registro avanzada
+Function Clean-Registry {
+    Write-Log "Realizando limpieza avanzada del registro de Windows..." -Color Cyan
+    try {
+        # Limpiar entradas de programas desinstalados
+        $registryPaths = @(
+            "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
+            "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall"
+        )
+        
+        foreach ($path in $registryPaths) {
+            Get-ChildItem -Path $path -ErrorAction SilentlyContinue | ForEach-Object {
+                $key = $_.PSChildName
+                $displayName = (Get-ItemProperty -Path "$path\\$key" -Name "DisplayName" -ErrorAction SilentlyContinue).DisplayName
+                $uninstallString = (Get-ItemProperty -Path "$path\\$key" -Name "UninstallString" -ErrorAction SilentlyContinue).UninstallString
+                
+                if ($displayName -and -not $uninstallString) {
+                    Write-Log "Eliminando entrada de registro huérfana: $displayName"
+                    Remove-Item -Path "$path\\$key" -Recurse -Force -ErrorAction SilentlyContinue
+                }
+            }
+        }
+        Write-Log "Limpieza del registro completada." -Color Green
+    } catch {
+        Write-Log "ERROR al limpiar el registro: $_" -Color Red
+    }
+}
+
+# NUEVA FUNCIÓN: Optimización de energía
+Function Optimize-PowerPlan {
+    Write-Log "Aplicando plan de energía de alto rendimiento..." -Color Cyan
+    try {
+        # Establecer plan de alto rendimiento
+        powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+        # Deshabilitar suspensión USB selectiva
+        powercfg -setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0
+        powercfg -setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0
+        Write-Log "Plan de energía optimizado para máximo rendimiento." -Color Green
+    } catch {
+        Write-Log "ERROR al optimizar plan de energía: $_" -Color Red
+    }
+}
+
 Function Run-AllOptimizations {
     Write-Log "INICIANDO EJECUCIÓN COMPLETA DE TODAS LAS OPTIMIZACIONES (EXTREMO)" "Red"
     Write-Host "==========================================================================================" -ForegroundColor Red
@@ -552,6 +632,8 @@ Function Run-AllOptimizations {
     Clear-EventLogs
     Optimize-Startup
     Diagnose-System
+    Clean-Registry # NUEVA
+    Optimize-PowerPlan # NUEVA
 
     Write-Log "EJECUCIÓN COMPLETA FINALIZADA. SE RECOMIENDA REINICIAR EL SISTEMA." "Green"
 }
@@ -563,7 +645,7 @@ Check-Admin
 Write-Log "✔️ Bienvenido a LEVIATÁN v15.0. Por favor, selecciona las opciones que deseas ejecutar." "Green"
 
 while ($true) {
-    Write-Host "`n================ MENÚ DE OPTIMIZACIÓN EXTREMA ================" -ForegroundColor Cyan
+    Write-Host "\`n================ MENÚ DE OPTIMIZACIÓN EXTREMA ================" -ForegroundColor Cyan
     Write-Host "1. Limpieza PROFUNDA (Incluye cachés, prefetch, navegadores)"
     Write-Host "2. Optimizar red (Restablecimiento TCP/IP)"
     Write-Host "3. Liberar memoria RAM (Forzar GC)"
@@ -578,7 +660,9 @@ while ($true) {
     Write-Host "12. Optimizar tareas de inicio (Incluye NVIDIA)"
     Write-Host "13. Diagnóstico y reparación del sistema (SFC/DISM)"
     Write-Host "14. Bloqueo de Telemetría vía Hosts File (NUEVO - Bloqueo DNS)"
-    Write-Host "15. Ejecutar TODAS las optimizaciones (ADVERTENCIA: Extrema y Forzada)"
+    Write-Host "15. Limpieza avanzada del registro (NUEVO)"
+    Write-Host "16. Optimización de plan de energía (NUEVO)"
+    Write-Host "17. Ejecutar TODAS las optimizaciones (ADVERTENCIA: Extrema y Forzada)"
     Write-Host "0. Salir"
     Write-Host "======================================================" -ForegroundColor Cyan
     
@@ -599,28 +683,264 @@ while ($true) {
         "12" { Optimize-Startup }
         "13" { Diagnose-System }
         "14" { Block-TelemetryHosts } # Nueva opción
-        "15" { Run-AllOptimizations } # Run All ahora es 15
+        "15" { Clean-Registry } # Nueva opción
+        "16" { Optimize-PowerPlan } # Nueva opción
+        "17" { Run-AllOptimizations } # Run All ahora es 17
         "0" { Write-Log "Saliendo del script. ¡Optimización finalizada!"; break }
         default { Write-Log "Opción no válida. Inténtalo de nuevo."; Start-Sleep -Seconds 1 }
     }
 }
-#endregion</code></pre>
-            </section>
-            
-            <div class="button-container">
-                <button onclick="copyScript()" class="copy-btn" aria-label="Copiar script al portapapeles">
-                    📋 Copiar Script
-                </button>
-            </div>
-        </main>
-    </div>
-    
-    <div id="message-box" class="message-box" role="alert" aria-live="polite"></div>
+#endregion`;
 
-    <script>
-        // Remove no-js class once JavaScript is loaded
-        document.documentElement.classList.remove('no-js');
-        
+        // Function descriptions for tooltips
+        const functionDescriptions = {
+            "Clean-System": {
+                name: "Limpieza Profunda del Sistema",
+                description: "Elimina archivos temporales, cachés de navegadores, archivos de actualización y otros elementos innecesarios para liberar espacio en disco.",
+                usage: "Clean-System"
+            },
+            "Optimize-Network": {
+                name: "Optimización de Red",
+                description: "Reinicia adaptadores de red, restablece la pila TCP/IP y limpia la caché DNS para mejorar la conectividad y velocidad de red.",
+                usage: "Optimize-Network"
+            },
+            "Defrag-Drives": {
+                name: "Desfragmentación de Discos",
+                description: "Desfragmenta unidades HDD (excluye SSDs) para mejorar el rendimiento de acceso a datos en discos mecánicos.",
+                usage: "Defrag-Drives"
+            },
+            "Stop-UnnecessaryServices": {
+                name: "Detener Servicios Innecesarios",
+                description: "Detiene y deshabilita servicios de Windows que consumen recursos pero no son esenciales para la mayoría de usuarios.",
+                usage: "Stop-UnnecessaryServices [-Force]"
+            },
+            "Remove-Bloatware": {
+                name: "Eliminar Aplicaciones Preinstaladas",
+                description: "Elimina aplicaciones de la Microsoft Store que vienen preinstaladas con Windows y que muchos usuarios no utilizan.",
+                usage: "Remove-Bloatware [-Force]"
+            },
+            "Update-System": {
+                name: "Actualización del Sistema",
+                description: "Actualiza Windows y todas las aplicaciones instaladas mediante Windows Update y Winget para mantener el sistema seguro y actualizado.",
+                usage: "Update-System"
+            },
+            "Optimize-SSD": {
+                name: "Optimización de SSD",
+                description: "Aplica configuraciones específicas para unidades SSD, incluyendo TRIM, deshabilitación de hibernación y optimización de Prefetch.",
+                usage: "Optimize-SSD"
+            },
+            "Optimize-RegistryTweaks": {
+                name: "Ajustes de Registro",
+                description: "Aplica modificaciones al registro de Windows para mejorar el rendimiento general del sistema y la responsividad de la interfaz.",
+                usage: "Optimize-RegistryTweaks"
+            },
+            "Disable-Telemetry": {
+                name: "Deshabilitar Telemetría",
+                description: "Desactiva la recolección de datos de diagnóstico y telemetría de Windows para mejorar la privacidad.",
+                usage: "Disable-Telemetry [-Force]"
+            },
+            "Block-TelemetryHosts": {
+                name: "Bloqueo de Telemetría vía Hosts",
+                description: "Bloquea dominios de telemetría de Microsoft mediante el archivo hosts para prevenir el envío de datos.",
+                usage: "Block-TelemetryHosts"
+            },
+            "Clear-EventLogs": {
+                name: "Limpieza de Registros de Eventos",
+                description: "Limpia todos los registros de eventos de Windows para liberar espacio y mantener el sistema organizado.",
+                usage: "Clear-EventLogs"
+            },
+            "Optimize-Startup": {
+                name: "Optimización de Inicio",
+                description: "Deshabilita tareas programadas innecesarias que se ejecutan al inicio para reducir el tiempo de arranque.",
+                usage: "Optimize-Startup"
+            },
+            "Diagnose-System": {
+                name: "Diagnóstico del Sistema",
+                description: "Ejecuta SFC, DISM y CHKDSK para detectar y reparar problemas del sistema de archivos y la imagen de Windows.",
+                usage: "Diagnose-System"
+            },
+            "Clean-Registry": {
+                name: "Limpieza del Registro",
+                description: "Elimina entradas huérfanas y obsoletas del registro de Windows para mejorar la estabilidad y rendimiento.",
+                usage: "Clean-Registry"
+            },
+            "Optimize-PowerPlan": {
+                name: "Optimización de Energía",
+                description: "Establece el plan de energía de alto rendimiento y optimiza configuraciones relacionadas para máximo rendimiento.",
+                usage: "Optimize-PowerPlan"
+            },
+            "Run-AllOptimizations": {
+                name: "Ejecución Completa",
+                description: "Ejecuta todas las optimizaciones disponibles de forma secuencial para una optimización completa del sistema.",
+                usage: "Run-AllOptimizations"
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load script content
+            document.getElementById('scriptContent').textContent = scriptContent;
+            
+            // Initialize theme
+            initializeTheme();
+            
+            // Initialize search functionality
+            initializeSearch();
+            
+            // Initialize function info display
+            initializeFunctionInfo();
+        });
+
+        function initializeTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                themeToggle.textContent = '🌙';
+            } else {
+                document.body.classList.remove('light-mode');
+                themeToggle.textContent = '🌓';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                if (document.body.classList.contains('light-mode')) {
+                    document.body.classList.remove('light-mode');
+                    themeToggle.textContent = '🌓';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.add('light-mode');
+                    themeToggle.textContent = '🌙';
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        }
+
+        function initializeSearch() {
+            const searchBox = document.getElementById('searchBox');
+            const searchResults = document.getElementById('searchResults');
+            
+            searchBox.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                
+                if (query.length < 2) {
+                    searchResults.style.display = 'none';
+                    return;
+                }
+                
+                // Find matches in the script
+                const lines = scriptContent.split('\n');
+                const matches = [];
+                
+                lines.forEach((line, index) => {
+                    if (line.toLowerCase().includes(query)) {
+                        matches.push({
+                            line: index + 1,
+                            content: line.trim(),
+                            index: index
+                        });
+                    }
+                });
+                
+                // Display results
+                if (matches.length > 0) {
+                    searchResults.innerHTML = '';
+                    matches.slice(0, 10).forEach(match => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.textContent = `Línea ${match.line}: ${match.content.substring(0, 80)}${match.content.length > 80 ? '...' : ''}`;
+                        item.addEventListener('click', function() {
+                            highlightAndScrollToLine(match.index);
+                            searchResults.style.display = 'none';
+                            searchBox.value = '';
+                        });
+                        searchResults.appendChild(item);
+                    });
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchBox.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+        }
+
+        function initializeFunctionInfo() {
+            const codeElement = document.getElementById('scriptContent');
+            
+            // Add click event to function names
+            codeElement.addEventListener('click', function(e) {
+                const target = e.target;
+                if (target.tagName === 'SPAN' && target.classList.contains('function-name')) {
+                    const functionName = target.textContent.replace('Function ', '').trim();
+                    showFunctionInfo(functionName);
+                }
+            });
+            
+            // Parse and highlight functions in the script
+            highlightFunctions();
+        }
+
+        function highlightFunctions() {
+            const codeElement = document.getElementById('scriptContent');
+            let content = codeElement.innerHTML;
+            
+            // Highlight function definitions
+            const functionRegex = /Function (\w+)/g;
+            content = content.replace(functionRegex, '<span class="function-name" style="color: #60a5fa; cursor: pointer;">Function $1</span>');
+            
+            codeElement.innerHTML = content;
+        }
+
+        function showFunctionInfo(functionName) {
+            const info = functionDescriptions[functionName];
+            const functionInfo = document.getElementById('functionInfo');
+            
+            if (info) {
+                document.getElementById('functionName').textContent = info.name;
+                document.getElementById('functionDescription').textContent = info.description;
+                document.getElementById('functionUsageCode').textContent = info.usage;
+                functionInfo.style.display = 'block';
+                
+                // Scroll to function info
+                functionInfo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function highlightAndScrollToLine(lineIndex) {
+            const codeElement = document.getElementById('scriptContent');
+            const lines = codeElement.textContent.split('\n');
+            
+            // Highlight the line
+            const highlightedLines = lines.map((line, index) => {
+                if (index === lineIndex) {
+                    return `<span class="highlight">${line}</span>`;
+                }
+                return line;
+            });
+            
+            codeElement.innerHTML = highlightedLines.join('\n');
+            
+            // Re-highlight functions after modifying content
+            highlightFunctions();
+            
+            // Scroll to the highlighted line
+            const lineElement = codeElement.querySelector('.highlight');
+            if (lineElement) {
+                lineElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                    lineElement.classList.remove('highlight');
+                }, 3000);
+            }
+        }
+
         function showMessage(message, type = 'success') {
             const msgBox = document.getElementById('message-box');
             msgBox.textContent = message;
@@ -667,6 +987,60 @@ while ($true) {
             } finally {
                 document.body.removeChild(tempTextArea);
             }
+        }
+
+        function downloadScript() {
+            const scriptText = document.getElementById('scriptContent').innerText;
+            const blob = new Blob([scriptText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'LEVIATAN_v15.0_Optimizador_Extremo.ps1';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showMessage('⬇️ Script descargado correctamente.');
+        }
+
+        function showStepByStep() {
+            const steps = [
+                { title: "Verificación de Administrador", description: "El script verifica que se esté ejecutando con privilegios de administrador." },
+                { title: "Creación de Punto de Restauración", description: "Se crea un punto de restauración del sistema por seguridad." },
+                { title: "Limpieza Profunda del Sistema", description: "Se eliminan archivos temporales, cachés y otros elementos innecesarios." },
+                { title: "Optimización de Red", description: "Se reinician adaptadores de red y se restablece la pila TCP/IP." },
+                { title: "Liberación de Memoria RAM", description: "Se fuerza la recolección de basura para liberar memoria." },
+                { title: "Detención de Servicios Innecesarios", description: "Se detienen y deshabilitan servicios que consumen recursos." },
+                { title: "Eliminación de Bloatware", description: "Se eliminan aplicaciones preinstaladas no deseadas." },
+                { title: "Actualización del Sistema", description: "Se actualiza Windows y las aplicaciones instaladas." },
+                { title: "Optimización de SSD", description: "Se aplican configuraciones específicas para unidades SSD." },
+                { title: "Desfragmentación de Discos", description: "Se desfragmentan unidades HDD (excluyendo SSDs)." },
+                { title: "Deshabilitación de Telemetría", description: "Se desactiva la recolección de datos de diagnóstico." },
+                { title: "Bloqueo de Telemetría vía Hosts", description: "Se bloquean dominios de telemetría mediante el archivo hosts." },
+                { title: "Optimización de Registro", description: "Se aplican ajustes de registro para mejorar el rendimiento." },
+                { title: "Limpieza de Registros de Eventos", description: "Se limpian todos los registros de eventos." },
+                { title: "Optimización de Inicio", description: "Se deshabilitan tareas programadas innecesarias al inicio." },
+                { title: "Diagnóstico del Sistema", description: "Se ejecutan SFC, DISM y CHKDSK para detectar y reparar problemas." },
+                { title: "Limpieza del Registro", description: "Se eliminan entradas huérfanas del registro." },
+                { title: "Optimización de Energía", description: "Se establece el plan de energía de alto rendimiento." }
+            ];
+            
+            let stepContent = "Modo Paso a Paso - LEVIATÁN v15.0\n\n";
+            stepContent += "Este script ejecuta las siguientes optimizaciones en orden:\n\n";
+            
+            steps.forEach((step, index) => {
+                stepContent += `${index + 1}. ${step.title}\n   ${step.description}\n\n`;
+            });
+            
+            stepContent += "Para ejecutar el script:\n";
+            stepContent += "1. Guarda el script como 'LEVIATAN_v15.0.ps1'\n";
+            stepContent += "2. Abre PowerShell como Administrador\n";
+            stepContent += "3. Ejecuta: Set-ExecutionPolicy RemoteSigned (si es necesario)\n";
+            stepContent += "4. Navega a la carpeta del script y ejecuta: .\\LEVIATAN_v15.0.ps1\n";
+            stepContent += "5. Sigue las instrucciones en pantalla\n\n";
+            stepContent += "ADVERTENCIA: Siempre ejecuta como Administrador y crea un punto de restauración antes de proceder.";
+            
+            alert(stepContent);
         }
     </script>
 </body>
