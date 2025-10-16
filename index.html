@@ -1,133 +1,179 @@
 <!DOCTYPE html>
-<!-- 
-  ===================================================================================================
-  ARCHIVO HTML OPTIMIZADO - TITÁN v16.0 (Versión Evolucionada y Segura)
-  Autor de la optimización: Experto en Optimización de Sistemas Windows
-
-  Resumen de mejoras clave en esta versión del script:
-  1. **Seguridad y Reversibilidad:** Se introduce un nuevo menú de "Restauración" que permite revertir cambios críticos (servicios, archivo hosts, plan de energía), aumentando drásticamente la seguridad.
-  2. **Nuevas Optimizaciones Avanzadas:**
-     - Desbloqueo y activación del plan de energía de "Máximo Rendimiento".
-     - Optimización de efectos visuales para una interfaz más rápida.
-     - Cambio a DNS más rápidos y privados (Cloudflare).
-     - Añadido del práctico menú contextual "Tomar Posesión".
-  3. **Eficiencia y Claridad Mejoradas:** El código ha sido refactorizado para mayor legibilidad. Los comentarios ahora explican el "porqué" de cada acción, y la salida en consola es más clara.
-  4. **Gestión Inteligente de Servicios:** Antes de deshabilitar servicios, el script ahora guarda su estado original, permitiendo una restauración precisa.
-  5. **Interfaz Web Actualizada:** El código HTML y JavaScript se han actualizado para reflejar las nuevas funciones, manteniendo la interactividad y facilidad de uso.
-  ===================================================================================================
--->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script TITÁN v16.0 - Optimización Definitiva, limpieza, aceleración y control de privacidad para Windows con menú interactivo y opciones de restauración.">
-    <title>TITÁN v16.0 - Optimizador Definitivo (Edición Optimizada)</title>
+    <meta name="description" content="Script TITÁN v17.0 - A modernized web UI for the ultimate Windows optimization PowerShell script, featuring a responsive design, dark mode, interactive elements, and enhanced code readability.">
+    <title>TITÁN v17.0 - Enhanced Script Optimizer</title>
     
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%26%239889%3B%3C/text%3E%3C/svg%3E">
+    <!-- Tailwind CSS for modern and responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Google Fonts for a cleaner typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon using SVG for a crisp look -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+
     <style>
-      :root{--background-dark:#0d1117;--text-dark:#c9d1d9;--background-light:#f9fafb;--text-light:#1f2937;--primary-color:#0ea5e9;--primary-hover:#0284c7;--secondary-color:#374151;--secondary-hover:#4b5563;--success-color:#16a34a;--success-hover:#15803d;--error-color:#dc2626;--warning-color:#f97316;--code-bg-dark:#1e293b;--code-bg-light:#ffffff;--border-color:#0ea5e9;--border-focus:#38bdf8;--highlight-bg:#fef08a;--highlight-text:#1e293b;--shadow-light:rgba(0,0,0,0.1);--shadow-dark:rgba(0,0,0,0.25)}
-      body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background-color:var(--background-dark);color:var(--text-dark);margin:0;padding:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;transition:background-color .3s,color .3s}
-      .container{max-width:min(95%,1200px);width:100%;padding:1rem}
-      .header{text-align:center;margin-bottom:1.5rem}
-      .title{font-size:2.25rem;font-weight:800;margin-bottom:.5rem;color:var(--border-focus)}
-      .code-container{background-color:var(--code-bg-dark);color:var(--text-dark);padding:1.5rem;border-radius:1rem;box-shadow:0 25px 50px -12px var(--shadow-dark);overflow:auto;border:4px solid var(--border-color);position:relative}
-      .code-container pre{white-space:pre-wrap;word-break:break-all;margin:0;font-family:'Consolas','Monaco','Courier New',monospace;font-size:.875rem;line-height:1.5}
-      .button-container{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.5rem;width:100%}
-      .btn{background-color:var(--primary-color);color:#fff;font-weight:700;padding:.75rem 1.5rem;border-radius:.5rem;border:none;cursor:pointer;transition:all .2s;box-shadow:0 10px 15px -3px var(--shadow-light)}
-      .btn:hover{background-color:var(--primary-hover);transform:scale(1.05)}
-      .btn-secondary{background-color:var(--secondary-color)}
-      .btn-secondary:hover{background-color:var(--secondary-hover)}
-      .btn-success{background-color:var(--success-color)}
-      .btn-success:hover{background-color:var(--success-hover)}
-      .message-box{position:fixed;top:1.5rem;left:50%;transform:translateX(-50%);background-color:#1f2937;color:#fff;padding:.75rem 1.5rem;border-radius:.75rem;box-shadow:0 25px 50px -12px var(--shadow-dark);opacity:0;transition:opacity .5s,transform .5s;pointer-events:none;z-index:100}
-      .message-box.show{opacity:1;pointer-events:auto;transform:translate(-50%,10px)}
-      .message-box.success{background-color:var(--success-color)}
-      .message-box.error{background-color:var(--error-color)}
-      .theme-toggle{position:absolute;top:1rem;right:1rem;background:transparent;border:none;cursor:pointer;font-size:1.5rem}
-      .search-container{position:relative;margin-bottom:1rem}
-      .search-box{width:100%;padding:.75rem 1rem;border-radius:.5rem;border:2px solid var(--border-color);background-color:var(--code-bg-dark);color:var(--text-dark);font-size:1rem}
-      .search-box:focus{outline:none;border-color:var(--border-focus)}
-      .search-results{position:absolute;top:100%;left:0;right:0;background-color:var(--code-bg-dark);border:1px solid var(--border-color);border-top:none;border-radius:0 0 .5rem .5rem;max-height:200px;overflow-y:auto;z-index:10}
-      .search-result-item{padding:.5rem 1rem;cursor:pointer;border-bottom:1px solid var(--secondary-color)}
-      .search-result-item:hover{background-color:var(--secondary-color)}
-      .highlight{background-color:var(--highlight-bg);color:var(--highlight-text);padding:0 2px;border-radius:2px}
-      .function-info{background-color:var(--secondary-color);border-left:4px solid var(--border-color);padding:1rem;margin:1rem 0;border-radius:0 .5rem .5rem 0}
-      .function-info h3{margin-top:0;color:var(--border-focus)}
-      .function-info p{margin-bottom:.5rem}
-      .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;z-index:1000;opacity:0;transition:opacity .3s ease;pointer-events:none}
-      .modal-overlay.show{opacity:1;pointer-events:auto}
-      .modal-content{background:var(--code-bg-dark);color:var(--text-dark);padding:2rem;border-radius:1rem;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;position:relative}
-      .modal-content h2{color:var(--border-focus);margin-top:0}
-      .modal-content pre{background:var(--background-dark);padding:1rem;border-radius:.5rem;white-space:pre-wrap}
-      .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;color:var(--text-dark);cursor:pointer}
-      
-      @media (max-width:768px){.title{font-size:1.875rem}.code-container{padding:1rem}.btn{width:100%}}
-      body.light-mode{background-color:var(--background-light);color:var(--text-light)}
-      .light-mode .code-container,.light-mode .modal-content{background-color:var(--code-bg-light);color:var(--text-light);border-color:var(--border-focus);box-shadow:0 4px 6px -1px var(--shadow-light)}
-      .light-mode .modal-content pre{background:#f1f5f9}
-      .light-mode .btn{box-shadow:0 4px 6px -1px var(--shadow-light)}
-      .light-mode .search-box{background-color:var(--code-bg-light);color:var(--text-light);border-color:var(--border-focus)}
-      .light-mode .function-info{background-color:#e5e7eb;color:var(--text-light)}
-      .light-mode .modal-close{color:var(--text-light)}
-      .function-name{color:#60a5fa;cursor:pointer;text-decoration:underline}
-      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+        /* ==========================================================================
+           Custom Styles and Overrides
+           - We use a mix of Tailwind utility classes and some custom CSS for fine-tuning.
+           - CSS variables are defined for easy theme management (dark/light modes).
+           - The Inter font is set as the default for a modern look.
+           ========================================================================== */
+        :root {
+            --background-light: #f9fafb;
+            --text-light: #1f2937;
+            --background-dark: #0d1117;
+            --text-dark: #c9d1d9;
+            --primary-color: #0ea5e9;
+            --primary-hover: #0284c7;
+            --secondary-color-dark: #1e293b;
+            --secondary-color-light: #ffffff;
+            --border-dark: #374151;
+            --border-light: #d1d5db;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Light mode theme */
+        body.light {
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+        
+        /* Dark mode theme */
+        body.dark {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+        
+        /* Custom styling for the code block */
+        .code-block {
+            background-color: var(--secondary-color-dark);
+            border: 1px solid var(--border-dark);
+        }
+
+        .light .code-block {
+            background-color: var(--secondary-color-light);
+            border: 1px solid var(--border-light);
+        }
+        
+        /* Custom scrollbar for a better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        /* Syntax Highlighting Styles */
+        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
+        .token.punctuation { color: #d4d4d4; }
+        .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: #b5cea8; }
+        .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #ce9178; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: #d4d4d4; }
+        .token.atrule, .token.attr-value, .token.keyword { color: #569cd6; }
+        .token.function { color: #dcdcaa; }
+        .token.variable { color: #9cdcfe; }
+        .token.regex, .token.important { color: #d16969; }
+        .token.important, .token.bold { font-weight: bold; }
+        .token.italic { font-style: italic; }
+        .token.entity { cursor: help; }
+
+        /* Highlighted line style for search */
+        .highlighted-line {
+            background-color: rgba(14, 165, 233, 0.2);
+            display: block;
+            border-left: 3px solid var(--primary-color);
+            transition: background-color 0.3s;
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1 class="title">
-                <span aria-hidden="true">⚡</span> TITÁN v16.0 - Optimizador Definitivo
+<body class="dark antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-400">
+                <span aria-hidden="true" class="mr-2">⚡</span>TITÁN v17.0
             </h1>
-            <p>Script PowerShell para optimización extrema, limpieza, control de privacidad y restauración segura de Windows.</p>
+            <p class="mt-2 text-lg text-gray-400">An enhanced web interface for the ultimate Windows optimization script.</p>
         </header>
-        
+
         <main>
-            <div class="search-container">
-                <input type="text" class="search-box" id="searchBox" placeholder="Buscar en el script (funciones, comandos, etc.)" aria-describedby="search-desc">
-                <div id="search-desc" class="sr-only">Introduce al menos 2 caracteres para buscar en el código fuente.</div>
-                <div class="search-results" id="searchResults" style="display: none;" role="listbox" aria-label="Resultados de búsqueda"></div>
+            <!-- Control Panel -->
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                <!-- Search Input -->
+                <div class="relative flex-grow">
+                    <input type="text" id="searchBox" placeholder="Search in script (e.g., 'Clean-System')" class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-200 placeholder-gray-500">
+                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-center gap-2">
+                    <button id="copyBtn" title="Copy Script" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 rounded-lg font-semibold text-white transition-transform transform hover:scale-105">Copy</button>
+                    <button id="downloadBtn" title="Download Script" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105">Download</button>
+                    <button id="themeToggle" title="Toggle Theme" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105">🌓</button>
+                </div>
             </div>
-            
-            <section class="code-container" aria-label="Código del script de optimización">
-                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">🌓</button>
-                <pre><code class="script-content" id="scriptContent"># Cargando script TITÁN v16.0...</code></pre>
-            </section>
-            
-            <div class="function-info" id="functionInfo" style="display: none;" role="region" aria-label="Información de función seleccionada">
-                <h3 id="functionName">Nombre de la función</h3>
-                <p id="functionDescription">Descripción de la función</p>
-                <p><strong>Uso:</strong> <code id="functionUsageCode"></code></p>
-            </div>
-            
-            <div class="button-container">
-                <button id="copyBtn" class="btn" aria-label="Copiar script al portapapeles">
-                    📋 Copiar Script
-                </button>
-                <button id="downloadBtn" class="btn btn-secondary" aria-label="Descargar script como archivo">
-                    ⬇️ Descargar Script
-                </button>
-                <button id="stepByStepBtn" class="btn btn-success" aria-label="Ver modo paso a paso">
-                    🚶 Modo Paso a Paso
-                </button>
+
+            <!-- Code Viewer -->
+            <div class="code-block rounded-lg shadow-2xl overflow-hidden">
+                <div class="px-4 py-2 bg-gray-900/50 border-b border-gray-700 flex justify-between items-center">
+                    <span class="text-sm font-medium text-gray-400">TITAN_v17.0_Optimizer.ps1</span>
+                    <span id="line-count" class="text-sm text-gray-500"></span>
+                </div>
+                <pre class="overflow-auto p-4 text-sm" style="max-height: 60vh;"><code id="scriptContent" class="language-powershell"></code></pre>
             </div>
         </main>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-8 text-sm text-gray-500">
+            <p>Enhanced and optimized for a better user experience. Original script concept retained.</p>
+        </footer>
     </div>
     
-    <div id="message-box" class="message-box" role="alert" aria-live="polite"></div>
-
-    <div id="stepByStepModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-content">
-            <button id="modalCloseBtn" class="modal-close" aria-label="Cerrar modal">&times;</button>
-            <h2 id="modalTitle">Modo Paso a Paso - TITÁN v16.0</h2>
-            <div id="modalBody"></div>
-        </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300">
+        Message
     </div>
 
-    <script defer>
-      document.addEventListener('DOMContentLoaded',()=>{const scriptContentText=`# ===================================================================================================
-#   PowerScript Optimizador TITÁN v16.0 - Edición Definitiva, Segura y Reversible
+    <!-- Prism.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+
+    <script>
+        // ==========================================================================
+        //  Enhanced JavaScript Logic - TITÁN v17.0
+        //  - Modular and well-commented for clarity.
+        //  - Handles UI interactions, theme switching, search, and more.
+        //  - Uses modern JavaScript features.
+        // ==========================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Elements ---
+            const themeToggle = document.getElementById('themeToggle');
+            const scriptContentEl = document.getElementById('scriptContent');
+            const searchBox = document.getElementById('searchBox');
+            const copyBtn = document.getElementById('copyBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const toast = document.getElementById('toast');
+            const lineCountEl = document.getElementById('line-count');
+
+            // --- The PowerShell script content ---
+            const scriptContentText = `# ===================================================================================================
+#   PowerScript Optimizador TITÁN v17.0 - Edición Moderna, Segura y Reversible
 #   Objetivo: Limpieza Profunda, aceleración máxima, control de privacidad y estabilidad del sistema.
 #   ADVERTENCIA: EJECUTAR SIEMPRE COMO ADMINISTRADOR.
 #
@@ -136,7 +182,7 @@
 
 #region VARIABLES GLOBALES Y CONFIGURACIÓN DEL LOG
 $logPath = "$env:USERPROFILE\\Desktop"
-$logFile = "$logPath\\Titan-Optimizer-Log-v16.0.txt"
+$logFile = "$logPath\\Titan-Optimizer-Log-v17.0.txt"
 $backupPath = "$logPath\\Titan_Backups"
 if (-not (Test-Path $backupPath)) { New-Item -Path $backupPath -ItemType Directory -Force | Out-Null }
 
@@ -162,7 +208,7 @@ Function Check-Admin {
 Function New-SystemRestorePoint {
     Write-Log "Creando un punto de restauración del sistema..." 'Yellow' 'ACTION'
     try {
-        Checkpoint-Computer -Description "TITÁN v16.0 - Antes de la optimización" -RestorePointType "MODIFY_SETTINGS"
+        Checkpoint-Computer -Description "TITÁN v17.0 - Antes de la optimización" -RestorePointType "MODIFY_SETTINGS"
         Write-Log "Punto de restauración creado con éxito." 'Green' 'SUCCESS'
     } catch {
         Write-Log "No se pudo crear el punto de restauración. Asegúrate de que la protección del sistema esté habilitada." 'Red' 'ERROR'
@@ -408,11 +454,11 @@ Function Restore-PowerPlan {
 
 #region MENÚ PRINCIPAL Y EJECUCIÓN
 Check-Admin
-Write-Log "✔️ Bienvenido a TITÁN v16.0. El LOG se guardará en '$logFile'." 'Green' 'SYSTEM'
+Write-Log "✔️ Bienvenido a TITÁN v17.0. El LOG se guardará en '$logFile'." 'Green' 'SYSTEM'
 
 while ($true) {
     Write-Host "\\n"
-    Write-Host "========================== MENÚ DE OPTIMIZACIÓN TITÁN v16.0 ==========================" -ForegroundColor Cyan
+    Write-Host "========================== MENÚ DE OPTIMIZACIÓN TITÁN v17.0 ==========================" -ForegroundColor Cyan
     Write-Host "    [LIMPIEZA PROFUNDA]                          [OPTIMIZACIÓN DE RENDIMIENTO]"
     Write-Host " 1. Limpieza completa del sistema             6. Optimizar servicios (Crea respaldo)"
     Write-Host " 2. Eliminar Bloatware (Apps preinstaladas)   7. Ajustes de rendimiento del registro"
@@ -462,22 +508,157 @@ while ($true) {
         default { Write-Log "Opción no válida. Inténtalo de nuevo." 'Red' 'WARN' }
     }
 }
-#endregion`;const functionDescriptions={Clean_System:{name:"Limpieza Completa del Sistema",description:"Elimina archivos temporales, cachés de sistema y navegadores, archivos de Prefetch y vacía la papelera.",usage:"Clean-System"},Remove_Bloatware:{name:"Eliminar Bloatware",description:"Desinstala aplicaciones preinstaladas de Windows y la Microsoft Store que no son esenciales.",usage:"Remove-Bloatware"},Clear_EventLogs:{name:"Limpiar Registros de Eventos",description:"Borra todos los logs de eventos de Windows para liberar espacio y facilitar diagnósticos futuros.",usage:"Clear-EventLogs"},Update_System:{name:"Actualizar Sistema y Apps",description:"Busca e instala las últimas actualizaciones de Windows y de las aplicaciones instaladas a través de Winget.",usage:"Update-System"},Block_TelemetryHosts:{name:"Bloquear Telemetría (Hosts)",description:"Modifica el archivo Hosts para bloquear la comunicación con servidores de telemetría de Microsoft.",usage:"Block-TelemetryHosts"},Optimize_Services:{name:"Optimizar Servicios",description:"Deshabilita servicios no esenciales que consumen recursos. Importante: crea un respaldo para poder restaurarlos.",usage:"Optimize-Services"},Optimize_PerformanceTweaks:{name:"Ajustes de Rendimiento (Registro)",description:"Aplica cambios en el registro para acelerar el apagado del sistema, la respuesta de la interfaz y desactivar la telemetría.",usage:"Optimize-PerformanceTweaks"},Set_VisualEffects:{name:"Optimizar Efectos Visuales",description:"Configura Windows para 'Mejor Rendimiento', desactivando animaciones y transparencias para una máxima fluidez.",usage:"Set-VisualEffects"},Unlock_UltimatePerformance:{name:"Activar Plan 'Máximo Rendimiento'",description:"Desbloquea y activa el plan de energía oculto de máximo rendimiento para exprimir el hardware.",usage:"Unlock-UltimatePerformance"},Set_FastDNS:{name:"Cambiar DNS a Cloudflare",description:"Configura la red para usar los servidores DNS de Cloudflare (1.1.1.1), mejorando la velocidad y privacidad de la navegación.",usage:"Set-FastDNS"},Add_TakeOwnership:{name:"Añadir 'Tomar Posesión'",description:"Agrega una opción al menú contextual del clic derecho para tomar control total de archivos y carpetas.",usage:"Add-TakeOwnership"},Restore_Services:{name:"Restaurar Servicios",description:"Restaura los servicios modificados a su estado original utilizando el archivo de respaldo creado previamente.",usage:"Restore-Services"},Restore_HostsFile:{name:"Restaurar Archivo Hosts",description:"Restaura el archivo Hosts a su estado original desde la copia de seguridad.",usage:"Restore-HostsFile"},Restore_PowerPlan:{name:"Restaurar Plan de Energía",description:"Vuelve a establecer el plan de energía 'Equilibrado' por defecto de Windows.",usage:"Restore-PowerPlan"}};const themeToggle=document.getElementById('themeToggle'),scriptContentEl=document.getElementById('scriptContent'),searchBox=document.getElementById('searchBox'),searchResults=document.getElementById('searchResults'),functionInfoEl=document.getElementById('functionInfo'),messageBox=document.getElementById('message-box'),copyBtn=document.getElementById('copyBtn'),downloadBtn=document.getElementById('downloadBtn'),stepByStepBtn=document.getElementById('stepByStepBtn'),modal=document.getElementById('stepByStepModal'),modalBody=document.getElementById('modalBody'),modalCloseBtn=document.getElementById('modalCloseBtn');const showMessage=(message,type='success')=>{messageBox.textContent=message;messageBox.className='message-box';messageBox.classList.add(type,'show');setTimeout(()=>messageBox.classList.remove('show'),3000)};const copyScript=()=>{const text=scriptContentText;const textArea=document.createElement('textarea');textArea.value=text;textArea.style.position='fixed';textArea.style.top='-9999px';textArea.style.left='-9999px';document.body.appendChild(textArea);textArea.focus();textArea.select();try{const successful=document.execCommand('copy');showMessage(successful?'✔️ Script copiado al portapapeles.':'❌ Error al copiar el script.','error')}catch(err){console.error('Error al ejecutar execCommand: ',err);showMessage('❌ Error al copiar el script.','error')}document.body.removeChild(textArea)};const downloadScript=()=>{const blob=new Blob([scriptContentText],{type:'text/plain'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='TITAN_v16.0_Optimizer.ps1';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showMessage('⬇️ Script descargado correctamente.')};const showStepByStep=()=>{modalBody.innerHTML=`<h2>Pasos de Ejecución y Seguridad</h2>
-        <p>Este script está diseñado para ser modular. Puedes elegir qué optimizaciones aplicar. Para una ejecución segura, sigue estos pasos:</p>
-        <ol>
-            <li><strong>Ejecutar como Administrador:</strong> Siempre abre una ventana de PowerShell con "Ejecutar como administrador".</li>
-            <li><strong>Crear Punto de Restauración:</strong> Antes de aplicar cambios mayores (como en la opción 'A'), Windows creará un punto de restauración. ¡No omitas este paso!</li>
-            <li><strong>Aplicar Cambios Gradualmente:</strong> Empieza con las opciones de limpieza (1-3) y comprueba que todo funciona bien.</li>
-            <li><strong>Utiliza la Restauración:</strong> Si alguna optimización (ej. la de servicios) causa problemas con un programa específico, usa las opciones de restauración (R1-R3) para revertir los cambios.</li>
-        </ol>
-        <h4>Para ejecutar el script:</h4>
-        <pre>1. Descarga el script ('TITAN_v16.0_Optimizer.ps1')
-2. Abre PowerShell como Administrador.
-3. Si es la primera vez, ejecuta: <strong>Set-ExecutionPolicy RemoteSigned -Force</strong>
-4. Navega a la carpeta del script (ej. cd C:\\Users\\TuUsuario\\Downloads)
-5. Ejecuta el script: <strong>.\\TITAN_v16.0_Optimizer.ps1</strong>
-6. Sigue las instrucciones del menú interactivo.</pre>
-        <p><strong>NOTA:</strong> El script creará una carpeta 'Titan_Backups' en tu escritorio para guardar respaldos importantes.</p>`;modal.classList.add('show');modalBody.focus()};const closeModal=()=>{modal.classList.remove('show');searchBox.focus()};const highlightFunctions=()=>{let content=scriptContentEl.innerHTML;const functionRegex=/Function (\\w+)/g;content=content.replace(functionRegex,'<span class="function-name" style="color: #60a5fa; cursor: pointer; text-decoration: underline;">Function $1</span>');scriptContentEl.innerHTML=content};const highlightAndScrollToLine=(lineIndex)=>{const lines=scriptContentEl.textContent.split('\\n');const highlightedLines=lines.map((line,index)=>index===lineIndex?`<span class="highlight">${line}</span>`:line);scriptContentEl.innerHTML=highlightedLines.join('\\n');const lineElement=scriptContentEl.querySelector('.highlight');if(lineElement){lineElement.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{lineElement.outerHTML=lineElement.innerHTML},3000)}};function init(){scriptContentEl.textContent=scriptContentText;highlightFunctions();const savedTheme=localStorage.getItem('theme')||'dark';if(savedTheme==='light'){document.body.classList.add('light-mode');themeToggle.textContent='🌙'}themeToggle.addEventListener('click',()=>{document.body.classList.toggle('light-mode');const isLight=document.body.classList.contains('light-mode');themeToggle.textContent=isLight?'🌙':'🌓';localStorage.setItem('theme',isLight?'light':'dark')});copyBtn.addEventListener('click',copyScript);downloadBtn.addEventListener('click',downloadScript);stepByStepBtn.addEventListener('click',showStepByStep);modalCloseBtn.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show'))closeModal()});searchBox.addEventListener('input',e=>{const query=e.target.value.trim().toLowerCase();if(query.length<2){searchResults.style.display='none';return}const lines=scriptContentText.split('\\n');const matches=lines.reduce((acc,line,index)=>{if(line.toLowerCase().includes(query)){acc.push({line:index+1,content:line.trim(),index:index})}return acc},[]);if(matches.length>0){searchResults.innerHTML='';matches.slice(0,10).forEach(match=>{const item=document.createElement('div');item.className='search-result-item';item.setAttribute('role','option');item.textContent=`Línea ${match.line}: ${match.content.substring(0,80)}${match.content.length>80?'...':''}`;item.onclick=()=>{highlightAndScrollToLine(match.index);searchResults.style.display='none';searchBox.value=''};searchResults.appendChild(item)});searchResults.style.display='block'}else{searchResults.style.display='none'}});document.addEventListener('click',e=>{if(!searchBox.contains(e.target)&&!searchResults.contains(e.target)){searchResults.style.display='none'}});scriptContentEl.addEventListener('click',e=>{if(e.target.classList.contains('function-name')){const functionNameWithPrefix='Function ';const targetText=e.target.textContent;if(targetText.startsWith(functionNameWithPrefix)){const functionName=targetText.substring(functionNameWithPrefix.length).trim();const info=functionDescriptions[functionName];if(info){document.getElementById('functionName').textContent=info.name;document.getElementById('functionDescription').textContent=info.description;document.getElementById('functionUsageCode').textContent=info.usage;functionInfoEl.style.display='block';functionInfoEl.scrollIntoView({behavior:'smooth',block:'nearest'})}}}});const focusableElements=[...modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')];modal.addEventListener('keydown',e=>{if(e.key==='Tab'){const first=focusableElements[0],last=focusableElements[focusableElements.length-1];if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus()}}else{if(document.activeElement===last){e.preventDefault();first.focus()}}}})}init()});
+#endregion`;
+
+            // --- State ---
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+
+            // --- Functions ---
+            
+            /**
+             * Applies the current theme to the body.
+             */
+            const applyTheme = () => {
+                document.body.className = '';
+                document.body.classList.add(currentTheme, 'antialiased');
+                themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌓';
+            };
+
+            /**
+             * Toggles the theme between light and dark.
+             */
+            const toggleTheme = () => {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme();
+                showToast(`Switched to ${currentTheme} mode`);
+            };
+
+            /**
+             * Displays a toast notification.
+             * @param {string} message - The message to display.
+             * @param {string} type - 'success' or 'error'.
+             */
+            const showToast = (message, type = 'success') => {
+                toast.textContent = message;
+                toast.className = `fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300`;
+                toast.classList.add(type === 'success' ? 'bg-green-500' : 'bg-red-500');
+                
+                // Animate in
+                setTimeout(() => {
+                    toast.classList.remove('opacity-0', 'translate-y-10');
+                }, 10);
+                
+                // Animate out
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-10');
+                }, 3000);
+            };
+
+            /**
+             * Copies the script content to the clipboard.
+             * Uses a fallback for environments where navigator.clipboard is blocked.
+             */
+            const copyScript = () => {
+                // Fallback method using a temporary textarea
+                const textArea = document.createElement('textarea');
+                textArea.value = scriptContentText;
+
+                // Make the textarea invisible
+                textArea.style.position = 'fixed';
+                textArea.style.top = '-9999px';
+                textArea.style.left = '-9999px';
+
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        showToast('✅ Script copied to clipboard!');
+                    } else {
+                        showToast('❌ Failed to copy script.', 'error');
+                    }
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    showToast('❌ Failed to copy script.', 'error');
+                }
+
+                document.body.removeChild(textArea);
+            };
+            
+            /**
+             * Downloads the script as a .ps1 file.
+             */
+            const downloadScript = () => {
+                const blob = new Blob([scriptContentText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'TITAN_v17.0_Optimizer.ps1';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('⬇️ Script download started.');
+            };
+
+            /**
+             * Initializes and highlights the script content.
+             */
+            const renderScript = () => {
+                scriptContentEl.textContent = scriptContentText;
+                Prism.highlightElement(scriptContentEl);
+                const lineCount = scriptContentText.split('\n').length;
+                lineCountEl.textContent = `${lineCount} lines`;
+            };
+
+            /**
+             * Handles the search functionality.
+             */
+            const handleSearch = () => {
+                const query = searchBox.value.toLowerCase();
+                renderScript(); // Reset highlights
+
+                if (query.length < 3) {
+                    return;
+                }
+
+                const lines = scriptContentEl.innerHTML.split('\n');
+                let firstMatch = null;
+                const highlightedLines = lines.map((line, index) => {
+                    if (line.toLowerCase().includes(query)) {
+                        if (!firstMatch) firstMatch = index;
+                        // Use a regex to wrap the match in a mark tag for styling
+                        const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+                        const highlightedLine = line.replace(regex, `<mark class="bg-sky-500/30 px-1 rounded">\$1</mark>`);
+                        return `<span class="highlighted-line">${highlightedLine}</span>`;
+                    }
+                    return line;
+                }).join('\n');
+
+                scriptContentEl.innerHTML = highlightedLines;
+                
+                // Scroll to the first match
+                if (firstMatch !== null) {
+                    const firstMatchElement = scriptContentEl.querySelector('.highlighted-line');
+                    if (firstMatchElement) {
+                        firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            };
+
+            // --- Event Listeners ---
+            themeToggle.addEventListener('click', toggleTheme);
+            copyBtn.addEventListener('click', copyScript);
+            downloadBtn.addEventListener('click', downloadScript);
+            searchBox.addEventListener('input', handleSearch);
+
+            // --- Initialization ---
+            applyTheme();
+            renderScript();
+        });
     </script>
 </body>
 </html>
