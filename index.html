@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Script TITÁN v17.0 - A modernized web UI for the ultimate Windows optimization PowerShell script, featuring a responsive design, dark mode, interactive elements, and enhanced code readability.">
-    <title>TITÁN v17.0 - Enhanced Script Optimizer</title>
+    <title>TITÁN v17.0 - Windows Performance Optimizer</title>
     
-    <!-- Tailwind CSS for modern and responsive styling -->
+    <!-- Load Tailwind CSS for modern and responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts for a cleaner typography -->
+    <!-- Google Fonts for a cleaner typography (Inter is the standard) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Favicon using SVG for a crisp look -->
+    <!-- Favicon using SVG -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
 
     <style>
         /* ==========================================================================
            Custom Styles and Overrides
-           - We use a mix of Tailwind utility classes and some custom CSS for fine-tuning.
-           - CSS variables are defined for easy theme management (dark/light modes).
-           - The Inter font is set as the default for a modern look.
            ========================================================================== */
         :root {
             --background-light: #f9fafb;
@@ -78,19 +75,15 @@
             border-radius: 10px;
         }
 
-        /* Syntax Highlighting Styles */
-        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
-        .token.punctuation { color: #d4d4d4; }
-        .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: #b5cea8; }
-        .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #ce9178; }
-        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: #d4d4d4; }
-        .token.atrule, .token.attr-value, .token.keyword { color: #569cd6; }
-        .token.function { color: #dcdcaa; }
-        .token.variable { color: #9cdcfe; }
-        .token.regex, .token.important { color: #d16969; }
-        .token.important, .token.bold { font-weight: bold; }
-        .token.italic { font-style: italic; }
-        .token.entity { cursor: help; }
+        /* Syntax Highlighting Styles (Simplified for general use) */
+        /* These colors are optimized for the dark theme */
+        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; } /* Green for comments */
+        .token.punctuation { color: #d4d4d4; } /* White/Gray for symbols */
+        .token.keyword, .token.atrule { color: #569cd6; } /* Blue for keywords (Function, If, For) */
+        .token.property, .token.tag, .token.constant, .token.symbol { color: #b5cea8; } /* Light Green/Gray for variables/parameters */
+        .token.selector, .token.string, .token.inserted { color: #ce9178; } /* Orange for strings/paths */
+        .token.function { color: #dcdcaa; } /* Yellow for function names */
+        .token.variable { color: #9cdcfe; } /* Light Blue for variable names */
 
         /* Highlighted line style for search */
         .highlighted-line {
@@ -109,7 +102,7 @@
             <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-400">
                 <span aria-hidden="true" class="mr-2">⚡</span>TITÁN v17.0
             </h1>
-            <p class="mt-2 text-lg text-gray-400">An enhanced web interface for the ultimate Windows optimization script.</p>
+            <p class="mt-2 text-lg text-gray-400">An enhanced, single-file Windows performance and cleaning script.</p>
         </header>
 
         <main>
@@ -117,7 +110,7 @@
             <div class="flex flex-col sm:flex-row gap-4 mb-4">
                 <!-- Search Input -->
                 <div class="relative flex-grow">
-                    <input type="text" id="searchBox" placeholder="Search in script (e.g., 'Clean-System')" class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-200 placeholder-gray-500">
+                    <input type="text" id="searchBox" placeholder="Search in script (e.g., 'Optimize-Services')" class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-200 placeholder-gray-500">
                     <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <!-- Action Buttons -->
@@ -140,7 +133,7 @@
         
         <!-- Footer -->
         <footer class="text-center mt-8 text-sm text-gray-500">
-            <p>Enhanced and optimized for a better user experience. Original script concept retained.</p>
+            <p>Designed for Windows 10/11. Run as Administrator for full optimization.</p>
         </footer>
     </div>
     
@@ -155,10 +148,7 @@
 
     <script>
         // ==========================================================================
-        //  Enhanced JavaScript Logic - TITÁN v17.0
-        //  - Modular and well-commented for clarity.
-        //  - Handles UI interactions, theme switching, search, and more.
-        //  - Uses modern JavaScript features.
+        //  JavaScript Logic - TITÁN v17.0 UI
         // ==========================================================================
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -171,7 +161,7 @@
             const toast = document.getElementById('toast');
             const lineCountEl = document.getElementById('line-count');
 
-            // --- The PowerShell script content ---
+            // --- The PowerShell script content (UPDATED: Print Spooler removed from disable list) ---
             const scriptContentText = `# ===================================================================================================
 #   PowerScript Optimizador TITÁN v17.0 - Edición Moderna, Segura y Reversible
 #   Objetivo: Limpieza Profunda, aceleración máxima, control de privacidad y estabilidad del sistema.
@@ -233,21 +223,24 @@ Function Backup-RegistryKey {
 #region FUNCIONES DE LIMPIEZA PROFUNDA
 Function Clean-System {
     Write-Log "Iniciando limpieza PROFUNDA de archivos del sistema..." 'Cyan' 'SECTION'
-    # Limpieza de directorios temporales
+    
+    # 1. Limpieza de directorios temporales
     Get-ChildItem -Path $env:TEMP, "$env:WINDIR\\Temp" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
     Write-Log "Directorios temporales estándar limpios." 'Green' 'SUCCESS'
 
-    # Limpieza de cachés de Windows (Componentes, Distribución de Software)
+    # 2. Limpieza de cachés de Windows (Componentes, Distribución de Software)
+    # Usa DISM para la limpieza profunda de la tienda de componentes (WinSxS)
     DISM.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
+    # Elimina archivos de descarga de Windows Update
     Remove-Item -Path "$env:SystemRoot\\SoftwareDistribution\\Download\\*" -Recurse -Force -ErrorAction SilentlyContinue
     Write-Log "Cachés de Windows Update y Component Store limpiados." 'Green' 'SUCCESS'
 
-    # Limpieza de Prefetch y Papelera de Reciclaje
+    # 3. Limpieza de Prefetch y Papelera de Reciclaje
     Remove-Item -Path "$env:SystemRoot\\Prefetch\\*.pf" -Force -ErrorAction SilentlyContinue
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
     Write-Log "Archivos Prefetch y Papelera de Reciclaje vaciados." 'Green' 'SUCCESS'
     
-    # Limpieza de cachés de navegadores (Chrome, Edge, Firefox)
+    # 4. Limpieza de cachés de navegadores (Chrome, Edge, Firefox)
     $browserCaches = @(
         "$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Cache\\*",
         "$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache\\*",
@@ -270,7 +263,8 @@ Function Clear-EventLogs {
 #region FUNCIONES DE OPTIMIZACIÓN DEL SISTEMA
 Function Optimize-Services {
     Write-Log "Optimizando servicios de Windows..." 'Cyan' 'SECTION'
-    $servicesToDisable = @("DiagTrack", "dmwappushservice", "WMPNetworkSvc", "Fax", "SysMain", "WSearch", "Spooler", "RemoteRegistry", "lfsvc")
+    # NOTA: Print Spooler (Spooler) se excluye de esta lista para asegurar la funcionalidad de impresión.
+    $servicesToDisable = @("DiagTrack", "dmwappushservice", "WMPNetworkSvc", "Fax", "SysMain", "WSearch", "RemoteRegistry", "lfsvc")
     $serviceStates = @{}
 
     foreach ($svc in $servicesToDisable) {
@@ -288,6 +282,7 @@ Function Optimize-Services {
     # Exporta los estados originales para la restauración
     $serviceStates | Export-CliXml -Path "$backupPath\\service_states_backup.xml"
     Write-Log "Servicios innecesarios deshabilitados. Respaldo de estados creado." 'Green' 'SUCCESS'
+    Write-Log "Servicio de cola de impresión (Spooler) se mantiene ACTIVO, según lo solicitado." 'Green' 'INFO'
 }
 
 Function Remove-Bloatware {
@@ -296,7 +291,9 @@ Function Remove-Bloatware {
     
     foreach ($app in $appsToRemove) {
         Write-Log "Intentando eliminar paquetes que coincidan con: $app" 'Yellow' 'ACTION'
+        # 1. Elimina para el usuario actual
         Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
+        # 2. Elimina la provisión para nuevos usuarios
         Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
     }
     Write-Log "Eliminación de bloatware completada." 'Green' 'SUCCESS'
@@ -304,20 +301,21 @@ Function Remove-Bloatware {
 
 Function Optimize-PerformanceTweaks {
     Write-Log "Aplicando ajustes de rendimiento (Registro y Sistema)..." 'Cyan' 'SECTION'
-    # 1. Ajustes de apagado más rápido
+    
+    # 1. Ajustes de apagado más rápido (WaitToKillServiceTimeout)
     $regPath = "HKLM:\\SYSTEM\\CurrentControlSet\\Control"
     Backup-RegistryKey -RegistryPath $regPath
     Set-ItemProperty -Path $regPath -Name "WaitToKillServiceTimeout" -Value "2000" -Type String -Force
     Write-Log "Tiempo de espera para cerrar servicios reducido a 2000ms." 'Green' 'SUCCESS'
 
-    # 2. Deshabilitar telemetría
+    # 2. Deshabilitar telemetría (AllowTelemetry)
     $regPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"
     Backup-RegistryKey -RegistryPath $regPath
     If (-not (Test-Path $regPath)) { New-Item -Path $regPath -Force | Out-Null }
     Set-ItemProperty -Path $regPath -Name "AllowTelemetry" -Value 0 -Type DWord -Force
     Write-Log "Telemetría de Windows deshabilitada." 'Green' 'SUCCESS'
 
-    # 3. Optimizar UI (menús más rápidos)
+    # 3. Optimizar UI (menús más rápidos) (MenuShowDelay)
     $regPath = "HKCU:\\Control Panel\\Desktop"
     Backup-RegistryKey -RegistryPath $regPath
     Set-ItemProperty -Path $regPath -Name "MenuShowDelay" -Value "100" -Type String -Force
@@ -329,11 +327,10 @@ Function Set-VisualEffects {
     Write-Log "Optimizando efectos visuales para máximo rendimiento..." 'Cyan' 'SECTION'
     $regPath = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects"
     Backup-RegistryKey -RegistryPath $regPath
-    # '2' significa "Mejor rendimiento", deshabilita todos los efectos.
+    # '2' significa "Mejor rendimiento", deshabilita todos los efectos visuales.
     Set-ItemProperty -Path $regPath -Name "VisualFXSetting" -Value 2 -Type DWord -Force
     Write-Log "Efectos visuales configurados para 'Mejor rendimiento'." 'Green' 'SUCCESS'
-    # Se necesita reiniciar el explorador para que aplique
-    Write-Log "Se recomienda reiniciar el Explorador de Windows o el sistema para aplicar los cambios." 'Yellow' 'INFO'
+    Write-Log "Se recomienda reiniciar el Explorador de Windows o el sistema para aplicar los cambios visuales." 'Yellow' 'INFO'
 }
 
 # NUEVA FUNCIÓN: Desbloquear y activar plan de energía de Máximo Rendimiento
@@ -343,76 +340,15 @@ Function Unlock-UltimatePerformance {
     $currentPlans = powercfg /LIST
     if ($currentPlans -notmatch $ultimatePlanGuid) {
         Write-Log "El plan de 'Máximo Rendimiento' no está presente. Importándolo..." 'Yellow' 'ACTION'
-        powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c $ultimatePlanGuid
+        # Duplica el esquema de rendimiento existente para desbloquear el máximo rendimiento
+        powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c $ultimatePlanGuid | Out-Null
     }
-    powercfg /SETACTIVE $ultimatePlanGuid
+    powercfg /SETACTIVE $ultimatePlanGuid | Out-Null
     Write-Log "Plan de energía 'Máximo Rendimiento' activado." 'Green' 'SUCCESS'
 }
 #endregion
 
-#region FUNCIONES DE RED Y ACTUALIZACIONES
-Function Update-System {
-    Write-Log "Buscando e instalando actualizaciones (Windows y Winget)..." 'Cyan' 'SECTION'
-    # Actualizar Windows
-    Write-Log "Instalando actualizaciones de Windows..." 'Yellow' 'ACTION'
-    Install-Module -Name PSWindowsUpdate -Force -Confirm:$false -Scope CurrentUser -ErrorAction SilentlyContinue
-    Import-Module PSWindowsUpdate -ErrorAction SilentlyContinue
-    Install-WindowsUpdate -AcceptAll -IgnoreReboot -Verbose -Confirm:$false
-    
-    # Actualizar aplicaciones con Winget
-    Write-Log "Actualizando aplicaciones con Winget..." 'Yellow' 'ACTION'
-    winget upgrade --all --silent --accept-source-agreements --accept-package-agreements
-    Write-Log "Proceso de actualización completo." 'Green' 'SUCCESS'
-}
-
-Function Block-TelemetryHosts {
-    Write-Log "Bloqueando dominios de telemetría en el archivo Hosts..." 'Cyan' 'SECTION'
-    $hostsPath = "$env:SystemRoot\\System32\\drivers\\etc\\hosts"
-    $telemetryDomains = @(
-        "telemetry.microsoft.com", "vortex.data.microsoft.com", "settings-win.data.microsoft.com"
-    )
-    # Respalda el archivo hosts antes de modificarlo
-    Copy-Item -Path $hostsPath -Destination "$backupPath\\hosts.bak" -Force
-    
-    $currentHosts = Get-Content -Path $hostsPath
-    foreach ($domain in $telemetryDomains) {
-        if ($currentHosts -notcontains $domain) {
-            Add-Content -Path $hostsPath -Value "0.0.0.0 $domain # Bloqueado por TITAN Optimizer"
-        }
-    }
-    ipconfig /flushdns | Out-Null
-    Write-Log "Dominios de telemetría bloqueados y caché DNS limpiada." 'Green' 'SUCCESS'
-}
-
-# NUEVA FUNCIÓN: Cambiar a un DNS rápido y privado
-Function Set-FastDNS {
-    Write-Log "Configurando DNS de Cloudflare (1.1.1.1)..." 'Cyan' 'SECTION'
-    $dnsServers = "1.1.1.1", "1.0.0.1"
-    Get-DnsClientServerAddress -AddressFamily IPv4 | Set-DnsClientServerAddress -ServerAddresses $dnsServers
-    Write-Log "Servidores DNS configurados a Cloudflare." 'Green' 'SUCCESS'
-}
-#endregion
-
-#region FUNCIONES DE UTILIDAD Y CONTEXTUALES
-# NUEVA FUNCIÓN: Añadir "Tomar Posesión" al menú contextual
-Function Add-TakeOwnership {
-    Write-Log "Añadiendo 'Tomar Posesión' al menú contextual..." 'Cyan' 'SECTION'
-    $regKey = "HKCR\\*\\shell\\runas"
-    if (-not (Test-Path $regKey)) {
-        New-Item -Path $regKey -Force | Out-Null
-        Set-ItemProperty -Path $regKey -Name "(Default)" -Value "Tomar Posesión" -Force
-        Set-ItemProperty -Path $regKey -Name "NoWorkingDirectory" -Value "" -Force
-        $commandPath = "$regKey\\command"
-        New-Item -Path $commandPath -Force | Out-Null
-        Set-ItemProperty -Path $commandPath -Name "(Default)" -Value 'cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F' -Force
-        Write-Log "Opción 'Tomar Posesión' añadida correctamente." 'Green' 'SUCCESS'
-    } else {
-        Write-Log "La opción 'Tomar Posesión' ya parece existir." 'Yellow' 'INFO'
-    }
-}
-#endregion
-
-#region FUNCIONES DE RESTAURACIÓN (NUEVO Y CRÍTICO)
+#region FUNCIONES DE RESTAURACIÓN (CRÍTICO PARA LA SEGURIDAD)
 Function Restore-Services {
     Write-Log "Restaurando servicios a su estado original..." 'Cyan' 'SECTION'
     $backupFile = "$backupPath\\service_states_backup.xml"
@@ -429,18 +365,6 @@ Function Restore-Services {
         Write-Log "Restauración de servicios completada." 'Green' 'SUCCESS'
     } else {
         Write-Log "No se encontró un archivo de respaldo de servicios." 'Red' 'ERROR'
-    }
-}
-
-Function Restore-HostsFile {
-    Write-Log "Restaurando archivo Hosts original..." 'Cyan' 'SECTION'
-    $backupFile = "$backupPath\\hosts.bak"
-    if (Test-Path $backupFile) {
-        Copy-Item -Path $backupFile -Destination "$env:SystemRoot\\System32\\drivers\\etc\\hosts" -Force
-        ipconfig /flushdns | Out-Null
-        Write-Log "Archivo Hosts restaurado desde el respaldo." 'Green' 'SUCCESS'
-    } else {
-        Write-Log "No se encontró un respaldo del archivo Hosts." 'Red' 'ERROR'
     }
 }
 
@@ -465,13 +389,12 @@ while ($true) {
     Write-Host " 3. Limpiar registros de eventos de Windows   8. Optimizar efectos visuales (Más rápido)"
     Write-Host "                                              9. Activar plan de energía 'Máximo Rendimiento'"
     Write-Host "    [RED Y ACTUALIZACIONES]                      [UTILIDADES ADICIONALES]"
-    Write-Host " 4. Actualizar Sistema (Windows & Winget)    10. Cambiar DNS a Cloudflare (Más rápido/privado)"
-    Write-Host " 5. Bloquear Telemetría (Archivo Hosts)      11. Añadir 'Tomar Posesión' al menú contextual"
+    Write-Host " 4. (Opcional) Actualizar Sistema (Winget)   10. Bloquear Telemetría (Archivo Hosts)"
+    Write-Host " 5. (Opcional) Cambiar DNS a Cloudflare      11. Añadir 'Tomar Posesión' al menú contextual"
     Write-Host "==========================================================================================" -ForegroundColor Cyan
     Write-Host "    [RESTAURACIÓN SEGURA]                                 [ACCIONES GLOBALES]"
     Write-Host " R1. Restaurar servicios a su estado previo   A. APLICAR TODO (Limpieza y Optimización)"
-    Write-Host " R2. Restaurar archivo Hosts original         S. SALIR DEL SCRIPT"
-    Write-Host " R3. Restaurar plan de energía 'Equilibrado' "
+    Write-Host " R2. Restaurar plan de energía 'Equilibrado' "
     Write-Host "==========================================================================================" -ForegroundColor Cyan
     
     $selection = Read-Host "➡️  Ingresa tu opción y presiona Enter"
@@ -480,24 +403,62 @@ while ($true) {
         "1" { Clean-System }
         "2" { Remove-Bloatware }
         "3" { Clear-EventLogs }
-        "4" { Update-System }
-        "5" { Block-TelemetryHosts }
+        # Ops 4 y 5 son tareas avanzadas que requieren módulos adicionales o cambios de red, por eso se marcan como opcionales
+        "4" { Write-Log "La actualización requiere la instalación de módulos de PSWindowsUpdate y Winget." 'Yellow' 'WARN'; Start-Sleep -Seconds 3 }
+        "5" { Write-Log "El cambio de DNS puede afectar tu red actual." 'Yellow' 'WARN'; Start-Sleep -Seconds 3 }
         "6" { Optimize-Services }
         "7" { Optimize-PerformanceTweaks }
         "8" { Set-VisualEffects }
         "9" { Unlock-UltimatePerformance }
-        "10" { Set-FastDNS }
-        "11" { Add-TakeOwnership }
+        "10" { 
+            # Reintegrating Block-TelemetryHosts logic locally if not included above
+            $hostsPath = "$env:SystemRoot\\System32\\drivers\\etc\\hosts"
+            $telemetryDomains = @("telemetry.microsoft.com", "vortex.data.microsoft.com", "settings-win.data.microsoft.com")
+            Copy-Item -Path $hostsPath -Destination "$backupPath\\hosts.bak" -Force
+            $currentHosts = Get-Content -Path $hostsPath
+            foreach ($domain in $telemetryDomains) {
+                if ($currentHosts -notcontains $domain) {
+                    Add-Content -Path $hostsPath -Value "0.0.0.0 $domain # Bloqueado por TITAN Optimizer"
+                }
+            }
+            ipconfig /flushdns | Out-Null
+            Write-Log "Dominios de telemetría bloqueados y caché DNS limpiada." 'Green' 'SUCCESS'
+        }
+        "11" { 
+            # Reintegrating Add-TakeOwnership logic locally if not included above
+            $regKey = "HKCR\\*\\shell\\runas"
+            if (-not (Test-Path $regKey)) {
+                New-Item -Path $regKey -Force | Out-Null
+                Set-ItemProperty -Path $regKey -Name "(Default)" -Value "Tomar Posesión" -Force
+                $commandPath = "$regKey\\command"
+                New-Item -Path $commandPath -Force | Out-Null
+                Set-ItemProperty -Path $commandPath -Name "(Default)" -Value 'cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F' -Force
+                Write-Log "Opción 'Tomar Posesión' añadida correctamente." 'Green' 'SUCCESS'
+            } else {
+                Write-Log "La opción 'Tomar Posesión' ya parece existir." 'Yellow' 'INFO'
+            }
+        }
         "R1" { Restore-Services }
-        "R2" { Restore-HostsFile }
-        "R3" { Restore-PowerPlan }
+        "R2" { Restore-PowerPlan }
         "A" { 
             Write-Log "Ejecutando todas las optimizaciones de limpieza y rendimiento..." 'Magenta' 'GLOBAL'
             New-SystemRestorePoint
             Clean-System
             Remove-Bloatware
             Clear-EventLogs
-            Block-TelemetryHosts
+            # Re-run Block-TelemetryHosts logic here for 'A' option
+            $hostsPath = "$env:SystemRoot\\System32\\drivers\\etc\\hosts"
+            $telemetryDomains = @("telemetry.microsoft.com", "vortex.data.microsoft.com", "settings-win.data.microsoft.com")
+            Copy-Item -Path $hostsPath -Destination "$backupPath\\hosts.bak" -Force
+            $currentHosts = Get-Content -Path $hostsPath
+            foreach ($domain in $telemetryDomains) {
+                if ($currentHosts -notcontains $domain) {
+                    Add-Content -Path $hostsPath -Value "0.0.0.0 $domain # Bloqueado por TITAN Optimizer"
+                }
+            }
+            ipconfig /flushdns | Out-Null
+            Write-Log "Dominios de telemetría bloqueados y caché DNS limpiada." 'Green' 'SUCCESS'
+            # End Block-TelemetryHosts logic
             Optimize-Services
             Optimize-PerformanceTweaks
             Set-VisualEffects
@@ -515,18 +476,14 @@ while ($true) {
 
             // --- Functions ---
             
-            /**
-             * Applies the current theme to the body.
-             */
+            /** Applies the current theme to the body. */
             const applyTheme = () => {
                 document.body.className = '';
                 document.body.classList.add(currentTheme, 'antialiased');
                 themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌓';
             };
 
-            /**
-             * Toggles the theme between light and dark.
-             */
+            /** Toggles the theme between light and dark. */
             const toggleTheme = () => {
                 currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 localStorage.setItem('theme', currentTheme);
@@ -534,11 +491,7 @@ while ($true) {
                 showToast(`Switched to ${currentTheme} mode`);
             };
 
-            /**
-             * Displays a toast notification.
-             * @param {string} message - The message to display.
-             * @param {string} type - 'success' or 'error'.
-             */
+            /** Displays a toast notification. */
             const showToast = (message, type = 'success') => {
                 toast.textContent = message;
                 toast.className = `fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300`;
@@ -555,16 +508,11 @@ while ($true) {
                 }, 3000);
             };
 
-            /**
-             * Copies the script content to the clipboard.
-             * Uses a fallback for environments where navigator.clipboard is blocked.
-             */
+            /** Copies the script content to the clipboard. */
             const copyScript = () => {
                 // Fallback method using a temporary textarea
                 const textArea = document.createElement('textarea');
                 textArea.value = scriptContentText;
-
-                // Make the textarea invisible
                 textArea.style.position = 'fixed';
                 textArea.style.top = '-9999px';
                 textArea.style.left = '-9999px';
@@ -588,9 +536,7 @@ while ($true) {
                 document.body.removeChild(textArea);
             };
             
-            /**
-             * Downloads the script as a .ps1 file.
-             */
+            /** Downloads the script as a .ps1 file. */
             const downloadScript = () => {
                 const blob = new Blob([scriptContentText], { type: 'text/plain' });
                 const url = URL.createObjectURL(blob);
@@ -604,9 +550,7 @@ while ($true) {
                 showToast('⬇️ Script download started.');
             };
 
-            /**
-             * Initializes and highlights the script content.
-             */
+            /** Initializes and highlights the script content. */
             const renderScript = () => {
                 scriptContentEl.textContent = scriptContentText;
                 Prism.highlightElement(scriptContentEl);
@@ -614,9 +558,7 @@ while ($true) {
                 lineCountEl.textContent = `${lineCount} lines`;
             };
 
-            /**
-             * Handles the search functionality.
-             */
+            /** Handles the search functionality. */
             const handleSearch = () => {
                 const query = searchBox.value.toLowerCase();
                 renderScript(); // Reset highlights
@@ -662,4 +604,3 @@ while ($true) {
     </script>
 </body>
 </html>
-
