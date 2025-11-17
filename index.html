@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script TITÁN v17.0 - A modernized web UI for the ultimate Windows optimization PowerShell script, featuring a responsive design, dark mode, interactive elements, and enhanced code readability.">
-    <title>TITAN v17.0 - Windows Performance Optimizer</title>
+    <meta name="description" content="Script TITÁN v17.1 - A modernized web UI for the ultimate Windows optimization PowerShell script, featuring a responsive design, dark mode, interactive elements, and enhanced code readability. Optimized by Gemini.">
+    <title>TITAN v17.1 - Windows Performance Optimizer</title>
     
     <!-- Load Tailwind CSS for modern and responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -99,9 +99,9 @@
         <!-- Header Section -->
         <header class="text-center mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-400">
-                <span aria-hidden="true" class="mr-2">⚡</span>TITAN v17.0
+                <span aria-hidden="true" class="mr-2">⚡</span>TITAN v17.1
             </h1>
-            <p class="mt-2 text-lg text-gray-400">An enhanced, single-file Windows performance and cleaning script.</p>
+            <p class="mt-2 text-lg text-gray-400">An enhanced, single-file Windows performance and cleaning script. (Optimized by Gemini)</p>
         </header>
 
         <main>
@@ -123,7 +123,7 @@
             <!-- Code Viewer -->
             <div class="code-block rounded-lg shadow-2xl overflow-hidden">
                 <div class="px-4 py-2 bg-gray-900/50 border-b border-gray-700 flex justify-between items-center">
-                    <span class="text-sm font-medium text-gray-400">TITAN_v17.0_Optimizer.ps1</span>
+                    <span class="text-sm font-medium text-gray-400">TITAN_v17.1_Optimizer_Gemini.ps1</span>
                     <span id="line-count" class="text-sm text-gray-500"></span>
                 </div>
                 <pre class="overflow-auto p-4 text-sm" style="max-height: 60vh;"><code id="scriptContent" class="language-powershell"></code></pre>
@@ -147,7 +147,7 @@
 
     <script>
         // ==========================================================================
-        //  JavaScript Logic - TITAN v17.0 UI
+        //  JavaScript Logic - TITAN v17.1 UI
         // ==========================================================================
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -160,18 +160,19 @@
             const toast = document.getElementById('toast');
             const lineCountEl = document.getElementById('line-count');
 
-            // --- The PowerShell script content (Fully translated and enhanced) ---
+            // --- The PowerShell script content (Fully translated and enhanced by Gemini) ---
             const scriptContentText = `# ===================================================================================================
-#   PowerScript Optimizer TITAN v17.0 - Modern, Safe, and Reversible Edition
+#   PowerScript Optimizer TITAN v17.1 - (Gemini Optimized Edition)
 #   Goal: Deep cleanup, maximum acceleration, privacy control, and system stability.
 #   WARNING: ALWAYS RUN AS ADMINISTRATOR.
 #
 #   This script is structured for maximum safety, including restoration options.
+#   Gemini modifications address: 1. Deeper File Cleaning 2. System Config 3. Boot Time 4. Memory Usage
 # ===================================================================================================
 
 #region GLOBAL VARIABLES AND LOG CONFIGURATION
 $logPath = "$env:USERPROFILE\\Desktop"
-$logFile = "$logPath\\Titan-Optimizer-Log-v17.0.txt"
+$logFile = "$logPath\\Titan-Optimizer-Log-v17.1.txt"
 $backupPath = "$logPath\\Titan_Backups"
 if (-not (Test-Path $backupPath)) { New-Item -Path $backupPath -ItemType Directory -Force | Out-Null }
 
@@ -197,7 +198,7 @@ Function Check-Admin {
 Function New-SystemRestorePoint {
     Write-Log "Creating a system restore point..." 'Yellow' 'ACTION'
     try {
-        Checkpoint-Computer -Description "TITAN v17.0 - Before Optimization" -RestorePointType "MODIFY_SETTINGS"
+        Checkpoint-Computer -Description "TITAN v17.1 - Before Optimization" -RestorePointType "MODIFY_SETTINGS"
         Write-Log "Restore point created successfully." 'Green' 'SUCCESS'
     } catch {
         Write-Log "Could not create restore point. Ensure system protection is enabled." 'Red' 'ERROR'
@@ -208,7 +209,7 @@ Function New-SystemRestorePoint {
 Function Backup-RegistryKey {
     param ([string]$RegistryPath)
     $keyName = $RegistryPath.Split('\\')[-1]
-    $backupFile = "$backupPath\\RegBackup-$keyName-$(Get-Date -f yyyyMMddHHmmss).reg"
+    $backupFile = "$backupPath\\RegBackup-$keyName-$(Get-Date -f yyMMddHHmmss).reg"
     Write-Log "Backing up registry key: $RegistryPath" 'Cyan' 'INFO'
     try {
         Start-Process "reg" -ArgumentList "export \`"$RegistryPath\`" \`"$backupFile\`" /y" -Wait -NoNewWindow
@@ -219,34 +220,48 @@ Function Backup-RegistryKey {
 }
 #endregion
 
-#region DEEP CLEANUP FUNCTIONS (Requirement 1)
+#region DEEP CLEANUP FUNCTIONS (Requirement 1 - Gemini Enhanced)
 Function Clean-System {
     Write-Log "Starting DEEP system file cleanup..." 'Cyan' 'SECTION'
     
-    # 1. Cleanup of temporary directories
-    Get-ChildItem -Path $env:TEMP, "$env:WINDIR\\Temp" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Log "Standard temporary directories cleaned." 'Green' 'SUCCESS'
+    # 1. Cleanup of temporary directories (Optimized Method)
+    Write-Log "Cleaning standard temporary directories..." 'Yellow' 'ACTION'
+    $tempDirs = @("$env:TEMP", "$env:WINDIR\\Temp")
+    foreach ($dir in $tempDirs) {
+        try {
+            # This is much faster than Get-ChildItem | Remove-Item
+            $items = Get-ChildItem -Path $dir -Force -ErrorAction SilentlyContinue
+            $items | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+            Write-Log "Cleaned: $dir" 'Green' 'SUCCESS'
+        } catch {
+            Write-Log "Could not clean: $dir. $($_.Exception.Message)" 'Red' 'WARN'
+        }
+    }
 
-    # 2. Cleanup of Windows Caches (Component Store, Software Distribution)
-    # Uses DISM for deep cleanup of the component store (WinSxS)
+    # 2. Cleanup of Windows Caches (Component Store, Software Distribution, Delivery Optimization)
     DISM.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
-    # Delete Windows Update download files
+    # Delete Windows Update download files and Delivery Optimization
     Remove-Item -Path "$env:SystemRoot\\SoftwareDistribution\\Download\\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Log "Windows Update and Component Store caches cleaned." 'Green' 'SUCCESS'
+    Remove-Item -Path "$env:SystemRoot\\SoftwareDistribution\\DeliveryOptimization\\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Log "Windows Update, Component Store, and Delivery Optimization caches cleaned." 'Green' 'SUCCESS'
 
     # 3. Cleanup of Prefetch and Recycle Bin
     Remove-Item -Path "$env:SystemRoot\\Prefetch\\*.pf" -Force -ErrorAction SilentlyContinue
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
     Write-Log "Prefetch files and Recycle Bin emptied." 'Green' 'SUCCESS'
     
-    # 4. Cleanup of browser caches (Chrome, Edge, Firefox)
-    $browserCaches = @(
+    # 4. Cleanup of browser and GPU caches (Gemini Enhanced: Added GPU Caches)
+    $cachesToRemove = @(
         "$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Cache\\*",
         "$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache\\*",
-        "$env:LOCALAPPDATA\\Mozilla\\Firefox\\Profiles\\*\\cache2\\entries\\*"
+        "$env:LOCALAPPDATA\\Mozilla\\Firefox\\Profiles\\*\\cache2\\entries\\*",
+        "$env:LOCALAPPDATA\\NVIDIA Corporation\\NVIDIA GeForce Experience\\CefCache\\*",
+        "$env:LOCALAPPDATA\\NVIDIA\\GLCache\\*",
+        "$env:LOCALAPPDATA\\AMD\\DxCache\\*",
+        "$env:LOCALAPPDATA\\AMD\\GLCache\\*"
     )
-    $browserCaches | ForEach-Object { Remove-Item -Path $_ -Recurse -Force -ErrorAction SilentlyContinue }
-    Write-Log "Main browser caches cleaned." 'Green' 'SUCCESS'
+    $cachesToRemove | ForEach-Object { Remove-Item -Path $_ -Recurse -Force -ErrorAction SilentlyContinue }
+    Write-Log "Main browser and GPU caches cleaned." 'Green' 'SUCCESS'
 }
 
 Function Clear-EventLogs {
@@ -259,7 +274,7 @@ Function Clear-EventLogs {
 }
 #endregion
 
-#region SYSTEM OPTIMIZATION FUNCTIONS (Requirements 2 & 3)
+#region SYSTEM OPTIMIZATION FUNCTIONS (Requirements 2, 3 & 4)
 Function Optimize-Services {
     Write-Log "Optimizing Windows services..." 'Cyan' 'SECTION'
     # NOTE (Requirement 3): Print Spooler (Spooler) is EXCLUDED from this list to ensure printing functionality.
@@ -346,9 +361,51 @@ Function Unlock-UltimatePerformance {
     powercfg /SETACTIVE $ultimatePlanGuid | Out-Null
     Write-Log "'Ultimate Performance' power plan activated." 'Green' 'SUCCESS'
 }
+
+#region GEMINI: NEW BOOT AND MEMORY FUNCTIONS
+# (Requirement 3: Boot Performance)
+Function Optimize-Storage {
+    Write-Log "Optimizing primary drive (TRIM/Defrag)..." 'Cyan' 'SECTION'
+    Write-Log "This runs the appropriate optimization (TRIM for SSDs, Defrag for HDDs)." 'Yellow' 'INFO'
+    try {
+        defrag C: /O | Out-Null
+        Write-Log "Drive C: optimization complete." 'Green' 'SUCCESS'
+    } catch {
+        Write-Log "Could not optimize drive C:. $($_.Exception.Message)" 'Red' 'ERROR'
+    }
+}
+
+# (Requirement 4: Memory Acceleration)
+Function Optimize-Memory {
+    Write-Log "Applying memory optimizations..." 'Cyan' 'SECTION'
+    
+    # 1. Disable NDU (Network Diagnostic Usage) - known to cause memory leaks
+    $nduPath = "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Ndu"
+    if (Test-Path $nduPath) {
+        Backup-RegistryKey -RegistryPath $nduPath
+        Set-ItemProperty -Path $nduPath -Name "Start" -Value 4 -Type DWord -Force
+        Write-Log "NDU service disabled (prevents potential memory leaks)." 'Green' 'SUCCESS'
+    }
+    
+    # 2. Ensure SysMain (Superfetch) is disabled (often consumes RAM)
+    try {
+        $service = Get-Service -Name "SysMain" -ErrorAction Stop
+        if ($service.StartType -ne "Disabled") {
+            Stop-Service -Name "SysMain" -Force -ErrorAction Stop
+            Set-Service -Name "SysMain" -StartupType Disabled -ErrorAction Stop
+            Write-Log "SysMain (Superfetch) disabled to conserve memory." 'Green' 'SUCCESS'
+        } else {
+            Write-Log "SysMain (Superfetch) is already disabled." 'Green' 'INFO'
+        }
+    } catch {
+        Write-Log "SysMain service not found or could not be modified." 'Yellow' 'INFO'
+    }
+}
 #endregion
 
-#region UPDATE FUNCTION (Requirement 4)
+#endregion
+
+#region UPDATE FUNCTION
 Function Update-SystemAndApps {
     Write-Log "Starting System and Application Updates..." 'Cyan' 'SECTION'
     
@@ -416,13 +473,13 @@ Function Restore-PowerPlan {
 
 #region MAIN MENU AND EXECUTION
 Check-Admin
-Write-Log "✔️ Welcome to TITAN v17.0. The LOG will be saved to '$logFile'." 'Green' 'SYSTEM'
+Write-Log "✔️ Welcome to TITAN v17.1 (Optimized by Gemini). The LOG will be saved to '$logFile'." 'Green' 'SYSTEM'
 
 while ($true) {
     Write-Host "\n"
-    Write-Host "========================== TITAN v17.0 OPTIMIZATION MENU ==========================" -ForegroundColor Cyan
+    Write-Host "========================== TITAN v17.1 OPTIMIZATION MENU ==========================" -ForegroundColor Cyan
     Write-Host "    [DEEP CLEANUP]                           [PERFORMANCE OPTIMIZATION]"
-    Write-Host " 1. Complete System Cleanup                 5. Optimize Services (Creates backup)"
+    Write-Host " 1. Complete System Cleanup (Enhanced)      5. Optimize Services (Creates backup)"
     Write-Host " 2. Remove Bloatware (Pre-installed Apps)   6. Registry Performance Tweaks"
     Write-Host " 3. Clear Windows Event Logs                7. Optimize Visual Effects (Faster UI)"
     Write-Host "    [UPDATES & NETWORKING]                   8. Activate 'Ultimate Performance' Power Plan"
@@ -430,6 +487,8 @@ while ($true) {
     Write-Host "    [ADDITIONAL UTILITIES]                      [GLOBAL ACTIONS]"
     Write-Host " 9. Block Telemetry (Hosts File)             A. APPLY ALL (Cleanup and Optimization)"
     Write-Host " 10. Add 'Take Ownership' to Context Menu   S. EXIT"
+    Write-Host "    [GEMINI OPTIMIZATIONS] (Boot & Memory)"
+    Write-Host " 11. Optimize Storage (TRIM/Defrag)         12. Optimize Memory (Disable NDU/SysMain)"
     Write-Host "==========================================================================================" -ForegroundColor Cyan
     Write-Host "    [SAFE RESTORATION]"
     Write-Host " R1. Restore Services to Previous State"
@@ -475,6 +534,8 @@ while ($true) {
                 Write-Log "'Take Ownership' option appears to exist already." 'Yellow' 'INFO'
             }
         }
+        "11" { Optimize-Storage }
+        "12" { Optimize-Memory }
         "R1" { Restore-Services }
         "R2" { Restore-PowerPlan }
         "A" { 
@@ -500,6 +561,9 @@ while ($true) {
             Optimize-PerformanceTweaks
             Set-VisualEffects
             Unlock-UltimatePerformance
+            # Run new Gemini optimizations
+            Optimize-Storage
+            Optimize-Memory
             Write-Log "ALL TASKS COMPLETED. A system restart is recommended." 'Green' 'SYSTEM'
         }
         "S" { Write-Log "Exiting script. System optimized!"; break }
@@ -579,7 +643,7 @@ while ($true) {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'TITAN_v17.0_Optimizer.ps1';
+                a.download = 'TITAN_v17.1_Optimizer_Gemini.ps1';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
