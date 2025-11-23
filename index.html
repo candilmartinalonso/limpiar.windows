@@ -2,121 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- IE=edge ensures the page uses the latest rendering engine in Windows Edge -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script TITÁN v17.1 - A modernized web UI for the ultimate Windows optimization PowerShell script, featuring a responsive design, dark mode, interactive elements, and enhanced code readability. Optimized by Gemini.">
+    <meta name="description" content="Script TITÁN v17.1 - Optimized Windows Performance Tool">
     <title>TITAN v17.1 - Windows Performance Optimizer</title>
     
-    <!-- Load Tailwind CSS for modern and responsive styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts for a cleaner typography (Inter is the standard) -->
+    <!-- OPTIMIZATION: Resource Hints for faster connection to CDNs -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Load Tailwind CSS -->
+    <!-- Note: Kept in HEAD to prevent Flash of Unstyled Content (FOUC) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Favicon using SVG -->
+    <!-- Favicon (SVG) -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
 
     <style>
-        /* ==========================================================================
-           Custom Styles and Overrides
-           ========================================================================== */
+        /* OPTIMIZATION: Consolidated Custom Styles */
         :root {
-            --background-light: #f9fafb;
-            --text-light: #1f2937;
-            --background-dark: #0d1117;
-            --text-dark: #c9d1d9;
-            --primary-color: #0ea5e9;
-            --primary-hover: #0284c7;
-            --secondary-color-dark: #1e293b;
-            --secondary-color-light: #ffffff;
-            --border-dark: #374151;
-            --border-light: #d1d5db;
+            --bg-light: #f9fafb; --text-light: #1f2937;
+            --bg-dark: #0d1117;  --text-dark: #c9d1d9;
+            --primary: #0ea5e9;  --primary-hover: #0284c7;
+            --code-bg-dark: #1e293b; --code-bg-light: #ffffff;
+            --border-dark: #374151;  --border-light: #d1d5db;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
         
-        /* Light mode theme */
-        body.light {
-            background-color: var(--background-light);
-            color: var(--text-light);
-        }
+        /* Themes */
+        body.light { background-color: var(--bg-light); color: var(--text-light); }
+        body.dark { background-color: var(--bg-dark); color: var(--text-dark); }
         
-        /* Dark mode theme */
-        body.dark {
-            background-color: var(--background-dark);
-            color: var(--text-dark);
-        }
+        /* Code Block Styling */
+        .code-block { border: 1px solid var(--border-dark); background-color: var(--code-bg-dark); }
+        .light .code-block { border: 1px solid var(--border-light); background-color: var(--code-bg-light); }
         
-        /* Custom styling for the code block */
-        .code-block {
-            background-color: var(--secondary-color-dark);
-            border: 1px solid var(--border-dark);
-        }
+        /* Scrollbar Optimization */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: var(--primary); border-radius: 4px; }
 
-        .light .code-block {
-            background-color: var(--secondary-color-light);
-            border: 1px solid var(--border-light);
-        }
-        
-        /* Custom scrollbar for a better look */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
-            border-radius: 10px;
-        }
+        /* Syntax Highlighting Colors (Dark Mode Optimized) */
+        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
+        .token.punctuation { color: #d4d4d4; }
+        .token.keyword, .token.atrule { color: #569cd6; }
+        .token.property, .token.tag, .token.constant, .token.symbol { color: #b5cea8; }
+        .token.selector, .token.string, .token.inserted { color: #ce9178; }
+        .token.function { color: #dcdcaa; }
+        .token.variable { color: #9cdcfe; }
 
-        /* Syntax Highlighting Styles (Optimized for dark theme) */
-        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; } /* Green for comments */
-        .token.punctuation { color: #d4d4d4; } /* White/Gray for symbols */
-        .token.keyword, .token.atrule { color: #569cd6; } /* Blue for keywords (Function, If, For) */
-        .token.property, .token.tag, .token.constant, .token.symbol { color: #b5cea8; } /* Light Green/Gray for variables/parameters */
-        .token.selector, .token.string, .token.inserted { color: #ce9178; } /* Orange for strings/paths */
-        .token.function { color: #dcdcaa; } /* Yellow for function names */
-        .token.variable { color: #9cdcfe; } /* Light Blue for variable names */
-
-        /* Highlighted line style for search */
+        /* Search Highlight */
         .highlighted-line {
             background-color: rgba(14, 165, 233, 0.2);
             display: block;
-            border-left: 3px solid var(--primary-color);
-            transition: background-color 0.3s;
+            border-left: 3px solid var(--primary);
         }
+        
+        /* Toast Animation */
+        .toast-enter { opacity: 1; transform: translateY(0); }
+        .toast-exit { opacity: 0; transform: translateY(2.5rem); }
     </style>
 </head>
 <body class="dark antialiased">
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
-        <!-- Header Section -->
+        <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-400">
                 <span aria-hidden="true" class="mr-2">⚡</span>TITAN v17.1
             </h1>
-            <p class="mt-2 text-lg text-gray-400">An enhanced, single-file Windows performance and cleaning script. (Optimized by Gemini)</p>
+            <p class="mt-2 text-lg text-gray-400">Windows Performance Optimizer (Gemini Optimized)</p>
         </header>
 
         <main>
             <!-- Control Panel -->
             <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                <!-- Search Input -->
+                <!-- Search -->
                 <div class="relative flex-grow">
-                    <input type="text" id="searchBox" placeholder="Search in script (e.g., 'Optimize-Services')" class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-200 placeholder-gray-500">
-                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" id="searchBox" aria-label="Search script content" placeholder="Search (e.g., 'Optimize-Services')..." class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-200 placeholder-gray-500 transition-colors">
+                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
-                <!-- Action Buttons -->
+                
+                <!-- Buttons -->
                 <div class="flex items-center justify-center gap-2">
-                    <button id="copyBtn" title="Copy Script" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 rounded-lg font-semibold text-white transition-transform transform hover:scale-105">Copy</button>
-                    <button id="downloadBtn" title="Download Script" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105">Download</button>
-                    <button id="themeToggle" title="Toggle Theme" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105">🌓</button>
+                    <button id="copyBtn" aria-label="Copy script to clipboard" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 rounded-lg font-semibold text-white transition-transform transform hover:scale-105 active:scale-95">Copy</button>
+                    <button id="downloadBtn" aria-label="Download script file" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105 active:scale-95">Download</button>
+                    <button id="themeToggle" aria-label="Toggle dark/light mode" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105 active:scale-95">🌓</button>
                 </div>
             </div>
 
@@ -124,43 +102,44 @@
             <div class="code-block rounded-lg shadow-2xl overflow-hidden">
                 <div class="px-4 py-2 bg-gray-900/50 border-b border-gray-700 flex justify-between items-center">
                     <span class="text-sm font-medium text-gray-400">TITAN_v17.1_Optimizer_Gemini.ps1</span>
-                    <span id="line-count" class="text-sm text-gray-500"></span>
+                    <span id="line-count" class="text-sm text-gray-500">Loading...</span>
                 </div>
-                <pre class="overflow-auto p-4 text-sm" style="max-height: 60vh;"><code id="scriptContent" class="language-powershell"></code></pre>
+                <!-- OPTIMIZATION: Removed inline style for class-based height control if needed, kept max-height for UX -->
+                <pre class="overflow-auto p-4 text-sm scroll-smooth" style="max-height: 60vh;"><code id="scriptContent" class="language-powershell"></code></pre>
             </div>
         </main>
         
-        <!-- Footer -->
         <footer class="text-center mt-8 text-sm text-gray-500">
-            <p>Designed for Windows 10/11. Run as Administrator for full optimization.</p>
+            <p>Designed for Windows 10/11. Run as Administrator.</p>
         </footer>
     </div>
     
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300">
+    <div id="toast" role="alert" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300 pointer-events-none">
         Message
     </div>
 
-    <!-- Prism.js for Syntax Highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+    <!-- OPTIMIZATION: Deferred loading of Syntax Highlighting to unblock initial render -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js" defer></script>
 
     <script>
-        // ==========================================================================
-        //  JavaScript Logic - TITAN v17.1 UI
-        // ==========================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Elements ---
-            const themeToggle = document.getElementById('themeToggle');
-            const scriptContentEl = document.getElementById('scriptContent');
-            const searchBox = document.getElementById('searchBox');
-            const copyBtn = document.getElementById('copyBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const toast = document.getElementById('toast');
-            const lineCountEl = document.getElementById('line-count');
+            // --- DOM Elements Cache ---
+            const els = {
+                themeToggle: document.getElementById('themeToggle'),
+                scriptContent: document.getElementById('scriptContent'),
+                searchBox: document.getElementById('searchBox'),
+                copyBtn: document.getElementById('copyBtn'),
+                downloadBtn: document.getElementById('downloadBtn'),
+                toast: document.getElementById('toast'),
+                lineCount: document.getElementById('line-count')
+            };
 
-            // --- The PowerShell script content (Fully translated and enhanced by Gemini) ---
+            // --- Configuration ---
+            const SCRIPT_FILENAME = 'TITAN_v17.1_Optimizer_Gemini.ps1';
+            
+            // --- The PowerShell script content ---
             const scriptContentText = `# ===================================================================================================
 #   PowerScript Optimizer TITAN v17.1 - (Gemini Optimized Edition)
 #   Goal: Deep cleanup, maximum acceleration, privacy control, and system stability.
@@ -572,78 +551,60 @@ while ($true) {
 }
 #endregion`;
 
-            // --- State ---
-            let currentTheme = localStorage.getItem('theme') || 'dark';
-
-            // --- Functions ---
-            
-            /** Applies the current theme to the body. */
-            const applyTheme = () => {
-                document.body.className = '';
-                document.body.classList.add(currentTheme, 'antialiased');
-                themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌓';
-            };
-
-            /** Toggles the theme between light and dark. */
+            // --- Theme Management ---
             const toggleTheme = () => {
-                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                localStorage.setItem('theme', currentTheme);
-                applyTheme();
-                showToast(`Switched to ${currentTheme} mode`);
+                const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.body.classList.replace(currentTheme, newTheme);
+                els.themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌓';
+                localStorage.setItem('theme', newTheme);
+                showToast(`Switched to ${newTheme} mode`);
             };
 
-            /** Displays a toast notification. */
+            const initTheme = () => {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                document.body.classList.add(savedTheme);
+                if(savedTheme === 'light') document.body.classList.remove('dark');
+                els.themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌓';
+            };
+
+            // --- Toast Logic ---
             const showToast = (message, type = 'success') => {
-                toast.textContent = message;
-                toast.className = `fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300`;
-                toast.classList.add(type === 'success' ? 'bg-green-500' : 'bg-red-500');
+                els.toast.textContent = message;
+                els.toast.className = `fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg transition-all duration-300 pointer-events-none`;
+                els.toast.classList.add(type === 'success' ? 'bg-green-500' : 'bg-red-500', 'toast-enter');
                 
-                // Animate in
+                // Reset after delay
                 setTimeout(() => {
-                    toast.classList.remove('opacity-0', 'translate-y-10');
-                }, 10);
-                
-                // Animate out
-                setTimeout(() => {
-                    toast.classList.add('opacity-0', 'translate-y-10');
+                    els.toast.classList.remove('toast-enter');
+                    els.toast.classList.add('toast-exit');
                 }, 3000);
             };
 
-            /** Copies the script content to the clipboard. */
-            const copyScript = () => {
-                // Fallback method using a temporary textarea
-                const textArea = document.createElement('textarea');
-                textArea.value = scriptContentText;
-                textArea.style.position = 'fixed';
-                textArea.style.top = '-9999px';
-                textArea.style.left = '-9999px';
-
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-
+            // --- File Actions ---
+            const copyScript = async () => {
                 try {
-                    const successful = document.execCommand('copy');
-                    if (successful) {
-                        showToast('✅ Script copied to clipboard!');
-                    } else {
-                        showToast('❌ Failed to copy script.', 'error');
-                    }
+                    await navigator.clipboard.writeText(scriptContentText);
+                    showToast('✅ Script copied to clipboard!');
                 } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                    showToast('❌ Failed to copy script.', 'error');
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = scriptContentText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showToast('✅ Script copied to clipboard!');
                 }
-
-                document.body.removeChild(textArea);
             };
-            
-            /** Downloads the script as a .ps1 file. */
+
             const downloadScript = () => {
                 const blob = new Blob([scriptContentText], { type: 'text/plain' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'TITAN_v17.1_Optimizer_Gemini.ps1';
+                a.download = SCRIPT_FILENAME;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -651,55 +612,67 @@ while ($true) {
                 showToast('⬇️ Script download started.');
             };
 
-            /** Initializes and highlights the script content. */
-            const renderScript = () => {
-                scriptContentEl.textContent = scriptContentText;
-                Prism.highlightElement(scriptContentEl);
-                const lineCount = scriptContentText.split('\n').length;
-                lineCountEl.textContent = `${lineCount} lines`;
+            // --- Rendering & Search ---
+            const renderScript = (content = scriptContentText) => {
+                els.scriptContent.textContent = content;
+                els.lineCount.textContent = `${content.split('\n').length} lines`;
+                // Check if Prism is loaded (since it's deferred)
+                if (window.Prism) {
+                    Prism.highlightElement(els.scriptContent);
+                }
             };
 
-            /** Handles the search functionality. */
-            const handleSearch = () => {
-                const query = searchBox.value.toLowerCase();
-                renderScript(); // Reset highlights
+            // OPTIMIZATION: Debounce function to prevent lag on every keystroke
+            const debounce = (func, wait) => {
+                let timeout;
+                return function(...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            };
 
+            const handleSearch = debounce(() => {
+                const query = els.searchBox.value.toLowerCase();
+                
                 if (query.length < 3) {
+                    renderScript(); // Reset if query too short
                     return;
                 }
 
-                const lines = scriptContentEl.innerHTML.split('\n');
-                let firstMatch = null;
-                const highlightedLines = lines.map((line, index) => {
+                const lines = scriptContentText.split('\n');
+                let firstMatch = false;
+
+                const highlightedContent = lines.map((line) => {
                     if (line.toLowerCase().includes(query)) {
-                        if (!firstMatch) firstMatch = index;
-                        // Use a regex to wrap the match in a mark tag for styling
+                        // Mark the match found
+                        firstMatch = true; 
+                        
+                        // Wrap the specific matched text with regex to preserve case
                         const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-                        const highlightedLine = line.replace(regex, `<mark class="bg-sky-500/30 px-1 rounded">\$1</mark>`);
-                        return `<span class="highlighted-line">${highlightedLine}</span>`;
+                        const highlightedText = line.replace(regex, `<mark class="bg-sky-500/30 px-1 rounded text-white">\$1</mark>`);
+                        
+                        return `<span class="highlighted-line">${highlightedText}</span>`;
                     }
                     return line;
                 }).join('\n');
 
-                scriptContentEl.innerHTML = highlightedLines;
+                els.scriptContent.innerHTML = highlightedContent;
                 
-                // Scroll to the first match
-                if (firstMatch !== null) {
-                    const firstMatchElement = scriptContentEl.querySelector('.highlighted-line');
-                    if (firstMatchElement) {
-                        firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
+                // Scroll to first match
+                const firstMatchEl = els.scriptContent.querySelector('.highlighted-line');
+                if (firstMatchEl) {
+                    firstMatchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-            };
+            }, 300); // 300ms delay
 
             // --- Event Listeners ---
-            themeToggle.addEventListener('click', toggleTheme);
-            copyBtn.addEventListener('click', copyScript);
-            downloadBtn.addEventListener('click', downloadScript);
-            searchBox.addEventListener('input', handleSearch);
+            els.themeToggle.addEventListener('click', toggleTheme);
+            els.copyBtn.addEventListener('click', copyScript);
+            els.downloadBtn.addEventListener('click', downloadScript);
+            els.searchBox.addEventListener('input', handleSearch);
 
-            // --- Initialization ---
-            applyTheme();
+            // --- Init ---
+            initTheme();
             renderScript();
         });
     </script>
