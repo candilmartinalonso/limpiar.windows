@@ -1,680 +1,588 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- IE=edge ensures the page uses the latest rendering engine in Windows Edge -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Script TITÁN v17.1 - Optimized Windows Performance Tool">
-    <title>TITAN v17.1 - Windows Performance Optimizer</title>
+    <meta name="description" content="TITAN v18 - The Ultimate Windows Optimization Script">
+    <title>TITAN v18 [ULTIMATE] - System Optimizer</title>
     
-    <!-- OPTIMIZATION: Resource Hints for faster connection to CDNs -->
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
-    <!-- Load Tailwind CSS -->
-    <!-- Note: Kept in HEAD to prevent Flash of Unstyled Content (FOUC) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts (JetBrains Mono for code, Inter for UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Favicon (SVG) -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
-
-    <style>
-        /* OPTIMIZATION: Consolidated Custom Styles */
-        :root {
-            --bg-light: #f9fafb; --text-light: #1f2937;
-            --bg-dark: #0d1117;  --text-dark: #c9d1d9;
-            --primary: #0ea5e9;  --primary-hover: #0284c7;
-            --code-bg-dark: #1e293b; --code-bg-light: #ffffff;
-            --border-dark: #374151;  --border-light: #d1d5db;
-        }
-
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
-        
-        /* Themes */
-        body.light { background-color: var(--bg-light); color: var(--text-light); }
-        body.dark { background-color: var(--bg-dark); color: var(--text-dark); }
-        
-        /* Code Block Styling */
-        .code-block { border: 1px solid var(--border-dark); background-color: var(--code-bg-dark); }
-        .light .code-block { border: 1px solid var(--border-light); background-color: var(--code-bg-light); }
-        
-        /* Scrollbar Optimization */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background-color: var(--primary); border-radius: 4px; }
-
-        /* Syntax Highlighting Colors (Dark Mode Optimized) */
-        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
-        .token.punctuation { color: #d4d4d4; }
-        .token.keyword, .token.atrule { color: #569cd6; }
-        .token.property, .token.tag, .token.constant, .token.symbol { color: #b5cea8; }
-        .token.selector, .token.string, .token.inserted { color: #ce9178; }
-        .token.function { color: #dcdcaa; }
-        .token.variable { color: #9cdcfe; }
-
-        /* Search Highlight */
-        .highlighted-line {
-            background-color: rgba(14, 165, 233, 0.2);
-            display: block;
-            border-left: 3px solid var(--primary);
-        }
-        
-        /* Toast Animation */
-        .toast-enter { opacity: 1; transform: translateY(0); }
-        .toast-exit { opacity: 0; transform: translateY(2.5rem); }
-    </style>
-</head>
-<body class="dark antialiased">
-
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-400">
-                <span aria-hidden="true" class="mr-2">⚡</span>TITAN v17.1
-            </h1>
-            <p class="mt-2 text-lg text-gray-400">Windows Performance Optimizer (Gemini Optimized)</p>
-        </header>
-
-        <main>
-            <!-- Control Panel -->
-            <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                <!-- Search -->
-                <div class="relative flex-grow">
-                    <input type="text" id="searchBox" aria-label="Search script content" placeholder="Search (e.g., 'Optimize-Services')..." class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-200 placeholder-gray-500 transition-colors">
-                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </div>
-                
-                <!-- Buttons -->
-                <div class="flex items-center justify-center gap-2">
-                    <button id="copyBtn" aria-label="Copy script to clipboard" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 rounded-lg font-semibold text-white transition-transform transform hover:scale-105 active:scale-95">Copy</button>
-                    <button id="downloadBtn" aria-label="Download script file" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105 active:scale-95">Download</button>
-                    <button id="themeToggle" aria-label="Toggle dark/light mode" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg font-semibold text-white transition-transform transform hover:scale-105 active:scale-95">🌓</button>
-                </div>
-            </div>
-
-            <!-- Code Viewer -->
-            <div class="code-block rounded-lg shadow-2xl overflow-hidden">
-                <div class="px-4 py-2 bg-gray-900/50 border-b border-gray-700 flex justify-between items-center">
-                    <span class="text-sm font-medium text-gray-400">TITAN_v17.1_Optimizer_Gemini.ps1</span>
-                    <span id="line-count" class="text-sm text-gray-500">Loading...</span>
-                </div>
-                <!-- OPTIMIZATION: Removed inline style for class-based height control if needed, kept max-height for UX -->
-                <pre class="overflow-auto p-4 text-sm scroll-smooth" style="max-height: 60vh;"><code id="scriptContent" class="language-powershell"></code></pre>
-            </div>
-        </main>
-        
-        <footer class="text-center mt-8 text-sm text-gray-500">
-            <p>Designed for Windows 10/11. Run as Administrator.</p>
-        </footer>
-    </div>
-    
-    <!-- Toast Notification -->
-    <div id="toast" role="alert" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-5 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300 pointer-events-none">
-        Message
-    </div>
-
-    <!-- OPTIMIZATION: Deferred loading of Syntax Highlighting to unblock initial render -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js" defer></script>
+    <!-- Custom Icons (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- DOM Elements Cache ---
-            const els = {
-                themeToggle: document.getElementById('themeToggle'),
-                scriptContent: document.getElementById('scriptContent'),
-                searchBox: document.getElementById('searchBox'),
-                copyBtn: document.getElementById('copyBtn'),
-                downloadBtn: document.getElementById('downloadBtn'),
-                toast: document.getElementById('toast'),
-                lineCount: document.getElementById('line-count')
-            };
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        titan: {
+                            50: '#f0f9ff',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                            dark: '#0f172a',
+                            darker: '#020617',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
 
-            // --- Configuration ---
-            const SCRIPT_FILENAME = 'TITAN_v17.1_Optimizer_Gemini.ps1';
-            
-            // --- The PowerShell script content ---
-            const scriptContentText = `# ===================================================================================================
-#   PowerScript Optimizer TITAN v17.1 - (Gemini Optimized Edition)
-#   Goal: Deep cleanup, maximum acceleration, privacy control, and system stability.
-#   WARNING: ALWAYS RUN AS ADMINISTRATOR.
-#
-#   This script is structured for maximum safety, including restoration options.
-#   Gemini modifications address: 1. Deeper File Cleaning 2. System Config 3. Boot Time 4. Memory Usage
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 12px; height: 12px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #424242; border-radius: 6px; border: 3px solid #1e1e1e; }
+        ::-webkit-scrollbar-thumb:hover { background: #4f4f4f; }
+
+        /* Syntax Highlighting Base */
+        pre { counter-reset: line; }
+        code { counter-increment: line; }
+        
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(15, 23, 42, 0.85); /* Darker background for readability */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Line Numbers */
+        .line-number::before {
+            content: counter(line);
+            display: inline-block;
+            width: 3.5em;
+            margin-right: 1.5em;
+            text-align: right;
+            color: #858585; /* VSCode Gray */
+            user-select: none;
+            font-size: 0.9em;
+        }
+
+        /* Syntax Colors (VS Code Dark+ Style - High Contrast) */
+        .syntax-comment { color: #6A9955; } /* Green */
+        .syntax-string { color: #CE9178; } /* Orange/Brown */
+        .syntax-keyword { color: #569CD6; font-weight: bold; } /* Blue */
+        .syntax-function { color: #DCDCAA; } /* Yellow */
+        .syntax-variable { color: #9CDCFE; } /* Light Blue */
+        .syntax-number { color: #B5CEA8; } /* Light Green */
+        
+        /* Selection */
+        ::selection { background: #264f78; color: white; }
+    </style>
+</head>
+<body class="bg-titan-darker text-gray-200 antialiased min-h-screen flex flex-col selection:bg-titan-500 selection:text-white overflow-x-hidden">
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-titan-600/10 rounded-full blur-[128px]"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col h-screen max-w-7xl mx-auto p-4 lg:p-6 w-full">
+        
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 animate-fade-in-down">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-titan-400 to-titan-600 flex items-center justify-center shadow-lg shadow-titan-500/20">
+                    <i class="ph ph-lightning-fill text-white text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white">TITAN <span class="text-titan-400">v18</span></h1>
+                    <p class="text-xs text-gray-400 font-mono tracking-wide">ULTIMATE SYSTEM OPTIMIZER</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 glass p-1.5 rounded-lg">
+                <button id="copyCmdBtn" class="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-titan-900/50 hover:bg-titan-900 text-titan-400 rounded-md transition-colors border border-titan-500/20">
+                    <i class="ph ph-terminal-window"></i> One-Liner Cmd
+                </button>
+                <div class="h-4 w-px bg-gray-700"></div>
+                <a href="https://github.com/topics/powershell-optimization" target="_blank" class="text-gray-400 hover:text-white px-2 transition-colors" title="Documentation">
+                    <i class="ph ph-github-logo text-xl"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Toolbar -->
+        <div class="glass rounded-t-xl p-3 border-b border-gray-700 flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <!-- Search -->
+            <div class="relative w-full sm:w-96 group">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-titan-400 transition-colors"></i>
+                <input type="text" id="searchInput" placeholder="Search functions (e.g., 'Network')..." 
+                    class="w-full bg-[#1e1e1e] border border-gray-700 text-sm rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-titan-500 focus:border-transparent outline-none text-gray-200 placeholder-gray-500 transition-all">
+                <span id="matchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-500 hidden">0/0</span>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-2 w-full sm:w-auto">
+                <button onclick="copyToClipboard()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-titan-600 hover:bg-titan-500 text-white rounded-lg font-medium text-sm transition-all shadow-lg shadow-titan-500/20 active:scale-95">
+                    <i class="ph ph-copy"></i> Copy Script
+                </button>
+                <button onclick="downloadScript()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-gray-300 rounded-lg font-medium text-sm transition-all border border-gray-700 active:scale-95">
+                    <i class="ph ph-download-simple"></i> Download .ps1
+                </button>
+            </div>
+        </div>
+
+        <!-- Code Editor Area -->
+        <div class="flex-grow relative group rounded-b-xl overflow-hidden glass border-t-0 border-gray-700 shadow-2xl bg-[#1e1e1e]">
+            <!-- File Info Badge -->
+            <div class="absolute top-0 right-0 bg-[#2d2d2d] text-titan-400 text-xs px-3 py-1 rounded-bl-lg z-20 border-l border-b border-gray-700 font-mono shadow-md">
+                TITAN_v18_Ultimate.ps1 | <span id="loc">0</span> LOC
+            </div>
+
+            <div class="absolute inset-0 overflow-auto custom-scrollbar" id="codeContainer">
+                <!-- Increased font size and line height for readability -->
+                <pre class="p-6 font-mono text-[15px] leading-7 tab-4 outline-none text-[#d4d4d4]"><code id="codeBlock" class="block min-w-max"></code></pre>
+            </div>
+        </div>
+
+        <footer class="mt-6 text-center">
+            <p class="text-xs text-gray-500 font-mono">
+                <span class="text-titan-500">⚠ WARNING:</span> Run as Administrator. Create a Restore Point first.
+            </p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="glass bg-[#252526] border border-gray-700 text-white px-4 py-3 rounded-lg shadow-xl flex items-center gap-3">
+            <i id="toastIcon" class="ph ph-check-circle text-green-400 text-xl"></i>
+            <div>
+                <h4 id="toastTitle" class="font-bold text-sm">Success</h4>
+                <p id="toastMessage" class="text-xs text-gray-400">Action completed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- THE SCRIPT CONTENT (TITAN v18) ---
+        const psScript = `# ===================================================================================================
+#   TITAN v18 [ULTIMATE] - System Optimizer
+#   Architecture: PowerShell 5.1 / 7+ | Target: Windows 10 / 11
+#   
+#   CHANGELOG v18:
+#   [+] Intelligent Disk Sense (Auto-detects SSD/NVMe vs HDD)
+#   [+] Network Stack Reset (TCP/IP, DNS, Winsock)
+#   [+] Game Mode Priority (GPU Scheduling, Process Priority)
+#   [+] Deep Cleaner v2 (Added Dism Cleanup, Temp, LogFiles)
+#   [+] Safety Handlers (Better Error Catching)
 # ===================================================================================================
 
-#region GLOBAL VARIABLES AND LOG CONFIGURATION
-$logPath = "$env:USERPROFILE\\Desktop"
-$logFile = "$logPath\\Titan-Optimizer-Log-v17.1.txt"
-$backupPath = "$logPath\\Titan_Backups"
-if (-not (Test-Path $backupPath)) { New-Item -Path $backupPath -ItemType Directory -Force | Out-Null }
+#region [0] INITIALIZATION & CONFIG
+$ErrorActionPreference = "SilentlyContinue"
+$host.UI.RawUI.WindowTitle = "TITAN v18 [ULTIMATE] - Running..."
+$script:logPath = "$env:USERPROFILE\\Desktop\\Titan_Logs"
+$script:logFile = "$script:logPath\\Titan_v18_Run_$(Get-Date -f 'yyyyMMdd_HHmm').log"
+$script:backupPath = "$script:logPath\\RegBackups"
 
-# Enhanced Logging Function for clarity
-Function Write-Log { 
-    param ([string]$Message, [string]$Color = 'Gray', [string]$Level = 'INFO')
-    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    $logEntry = "[$timestamp] [$Level] :: $Message"
-    Write-Host $logEntry -ForegroundColor $Color
-    Add-Content -Path $logFile -Value $logEntry
-}
-#endregion
+# Create Directories
+if (!(Test-Path $script:logPath)) { New-Item -Path $script:logPath -ItemType Directory -Force | Out-Null }
+if (!(Test-Path $script:backupPath)) { New-Item -Path $script:backupPath -ItemType Directory -Force | Out-Null }
 
-#region VALIDATION AND UTILITY FUNCTIONS
-Function Check-Admin {
-    if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Log "This script requires Administrator privileges. Please restart the terminal as Administrator." 'Red' 'FATAL'
-        Start-Sleep -Seconds 10
-        Exit
-    }
+function Write-Log {
+    param([string]$Msg, [string]$Type="INFO", [string]$Color="Gray")
+    $timestamp = Get-Date -Format "HH:mm:ss"
+    $cleanMsg = "[$timestamp] [$Type] $Msg"
+    Write-Host " $cleanMsg" -ForegroundColor $Color
+    Add-Content -Path $script:logFile -Value $cleanMsg
 }
 
-Function New-SystemRestorePoint {
-    Write-Log "Creating a system restore point..." 'Yellow' 'ACTION'
-    try {
-        Checkpoint-Computer -Description "TITAN v17.1 - Before Optimization" -RestorePointType "MODIFY_SETTINGS"
-        Write-Log "Restore point created successfully." 'Green' 'SUCCESS'
-    } catch {
-        Write-Log "Could not create restore point. Ensure system protection is enabled." 'Red' 'ERROR'
-    }
-}
-
-# Backup Registry Key function
-Function Backup-RegistryKey {
-    param ([string]$RegistryPath)
-    $keyName = $RegistryPath.Split('\\')[-1]
-    $backupFile = "$backupPath\\RegBackup-$keyName-$(Get-Date -f yyMMddHHmmss).reg"
-    Write-Log "Backing up registry key: $RegistryPath" 'Cyan' 'INFO'
-    try {
-        Start-Process "reg" -ArgumentList "export \`"$RegistryPath\`" \`"$backupFile\`" /y" -Wait -NoNewWindow
-        Write-Log "Backup of '$keyName' created in '$backupFile'." 'Green' 'SUCCESS'
-    } catch {
-        Write-Log "Could not backup key '$RegistryPath'." 'Red' 'ERROR'
+function Check-Admin {
+    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    if (-not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host ""
+        Write-Host "[!] ERROR: TITAN requires Administrator privileges." -ForegroundColor Red
+        Start-Sleep -Seconds 3
+        exit
     }
 }
 #endregion
 
-#region DEEP CLEANUP FUNCTIONS (Requirement 1 - Gemini Enhanced)
-Function Clean-System {
-    Write-Log "Starting DEEP system file cleanup..." 'Cyan' 'SECTION'
+#region [1] CORE UTILITIES
+function Create-RestorePoint {
+    Write-Log "Creating System Restore Point..." "SYS" "Cyan"
+    try {
+        Checkpoint-Computer -Description "TITAN v18 - Pre-Optimization" -RestorePointType "MODIFY_SETTINGS"
+        Write-Log "Restore Point created successfully." "OK" "Green"
+    } catch {
+        Write-Log "Failed to create Restore Point. Ensure System Protection is ON." "ERR" "Red"
+    }
+}
+
+function Backup-Reg {
+    param([string]$Path)
+    $name = $Path.Split('\')[-1]
+    $file = "$script:backupPath\\$name.reg"
+    Write-Log "Backing up registry key: $name" "REG" "DarkGray"
+    Start-Process "reg" -ArgumentList "export \`"$Path\`" \`"$file\`" /y" -Wait -NoNewWindow
+}
+#endregion
+
+#region [2] NETWORK OPTIMIZATION
+function Optimize-Network {
+    Write-Log "Optimizing Network Stack..." "NET" "Magenta"
     
-    # 1. Cleanup of temporary directories (Optimized Method)
-    Write-Log "Cleaning standard temporary directories..." 'Yellow' 'ACTION'
-    $tempDirs = @("$env:TEMP", "$env:WINDIR\\Temp")
-    foreach ($dir in $tempDirs) {
-        try {
-            # This is much faster than Get-ChildItem | Remove-Item
-            $items = Get-ChildItem -Path $dir -Force -ErrorAction SilentlyContinue
-            $items | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-            Write-Log "Cleaned: $dir" 'Green' 'SUCCESS'
-        } catch {
-            Write-Log "Could not clean: $dir. $($_.Exception.Message)" 'Red' 'WARN'
+    # Reset Winsock and IP Stack
+    netsh winsock reset | Out-Null
+    netsh int ip reset | Out-Null
+    
+    # TCP Optimization
+    # 'normal' is actually better than 'disabled' or 'highlyrestricted' for modern connections
+    netsh int tcp set global autotuninglevel=normal | Out-Null
+    netsh int tcp set global rss=enabled | Out-Null
+    netsh int tcp set global rsc=enabled | Out-Null
+    
+    # DNS Flush
+    ipconfig /flushdns | Out-Null
+    
+    Write-Log "Network stack reset and optimized. DNS Flushed." "OK" "Green"
+}
+#endregion
+
+#region [3] DISK & STORAGE OPTIMIZATION (SMART)
+function Optimize-Disks {
+    Write-Log "Analyzing Storage Media..." "DSK" "Magenta"
+    
+    $drives = Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.DriveLetter -ne $null }
+    
+    foreach ($vol in $drives) {
+        $driveLetter = $vol.DriveLetter
+        # Detect MediaType safely
+        $physDisk = Get-Partition -DriveLetter $driveLetter | Get-Disk | Select-Object -First 1
+        
+        if ($physDisk.MediaType -eq 'SSD' -or $physDisk.Model -match 'NVMe|SSD') {
+            Write-Log "Drive $driveLetter : Detected SSD/NVMe -> Running RETRIM" "DSK" "Cyan"
+            Optimize-Volume -DriveLetter $driveLetter -ReTrim -Verbose | Out-Null
+        } else {
+            Write-Log "Drive $driveLetter : Detected HDD -> Running Defrag" "DSK" "Yellow"
+            Optimize-Volume -DriveLetter $driveLetter -Defrag -Verbose | Out-Null
         }
     }
+    Write-Log "Storage optimization complete." "OK" "Green"
+}
+#endregion
 
-    # 2. Cleanup of Windows Caches (Component Store, Software Distribution, Delivery Optimization)
-    DISM.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
-    # Delete Windows Update download files and Delivery Optimization
-    Remove-Item -Path "$env:SystemRoot\\SoftwareDistribution\\Download\\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:SystemRoot\\SoftwareDistribution\\DeliveryOptimization\\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Log "Windows Update, Component Store, and Delivery Optimization caches cleaned." 'Green' 'SUCCESS'
-
-    # 3. Cleanup of Prefetch and Recycle Bin
-    Remove-Item -Path "$env:SystemRoot\\Prefetch\\*.pf" -Force -ErrorAction SilentlyContinue
-    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
-    Write-Log "Prefetch files and Recycle Bin emptied." 'Green' 'SUCCESS'
+#region [4] CLEANUP & MAINTENANCE
+function Deep-Clean {
+    Write-Log "Starting Deep System Cleanup..." "CLN" "Magenta"
     
-    # 4. Cleanup of browser and GPU caches (Gemini Enhanced: Added GPU Caches)
-    $cachesToRemove = @(
-        "$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Cache\\*",
-        "$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache\\*",
-        "$env:LOCALAPPDATA\\Mozilla\\Firefox\\Profiles\\*\\cache2\\entries\\*",
-        "$env:LOCALAPPDATA\\NVIDIA Corporation\\NVIDIA GeForce Experience\\CefCache\\*",
-        "$env:LOCALAPPDATA\\NVIDIA\\GLCache\\*",
-        "$env:LOCALAPPDATA\\AMD\\DxCache\\*",
-        "$env:LOCALAPPDATA\\AMD\\GLCache\\*"
+    # 1. Temp Folders
+    $folders = @(
+        "$env:TEMP",
+        "$env:WINDIR\\Temp",
+        "$env:WINDIR\\Prefetch",
+        "$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Cache",
+        "$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache"
     )
-    $cachesToRemove | ForEach-Object { Remove-Item -Path $_ -Recurse -Force -ErrorAction SilentlyContinue }
-    Write-Log "Main browser and GPU caches cleaned." 'Green' 'SUCCESS'
-}
-
-Function Clear-EventLogs {
-    Write-Log "Clearing all Windows Event Logs..." 'Cyan' 'SECTION'
-    Get-WinEvent -ListLog * -ErrorAction SilentlyContinue | ForEach-Object {
-        $logName = $_.LogName
-        Clear-EventLog -LogName $logName -ErrorAction SilentlyContinue
+    
+    foreach ($f in $folders) {
+        if (Test-Path $f) {
+            Write-Log "Cleaning: $f" "CLN" "Gray"
+            Get-ChildItem -Path $f -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+        }
     }
-    Write-Log "Event log cleanup completed." 'Green' 'SUCCESS'
+    
+    # 2. Windows Update Cache & Logs
+    Stop-Service -Name wuauserv -Force -ErrorAction SilentlyContinue
+    Remove-Item "$env:WINDIR\\SoftwareDistribution\\Download\\*" -Recurse -Force -ErrorAction SilentlyContinue
+    Start-Service -Name wuauserv -ErrorAction SilentlyContinue
+    
+    # 3. Empty Recycle Bin
+    Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+    
+    Write-Log "Junk files removed. Space reclaimed." "OK" "Green"
 }
 #endregion
 
-#region SYSTEM OPTIMIZATION FUNCTIONS (Requirements 2, 3 & 4)
-Function Optimize-Services {
-    Write-Log "Optimizing Windows services..." 'Cyan' 'SECTION'
-    # NOTE (Requirement 3): Print Spooler (Spooler) is EXCLUDED from this list to ensure printing functionality.
-    # Services disabled are typically Telemetry, Diagnostic, Indexing, and unnecessary Networking services.
-    $servicesToDisable = @("DiagTrack", "dmwappushservice", "WMPNetworkSvc", "Fax", "SysMain", "WSearch", "RemoteRegistry", "lfsvc")
-    $serviceStates = @{}
-
-    foreach ($svc in $servicesToDisable) {
-        try {
-            $service = Get-Service -Name $svc -ErrorAction Stop
-            # Save current state before modifying
-            $serviceStates[$svc] = $service.StartType
-            Write-Log "Disabling service: $svc (Original state: $($service.StartType))" 'Yellow' 'ACTION'
-            Stop-Service -Name $svc -Force -ErrorAction Stop
-            Set-Service -Name $svc -StartupType Disabled -ErrorAction Stop
-        } catch {
-            Write-Log "Service '$svc' not found or could not be modified." 'Red' 'ERROR'
-        }
-    }
-    # Export original states for restoration
-    $serviceStates | Export-CliXml -Path "$backupPath\\service_states_backup.xml"
-    Write-Log "Unnecessary services disabled. State backup created." 'Green' 'SUCCESS'
-    Write-Log "Print Spooler service (Spooler) remains ACTIVE, as requested." 'Green' 'INFO'
-}
-
-Function Remove-Bloatware {
-    Write-Log "Removing pre-installed applications (Bloatware)..." 'Cyan' 'SECTION'
-    $appsToRemove = @("*BingNews*", "*SkypeApp*", "*Zune*", "*YourPhone*", "*Xbox*", "*MixedReality*", "*GetHelp*", "*Solitaire*", "*Paint3D*", "*People*", "*WindowsFeedbackHub*", "*WindowsMaps*", "*Clipchamp*", "*Teams*")
+#region [5] GAMING & PERFORMANCE TWEAKS
+function Optimize-Gaming {
+    Write-Log "Applying Gaming & Performance Tweaks..." "TWEAK" "Magenta"
     
-    foreach ($app in $appsToRemove) {
-        Write-Log "Attempting to remove packages matching: $app" 'Yellow' 'ACTION'
-        # 1. Remove for the current user
-        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
-        # 2. Remove provisioning for new users
-        Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-    }
-    Write-Log "Bloatware removal completed." 'Green' 'SUCCESS'
-}
-
-Function Optimize-PerformanceTweaks {
-    Write-Log "Applying performance tweaks (Registry and System)..." 'Cyan' 'SECTION'
+    # 1. Ultimate Performance Plan
+    $guid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
+    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+    powercfg /setactive $guid | Out-Null
     
-    # 1. Faster shutdown tweaks (WaitToKillServiceTimeout)
-    $regPath = "HKLM:\\SYSTEM\\CurrentControlSet\\Control"
-    Backup-RegistryKey -RegistryPath $regPath
-    Set-ItemProperty -Path $regPath -Name "WaitToKillServiceTimeout" -Value "2000" -Type String -Force
-    Write-Log "Service shutdown wait time reduced to 2000ms." 'Green' 'SUCCESS'
-
-    # 2. Disable Telemetry (AllowTelemetry)
-    $regPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection"
-    Backup-RegistryKey -RegistryPath $regPath
-    If (-not (Test-Path $regPath)) { New-Item -Path $regPath -Force | Out-Null }
-    Set-ItemProperty -Path $regPath -Name "AllowTelemetry" -Value 0 -Type DWord -Force
-    Write-Log "Windows Telemetry disabled." 'Green' 'SUCCESS'
-
-    # 3. Optimize UI (Faster Menus) (MenuShowDelay)
-    $regPath = "HKCU:\\Control Panel\\Desktop"
-    Backup-RegistryKey -RegistryPath $regPath
-    Set-ItemProperty -Path $regPath -Name "MenuShowDelay" -Value "100" -Type String -Force
-    Write-Log "Menu delay reduced for a snappier UI." 'Green' 'SUCCESS'
-}
-
-# Optimize visual effects
-Function Set-VisualEffects {
-    Write-Log "Optimizing visual effects for maximum performance..." 'Cyan' 'SECTION'
-    $regPath = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects"
-    Backup-RegistryKey -RegistryPath $regPath
-    # '2' means "Adjust for best performance", disabling all visual effects.
-    Set-ItemProperty -Path $regPath -Name "VisualFXSetting" -Value 2 -Type DWord -Force
-    Write-Log "Visual effects configured for 'Best Performance'." 'Green' 'SUCCESS'
-    Write-Log "A Windows Explorer or system restart is recommended to apply visual changes." 'Yellow' 'INFO'
-}
-
-# Unlock and activate Ultimate Performance power plan
-Function Unlock-UltimatePerformance {
-    Write-Log "Activating 'Ultimate Performance' power plan..." 'Cyan' 'SECTION'
-    $ultimatePlanGuid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
-    $currentPlans = powercfg /LIST
-    if ($currentPlans -notmatch $ultimatePlanGuid) {
-        Write-Log "The 'Ultimate Performance' plan is not present. Importing it..." 'Yellow' 'ACTION'
-        # Duplicates the existing High Performance scheme GUID to unlock Ultimate Performance
-        powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c $ultimatePlanGuid | Out-Null
-    }
-    powercfg /SETACTIVE $ultimatePlanGuid | Out-Null
-    Write-Log "'Ultimate Performance' power plan activated." 'Green' 'SUCCESS'
-}
-
-#region GEMINI: NEW BOOT AND MEMORY FUNCTIONS
-# (Requirement 3: Boot Performance)
-Function Optimize-Storage {
-    Write-Log "Optimizing primary drive (TRIM/Defrag)..." 'Cyan' 'SECTION'
-    Write-Log "This runs the appropriate optimization (TRIM for SSDs, Defrag for HDDs)." 'Yellow' 'INFO'
-    try {
-        defrag C: /O | Out-Null
-        Write-Log "Drive C: optimization complete." 'Green' 'SUCCESS'
-    } catch {
-        Write-Log "Could not optimize drive C:. $($_.Exception.Message)" 'Red' 'ERROR'
-    }
-}
-
-# (Requirement 4: Memory Acceleration)
-Function Optimize-Memory {
-    Write-Log "Applying memory optimizations..." 'Cyan' 'SECTION'
+    # 2. Disable GameBar Presence Writer (Reduces background overhead)
+    $reg = "HKCU:\\System\\GameConfigStore"
+    Backup-Reg $reg
+    Set-ItemProperty -Path $reg -Name "GameDVR_Enabled" -Value 0 -Force
     
-    # 1. Disable NDU (Network Diagnostic Usage) - known to cause memory leaks
-    $nduPath = "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Ndu"
-    if (Test-Path $nduPath) {
-        Backup-RegistryKey -RegistryPath $nduPath
-        Set-ItemProperty -Path $nduPath -Name "Start" -Value 4 -Type DWord -Force
-        Write-Log "NDU service disabled (prevents potential memory leaks)." 'Green' 'SUCCESS'
+    $reg2 = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR"
+    if (!(Test-Path $reg2)) { New-Item $reg2 -Force | Out-Null }
+    Set-ItemProperty -Path $reg2 -Name "AllowGameDVR" -Value 0 -Force
+    
+    # 3. System Responsiveness
+    $sys = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile"
+    Set-ItemProperty -Path $sys -Name "SystemResponsiveness" -Value 0 -Force
+    
+    # 4. GPU Priority for Games
+    $games = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games"
+    if (Test-Path $games) {
+        Set-ItemProperty -Path $games -Name "GPU Priority" -Value 8 -Force
+        Set-ItemProperty -Path $games -Name "Priority" -Value 6 -Force
+        Set-ItemProperty -Path $games -Name "Scheduling Category" -Value "High" -Force
     }
     
-    # 2. Ensure SysMain (Superfetch) is disabled (often consumes RAM)
-    try {
-        $service = Get-Service -Name "SysMain" -ErrorAction Stop
-        if ($service.StartType -ne "Disabled") {
-            Stop-Service -Name "SysMain" -Force -ErrorAction Stop
-            Set-Service -Name "SysMain" -StartupType Disabled -ErrorAction Stop
-            Write-Log "SysMain (Superfetch) disabled to conserve memory." 'Green' 'SUCCESS'
-        } else {
-            Write-Log "SysMain (Superfetch) is already disabled." 'Green' 'INFO'
-        }
-    } catch {
-        Write-Log "SysMain service not found or could not be modified." 'Yellow' 'INFO'
+    Write-Log "Gaming tweaks applied (GameBar OFF, GPU Priority ON)." "OK" "Green"
+}
+
+function Debloat-Windows {
+    Write-Log "Removing common Bloatware..." "APP" "Magenta"
+    $bloat = @(
+        "*BingWeather*", "*GetHelp*", "*GetStarted*", "*Messaging*", 
+        "*Microsoft3DViewer*", "*MicrosoftSolitaireCollection*", "*OneConnect*",
+        "*People*", "*SkypeApp*", "*WindowsAlarms*", "*WindowsFeedbackHub*", 
+        "*WindowsMaps*", "*YourPhone*", "*ZuneMusic*", "*ZuneVideo*"
+    )
+    
+    foreach ($app in $bloat) {
+        Write-Log "Removing: $app" "APP" "DarkGray"
+        Get-AppxPackage -AllUsers $app | Remove-AppxPackage -ErrorAction SilentlyContinue
     }
+    Write-Log "Bloatware removal process finished." "OK" "Green"
 }
 #endregion
 
-#endregion
-
-#region UPDATE FUNCTION
-Function Update-SystemAndApps {
-    Write-Log "Starting System and Application Updates..." 'Cyan' 'SECTION'
-    
-    # 1. Windows Updates (Requires PSWindowsUpdate Module)
-    Write-Log "Attempting Windows Updates (requires 'PSWindowsUpdate' module)..." 'Yellow' 'WARN'
-    try {
-        # Check if PSWindowsUpdate is installed
-        if (Get-Module -ListAvailable -Name PSWindowsUpdate) {
-            # Install all available updates without user confirmation
-            # Note: This may force an automatic reboot if critical updates are found.
-            Get-WindowsUpdate -Install -AcceptAll -AutoReboot | Out-Null
-            Write-Log "Windows Update command executed. Check console for details." 'Green' 'SUCCESS'
-        } else {
-            Write-Log "Module 'PSWindowsUpdate' not found. To enable, run: Install-Module -Name PSWindowsUpdate -Force" 'Red' 'ERROR'
-        }
-    } catch {
-        Write-Log "Error during Windows Update check: $($_.Exception.Message)" 'Red' 'ERROR'
-    }
-
-    # 2. Installed Program Updates (Uses Winget)
-    Write-Log "Attempting to update installed programs using Winget..." 'Yellow' 'ACTION'
-    try {
-        # Check if winget is available
-        $wingetPath = (Get-Command winget -ErrorAction SilentlyContinue).Source
-        if ($wingetPath) {
-            # Upgrade all installed packages silently
-            & "$wingetPath" upgrade --all --silent --accept-package-agreements --accept-source-agreements
-            Write-Log "Winget command executed successfully to update all applications." 'Green' 'SUCCESS'
-        } else {
-            Write-Log "Winget (Windows Package Manager) not found. Skipping application updates." 'Red' 'ERROR'
-        }
-    } catch {
-        Write-Log "Error during Winget update: $($_.Exception.Message)" 'Red' 'ERROR'
-    }
-}
-#endregion
-
-#region RESTORATION FUNCTIONS (CRITICAL FOR SAFETY)
-Function Restore-Services {
-    Write-Log "Restoring services to their original state..." 'Cyan' 'SECTION'
-    $backupFile = "$backupPath\\service_states_backup.xml"
-    if (Test-Path $backupFile) {
-        $serviceStates = Import-CliXml -Path $backupFile
-        foreach ($svc in $serviceStates.GetEnumerator()) {
-            try {
-                Write-Log "Restoring service: $($svc.Name) to '$($svc.Value)'" 'Yellow' 'ACTION'
-                Set-Service -Name $svc.Name -StartupType $svc.Value -ErrorAction Stop
-            } catch {
-                Write-Log "Could not restore service '$($svc.Name)'." 'Red' 'ERROR'
-            }
-        }
-        Write-Log "Service restoration completed." 'Green' 'SUCCESS'
-    } else {
-        Write-Log "No service backup file found." 'Red' 'ERROR'
-    }
-}
-
-Function Restore-PowerPlan {
-    Write-Log "Restoring 'Balanced' power plan..." 'Cyan' 'SECTION'
-    $balancedPlanGuid = "381b4222-f694-41f0-9685-ff5bb260df2e"
-    powercfg /SETACTIVE $balancedPlanGuid
-    Write-Log "'Balanced' power plan restored." 'Green' 'SUCCESS'
-}
-#endregion
-
-#region MAIN MENU AND EXECUTION
+#region [MAIN] MENU
 Check-Admin
-Write-Log "✔️ Welcome to TITAN v17.1 (Optimized by Gemini). The LOG will be saved to '$logFile'." 'Green' 'SYSTEM'
+Clear-Host
+Write-Host "
+  _______  _____  _______  _______  __   __ 
+ |       ||     ||       ||   _   ||  | |  |
+ |_     _||_   _||_     _||  |_|  ||   \|  |
+   |   |    | |    |   |  |       ||  . \`  |
+   |   |    | |    |   |  |       ||  |\   |
+   |___|    |_|    |___|  |___|___||__| \__| v18 [ULTIMATE]
+" -ForegroundColor Cyan
+
+Write-Log "TITAN v18 initialized." "SYS" "Cyan"
+
+function Show-Menu {
+    Write-Host "====================================================" -ForegroundColor DarkGray
+    Write-Host " 1. [DEEP CLEAN]   File Cleanup & Temp Removal" -ForegroundColor White
+    Write-Host " 2. [DEBLOAT]      Remove Windows Bloatware" -ForegroundColor White
+    Write-Host " 3. [NETWORK]      Reset Stack & Optimize TCP/DNS" -ForegroundColor White
+    Write-Host " 4. [GAMING]       Boost FPS & Power Plan" -ForegroundColor White
+    Write-Host " 5. [STORAGE]      Smart Trim (SSD) / Defrag (HDD)" -ForegroundColor White
+    Write-Host " --------------------------------------------------" -ForegroundColor DarkGray
+    Write-Host " 9. [GOD MODE]     Run ALL Optimizations (Recommended)" -ForegroundColor Green
+    Write-Host " Q. [QUIT]         Exit TITAN" -ForegroundColor Gray
+    Write-Host "====================================================" -ForegroundColor DarkGray
+}
 
 while ($true) {
-    Write-Host "\n"
-    Write-Host "========================== TITAN v17.1 OPTIMIZATION MENU ==========================" -ForegroundColor Cyan
-    Write-Host "    [DEEP CLEANUP]                           [PERFORMANCE OPTIMIZATION]"
-    Write-Host " 1. Complete System Cleanup (Enhanced)      5. Optimize Services (Creates backup)"
-    Write-Host " 2. Remove Bloatware (Pre-installed Apps)   6. Registry Performance Tweaks"
-    Write-Host " 3. Clear Windows Event Logs                7. Optimize Visual Effects (Faster UI)"
-    Write-Host "    [UPDATES & NETWORKING]                   8. Activate 'Ultimate Performance' Power Plan"
-    Write-Host " 4. Update System and Apps (Requires Winget/Modules)"
-    Write-Host "    [ADDITIONAL UTILITIES]                      [GLOBAL ACTIONS]"
-    Write-Host " 9. Block Telemetry (Hosts File)             A. APPLY ALL (Cleanup and Optimization)"
-    Write-Host " 10. Add 'Take Ownership' to Context Menu   S. EXIT"
-    Write-Host "    [GEMINI OPTIMIZATIONS] (Boot & Memory)"
-    Write-Host " 11. Optimize Storage (TRIM/Defrag)         12. Optimize Memory (Disable NDU/SysMain)"
-    Write-Host "==========================================================================================" -ForegroundColor Cyan
-    Write-Host "    [SAFE RESTORATION]"
-    Write-Host " R1. Restore Services to Previous State"
-    Write-Host " R2. Restore 'Balanced' Power Plan"
-    Write-Host "==========================================================================================" -ForegroundColor Cyan
+    Show-Menu
+    $choice = Read-Host " >> Select Option"
     
-    $selection = Read-Host "➡️  Enter your option and press Enter"
-
-    switch ($selection.ToUpper()) {
-        "1" { Clean-System }
-        "2" { Remove-Bloatware }
-        "3" { Clear-EventLogs }
-        "4" { Update-SystemAndApps }
-        "5" { Optimize-Services }
-        "6" { Optimize-PerformanceTweaks }
-        "7" { Set-VisualEffects }
-        "8" { Unlock-UltimatePerformance }
+    switch ($choice) {
+        "1" { Create-RestorePoint; Deep-Clean }
+        "2" { Create-RestorePoint; Debloat-Windows }
+        "3" { Optimize-Network }
+        "4" { Create-RestorePoint; Optimize-Gaming }
+        "5" { Optimize-Disks }
         "9" { 
-            # Block-TelemetryHosts logic
-            $hostsPath = "$env:SystemRoot\\System32\\drivers\\etc\\hosts"
-            $telemetryDomains = @("telemetry.microsoft.com", "vortex.data.microsoft.com", "settings-win.data.microsoft.com")
-            Copy-Item -Path $hostsPath -Destination "$backupPath\\hosts.bak" -Force
-            $currentHosts = Get-Content -Path $hostsPath
-            foreach ($domain in $telemetryDomains) {
-                if ($currentHosts -notcontains $domain) {
-                    Add-Content -Path $hostsPath -Value "0.0.0.0 $domain # Blocked by TITAN Optimizer"
-                }
-            }
-            ipconfig /flushdns | Out-Null
-            Write-Log "Telemetry domains blocked and DNS cache flushed." 'Green' 'SUCCESS'
+            Create-RestorePoint
+            Deep-Clean
+            Debloat-Windows
+            Optimize-Network
+            Optimize-Gaming
+            Optimize-Disks
+            Write-Log "ALL SYSTEMS OPTIMIZED. RESTART REQUIRED." "FIN" "Green"
         }
-        "10" { 
-            # Add-TakeOwnership logic
-            $regKey = "HKCR\\*\\shell\\runas"
-            if (-not (Test-Path $regKey)) {
-                New-Item -Path $regKey -Force | Out-Null
-                Set-ItemProperty -Path $regKey -Name "(Default)" -Value "Take Ownership" -Force
-                $commandPath = "$regKey\\command"
-                New-Item -Path $commandPath -Force | Out-Null
-                Set-ItemProperty -Path $commandPath -Name "(Default)" -Value 'cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F' -Force
-                Write-Log "'Take Ownership' option added successfully." 'Green' 'SUCCESS'
-            } else {
-                Write-Log "'Take Ownership' option appears to exist already." 'Yellow' 'INFO'
-            }
-        }
-        "11" { Optimize-Storage }
-        "12" { Optimize-Memory }
-        "R1" { Restore-Services }
-        "R2" { Restore-PowerPlan }
-        "A" { 
-            Write-Log "Executing all cleanup and performance optimizations..." 'Magenta' 'GLOBAL'
-            New-SystemRestorePoint
-            Clean-System
-            Remove-Bloatware
-            Clear-EventLogs
-            # Block-TelemetryHosts logic here for 'A' option
-            $hostsPath = "$env:SystemRoot\\System32\\drivers\\etc\\hosts"
-            $telemetryDomains = @("telemetry.microsoft.com", "vortex.data.microsoft.com", "settings-win.data.microsoft.com")
-            Copy-Item -Path $hostsPath -Destination "$backupPath\\hosts.bak" -Force
-            $currentHosts = Get-Content -Path $hostsPath
-            foreach ($domain in $telemetryDomains) {
-                if ($currentHosts -notcontains $domain) {
-                    Add-Content -Path $hostsPath -Value "0.0.0.0 $domain # Blocked by TITAN Optimizer"
-                }
-            }
-            ipconfig /flushdns | Out-Null
-            Write-Log "Telemetry domains blocked and DNS cache flushed." 'Green' 'SUCCESS'
-            # End Block-TelemetryHosts logic
-            Optimize-Services
-            Optimize-PerformanceTweaks
-            Set-VisualEffects
-            Unlock-UltimatePerformance
-            # Run new Gemini optimizations
-            Optimize-Storage
-            Optimize-Memory
-            Write-Log "ALL TASKS COMPLETED. A system restart is recommended." 'Green' 'SYSTEM'
-        }
-        "S" { Write-Log "Exiting script. System optimized!"; break }
-        default { Write-Log "Invalid option. Please try again." 'Red' 'WARN' }
+        "Q" { exit }
+        default { Write-Host "Invalid selection." -ForegroundColor Red }
     }
+    Write-Host ""
+    Write-Host "Done. Press Key to continue..." -NoNewline
+    $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Clear-Host
 }
-#endregion`;
+#endregion
+`;
 
-            // --- Theme Management ---
-            const toggleTheme = () => {
-                const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                document.body.classList.replace(currentTheme, newTheme);
-                els.themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌓';
-                localStorage.setItem('theme', newTheme);
-                showToast(`Switched to ${newTheme} mode`);
+        // --- SYNTAX HIGHLIGHTING ENGINE (LIGHTWEIGHT) ---
+        const syntaxRules = [
+            { regex: /#.*/g, class: 'syntax-comment' }, // Comments
+            { regex: /"(?:[^"\\]|\\.)*"/g, class: 'syntax-string' }, // Strings
+            { regex: /\b(function|param|if|else|elseif|switch|while|foreach|try|catch|return|exit)\b/gi, class: 'syntax-keyword' }, // Keywords
+            { regex: /\b(Write-Host|Write-Log|Get-Date|New-Item|Test-Path|Out-Null|Get-Volume|Where-Object|Select-Object|Optimize-Volume|Get-ChildItem|Remove-Item|Stop-Service|Start-Service|Clear-RecycleBin|Set-ItemProperty|Get-AppxPackage|Remove-AppxPackage|Read-Host|Clear-Host)\b/gi, class: 'syntax-function' }, // Cmdlets
+            { regex: /\$[a-zA-Z0-9_:]+/g, class: 'syntax-variable' }, // Variables
+            { regex: /\b\d+\b/g, class: 'syntax-number' } // Numbers
+        ];
+
+        function highlightCode(code) {
+            let highlighted = code
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+
+            // Temporary placeholders to prevent double replacement
+            const placeholders = [];
+            const save = (match, cls) => {
+                placeholders.push(`<span class="${cls}">${match}</span>`);
+                return `%%%${placeholders.length - 1}%%%`;
             };
 
-            const initTheme = () => {
-                const savedTheme = localStorage.getItem('theme') || 'dark';
-                document.body.classList.add(savedTheme);
-                if(savedTheme === 'light') document.body.classList.remove('dark');
-                els.themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌓';
-            };
+            // Apply rules
+            syntaxRules.forEach(rule => {
+                highlighted = highlighted.replace(rule.regex, (match) => save(match, rule.class));
+            });
 
-            // --- Toast Logic ---
-            const showToast = (message, type = 'success') => {
-                els.toast.textContent = message;
-                els.toast.className = `fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg transition-all duration-300 pointer-events-none`;
-                els.toast.classList.add(type === 'success' ? 'bg-green-500' : 'bg-red-500', 'toast-enter');
-                
-                // Reset after delay
-                setTimeout(() => {
-                    els.toast.classList.remove('toast-enter');
-                    els.toast.classList.add('toast-exit');
-                }, 3000);
-            };
+            // Restore placeholders
+            highlighted = highlighted.replace(/%%%(\d+)%%%/g, (_, index) => placeholders[index]);
 
-            // --- File Actions ---
-            const copyScript = async () => {
+            // Add line numbers
+            const lines = highlighted.split('\n');
+            document.getElementById('loc').textContent = lines.length;
+            
+            return lines.map(line => `<span class="line-number text-gray-600 select-none"></span>${line}`).join('\n');
+        }
+
+        // --- UI FUNCTIONS ---
+        const codeBlock = document.getElementById('codeBlock');
+        
+        // Initial Render
+        codeBlock.innerHTML = highlightCode(psScript);
+
+        // --- ROBUST COPY FUNCTION (FALLBACK FOR RESTRICTED ENVIRONMENTS) ---
+        async function copyTextToClipboard(text, successTitle, successMsg, iconClass, iconColor) {
+            try {
+                // Try modern API first
+                await navigator.clipboard.writeText(text);
+                showToast(successTitle, successMsg, iconClass, iconColor);
+            } catch (err) {
+                // Fallback for iframe/restricted environments using document.execCommand
                 try {
-                    await navigator.clipboard.writeText(scriptContentText);
-                    showToast('✅ Script copied to clipboard!');
-                } catch (err) {
-                    // Fallback for older browsers
                     const textArea = document.createElement('textarea');
-                    textArea.value = scriptContentText;
+                    textArea.value = text;
+                    
+                    // Ensure it's not visible but part of DOM
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-9999px';
+                    textArea.style.top = '0';
                     document.body.appendChild(textArea);
+                    
+                    textArea.focus();
                     textArea.select();
-                    document.execCommand('copy');
+                    
+                    const successful = document.execCommand('copy');
                     document.body.removeChild(textArea);
-                    showToast('✅ Script copied to clipboard!');
-                }
-            };
-
-            const downloadScript = () => {
-                const blob = new Blob([scriptContentText], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = SCRIPT_FILENAME;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                showToast('⬇️ Script download started.');
-            };
-
-            // --- Rendering & Search ---
-            const renderScript = (content = scriptContentText) => {
-                els.scriptContent.textContent = content;
-                els.lineCount.textContent = `${content.split('\n').length} lines`;
-                // Check if Prism is loaded (since it's deferred)
-                if (window.Prism) {
-                    Prism.highlightElement(els.scriptContent);
-                }
-            };
-
-            // OPTIMIZATION: Debounce function to prevent lag on every keystroke
-            const debounce = (func, wait) => {
-                let timeout;
-                return function(...args) {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(this, args), wait);
-                };
-            };
-
-            const handleSearch = debounce(() => {
-                const query = els.searchBox.value.toLowerCase();
-                
-                if (query.length < 3) {
-                    renderScript(); // Reset if query too short
-                    return;
-                }
-
-                const lines = scriptContentText.split('\n');
-                let firstMatch = false;
-
-                const highlightedContent = lines.map((line) => {
-                    if (line.toLowerCase().includes(query)) {
-                        // Mark the match found
-                        firstMatch = true; 
-                        
-                        // Wrap the specific matched text with regex to preserve case
-                        const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-                        const highlightedText = line.replace(regex, `<mark class="bg-sky-500/30 px-1 rounded text-white">\$1</mark>`);
-                        
-                        return `<span class="highlighted-line">${highlightedText}</span>`;
+                    
+                    if (successful) {
+                         showToast(successTitle, successMsg, iconClass, iconColor);
+                    } else {
+                         showToast('Error', 'Clipboard copy failed.', 'ph-warning', 'text-red-400');
                     }
-                    return line;
-                }).join('\n');
-
-                els.scriptContent.innerHTML = highlightedContent;
-                
-                // Scroll to first match
-                const firstMatchEl = els.scriptContent.querySelector('.highlighted-line');
-                if (firstMatchEl) {
-                    firstMatchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } catch (fallbackErr) {
+                    console.error('Fallback copy failed', fallbackErr);
+                    showToast('Error', 'Could not copy text.', 'ph-warning', 'text-red-400');
                 }
-            }, 300); // 300ms delay
+            }
+        }
 
-            // --- Event Listeners ---
-            els.themeToggle.addEventListener('click', toggleTheme);
-            els.copyBtn.addEventListener('click', copyScript);
-            els.downloadBtn.addEventListener('click', downloadScript);
-            els.searchBox.addEventListener('input', handleSearch);
+        // Copy Script Button
+        function copyToClipboard() {
+            copyTextToClipboard(psScript, 'Success', 'Script copied to clipboard!', 'ph-check-circle', 'text-green-400');
+        }
 
-            // --- Init ---
-            initTheme();
-            renderScript();
+        // Download Function
+        function downloadScript() {
+            const blob = new Blob([psScript], { type: 'text/powershell' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'TITAN_v18_Ultimate.ps1';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('Downloading', 'TITAN_v18_Ultimate.ps1', 'ph-download-simple', 'text-blue-400');
+        }
+
+        // One-Liner Generator
+        document.getElementById('copyCmdBtn').addEventListener('click', () => {
+             copyTextToClipboard(psScript, 'Copied', 'Paste into PowerShell (Admin) to run.', 'ph-terminal', 'text-titan-400');
         });
+
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const matchCount = document.getElementById('matchCount');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            if (term.length < 2) {
+                codeBlock.innerHTML = highlightCode(psScript);
+                matchCount.classList.add('hidden');
+                return;
+            }
+
+            const lines = psScript.split('\n');
+            let matches = 0;
+            
+            // Re-render with highlight logic + search highlight
+            const processedLines = lines.map(line => {
+                let htmlLine = line
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;");
+                
+                // Very basic syntax highlighting for search view (to keep it fast)
+                // We strip complex syntax colors during search to emphasize the match
+                
+                if (line.toLowerCase().includes(term)) {
+                    matches++;
+                    // Highlight the term
+                    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                    htmlLine = htmlLine.replace(regex, '<span class="bg-yellow-500/50 text-white rounded px-0.5">$1</span>');
+                    return `<span class="line-number text-gray-600"></span><span class="bg-titan-900/50 block w-full border-l-2 border-yellow-500 pl-2">${htmlLine}</span>`;
+                }
+                return `<span class="line-number text-gray-600 opacity-30"></span><span class="opacity-40">${htmlLine}</span>`;
+            }).join('\n');
+
+            codeBlock.innerHTML = processedLines;
+            matchCount.textContent = `${matches} found`;
+            matchCount.classList.remove('hidden');
+        });
+
+        // Toast Logic
+        let toastTimeout;
+        function showToast(title, msg, iconClass, iconColorClass) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = msg;
+            
+            const icon = document.getElementById('toastIcon');
+            icon.className = `ph ${iconClass} ${iconColorClass} text-xl`;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
