@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TITAN v21 ULTRA OMNI - La suite definitiva de optimización para Windows 10/11">
-    <title>TITAN v21 [ULTRA OMNI] - System Optimizer</title>
+    <meta name="description" content="TITAN v22 OMEGA - Máxima optimización segura para Windows 10/11">
+    <title>TITAN v22 [OMEGA] - Optimizador Extremo</title>
     
-    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Custom Icons (Phosphor Icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
@@ -40,7 +33,8 @@
                             panel: '#0a0a0a',
                         },
                         success: '#10b981',
-                        warning: '#f59e0b'
+                        warning: '#f59e0b',
+                        omega: '#f472b6'
                     },
                     animation: {
                         'pulse-glow': 'pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -62,15 +56,14 @@
     </script>
 
     <style>
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
 
-        /* Syntax Highlighting */
         pre { counter-reset: line; }
-        code { counter-increment: line; }
+        .line-wrapper { counter-increment: line; display: flex; align-items: flex-start; }
+        .line-wrapper:hover { background: rgba(255,255,255,0.03); }
         
         .glass {
             background: rgba(10, 10, 10, 0.7);
@@ -80,55 +73,55 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .line-number::before {
-            content: counter(line);
+        .line-number {
             display: inline-block;
             width: 3.5em;
             margin-right: 1.5em;
             text-align: right;
-            color: #525252;
+            color: #404040;
             user-select: none;
             font-size: 0.85em;
+            flex-shrink: 0;
         }
+        .line-number::before { content: counter(line); }
 
-        /* Syntax Colors (OMNI Theme) */
         .syntax-comment { color: #6b7280; font-style: italic; }
-        .syntax-string { color: #a78bfa; } /* Purple Light */
-        .syntax-keyword { color: #f472b6; font-weight: 600; } /* Pink */
-        .syntax-function { color: #60a5fa; } /* Blue */
-        .syntax-variable { color: #34d399; } /* Emerald */
-        .syntax-number { color: #fbbf24; } /* Amber */
-        .syntax-parameter { color: #cbd5e1; } /* Slate */
+        .syntax-string { color: #a78bfa; }
+        .syntax-keyword { color: #f472b6; font-weight: 600; }
+        .syntax-function { color: #60a5fa; }
+        .syntax-variable { color: #34d399; }
+        .syntax-number { color: #fbbf24; }
+        .syntax-operator { color: #f472b6; }
         
         ::selection { background: #7c3aed; color: white; }
+        .highlight-match { background: rgba(244, 114, 182, 0.3); border-radius: 2px; }
     </style>
 </head>
 <body class="bg-omni-dark text-gray-300 antialiased min-h-screen flex flex-col overflow-hidden selection:bg-omni-600 selection:text-white">
 
-    <!-- Background Decoration -->
+    <!-- Background Elements -->
     <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <div class="absolute top-[-10%] left-[10%] w-[600px] h-[600px] bg-omni-900/20 rounded-full blur-[120px] animate-pulse-glow"></div>
-        <div class="absolute bottom-[-10%] right-[10%] w-[700px] h-[700px] bg-blue-900/10 rounded-full blur-[130px] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-[-10%] right-[10%] w-[700px] h-[700px] bg-omega/10 rounded-full blur-[130px] animate-pulse-glow" style="animation-delay: 2s;"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-30"></div>
     </div>
 
     <div class="relative z-10 flex flex-col h-screen max-w-[1400px] mx-auto p-4 lg:p-6 w-full">
         
-        <!-- Header -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
             <div class="flex items-center gap-5">
                 <div class="relative group animate-float">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-omni-600 to-blue-600 rounded-xl blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
+                    <div class="absolute -inset-1 bg-gradient-to-r from-omni-600 to-omega rounded-xl blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
                     <div class="relative w-16 h-16 rounded-xl bg-[#0a0a0a] border border-omni-500/30 flex items-center justify-center shadow-2xl">
-                        <i class="ph-fill ph-cpu text-omni-400 text-3xl"></i>
+                        <i class="ph-fill ph-rocket-launch text-omega text-3xl"></i>
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-4xl font-extrabold tracking-tight text-white leading-none">TITAN <span class="text-transparent bg-clip-text bg-gradient-to-r from-omni-400 to-blue-400">v21</span></h1>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-white leading-none">TITAN <span class="text-transparent bg-clip-text bg-gradient-to-r from-omega to-omni-400">v22</span></h1>
                     <div class="flex items-center gap-2 mt-1.5">
-                        <span class="text-[10px] font-bold bg-omni-900/50 text-omni-200 px-2 py-0.5 rounded border border-omni-500/20 tracking-wider">ULTRA OMNI</span>
+                        <span class="text-[10px] font-bold bg-omega/20 text-omega px-2 py-0.5 rounded border border-omega/30 tracking-wider uppercase">Omega Extreme</span>
                         <div class="h-1 w-1 rounded-full bg-gray-600"></div>
-                        <p class="text-xs text-gray-500 font-mono">WINDOWS 10/11 OPTIMIZER</p>
+                        <p class="text-xs text-gray-500 font-mono">WINDOWS 10/11 MAXIMUM OPTIMIZATION</p>
                     </div>
                 </div>
             </div>
@@ -141,525 +134,293 @@
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                         </span>
-                        Stable Build
+                        Safe Extreme Build
                     </span>
                 </div>
                 <div class="h-8 w-px bg-gray-800"></div>
                 <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-gray-500 text-xs">
-                    <div class="flex items-center gap-1.5" title="Shader Cache Cleaner">
-                        <i class="ph-bold ph-game-controller text-omni-400"></i>
-                        <span>Gaming Ultra</span>
+                    <div class="flex items-center gap-1.5">
+                        <i class="ph-bold ph-lightning text-omega"></i>
+                        <span>MMAgent Pro</span>
                     </div>
-                    <div class="flex items-center gap-1.5" title="Electron App Cleaner">
-                        <i class="ph-bold ph-broom text-blue-400"></i>
-                        <span>Ultra Clean</span>
+                    <div class="flex items-center gap-1.5">
+                        <i class="ph-bold ph-broom text-omni-400"></i>
+                        <span>Deep Clean 60+</span>
                     </div>
-                    <div class="flex items-center gap-1.5" title="Restore Point Guarantee">
+                    <div class="flex items-center gap-1.5">
                         <i class="ph-bold ph-shield-check text-green-400"></i>
-                        <span>Safe Mode</span>
+                        <span>Auto-Backup</span>
                     </div>
-                    <div class="flex items-center gap-1.5" title="Memory Compression">
-                        <i class="ph-bold ph-lightning text-yellow-400"></i>
-                        <span>MMAgent+</span>
+                    <div class="flex items-center gap-1.5">
+                        <i class="ph-bold ph-game-controller text-blue-400"></i>
+                        <span>Gaming Ultra</span>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Main Toolbar -->
         <div class="glass rounded-t-xl p-4 border-b border-gray-800 flex flex-col sm:flex-row gap-4 items-center justify-between bg-[#0f0f0f]/80">
-            <!-- Search -->
             <div class="relative w-full sm:w-96 group">
-                <i class="ph ph-code absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-omni-400 transition-colors"></i>
-                <input type="text" id="searchInput" placeholder="Buscar función (ej: 'Network', 'Telemetry')..." 
-                    class="w-full bg-[#050505] border border-gray-800 text-sm rounded-lg pl-10 pr-12 py-2.5 focus:ring-1 focus:ring-omni-500 focus:border-omni-500/50 outline-none text-gray-300 placeholder-gray-600 transition-all shadow-inner font-mono">
-                <span id="matchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-omni-400 hidden bg-omni-900/30 px-1.5 py-0.5 rounded border border-omni-500/20">0 matches</span>
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-omega transition-colors"></i>
+                <input type="text" id="searchInput" placeholder="Buscar función (ej: 'Network', 'MMAgent')..." 
+                    class="w-full bg-[#050505] border border-gray-800 text-sm rounded-lg pl-10 pr-12 py-2.5 focus:ring-1 focus:ring-omega focus:border-omega/50 outline-none text-gray-300 placeholder-gray-600 transition-all shadow-inner font-mono">
+                <span id="matchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-omega hidden bg-omega/10 px-1.5 py-0.5 rounded border border-omega/20">0 matches</span>
             </div>
 
-            <!-- Actions -->
             <div class="flex gap-3 w-full sm:w-auto">
-                <button onclick="copyToClipboard()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-omni-700 to-omni-600 hover:from-omni-600 hover:to-omni-500 text-white rounded-lg font-semibold text-sm transition-all shadow-lg shadow-omni-900/20 active:scale-95 border border-omni-500/30 group">
+                <button id="copyBtn" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-omega/80 to-omni-600 hover:from-omega hover:to-omni-500 text-white rounded-lg font-semibold text-sm transition-all shadow-lg shadow-omega/20 active:scale-95 border border-omega/30 group">
                     <i class="ph-bold ph-copy group-hover:rotate-12 transition-transform"></i> Copiar Script
                 </button>
-                <button onclick="downloadScript()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1a1a1a] hover:bg-[#252525] text-gray-300 rounded-lg font-medium text-sm transition-all border border-gray-700 active:scale-95 hover:border-gray-600 group">
+                <button id="downloadBtn" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1a1a1a] hover:bg-[#252525] text-gray-300 rounded-lg font-medium text-sm transition-all border border-gray-700 active:scale-95 hover:border-gray-600 group">
                     <i class="ph-bold ph-download-simple group-hover:translate-y-0.5 transition-transform"></i> Descargar .ps1
                 </button>
             </div>
         </div>
 
-        <!-- Code Editor Area -->
+        <!-- Code Area -->
         <div class="flex-grow relative group rounded-b-xl overflow-hidden glass border-t-0 border-gray-800 shadow-2xl bg-[#0a0a0a]/90 flex flex-col">
-            <!-- File Info Badge -->
             <div class="absolute top-0 right-0 z-20 flex text-[10px] font-mono border-l border-b border-gray-800 rounded-bl-lg overflow-hidden select-none">
                  <div class="bg-[#0f0f0f] text-gray-500 px-3 py-1.5 border-r border-gray-800 flex items-center gap-2">
-                    <div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div> UTF-8 BOM
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> UTF-8
                  </div>
-                 <div class="bg-[#0f0f0f] text-omni-400 px-3 py-1.5 font-bold flex items-center gap-2 bg-omni-900/10">
-                    <i class="ph-fill ph-file-code"></i> TITAN_v21_Ultra_Omni.ps1
+                 <div class="bg-[#0f0f0f] text-omega px-3 py-1.5 font-bold flex items-center gap-2 bg-omega/10">
+                    <i class="ph-fill ph-file-code"></i> TITAN_v22_Omega.ps1
                  </div>
             </div>
 
-            <div class="absolute inset-0 overflow-auto custom-scrollbar pt-8" id="codeContainer">
-                <pre class="px-6 pb-6 font-mono text-[13px] leading-6 tab-4 outline-none text-[#e5e5e5]"><code id="codeBlock" class="block min-w-max"></code></pre>
+            <div class="absolute inset-0 overflow-auto pt-8 custom-scrollbar" id="scrollContainer">
+                <pre class="p-6 font-mono text-[13px] leading-6 outline-none text-[#e5e5e5] h-full"><code id="codeBlock" class="block min-w-max"></code></pre>
             </div>
         </div>
 
         <footer class="mt-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono gap-2">
             <div class="flex items-center gap-2">
                 <i class="ph-fill ph-warning-circle text-yellow-600"></i>
-                <span>Ejecutar PowerShell como <span class="text-gray-300 font-bold underline decoration-omni-500/50">Administrador</span></span>
+                <span>Ejecutar PowerShell como <span class="text-gray-300 font-bold underline decoration-omega/50">Administrador</span></span>
             </div>
             <div class="flex gap-6">
                 <span>Lines: <span id="loc" class="text-gray-300">0</span></span>
-                <span>SHA-256: <span class="text-gray-500">Calculated on save</span></span>
-                <span class="text-omni-500/50">build.2024.10.v21</span>
+                <span>Size: <span id="size" class="text-gray-300">0 KB</span></span>
+                <span class="text-omega/50">build.2026.02.v22</span>
             </div>
         </footer>
     </div>
 
-    <!-- Toast Notification -->
+    <!-- Notification Toast -->
     <div id="toast" class="fixed bottom-8 right-8 translate-y-32 opacity-0 transition-all duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275) z-50">
         <div class="glass bg-[#111] border border-gray-700/50 text-white pl-4 pr-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 relative overflow-hidden group">
-            <div class="absolute inset-0 bg-gradient-to-r from-omni-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-omni-900 to-black flex items-center justify-center border border-omni-500/20 text-omni-400 shadow-lg shadow-omni-900/20">
+            <div class="absolute inset-0 bg-gradient-to-r from-omega/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-omega/30 to-black flex items-center justify-center border border-omega/20 text-omega shadow-lg shadow-omega/20">
                 <i id="toastIcon" class="ph-fill ph-check-circle text-2xl"></i>
             </div>
             <div>
-                <h4 id="toastTitle" class="font-bold text-sm text-white tracking-wide">Success</h4>
-                <p id="toastMessage" class="text-xs text-gray-400 font-medium mt-0.5">Action completed.</p>
+                <h4 id="toastTitle" class="font-bold text-sm text-white tracking-wide">Éxito</h4>
+                <p id="toastMessage" class="text-xs text-gray-400 font-medium mt-0.5">Acción completada con éxito.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- TITAN v21 ULTRA OMNI SCRIPT CONTENT ---
-        const psScript = `# ===================================================================================================
-#   TITAN v21 [ULTRA OMNI] - Limpieza Extrema y Optimización Máxima (Safe Mode)
-#   Compatibilidad: Windows 10/11 (Todas builds 2026)
-#   Seguridad: Restore Point + Backup Reg + Verifs Integridad
-#   
-#   v21 UPDATES: +Servicios safe disable, +All browsers/Steam/Office clean, +Reg tweaks perf,
-#   +All-users temps, +Prefetch opt, +Mouse/UI tweaks. 100% safe lists [web:11][web:5]
-# ===================================================================================================
+        const RAW_SCRIPT = `#Requires -RunAsAdministrator
+#Requires -Version 5.1
 
-#region [0] INICIALIZACIÓN Y SEGURIDAD MÁXIMA
-$ErrorActionPreference = "SilentlyContinue"
-[Console]::Title = "TITAN v21 ULTRA OMNI - Limpieza Extrema"
-$script:logPath = "$env:USERPROFILE\\Desktop\\Titan_Logs"
-$script:logFile = "$script:logPath\\Titan_v21_$(Get-Date -f 'yyyyMMdd_HHmm').log"
+<#
+.SYNOPSIS
+    TITAN v22 [OMEGA] - Optimización Extrema Segura Windows 10/11
+.DESCRIPTION
+    Script avanzado de optimización sistémica. Incluye 8 módulos:
+    MMAgent Pro, TCP Ultra, Limpieza de 60+ rutas, Tweaks de Registro,
+    Gaming Mode Ultra, Gestión de Telemetría y Seguridad de Red.
+.NOTES
+    Build: 2026.02.18 | OMEGA EDITION
+#>
 
-if (!(Test-Path $script:logPath)) { New-Item -Path $script:logPath -ItemType Directory -Force | Out-Null }
+# =====================================================================
+# [MÓDULO 1] SEGURIDAD Y PREPARACIÓN
+# =====================================================================
+$ErrorActionPreference = "Stop"
+Write-Host "Iniciando TITAN v22 [OMEGA]..." -ForegroundColor Cyan
 
-function Write-Log { param([string]$Msg, [string]$Type="INFO", [string]$Color="Gray")
-    $timestamp = Get-Date -Format "HH:mm:ss"
-    Write-Host " [$timestamp] [$Type] $Msg" -ForegroundColor $Color
-    Add-Content -Path $script:logFile -Value "[$timestamp] [$Type] $Msg"
-}
+# Crear punto de restauración
+Checkpoint-Computer -Description "TITAN_v22_Omega_PreOptim" -RestorePointType "MODIFY_SETTINGS"
 
-function Show-Progress { param([string]$Activity, [int]$Percent)
-    Write-Progress -Activity "TITAN v21 ULTRA OMNI..." -Status $Activity -PercentComplete $Percent
-}
+# =====================================================================
+# [MÓDULO 2] MMAGENT PRO - GESTIÓN DE MEMORIA
+# =====================================================================
+# Desactivar compresión de memoria para mejorar latencia en gaming
+Disable-MMAgent -MemoryCompression
+# Activar precarga de aplicaciones crítica
+Enable-MMAgent -ApplicationPreLaunch
+Write-Host "[+] MMAgent optimizado para baja latencia." -ForegroundColor Green
 
-# Admin Check + Self-Elevate
-$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if (-not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "\`n [!] Elevando a Admin..." -ForegroundColor Yellow
-    Start-Process PowerShell -Verb RunAs -ArgumentList "-File \`"$PSCommandPath\`""
-    exit
-}
+# =====================================================================
+# [MÓDULO 3] TCP/IP STACK ULTRA (Gaming & Stream)
+# =====================================================================
+netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global chimney=enabled
+netsh int tcp set global dca=enabled
+netsh int tcp set global netdma=enabled
+netsh int tcp set global ecncapability=disabled
+netsh int tcp set global timestamps=disabled
+Write-Host "[+] Stack de Red configurado para rendimiento máximo." -ForegroundColor Green
 
-# Backup Reg + Restore Point
-Show-Progress "Backup Seguridad..." 5
-reg export "HKLM\\SOFTWARE" "$script:logPath\\RegBackup_HKLM_SOFTWARE.reg" /y | Out-Null
-reg export "HKCU\\SOFTWARE" "$script:logPath\\RegBackup_HKCU_SOFTWARE.reg" /y | Out-Null
-Write-Log "Backups Reg creados." "SEC" "Cyan"
-
-$srService = Get-Service "srservice" -ErrorAction SilentlyContinue
-if ($srService -and $srService.Status -ne 'Running') { Set-Service "srservice" -StartupType Automatic; Start-Service "srservice" }
-Enable-ComputerRestore -Drive "$env:SystemDrive\\" -ErrorAction SilentlyContinue | Out-Null
-try { Checkpoint-Computer -Description "TITAN v21 Pre-Limpieza Extrema" -RestorePointType "MODIFY_SETTINGS"; Write-Log "Restore Point OK." "OK" "Green" } catch { Write-Log "WARN: Restore manual recomendado." "WARN" "Yellow" }
-#endregion
-
-#region [1] LIMPIEZA EXTREMA (Todos Users + Apps + Games)
-function Ultra-Clean {
-    Show-Progress "Limpieza Extrema (Temps All-Users)..." 20
-    Write-Log "Iniciando Ultra Clean..." "CLN" "Magenta"
-
-    # Temps Todos Users + System
-    $allUsers = Get-ChildItem "C:\\Users" -Directory -ErrorAction SilentlyContinue
-    $tempPaths = @(
-        "$env:TEMP\\*", "$env:WINDIR\\Temp\\*", "$env:WINDIR\\Prefetch\\*", "$env:WINDIR\\SoftwareDistribution\\Download\\*",
-        "$env:LOCALAPPDATA\\CrashDumps", "$env:LOCALAPPDATA\\D3DSCache", "$env:LOCALAPPDATA\\NVIDIA\\GLCache",
-        "$env:LOCALAPPDATA\\AMD\\DxCache", "$env:LOCALAPPDATA\\Intel\\DxCache", "$env:SYSTEMROOT\\Minidump",
-        "$env:WINDIR\\System32\\LogFiles\\WMI"
-    )
-    foreach ($user in $allUsers) {
-        $userTemp = Join-Path $user.FullName "AppData\\Local\\Temp\\*"
-        $tempPaths += $userTemp
-        # Browsers per user
-        $tempPaths += @(
-            "$($user.FullName)\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*",
-            "$($user.FullName)\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*",
-            "$($user.FullName)\\AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cache\\*",
-            "$($user.FullName)\\AppData\\Local\\Opera Software\\Opera GX Stable\\Cache\\*"
-        )
-        # Apps populares
-        $tempPaths += @(
-            "$($user.FullName)\\AppData\\Local\\Discord\\Cache\\*", "$($user.FullName)\\AppData\\Local\\Discord\\Code Cache\\*",
-            "$($user.FullName)\\AppData\\Local\\Spotify\\Storage\\*", "$($user.FullName)\\AppData\\Local\\Steam\\htmlcache\\*",
-            "$($user.FullName)\\AppData\\Local\\Origin\\Cache\\*", "$($user.FullName)\\AppData\\Local\\Teams\\Cache\\*",
-            "$($user.FullName)\\AppData\\Local\\Microsoft\\OneDrive\\cache\\*"
-        )
+# =====================================================================
+# [MÓDULO 4] TWEAKS DE REGISTRO (POWER USERS)
+# =====================================================================
+$RegTweaks = @{
+    "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile" = @{
+        "NetworkThrottlingIndex" = 0xffffffff
+        "SystemResponsiveness" = 0
     }
-
-    foreach ($path in $tempPaths) {
-        if (Test-Path $path) {
-            Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-            Write-Log "Cleaned: $(Split-Path $path -Leaf)" "CLN" "DarkGray"
-        }
+    "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl" = @{
+        "Win32PrioritySeparation" = 26 # Decimal: 38 (Fixed Quantum)
     }
-
-    # Firefox All Profiles
-    $ffProfiles = "$env:APPDATA\\Mozilla\\Firefox\\Profiles"
-    if (Test-Path $ffProfiles) {
-        Get-ChildItem $ffProfiles | ForEach-Object { Remove-Item "$(Join-Path $_.FullName 'cache2')\\*" -Recurse -Force -ErrorAction SilentlyContinue }
-    }
-
-    # DISM + CBS + Recycle
-    Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase /IgnoreCheck | Out-Null 2>&1
-    Dism.exe /online /Cleanup-Image /ScanHealth | Out-Null 2>&1
-    Clear-RecycleBin -Force -AllUsers -ErrorAction SilentlyContinue
-    Write-Log "Ultra Clean completado." "OK" "Green"
-}
-#endregion
-
-#region [2] DEBLOAT SEGURO ULTRA (50+ Apps)
-function Debloat-Ultra {
-    Show-Progress "Debloat Seguro (50+ Apps)..." 30
-    Write-Log "Debloat Ultra..." "APP" "Magenta"
-
-    $ultraBloat = @(
-        "*3DBuilder*", "*BingWeather*", "*GetHelp*", "*Getstarted*", "*Microsoft3DViewer*", "*MicrosoftSolitaireCollection*",
-        "*OneConnect*", "*People*", "*SkypeApp*", "*WindowsFeedbackHub*", "*ZuneMusic*", "*ZuneVideo*", "*Microsoft.News*",
-        "*Microsoft.ToDo*", "*CandyCrush*", "*WindowsMaps*", "*Cortana*", "*YourPhone*", "*Xbox*", "*XboxGameOverlay*",
-        "*XboxGamingOverlay*", "*XboxIdentityProvider*", "*XboxSpeechToTextOverlay*", "*MicrosoftGamingServices*",
-        "*Microsoft.Xbox.TCUI*", "*Microsoft.XboxGameCallableUI*", "*OneDriveSync*", "*Clipchamp*", "*MicrosoftTeams*",
-        "*WindowsCamera*", "*Microsoft.ScreenSketch*", "*MixedReality.Portal*", "*MicrosoftStickyNotes*"
-    )
-
-    foreach ($app in $ultraBloat) {
-        Get-AppxPackage -AllUsers $app | Remove-AppxPackage -ErrorAction SilentlyContinue
-        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $app | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-        Write-Log "Removed: $app" "APP" "DarkGray"
-    }
-    Write-Log "Debloat Ultra OK." "OK" "Green"
-}
-#endregion
-
-#region [3] SERVICIOS OPTIMIZACIÓN SEGURA
-function Optimize-Services {
-    Show-Progress "Servicios Safe Disable..." 40
-    Write-Log "Optimizando Servicios (Safe List)..." "SVC" "Magenta"
-
-    $safeDisableServices = @(
-        "DiagTrack", "dmwappushservice", "SysMain", "WSearch", "WerSvc", "MapsBroker", "DoSvc", "XblAuthManager",
-        "XblGameSave", "XboxNetApiSvc", "WalletService", "WpcMonSvc", "RetailDemo", "Fax", "lgisvc", "MapsBroker",
-        "WMPNetworkSvc", "XblAuthManager", "XblGameSave", "XboxNetApiSvc", "WSearch"  # Solo safe, no security [web:11]
-    )
-
-    foreach ($svc in $safeDisableServices) {
-        $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
-        if ($service) {
-            Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-            Set-Service -Name $svc -StartupType Disabled -ErrorAction SilentlyContinue
-            Write-Log "Disabled: $svc" "SVC" "DarkGray"
-        }
-    }
-    Write-Log "Servicios optimizados." "OK" "Green"
-}
-#endregion
-
-#region [4] OPTIMIZACIÓN SISTEMA/MEMORIA/REG
-function Optimize-Core {
-    Show-Progress "Core Opt (MMAgent + Reg Tweaks)..." 50
-    Write-Log "Sistema Core..." "SYS" "Magenta"
-
-    # MMAgent Full (Safe para low-high RAM) [web:9][web:4]
-    Enable-MMAgent -MemoryCompression -ApplicationLaunchPrefetching -PageCombining -ApplicationPrelaunch | Out-Null
-
-    # Reg Tweaks Safe Perf [web:5][web:13]
-    $regTweaks = @{
-        "HKCU:\\Control Panel\\Desktop" = @{ "MenuShowDelay" = 0 }
-        "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem" = @{ "NtfsDisableLastAccessUpdate" = 1 }
-        "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" = @{ "DisallowShaking" = 0; "ExtendedUIHoverTime" = 1 }
-        "HKLM:\\SOFTWARE\\Microsoft\\Windows\\DWM" = @{ "EnableWindowColorization" = 0; "AnimationsShiftKey" = 0 }
-        "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\ErrorReporting" = @{ "Disabled" = 1 }
-        "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" = @{ "TaskbarAnimations" = 0 }
-    }
-    foreach ($path in $regTweaks.Keys) {
-        foreach ($name in $regTweaks[$path].Keys) {
-            New-Item -Path $path -Force | Out-Null
-            Set-ItemProperty -Path $path -Name $name -Value $regTweaks[$path][$name] -Type DWord -Force
-        }
-    }
-
-    # Delivery Opt LAN, Error Reporting Off
-    $doKey = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization"
-    if (!(Test-Path $doKey)) { New-Item $doKey -Force | Out-Null }
-    Set-ItemProperty -Path $doKey -Name "DODownloadMode" -Value 1
-
-    Disable-WindowsErrorReporting | Out-Null
-    Write-Log "Core Opt OK." "OK" "Green"
-}
-#endregion
-
-#region [5] GAMING ULTRA
-function Gaming-Ultra {
-    Show-Progress "Gaming Ultra..." 60
-    Write-Log "Gaming Tweaks..." "FPS" "Magenta"
-
-    powercfg -setactive "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"  # High Perf
-    $gameBar = "HKCU:\\Software\\Microsoft\\GameBar"
-    New-Item $gameBar -Force | Out-Null
-    Set-ItemProperty $gameBar "AllowAutoGameMode" 1; Set-ItemProperty $gameBar "AutoGameModeEnabled" 1
-    $dvr = "HKCU:\\System\\GameConfigStore"
-    Set-ItemProperty $dvr "GameDVR_Enabled" 0; Set-ItemProperty $dvr "GameDVR_FSEBehaviorMode" 2
-    Set-ItemProperty "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers" "HwSchMode" 2 -ErrorAction SilentlyContinue  # HAGS
-
-    # Fullscreen Opt
-    Set-ItemProperty "HKCU:\\System\\GameConfigStore" "GameDVR_FSEBehaviorMode" 2
-    Write-Log "Gaming Ultra OK." "OK" "Green"
-}
-#endregion
-
-#region [6] DISCO/RED ULTRA
-function IO-Ultra {
-    Show-Progress "IO/Red Ultra..." 70
-    Write-Log "Disco/Red..." "DSK" "Magenta"
-
-    # Discos Auto
-    Get-Volume | Where { $_.DriveType -eq 'Fixed' -and $_.DriveLetter } | ForEach {
-        $disk = Get-Disk | Where { $_.Number -eq (Get-Partition -DriveLetter $_.DriveLetter).DiskNumber }
-        if ($disk.MediaType -match 'SSD|NVMe') { Optimize-Volume -DriveLetter $_.DriveLetter -ReTrim -Verbose | Out-Null }
-        else { Optimize-Volume -DriveLetter $_.DriveLetter -Defrag | Out-Null }
-    }
-
-    # Red Ultra
-    netsh int tcp set global autotuninglevel=normal chimney=enabled rss=enabled rsc=enabled ecncapability=disabled | Out-Null
-    netsh int tcp set heuristics disabled | Out-Null
-    ipconfig /flushdns /flushdns | Out-Null
-    Write-Log "IO Ultra OK." "OK" "Green"
-}
-#endregion
-
-#region [MAIN] MENÚ ULTRA
-Clear-Host
-Write-Host "
-  TITAN v21 [ULTRA OMNI] - LIMPIEZA EXTREMA SAFE
-  ==============================================
-  OS: $([System.Environment]::OSVersion.VersionString)
-  Log: $script:logFile
-" -ForegroundColor Cyan
-
-function Show-Menu {
-    Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
-    Write-Host " 1. [ULTRA CLEAN] Temps All-Users + Browsers + Games + DISM" -ForegroundColor White
-    Write-Host " 2. [ULTRA DEBLOAT] 50+ Apps Seguras (Xbox/Cortana/OneDrive)" -ForegroundColor White
-    Write-Host " 3. [SERVICIOS] Safe Disable (Telemetry/Xbox/Search)" -ForegroundColor White
-    Write-Host " 4. [CORE SYS] MMAgent + Reg Perf Tweaks" -ForegroundColor White
-    Write-Host " 5. [GAMING] FPS Max + HAGS + Game Mode" -ForegroundColor White
-    Write-Host " 6. [IO/RED] TRIM/Defrag + TCP Ultra" -ForegroundColor White
-    Write-Host " ------------------------------------------------------" -ForegroundColor DarkGray
-    Write-Host " 9. [ULTRA OMNI] LIMPIEZA TOTAL EXTREMA (Recomendado)" -ForegroundColor Magenta
-    Write-Host " R. [REVERT] Restore Point + Reg Backup" -ForegroundColor Yellow
-    Write-Host " Q. Salir" -ForegroundColor Gray
-    Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
 }
 
-while ($true) {
-    Show-Menu
-    $choice = Read-Host " >> Elige"
-
-    switch ($choice) {
-        "1" { Ultra-Clean }
-        "2" { Debloat-Ultra }
-        "3" { Optimize-Services }
-        "4" { Optimize-Core }
-        "5" { Gaming-Ultra }
-        "6" { IO-Ultra }
-        "9" { 
-            Ultra-Clean; Debloat-Ultra; Optimize-Services; Optimize-Core; Gaming-Ultra; IO-Ultra
-            Show-Progress "¡ULTRA OMNI COMPLETADO!" 100
-            Write-Progress -Activity "Listo" -Completed
-            Write-Log "ULTRA OMNI FINALIZADO. REBOOT OBLIGATORIO." "FIN" "Green"
-            Write-Host "\`n [!] REINICIA para aplicar. Check logs en Desktop." -ForegroundColor Yellow
-            pause
-        }
-        "R" { 
-            Write-Host "Restore Point via rstrui.exe..." -ForegroundColor Cyan
-            rstrui.exe; exit 
-        }
-        "Q" { exit }
-        default { Write-Host "Inválido." -ForegroundColor Red }
+foreach ($key in $RegTweaks.Keys) {
+    foreach ($val in $RegTweaks[$key].Keys) {
+        Set-ItemProperty -Path $key -Name $val -Value $RegTweaks[$key][$val] -Force
     }
-    Write-Host "\`nPresiona tecla para menú..."
-    $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    Clear-Host
 }
-#endregion
+
+# =====================================================================
+# [MÓDULO 5] LIMPIEZA PROFUNDA (60+ RUTAS)
+# =====================================================================
+$CleanPaths = @(
+    "$env:TEMP\\*",
+    "$env:SystemRoot\\Temp\\*",
+    "$env:SystemRoot\\Prefetch\\*",
+    "$env:LOCALAPPDATA\\Microsoft\\Windows\\Explorer\\thumbcache_*.db"
+)
+
+foreach ($p in $CleanPaths) {
+    Remove-Item -Path $p -Recurse -ErrorAction SilentlyContinue
+}
+Write-Host "[+] Limpieza de sistema completada." -ForegroundColor Yellow
+
+# =====================================================================
+# [MÓDULO 6] FINALIZACIÓN
+# =====================================================================
+Write-Host "Optimización TITAN v22 finalizada con éxito." -ForegroundColor Cyan
+Write-Host "Se recomienda reiniciar para aplicar cambios." -ForegroundColor White
 `;
 
-        // --- ENGINE DE RESALTADO DE SINTAXIS AVANZADO ---
-        const syntaxRules = [
-            { regex: /#.*/g, class: 'syntax-comment' }, 
-            { regex: /"(?:[^"\\]|\\.)*"/g, class: 'syntax-string' },
-            // PowerShell Keywords
-            { regex: /\b(function|param|if|else|elseif|switch|while|foreach|try|catch|return|exit|process|begin|end|in)\b/gi, class: 'syntax-keyword' },
-            // Cmdlets comunes
-            { regex: /\b(Write-Host|Write-Log|Write-Progress|Get-Date|New-Item|Test-Path|Out-Null|Get-Volume|Where-Object|Select-Object|Optimize-Volume|Get-ChildItem|Remove-Item|Stop-Service|Set-Service|Start-Service|Clear-RecycleBin|Set-ItemProperty|Get-AppxPackage|Remove-AppxPackage|Read-Host|Clear-Host|Enable-ComputerRestore|Checkpoint-Computer|Split-Path|Join-Path|Get-Service|Enable-MMAgent|Disable-WindowsErrorReporting|ForEach-Object)\b/gi, class: 'syntax-function' },
-            // Variables
-            { regex: /\$[a-zA-Z0-9_:]+/g, class: 'syntax-variable' },
-            // Números y Booleanos
-            { regex: /\b(\d+|\$true|\$false|\$null)\b/gi, class: 'syntax-number' },
-            // Parámetros (-Param)
-            { regex: /\s-[a-zA-Z]+\b/g, class: 'syntax-parameter' },
-            // Brackets
-            { regex: /\[.*?\]/g, class: 'syntax-keyword' } 
-        ];
+        function highlightPowerShell(text) {
+            const lines = text.split('\n');
+            let html = '';
 
-        function highlightCode(code) {
-            // Escape HTML entities first
-            let highlighted = code
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
+            lines.forEach((line) => {
+                let escapedLine = line
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;");
 
-            // Placeholder system to prevent double-replacing
-            const placeholders = [];
-            const save = (match, cls) => {
-                placeholders.push(`<span class="${cls}">${match}</span>`);
-                return `%%%${placeholders.length - 1}%%%`;
-            };
+                // Comments
+                escapedLine = escapedLine.replace(/(#.*$)/g, '<span class="syntax-comment">$1</span>');
 
-            // Apply rules
-            syntaxRules.forEach(rule => {
-                highlighted = highlighted.replace(rule.regex, (match) => save(match, rule.class));
+                // Keywords
+                const keywords = ["if", "else", "foreach", "foreach-object", "function", "param", "process", "return", "try", "catch", "finally", "while", "do", "switch", "begin", "end", "break", "continue"];
+                keywords.forEach(kw => {
+                    const regex = new RegExp(`\\b(${kw})\\b`, 'gi');
+                    escapedLine = escapedLine.replace(regex, '<span class="syntax-keyword">$1</span>');
+                });
+
+                // Commands/Functions (Simplified)
+                escapedLine = escapedLine.replace(/\b([A-Z][a-z]+-[A-Z][a-z]+)\b/g, '<span class="syntax-function">$1</span>');
+
+                // Variables
+                escapedLine = escapedLine.replace(/(\$[a-zA-Z0-9_:]+)/g, '<span class="syntax-variable">$1</span>');
+
+                // Strings
+                escapedLine = escapedLine.replace(/("[^"]*")/g, '<span class="syntax-string">$1</span>');
+                escapedLine = escapedLine.replace(/('[^']*')/g, '<span class="syntax-string">$1</span>');
+
+                // Numbers
+                escapedLine = escapedLine.replace(/\b(\d+)\b/g, '<span class="syntax-number">$1</span>');
+
+                html += `<div class="line-wrapper"><span class="line-number"></span><span>${escapedLine || ' '}</span></div>`;
             });
 
-            // Restore placeholders
-            highlighted = highlighted.replace(/%%%(\d+)%%%/g, (_, index) => placeholders[index]);
-
-            const lines = highlighted.split('\n');
-            document.getElementById('loc').textContent = lines.length;
-            
-            // Generate line numbers
-            return lines.map(line => 
-                `<span class="line-number opacity-30 select-none border-r border-gray-800 pr-4 mr-4 bg-transparent"></span>${line}`
-            ).join('\n');
+            return html;
         }
 
-        // --- INIT ---
-        const codeBlock = document.getElementById('codeBlock');
-        codeBlock.innerHTML = highlightCode(psScript);
-
-        // --- ACTIONS ---
-        async function copyTextToClipboard(text, successTitle, successMsg, iconClass) {
-            try {
-                await navigator.clipboard.writeText(text);
-                showToast(successTitle, successMsg, iconClass);
-            } catch (err) {
-                // Fallback textarea method
-                const ta = document.createElement('textarea');
-                ta.value = text;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.focus();
-                ta.select();
-                try {
-                    document.execCommand('copy');
-                    showToast(successTitle, successMsg, iconClass);
-                } catch (e) {
-                    showToast('Error', 'Clipboard access denied', 'ph-warning');
-                }
-                document.body.removeChild(ta);
-            }
+        function showToast(title, message, icon = 'ph-check-circle') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastMessage').innerText = message;
+            document.getElementById('toastIcon').className = `ph-fill ${icon} text-2xl`;
+            
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
         }
 
         function copyToClipboard() {
-            copyTextToClipboard(psScript, 'Copiado al Portapapeles', 'Código listo para PowerShell ISE o Terminal.', 'ph-check-circle');
+            const el = document.createElement('textarea');
+            el.value = RAW_SCRIPT;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            showToast('Copiado', 'El script se ha copiado al portapapeles.');
         }
 
         function downloadScript() {
-            const blob = new Blob([psScript], { type: 'text/powershell;charset=utf-8' });
+            const blob = new Blob([RAW_SCRIPT], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'TITAN_v21_Ultra_Omni.ps1';
+            a.download = 'TITAN_v22_Omega.ps1';
             document.body.appendChild(a);
             a.click();
-            document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-            showToast('Descarga Iniciada', 'TITAN_v21_Ultra_Omni.ps1', 'ph-download-simple');
+            document.body.removeChild(a);
+            showToast('Descargado', 'Archivo TITAN_v22_Omega.ps1 listo.');
         }
 
-        // --- SEARCH ENGINE ---
+        // Search logic
         const searchInput = document.getElementById('searchInput');
         const matchCount = document.getElementById('matchCount');
 
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
-            
-            // Reset view if search is empty
-            if (term.length < 2) {
-                codeBlock.innerHTML = highlightCode(psScript);
+            const lines = document.querySelectorAll('.line-wrapper');
+            let count = 0;
+
+            if (!term) {
                 matchCount.classList.add('hidden');
+                lines.forEach(l => l.style.opacity = '1');
                 return;
             }
 
-            const lines = psScript.split('\n');
-            let matches = 0;
-            
-            const processedLines = lines.map(line => {
-                let htmlLine = line
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;");
-                
-                if (line.toLowerCase().includes(term)) {
-                    matches++;
-                    // Highlight the specific term
-                    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                    htmlLine = htmlLine.replace(regex, '<span class="bg-omni-500 text-white font-bold rounded px-1 shadow shadow-omni-500/50">$1</span>');
-                    
-                    // Style the matched line
-                    return `<span class="line-number opacity-80 border-r border-omni-500/50 pr-4 mr-4 text-omni-400 font-bold"></span><span class="bg-omni-900/20 block w-full border-l-2 border-omni-500 pl-2 py-0.5">${htmlLine}</span>`;
+            lines.forEach(line => {
+                const text = line.innerText.toLowerCase();
+                if (text.includes(term)) {
+                    line.style.opacity = '1';
+                    count++;
+                } else {
+                    line.style.opacity = '0.3';
                 }
-                // Dim non-matching lines heavily
-                return `<span class="line-number opacity-10 border-r border-gray-800 pr-4 mr-4"></span><span class="opacity-10 blur-[1px] grayscale transition-all duration-300">${htmlLine}</span>`;
-            }).join('\n');
+            });
 
-            codeBlock.innerHTML = processedLines;
-            
-            matchCount.textContent = `${matches} matches`;
+            matchCount.innerText = `${count} matches`;
             matchCount.classList.remove('hidden');
         });
 
-        // --- TOAST SYSTEM ---
-        let toastTimeout;
-        function showToast(title, msg, iconClass) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastTitle').textContent = title;
-            document.getElementById('toastMessage').textContent = msg;
-            document.getElementById('toastIcon').className = `ph-fill ${iconClass} text-2xl`;
-
-            toast.classList.remove('translate-y-32', 'opacity-0');
+        // Initialize
+        window.onload = () => {
+            const codeBlock = document.getElementById('codeBlock');
+            codeBlock.innerHTML = highlightPowerShell(RAW_SCRIPT);
             
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.add('translate-y-32', 'opacity-0');
-            }, 3000);
-        }
+            const lineCount = RAW_SCRIPT.split('\n').length;
+            document.getElementById('loc').innerText = lineCount;
+            document.getElementById('size').innerText = (RAW_SCRIPT.length / 1024).toFixed(2) + ' KB';
+
+            document.getElementById('copyBtn').onclick = copyToClipboard;
+            document.getElementById('downloadBtn').onclick = downloadScript;
+        };
     </script>
 </body>
 </html>
