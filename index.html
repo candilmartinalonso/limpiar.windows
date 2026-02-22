@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TITAN v22 OMEGA - Máxima optimización segura para Windows 10/11">
+    <meta name="theme-color" content="#050505">
     <title>TITAN v22 [OMEGA] - Optimizador Extremo</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
@@ -56,14 +57,47 @@
     </script>
 
     <style>
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+        :root {
+            --scrollbar-width: 8px;
+            --line-height: 1.5rem;
+        }
 
-        pre { counter-reset: line; }
-        .line-wrapper { counter-increment: line; display: flex; align-items: flex-start; }
-        .line-wrapper:hover { background: rgba(255,255,255,0.03); }
+        /* Optimized scrollbar */
+        ::-webkit-scrollbar { 
+            width: var(--scrollbar-width); 
+            height: var(--scrollbar-width); 
+        }
+        ::-webkit-scrollbar-track { 
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb { 
+            background: #262626; 
+            border-radius: 4px; 
+            transition: background 0.2s;
+        }
+        ::-webkit-scrollbar-thumb:hover { 
+            background: #7c3aed; 
+        }
+
+        /* Line numbers and code structure */
+        .code-container {
+            counter-reset: line;
+        }
+        
+        .line-wrapper { 
+            counter-increment: line; 
+            display: flex; 
+            align-items: flex-start;
+            min-height: var(--line-height);
+        }
+        
+        .line-wrapper:hover { 
+            background: rgba(255,255,255,0.03); 
+        }
+        
+        .line-wrapper.highlighted {
+            background: rgba(244, 114, 182, 0.15);
+        }
         
         .glass {
             background: rgba(10, 10, 10, 0.7);
@@ -82,9 +116,14 @@
             user-select: none;
             font-size: 0.85em;
             flex-shrink: 0;
+            line-height: var(--line-height);
         }
-        .line-number::before { content: counter(line); }
+        
+        .line-number::before { 
+            content: counter(line); 
+        }
 
+        /* Syntax highlighting */
         .syntax-comment { color: #6b7280; font-style: italic; }
         .syntax-string { color: #a78bfa; }
         .syntax-keyword { color: #f472b6; font-weight: 600; }
@@ -93,14 +132,66 @@
         .syntax-number { color: #fbbf24; }
         .syntax-operator { color: #f472b6; }
         
-        ::selection { background: #7c3aed; color: white; }
-        .highlight-match { background: rgba(244, 114, 182, 0.3); border-radius: 2px; }
+        ::selection { 
+            background: #7c3aed; 
+            color: white; 
+        }
+        
+        .highlight-match { 
+            background: rgba(244, 114, 182, 0.4); 
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px rgba(244, 114, 182, 0.3);
+        }
+
+        /* Performance optimizations */
+        .will-change-transform {
+            will-change: transform;
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus visible for accessibility */
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid #f472b6;
+            outline-offset: 2px;
+        }
+
+        /* Toast animation optimization */
+        .toast-enter {
+            transform: translateY(8rem);
+            opacity: 0;
+        }
+        
+        .toast-enter-active {
+            transform: translateY(0);
+            opacity: 1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .toast-exit {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast-exit-active {
+            transform: translateY(8rem);
+            opacity: 0;
+            transition: all 0.3s ease-in;
+        }
     </style>
 </head>
 <body class="bg-omni-dark text-gray-300 antialiased min-h-screen flex flex-col overflow-hidden selection:bg-omni-600 selection:text-white">
 
     <!-- Background Elements -->
-    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div class="absolute top-[-10%] left-[10%] w-[600px] h-[600px] bg-omni-900/20 rounded-full blur-[120px] animate-pulse-glow"></div>
         <div class="absolute bottom-[-10%] right-[10%] w-[700px] h-[700px] bg-omega/10 rounded-full blur-[130px] animate-pulse-glow" style="animation-delay: 2s;"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-30"></div>
@@ -110,17 +201,17 @@
         
         <header class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
             <div class="flex items-center gap-5">
-                <div class="relative group animate-float">
+                <div class="relative group animate-float will-change-transform">
                     <div class="absolute -inset-1 bg-gradient-to-r from-omni-600 to-omega rounded-xl blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
                     <div class="relative w-16 h-16 rounded-xl bg-[#0a0a0a] border border-omni-500/30 flex items-center justify-center shadow-2xl">
-                        <i class="ph-fill ph-rocket-launch text-omega text-3xl"></i>
+                        <i class="ph-fill ph-rocket-launch text-omega text-3xl" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div>
                     <h1 class="text-4xl font-extrabold tracking-tight text-white leading-none">TITAN <span class="text-transparent bg-clip-text bg-gradient-to-r from-omega to-omni-400">v22</span></h1>
                     <div class="flex items-center gap-2 mt-1.5">
                         <span class="text-[10px] font-bold bg-omega/20 text-omega px-2 py-0.5 rounded border border-omega/30 tracking-wider uppercase">Omega Extreme</span>
-                        <div class="h-1 w-1 rounded-full bg-gray-600"></div>
+                        <div class="h-1 w-1 rounded-full bg-gray-600" aria-hidden="true"></div>
                         <p class="text-xs text-gray-500 font-mono">WINDOWS 10/11 MAXIMUM OPTIMIZATION</p>
                     </div>
                 </div>
@@ -130,29 +221,29 @@
                 <div class="flex flex-col items-end">
                     <span class="text-[10px] uppercase text-gray-500 font-bold tracking-widest">Estado</span>
                     <span class="text-xs font-mono text-success flex items-center gap-1.5">
-                        <span class="relative flex h-2 w-2">
+                        <span class="relative flex h-2 w-2" aria-hidden="true">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                         </span>
                         Safe Extreme Build
                     </span>
                 </div>
-                <div class="h-8 w-px bg-gray-800"></div>
+                <div class="h-8 w-px bg-gray-800" aria-hidden="true"></div>
                 <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-gray-500 text-xs">
                     <div class="flex items-center gap-1.5">
-                        <i class="ph-bold ph-lightning text-omega"></i>
+                        <i class="ph-bold ph-lightning text-omega" aria-hidden="true"></i>
                         <span>MMAgent Pro</span>
                     </div>
                     <div class="flex items-center gap-1.5">
-                        <i class="ph-bold ph-broom text-omni-400"></i>
+                        <i class="ph-bold ph-broom text-omni-400" aria-hidden="true"></i>
                         <span>Deep Clean 60+</span>
                     </div>
                     <div class="flex items-center gap-1.5">
-                        <i class="ph-bold ph-shield-check text-green-400"></i>
+                        <i class="ph-bold ph-shield-check text-green-400" aria-hidden="true"></i>
                         <span>Auto-Backup</span>
                     </div>
                     <div class="flex items-center gap-1.5">
-                        <i class="ph-bold ph-game-controller text-blue-400"></i>
+                        <i class="ph-bold ph-game-controller text-blue-400" aria-hidden="true"></i>
                         <span>Gaming Ultra</span>
                     </div>
                 </div>
@@ -161,41 +252,54 @@
 
         <div class="glass rounded-t-xl p-4 border-b border-gray-800 flex flex-col sm:flex-row gap-4 items-center justify-between bg-[#0f0f0f]/80">
             <div class="relative w-full sm:w-96 group">
-                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-omega transition-colors"></i>
-                <input type="text" id="searchInput" placeholder="Buscar función (ej: 'Network', 'MMAgent')..." 
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-omega transition-colors" aria-hidden="true"></i>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Buscar función (ej: 'Network', 'MMAgent')..." 
+                    autocomplete="off"
+                    aria-label="Buscar en el código"
                     class="w-full bg-[#050505] border border-gray-800 text-sm rounded-lg pl-10 pr-12 py-2.5 focus:ring-1 focus:ring-omega focus:border-omega/50 outline-none text-gray-300 placeholder-gray-600 transition-all shadow-inner font-mono">
-                <span id="matchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-omega hidden bg-omega/10 px-1.5 py-0.5 rounded border border-omega/20">0 matches</span>
+                <span id="matchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-omega hidden bg-omega/10 px-1.5 py-0.5 rounded border border-omega/20" aria-live="polite">0 matches</span>
             </div>
 
             <div class="flex gap-3 w-full sm:w-auto">
-                <button id="copyBtn" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-omega/80 to-omni-600 hover:from-omega hover:to-omni-500 text-white rounded-lg font-semibold text-sm transition-all shadow-lg shadow-omega/20 active:scale-95 border border-omega/30 group">
-                    <i class="ph-bold ph-copy group-hover:rotate-12 transition-transform"></i> Copiar Script
+                <button 
+                    id="copyBtn" 
+                    class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-omega/80 to-omni-600 hover:from-omega hover:to-omni-500 text-white rounded-lg font-semibold text-sm transition-all shadow-lg shadow-omega/20 active:scale-95 border border-omega/30 group"
+                    aria-label="Copiar script al portapapeles">
+                    <i class="ph-bold ph-copy group-hover:rotate-12 transition-transform" aria-hidden="true"></i> 
+                    <span>Copiar Script</span>
                 </button>
-                <button id="downloadBtn" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1a1a1a] hover:bg-[#252525] text-gray-300 rounded-lg font-medium text-sm transition-all border border-gray-700 active:scale-95 hover:border-gray-600 group">
-                    <i class="ph-bold ph-download-simple group-hover:translate-y-0.5 transition-transform"></i> Descargar .ps1
+                <button 
+                    id="downloadBtn" 
+                    class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#1a1a1a] hover:bg-[#252525] text-gray-300 rounded-lg font-medium text-sm transition-all border border-gray-700 active:scale-95 hover:border-gray-600 group"
+                    aria-label="Descargar archivo PowerShell">
+                    <i class="ph-bold ph-download-simple group-hover:translate-y-0.5 transition-transform" aria-hidden="true"></i> 
+                    <span>Descargar .ps1</span>
                 </button>
             </div>
         </div>
 
         <!-- Code Area -->
         <div class="flex-grow relative group rounded-b-xl overflow-hidden glass border-t-0 border-gray-800 shadow-2xl bg-[#0a0a0a]/90 flex flex-col">
-            <div class="absolute top-0 right-0 z-20 flex text-[10px] font-mono border-l border-b border-gray-800 rounded-bl-lg overflow-hidden select-none">
+            <div class="absolute top-0 right-0 z-20 flex text-[10px] font-mono border-l border-b border-gray-800 rounded-bl-lg overflow-hidden select-none" aria-hidden="true">
                  <div class="bg-[#0f0f0f] text-gray-500 px-3 py-1.5 border-r border-gray-800 flex items-center gap-2">
                     <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> UTF-8
                  </div>
                  <div class="bg-[#0f0f0f] text-omega px-3 py-1.5 font-bold flex items-center gap-2 bg-omega/10">
-                    <i class="ph-fill ph-file-code"></i> TITAN_v22_Omega.ps1
+                    <i class="ph-fill ph-file-code" aria-hidden="true"></i> TITAN_v22_Omega.ps1
                  </div>
             </div>
 
-            <div class="absolute inset-0 overflow-auto pt-8 custom-scrollbar" id="scrollContainer">
-                <pre class="p-6 font-mono text-[13px] leading-6 outline-none text-[#e5e5e5] h-full"><code id="codeBlock" class="block min-w-max"></code></pre>
+            <div class="absolute inset-0 overflow-auto pt-8 custom-scrollbar" id="scrollContainer" role="region" aria-label="Código PowerShell">
+                <pre class="p-6 font-mono text-[13px] leading-6 outline-none text-[#e5e5e5] h-full code-container"><code id="codeBlock" class="block min-w-max"></code></pre>
             </div>
         </div>
 
         <footer class="mt-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono gap-2">
             <div class="flex items-center gap-2">
-                <i class="ph-fill ph-warning-circle text-yellow-600"></i>
+                <i class="ph-fill ph-warning-circle text-yellow-600" aria-hidden="true"></i>
                 <span>Ejecutar PowerShell como <span class="text-gray-300 font-bold underline decoration-omega/50">Administrador</span></span>
             </div>
             <div class="flex gap-6">
@@ -207,11 +311,16 @@
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-8 right-8 translate-y-32 opacity-0 transition-all duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275) z-50">
-        <div class="glass bg-[#111] border border-gray-700/50 text-white pl-4 pr-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 relative overflow-hidden group">
+    <div 
+        id="toast" 
+        class="fixed bottom-8 right-8 z-50 toast-enter pointer-events-none"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true">
+        <div class="glass bg-[#111] border border-gray-700/50 text-white pl-4 pr-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 relative overflow-hidden group pointer-events-auto">
             <div class="absolute inset-0 bg-gradient-to-r from-omega/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="w-12 h-12 rounded-full bg-gradient-to-br from-omega/30 to-black flex items-center justify-center border border-omega/20 text-omega shadow-lg shadow-omega/20">
-                <i id="toastIcon" class="ph-fill ph-check-circle text-2xl"></i>
+                <i id="toastIcon" class="ph-fill ph-check-circle text-2xl" aria-hidden="true"></i>
             </div>
             <div>
                 <h4 id="toastTitle" class="font-bold text-sm text-white tracking-wide">Éxito</h4>
@@ -221,6 +330,7 @@
     </div>
 
     <script>
+        // Optimized PowerShell script content
         const RAW_SCRIPT = `#Requires -RunAsAdministrator
 #Requires -Version 5.1
 
@@ -305,89 +415,213 @@ Write-Host "Optimización TITAN v22 finalizada con éxito." -ForegroundColor Cya
 Write-Host "Se recomienda reiniciar para aplicar cambios." -ForegroundColor White
 `;
 
+        // Debounce utility for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Optimized syntax highlighting using DocumentFragment
         function highlightPowerShell(text) {
             const lines = text.split('\n');
-            let html = '';
+            const fragment = document.createDocumentFragment();
+            
+            const keywords = new Set([
+                "if", "else", "elseif", "foreach", "for", "while", "do", "until",
+                "function", "filter", "workflow", "configuration", "class",
+                "param", "process", "begin", "end", "dynamicparam",
+                "return", "exit", "break", "continue", "throw",
+                "try", "catch", "finally", "trap",
+                "switch", "case", "default",
+                "in", "notin", "contains", "notcontains",
+                "match", "notmatch", "like", "notlike",
+                "and", "or", "xor", "not", "as", "is"
+            ]);
 
             lines.forEach((line) => {
-                let escapedLine = line
+                const wrapper = document.createElement('div');
+                wrapper.className = 'line-wrapper';
+                
+                const lineNum = document.createElement('span');
+                lineNum.className = 'line-number';
+                
+                const content = document.createElement('span');
+                
+                // Escape HTML first
+                let html = line
                     .replace(/&/g, "&amp;")
                     .replace(/</g, "&lt;")
                     .replace(/>/g, "&gt;");
 
-                // Comments
-                escapedLine = escapedLine.replace(/(#.*$)/g, '<span class="syntax-comment">$1</span>');
+                // Apply syntax highlighting in specific order
+                // 1. Comments (must be first to avoid highlighting inside comments)
+                html = html.replace(/(#.*$)/g, '<span class="syntax-comment">$1</span>');
+                
+                // 2. Strings (handle both single and double quotes, but not inside comments)
+                // Simple approach: replace outside of comment spans
+                const parts = html.split(/(<span class="syntax-comment">.*?<\/span>)/);
+                html = parts.map(part => {
+                    if (part.startsWith('<span class="syntax-comment">')) return part;
+                    return part
+                        .replace(/("[^"]*")/g, '<span class="syntax-string">$1</span>')
+                        .replace(/('[^']*')/g, '<span class="syntax-string">$1</span>');
+                }).join('');
 
-                // Keywords
-                const keywords = ["if", "else", "foreach", "foreach-object", "function", "param", "process", "return", "try", "catch", "finally", "while", "do", "switch", "begin", "end", "break", "continue"];
+                // 3. Variables
+                html = html.replace(/(\$[a-zA-Z0-9_:]+)/g, '<span class="syntax-variable">$1</span>');
+
+                // 4. Functions/Cmdlets (Verb-Noun pattern)
+                html = html.replace(/\b([A-Z][a-z]+-[A-Z][a-zA-Z]+)\b/g, '<span class="syntax-function">$1</span>');
+
+                // 5. Keywords (whole word match, case insensitive)
                 keywords.forEach(kw => {
                     const regex = new RegExp(`\\b(${kw})\\b`, 'gi');
-                    escapedLine = escapedLine.replace(regex, '<span class="syntax-keyword">$1</span>');
+                    html = html.replace(regex, '<span class="syntax-keyword">$1</span>');
                 });
 
-                // Commands/Functions (Simplified)
-                escapedLine = escapedLine.replace(/\b([A-Z][a-z]+-[A-Z][a-z]+)\b/g, '<span class="syntax-function">$1</span>');
+                // 6. Numbers (integers, hex, scientific)
+                html = html.replace(/\b(\d+|0x[0-9a-fA-F]+|\d+\.\d+)\b/g, '<span class="syntax-number">$1</span>');
 
-                // Variables
-                escapedLine = escapedLine.replace(/(\$[a-zA-Z0-9_:]+)/g, '<span class="syntax-variable">$1</span>');
+                // 7. Operators
+                html = html.replace(/(\+|-|\*|\/|%|=|\||&|!|\^|~|<|>)/g, '<span class="syntax-operator">$1</span>');
 
-                // Strings
-                escapedLine = escapedLine.replace(/("[^"]*")/g, '<span class="syntax-string">$1</span>');
-                escapedLine = escapedLine.replace(/('[^']*')/g, '<span class="syntax-string">$1</span>');
-
-                // Numbers
-                escapedLine = escapedLine.replace(/\b(\d+)\b/g, '<span class="syntax-number">$1</span>');
-
-                html += `<div class="line-wrapper"><span class="line-number"></span><span>${escapedLine || ' '}</span></div>`;
+                content.innerHTML = html || ' ';
+                
+                wrapper.appendChild(lineNum);
+                wrapper.appendChild(content);
+                fragment.appendChild(wrapper);
             });
 
-            return html;
+            return fragment;
         }
 
-        function showToast(title, message, icon = 'ph-check-circle') {
+        // Toast notification system with queue
+        const toastQueue = [];
+        let toastTimeout = null;
+
+        function showToast(title, message, icon = 'ph-check-circle', duration = 3000) {
             const toast = document.getElementById('toast');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastMessage').innerText = message;
-            document.getElementById('toastIcon').className = `ph-fill ${icon} text-2xl`;
-            
-            toast.classList.remove('translate-y-32', 'opacity-0');
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-32', 'opacity-0');
-            }, 3000);
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            // If toast is currently showing, queue the next one
+            if (toast.classList.contains('toast-enter-active')) {
+                toastQueue.push({ title, message, icon, duration });
+                return;
+            }
+
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            toastIcon.className = `ph-fill ${icon} text-2xl`;
+
+            // Show toast
+            toast.classList.remove('toast-enter');
+            toast.classList.add('toast-enter-active');
+
+            toastTimeout = setTimeout(() => {
+                hideToast();
+            }, duration);
         }
 
-        function copyToClipboard() {
-            const el = document.createElement('textarea');
-            el.value = RAW_SCRIPT;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            showToast('Copiado', 'El script se ha copiado al portapapeles.');
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            
+            toast.classList.remove('toast-enter-active');
+            toast.classList.add('toast-exit-active');
+
+            setTimeout(() => {
+                toast.classList.remove('toast-exit-active');
+                toast.classList.add('toast-enter');
+                
+                // Process queue
+                if (toastQueue.length > 0) {
+                    const next = toastQueue.shift();
+                    setTimeout(() => showToast(next.title, next.message, next.icon, next.duration), 100);
+                }
+            }, 300);
+        }
+
+        // Clipboard operations with fallback
+        async function copyToClipboard() {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(RAW_SCRIPT);
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement("textarea");
+                    textArea.value = RAW_SCRIPT;
+                    textArea.style.position = "fixed";
+                    textArea.style.left = "-9999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    if (!successful) throw new Error('execCommand failed');
+                }
+                showToast('Copiado', 'El script se ha copiado al portapapeles.', 'ph-check-circle');
+            } catch (err) {
+                console.error('Copy failed:', err);
+                showToast('Error', 'No se pudo copiar al portapapeles.', 'ph-warning-circle');
+            }
         }
 
         function downloadScript() {
-            const blob = new Blob([RAW_SCRIPT], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'TITAN_v22_Omega.ps1';
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-            showToast('Descargado', 'Archivo TITAN_v22_Omega.ps1 listo.');
+            try {
+                const blob = new Blob([RAW_SCRIPT], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                
+                a.href = url;
+                a.download = 'TITAN_v22_Omega.ps1';
+                a.style.display = 'none';
+                
+                document.body.appendChild(a);
+                a.click();
+                
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+                
+                showToast('Descargado', 'Archivo TITAN_v22_Omega.ps1 listo.', 'ph-download-simple');
+            } catch (err) {
+                console.error('Download failed:', err);
+                showToast('Error', 'No se pudo descargar el archivo.', 'ph-warning-circle');
+            }
         }
 
-        // Search logic
+        // Optimized search with debouncing and highlighting
         const searchInput = document.getElementById('searchInput');
         const matchCount = document.getElementById('matchCount');
+        let currentMatches = [];
 
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
+        const performSearch = debounce((term) => {
             const lines = document.querySelectorAll('.line-wrapper');
+            const lowerTerm = term.toLowerCase();
+            currentMatches = [];
             let count = 0;
+
+            // Clear previous highlights
+            lines.forEach(line => {
+                line.classList.remove('highlighted');
+                const content = line.querySelector('span:last-child');
+                if (content) {
+                    // Remove previous highlight spans but keep content
+                    content.innerHTML = content.innerHTML.replace(/<span class="highlight-match">(.*?)<\/span>/g, '$1');
+                }
+            });
 
             if (!term) {
                 matchCount.classList.add('hidden');
@@ -395,32 +629,81 @@ Write-Host "Se recomienda reiniciar para aplicar cambios." -ForegroundColor Whit
                 return;
             }
 
-            lines.forEach(line => {
-                const text = line.innerText.toLowerCase();
-                if (text.includes(term)) {
+            lines.forEach((line, index) => {
+                const contentSpan = line.querySelector('span:last-child');
+                if (!contentSpan) return;
+                
+                const text = contentSpan.textContent.toLowerCase();
+                
+                if (text.includes(lowerTerm)) {
                     line.style.opacity = '1';
+                    line.classList.add('highlighted');
+                    currentMatches.push(line);
                     count++;
+                    
+                    // Highlight matching text
+                    const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
+                    contentSpan.innerHTML = contentSpan.innerHTML.replace(regex, '<span class="highlight-match">$1</span>');
                 } else {
                     line.style.opacity = '0.3';
                 }
             });
 
-            matchCount.innerText = `${count} matches`;
+            matchCount.textContent = `${count} match${count !== 1 ? 'es' : ''}`;
             matchCount.classList.remove('hidden');
+
+            // Scroll to first match if exists
+            if (currentMatches.length > 0) {
+                currentMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }, 150);
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + F to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            }
+            
+            // Escape to clear search
+            if (e.key === 'Escape' && document.activeElement === searchInput) {
+                searchInput.value = '';
+                searchInput.blur();
+                performSearch('');
+            }
         });
 
         // Initialize
-        window.onload = () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const codeBlock = document.getElementById('codeBlock');
-            codeBlock.innerHTML = highlightPowerShell(RAW_SCRIPT);
             
-            const lineCount = RAW_SCRIPT.split('\n').length;
-            document.getElementById('loc').innerText = lineCount;
-            document.getElementById('size').innerText = (RAW_SCRIPT.length / 1024).toFixed(2) + ' KB';
+            // Use requestAnimationFrame for non-blocking rendering
+            requestAnimationFrame(() => {
+                const fragment = highlightPowerShell(RAW_SCRIPT);
+                codeBlock.appendChild(fragment);
+                
+                const lineCount = RAW_SCRIPT.split('\n').length;
+                document.getElementById('loc').textContent = lineCount.toLocaleString();
+                document.getElementById('size').textContent = (RAW_SCRIPT.length / 1024).toFixed(2) + ' KB';
+            });
 
-            document.getElementById('copyBtn').onclick = copyToClipboard;
-            document.getElementById('downloadBtn').onclick = downloadScript;
-        };
+            // Event listeners
+            document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
+            document.getElementById('downloadBtn').addEventListener('click', downloadScript);
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (toastTimeout) clearTimeout(toastTimeout);
+        });
     </script>
 </body>
 </html>
